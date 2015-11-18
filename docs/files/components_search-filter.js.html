@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>components/search-filter.js - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: components/search-filter.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ @module search
+ */
+define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;, &#x27;Handlebars&#x27;, &#x27;text!templates/search-elements.hbs&#x27;, &#x27;config/searchfields&#x27;, &#x27;i18n!nls/texts&#x27;],
+             function($, jui, _B, _H, _tempRaw, searchFieldDefs, _T) {
+
+    /**
+     The searchFilter class is used to create and manage a certain search input field.
+     The searchFilter supports multiple types:
+
+     - boolean
+     - date
+     - enum
+     - objects
+     - radio
+     - select
+     - text
+
+     ## Todos
+
+     - add range selections
+     
+     @class searchFilter
+     @constructor
+     @param {Object} dP The DOM parent to insert the filter into
+     @param {String} field The name of the META Tag to represent - according to config/searchfields.js
+     @param {Mixed} [val] The start value assigned to the META Tag
+     */
+    /**
+     Event called when the input changes from filled (valid input) to an empty input.
+
+     @event cleared
+     */
+    /**
+     Event fired when the filter is removed from the UI.
+
+     @event delete
+     */
+    /**
+     Event fired when enter is pressed on the input.
+
+     @event enter
+     */
+    /**
+     Event fired when escape is pressed on the input.
+
+     @event escape
+     */
+    /**
+     Event fired when the input changes from empty to an filled state, meaning that some valid content is available.
+
+     @event filled
+     */
+    var searchFilter = function(dP, field, val) {
+        var autoCompleteConf = null,
+                autoComleteDefaults = {
+                    close: null,
+                    minLength: 3,
+                },
+        /**
+         Property storing the jquery DOM object
+
+         @private
+         @property dom
+         @type {Object}
+         */
+                dom = null,
+        /**
+         Property containing the ID of jquery DOM object - for convenience reasons
+         
+         @private
+         @property domId
+         @type {String}
+         */
+                domId = null,
+        /**
+         Backreference to the jquery DOM object containing the own DOM object.
+         
+         @private
+         @property domParent
+         @type {Object}
+         */
+                domParent = dP,
+                dontReactOnEnter = false,
+        /**
+         Flag indicating whether the current input field has a valid input or is empty.
+         
+         @private
+         @property filled
+         @type {Boolean}
+         */
+                 filled = false,
+        /**
+         The html type used to display the current filter.
+         
+         @private
+         @property htmlType
+         @type {String}
+         */
+                htmlType = null,
+        /**
+         A config variable containing the ID prefix to add to each DOM object
+         
+         @default &#x27;-filter-&#x27;
+         @private
+         @property idPrefix
+         @type {String}
+         @final
+         */
+                idPrefix = &#x27;-filter-&#x27;,
+        /**
+         The interal name of the META tag represented - according to config/searchfields.js
+         
+         @private
+         @property metaName
+         @type {String}
+         */
+                metaName = null,
+        /**
+         Flag indicating whether the selection of multiple values is possible or not
+         
+         @private
+         @property multipleValues
+         @type {Boolean}
+         */
+                multipleValues = false,
+        /**
+         Property containing a template (either Array or Object) with the possible values (i.e. select, enum, etc.)
+         
+         @private
+         @property possibleValues
+         @type {Array | Object}
+         */
+                possibleValues = null,
+
+        /**
+         Backreference
+         
+         @private
+         @property self
+         @type {Object}
+         */
+                self = this,
+                template = null;
+
+        this.addBooleanOps = function()
+        {
+            if (!dom &amp;&amp; !template) { return; }
+            var conf = {
+                &#x27;booleanOperators&#x27;: true,
+                &#x27;id&#x27;: domId,
+            }
+            var html = template(conf);
+            dom.prepend($(html));
+            return self;
+        };
+
+        this.addFilterToDom = function() {
+            dom.addClass(metaName);
+
+            var similar = domParent.find(&#x27;.&#x27;+metaName+&#x27;:last&#x27;);
+            if (domParent.find(&#x27;.sf&#x27;).length &gt; 0) {
+                self.addBooleanOps();
+            }
+            if (similar.length &gt; 0) {
+                similar.after(dom);
+            } else {
+                domParent.append(dom);
+            }
+
+            return self;
+        };
+        /**
+         The current value of the filter
+         
+         @private
+         @property value
+         @type {String | Object}
+         */
+                value = null;
+
+        this.and = function() {
+        };
+
+        /**
+         The method actually creating the HTML representation of the filter.
+
+         @method createDom
+         @param {String} [type] The HTML type to create. See the supported types in the class description
+         @private
+         @chainable
+         */
+        this.createDom = function(type) {
+            var d, html,
+                    type = type || htmlType;
+            
+            // date
+            if (type == &#x27;date&#x27;) {
+                d = { &#x27;label&#x27;:this.translate(metaName), &#x27;value&#x27;:&#x27;&#x27;, &#x27;type&#x27;:&#x27;text&#x27;, &#x27;textType&#x27;:true };
+                d.id = domId;
+                if (!searchFieldDefs[metaName][&#x27;exact&#x27;]) {
+                    d.comparisons = [
+                        { &#x27;display&#x27;: &#x27;beforeThisDate&#x27;, &#x27;value&#x27;: &#x27;lt&#x27; },
+                        { &#x27;display&#x27;: &#x27;onThisDate&#x27;, &#x27;value&#x27;: &#x27;eq&#x27; },
+                        { &#x27;display&#x27;: &#x27;afterThisDate&#x27;, &#x27;value&#x27;: &#x27;gt&#x27; }
+                    ];
+                }
+                html = template(d);
+                dom = $(html);
+                dom.find(&#x27;#&#x27;+domId).css(&#x27;width&#x27;, &#x27;auto&#x27;).datepicker();
+                self.addFilterToDom();
+                return self;
+            }
+
+            // enum, select
+            if (type == &#x27;enum&#x27; || type == &#x27;select&#x27;) {
+                var l = possibleValues;
+                if (typeof possibleValues == &#x27;object&#x27; &amp;&amp; typeof possibleValues[&#x27;func&#x27;] != &#x27;undefined&#x27;) {
+                    l = _B.executeCallback(l[&#x27;callback&#x27;]);
+                }
+
+                if (l.length == 0) {
+                    return false;
+                }
+
+                d = [];
+                for(var i=0;i&lt;l.length;i++) {
+                    d.push({ &#x27;value&#x27;:l[i], label:l[i] });
+                }
+                d = { &#x27;label&#x27;:this.translate(metaName), &#x27;options&#x27;:d, &#x27;selectType&#x27;:true };
+            }
+
+            // number, text
+            if (type == &#x27;text&#x27; || type == &#x27;number&#x27;) {
+                d = { &#x27;label&#x27;:this.translate(metaName), &#x27;value&#x27;:&#x27;&#x27;, &#x27;type&#x27;:type, &#x27;textType&#x27;:true };
+                if (type == &#x27;number&#x27; &amp;&amp; !searchFieldDefs[metaName][&#x27;exact&#x27;]) {
+                    d.comparisons = [
+                        { &#x27;display&#x27;: &#x27;equalTo&#x27;, &#x27;value&#x27;: &#x27;eq&#x27; },
+                        { &#x27;display&#x27;: &#x27;lessThan&#x27;, &#x27;value&#x27;: &#x27;lt&#x27; },
+                        { &#x27;display&#x27;: &#x27;greaterThan&#x27;, &#x27;value&#x27;: &#x27;gt&#x27; },
+                    ];
+                }
+                if (searchFieldDefs[metaName] &amp;&amp; searchFieldDefs[metaName][&#x27;pattern&#x27;]) {
+                    d.pattern = searchFieldDefs[metaName][&#x27;pattern&#x27;];
+                }
+            }
+
+            // object
+            if (type == &#x27;object&#x27;) {
+                var combinedInput = false;
+
+                if (typeof searchFieldDefs[metaName][&#x27;combinedInput&#x27;] != &#x27;undefined&#x27;) {
+                    combinedInput = searchFieldDefs[metaName][&#x27;combinedInput&#x27;];
+                }
+
+                d = {
+                            &#x27;fields&#x27; : [],
+                            &#x27;title&#x27; : this.translate(metaName),
+                            &#x27;objectType&#x27;: true,
+                        };
+
+                if (combinedInput) {
+                    var newLabel = [];
+                    for(var key in possibleValues) {
+                        newLabel.push(this.translate(key));
+                    }
+                    newLabel = newLabel.join(&#x27; &#x27;+this.translate(&#x27;or&#x27;)+&#x27; &#x27;);
+                    d.fields = [{ &#x27;label&#x27;: newLabel, &#x27;name&#x27;:&#x27;combined&#x27; }];
+                } else {
+                    for(var key in possibleValues) {
+                        d.fields.push({ &#x27;label&#x27;:this.translate(key), &#x27;name&#x27;:key });
+                    }
+                }
+            }
+
+            // radio
+            if (type == &#x27;radio&#x27;) {
+                d = {    &#x27;label&#x27; : this.translate(metaName),
+                            &#x27;options&#x27; : [],
+                            &#x27;radioType&#x27;: true,
+                        };
+                for (var key in possibleValues) {
+                    d.options.push({ &#x27;value&#x27; : possibleValues[key], &#x27;label&#x27; : this.translate(key) });
+                }
+            }
+            
+            d.id = domId;
+            html = template(d);
+            dom = $(html);
+
+            if (metaName == &#x27;query&#x27;) {
+                dom.attr(&#x27;id&#x27;, &#x27;queryterm-field&#x27;);
+            }
+
+            self.addFilterToDom();
+
+            if (autoCompleteConf) {
+                dom.find(&#x27;input&#x27;)
+                    .autocomplete(autoCompleteConf)
+                    .on(&#x27;focus.ph-plus&#x27;, function() {
+                        $(this).autocomplete(&quot;search&quot;, &quot;&quot;);
+                    });
+            }
+            return self;
+        };
+        
+        /**
+         Method to remove the HTML of the filter from the DOM.
+
+         @chainable
+         @method destroyDom
+         @private
+         */
+        this.destroyDom = function() {
+            if (dom == null) { return self; }
+            dom.remove();
+            dom = null;
+            return self;
+        };
+
+        /**
+         Method to display the HTML representation of the filter.
+
+         @method display
+         @chainable
+         */
+        this.display = function() {
+            dom.show();
+            return self;
+        };
+
+        this.preventEnterSearchStart = function(e, ui)
+        {
+            // in case the menu is closed due to enter pressed turn off the keyup event for one time
+            if ((e.charCode ? e.charCode : e.keyCode) == 13) {
+                dontReactOnEnter = true;
+            }
+            return false;
+        };
+
+        /**
+         Method to set focus on the filter&#x27;s input.
+
+         @method focus
+         @chainable
+         */
+        this.focus = function() {
+            switch (htmlType) {
+                case &#x27;date&#x27;:
+                case &#x27;number&#x27;:
+                case &#x27;object&#x27;:
+                case &#x27;radio&#x27;:
+                case &#x27;text&#x27;:
+                    dom.find(&#x27;input&#x27;).eq(0).focus();
+                    break;
+                case &#x27;enum&#x27;:
+                case &#x27;select&#x27;:
+                    dom.find(&#x27;select&#x27;).focus();
+                    break;
+            }
+            return self;
+        };
+
+        this.getBooleanOperator = function() {
+            if (dom.find(&#x27;.boolean-ops&#x27;)) {
+                return dom.find(&#x27;.boolean-ops&#x27;).val();
+            }
+            return &#x27;and&#x27;;
+        };
+        
+        /**
+         Method to get data from the dom object. Only working after the dom has been created!
+
+         @method getData
+         @return {Mixed} null on failure (no dom) or the data stored in the dom.
+         */
+        this.getData = function() {
+            if (dom == null) { return null; }
+            return dom.data(&#x27;sf-data&#x27;);
+        };
+
+        /**
+         Method to get the ID of dom object.
+
+         @method getId
+         @return {String} the dom ID
+         */
+        this.getId = function() {
+            return domId;
+        };
+
+        /**
+         Method to get the metatag&#x27;s name the filter is representing.
+
+         @method getMetaName
+         @return {String} The name of the tag represented by the filter UI.
+        */
+        this.getMetaName = function() {
+            return metaName;
+        };
+
+        /**
+         Method to retrieve the current value of the filter.
+
+         @method getValue
+         @return {Mixed} The value stored currently in the filter.
+         */
+        this.getValue = function() {
+            // date
+            if (htmlType == &#x27;date&#x27;) {
+                var v = dom.find(&#x27;#&#x27;+domId).datepicker(&#x27;getDate&#x27;);
+                if (dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;)) {
+                    var compType = dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;).val();
+                    if (compType == &#x27;lt&#x27;) { v = &#x27;..&#x27;+v; }
+                    if (compType == &#x27;gt&#x27;) { v = v+&#x27;..&#x27;; }
+                }
+                return v;
+            }
+
+            // enum or selects or text
+            if (htmlType == &#x27;enum&#x27; || htmlType == &#x27;select&#x27; || htmlType == &#x27;text&#x27; || htmlType == &#x27;number&#x27;) {
+                var v = dom.find(&#x27;#&#x27;+domId).val();
+                if (htmlType == &#x27;number&#x27; &amp;&amp; dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;)) {
+                    v = v.replace(/\,/g, &#x27;.&#x27;);
+                    var compType = dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;).val();
+                    if (compType == &#x27;lt&#x27;) { v = &#x27;..&#x27;+v; }
+                    if (compType == &#x27;gt&#x27;) { v = v+&#x27;..&#x27;; }
+                }
+                return v;
+            }
+
+            if (htmlType == &#x27;object&#x27;) {
+                var combinedInput = false;
+                var ret = {};
+
+                if (typeof searchFieldDefs[metaName][&#x27;combinedInput&#x27;] != &#x27;undefined&#x27;) {
+                    combinedInput = searchFieldDefs[metaName][&#x27;combinedInput&#x27;];
+                }
+
+                if (combinedInput) {
+                    var v = dom.find(&#x27;input&#x27;).val();
+                    for(var key in possibleValues) {
+                        ret[key] = v;
+                    }
+                } else {
+                    for(var key in possibleValues) {
+                        ret[key] = dom.find(&#x27;#&#x27;+domId+&#x27;-&#x27;+key).val();
+                    }
+                }
+                return ret;
+            }
+
+            // radio
+            if (htmlType == &#x27;radio&#x27;) {
+                return dom.find(&quot;input:checked&quot;).val();
+            }
+
+        };
+        
+        /**
+         Method to hide the HTML representation of the filter.
+
+         @method hide
+         @chainable
+         */
+        this.hide = function() {
+            dom.hide();
+            return self;
+        };
+        
+        /**
+         Method to destroy the whole filter object.
+
+         @method remove
+         @chainable
+         */
+        this.remove = function() {
+            this.destroyDom();
+            return self;
+        };
+
+        /**
+         Method setting data on the dom object. Only working after the dom has been created!
+
+         @chainable
+         @method setData
+         @param {Mixed} newData the data to store
+         @return {Mixed} null on failure (no dom) or the object
+         */
+        this.setData = function(newData) {
+            if (dom == null) { return null; }
+            dom.data(&#x27;sf-data&#x27;, newData);
+            return self;
+        };
+
+        /**
+         Method called when filter is first initiated.
+         Sets up the config for HTML, the DOM id, etc.
+
+         @chainable
+         @method setup
+         @param {String} name Name of the META Tag to represent
+         @param {Mixed} [v] Value of the META Tag
+         @private
+         */
+        this.setup = function(name, v) {
+            metaName = name;
+            multipleValues = false;
+            possibleValues = null;
+
+            if (name == &#x27;query&#x27;) {
+                var typeDef = new String();
+            } else {
+                var typeDef = searchFieldDefs[metaName];
+            }
+            var ht = (typeDef instanceof String || typeof typeDef == &#x27;string&#x27;) ? &#x27;text&#x27; : null;
+            var mt = ht;
+            
+            if (typeDef instanceof Boolean) {
+                mt = mt || &#x27;boolean&#x27;;
+                ht = ht || &#x27;radio&#x27;;
+                possibleValues = { &#x27;yes&#x27;: 1, &#x27;no&#x27;:0, };
+            }
+
+            if (typeDef instanceof Number || typeof typeDef == &#x27;number&#x27;) {
+                mt = mt || &#x27;number&#x27;;
+                ht = ht || &#x27;number&#x27;;
+            }
+
+            if (typeDef instanceof Date) {
+                mt = mt || &#x27;date&#x27;;
+                ht = ht || &#x27;date&#x27;;
+            }
+
+            if (mt == null &amp;&amp; typeof typeDef == &#x27;object&#x27;) {
+                mt = &#x27;object&#x27;;
+                ht = &#x27;object&#x27;
+            }
+
+            if (mt == &#x27;object&#x27;) {
+                if (typeof typeDef[&#x27;autoComplete&#x27;] != &#x27;undefined&#x27;) {
+                    autoCompleteConf = typeDef[&#x27;autoComplete&#x27;];
+                    autoComleteDefaults.close = self.preventEnterSearchStart;
+                    autoCompleteConf = $.extend({}, autoComleteDefaults, autoCompleteConf);
+                }
+
+                if (typeof typeDef[&#x27;type&#x27;] != &#x27;undefined&#x27;) {
+                    mt = typeDef[&#x27;type&#x27;].toLowerCase();
+                    ht = mt;
+                }
+
+                if (typeof typeDef[&#x27;multiple&#x27;] != &#x27;undefined&#x27;) {
+                    multipleValues = (mt != &#x27;boolean&#x27;) ? typeDef[&#x27;multiple&#x27;] : false;
+                }
+
+                if (typeof typeDef[&#x27;template&#x27;] != &#x27;undefined&#x27;) {
+                    possibleValues = $.extend(true, {}, typeDef[&#x27;template&#x27;]);
+                    if (typeDef[&#x27;template&#x27;] instanceof Array) {
+                        possibleValues = typeDef[&#x27;template&#x27;].slice();
+                    }
+                } else {
+                    possibleValues = $.extend(true, {}, typeDef);
+                }
+            }
+
+            htmlType = ht;
+
+            domId = domParent.data(&#x27;next-child-id&#x27;);
+            
+            if (typeof domId == &#x27;undefined&#x27;) {
+                domId = 0;
+            } else {
+                domId = parseInt(domId);
+            }
+            
+            domParent.data(&#x27;next-child-id&#x27;, domId+1);
+            domId = idPrefix+domId;
+            
+            this.createDom()
+                    .setValue(v);
+            
+            // special treatement for q
+            if (name == &#x27;query&#x27;) {
+                dom.find(&#x27;.remove-filter&#x27;).remove();
+            }
+
+            var htmlTag = (htmlType == &#x27;enum&#x27; || htmlType == &#x27;select&#x27;) ? &#x27;select&#x27; : &#x27;input&#x27;;
+
+            dom.find(htmlTag).on(&#x27;focus.ph-plus&#x27;, this.startInputManagement)
+                                             .on(&#x27;blur.ph-plus&#x27;, this.stopInputManagement);
+
+            dom.find(&quot;a.remove-filter&quot;).on(&#x27;click.ph-plus&#x27;, function() {
+                $(self).trigger(&#x27;delete&#x27;);
+                return false;
+            });
+
+            return self;
+        };
+
+        /**
+         Method to set the value of the filter. Updates the input in the created DOM.
+
+         @method setValue
+         @param {Mixed} [v] Value of the META Tag
+         @chainable
+         */
+        this.setValue = function(v) {
+            // date
+            if (htmlType == &#x27;date&#x27;) {
+                dom.find(&#x27;#&#x27;+domId).datepicker(&#x27;setDate&#x27;, new Date(v));
+                return self;
+            }
+
+            // enum or selects
+            if (htmlType == &#x27;enum&#x27; || htmlType == &#x27;select&#x27;) {
+                dom.find(&quot;#&quot;+domId).val(v);
+                return self;
+            }
+
+            // object
+            if (htmlType == &#x27;object&#x27;) {
+                var combinedInput = false;
+
+                if (typeof searchFieldDefs[metaName][&#x27;combinedInput&#x27;] != &#x27;undefined&#x27;) {
+                    combinedInput = searchFieldDefs[metaName][&#x27;combinedInput&#x27;];
+                }
+
+                if (!combinedInput &amp;&amp; typeof v == &#x27;object&#x27;) {
+                    for(var key in v) {
+                        dom.find(&#x27;#&#x27;+domId+&#x27;-&#x27;+key).val(v[key]);
+                    }
+                } else {
+                    dom.find(&#x27;input&#x27;).val(v);
+                }
+                return self;
+            }
+
+            // radio or text
+            if (htmlType == &#x27;radio&#x27; || htmlType == &#x27;text&#x27;) {
+                if (htmlType == &#x27;radio&#x27; &amp;&amp; !(v instanceof Array)) {
+                    v = [v];
+                }
+                dom.find(&quot;input&quot;).val(v);
+                return self;
+            }
+        };
+
+        /**
+         Eventhandler called when the input receives focus.
+         Enables the keyboard event handler to check the states cleared, filled, enter, escape.
+
+         @method startInputManagement
+         @param {Object} e The event object delivered by the event handler.
+         @private
+         */
+        this.startInputManagement = function(e)
+        {
+            var triggerEvent = &#x27;keyup&#x27;;
+            
+            if (htmlType == &#x27;enum&#x27; || htmlType == &#x27;select&#x27; || htmlType == &#x27;date&#x27;) {
+                triggerEvent = &#x27;change&#x27;;
+            }
+            if (htmlType == &#x27;text&#x27; &amp;&amp; autoCompleteConf) {
+                triggerEvent = &#x27;autocompleteclose&#x27;;
+            }
+
+            $(this).on(triggerEvent+&#x27;.ph-plus&#x27;, function(e) {
+
+                var v = $.trim(self.getValue());
+                var oldFlag = filled;
+
+                filled = (v.length &gt; 0);
+                if (htmlType == &#x27;object&#x27;) {
+                    filled = [];
+                    for(var key in v) {
+                        filled.push($.trim(v[key]));
+                    }
+                    filled = (filled.join().length &gt; 0);
+                }
+
+                if (filled != oldFlag) {
+                    if (filled) {
+                        $(self).trigger(&#x27;filled&#x27;);
+                    } else {
+                        $(self).trigger(&#x27;cleared&#x27;);
+                    }
+                }
+
+                if (e.keyCode == 13) {
+                    if (dontReactOnEnter) {
+                        dontReactOnEnter = false;
+                        return false;
+                    }
+                    // filtering selection enter on autocomplete fields
+                    $(self).trigger(&#x27;enter&#x27;);
+                }
+                if (e.keyCode == 27) {
+                    $(self).trigger(&#x27;escape&#x27;);
+                    $(this).blur();
+                }
+                return true;
+            });
+        };
+
+        /**
+         Eventhandler called when the input looses focus.
+         Disables the keyboard event handler to check the states cleared, filled, enter, escape.
+
+         @method stopInputManagement
+         @param {Object} e The event object delivered by the event handler.
+         @private
+         */
+        this.stopInputManagement = function(e) {
+            $(this).off(&#x27;keyup.ph-plus&#x27;);
+            return true;
+        };
+
+        /**
+         Method to translate the META Tag names into descriptive names.
+         Uses the translation library in  nls depending on the language indicated by the browser.
+
+         @method translate
+         @param {String} name Name of the META Tag to translate.
+         @private
+         @return {String} the translation, if existing.
+         */
+        this.translate = function(term) {
+            if (typeof _T[term] != &#x27;undefined&#x27;) {
+                return _T[term];
+            } 
+            return term;
+        };
+
+    _H.registerHelper(&#x27;translate&#x27;, self.translate);
+    template = _H.compile(_tempRaw);
+
+        if (typeof dP != &quot;undefined&quot;) {
+            idPrefix = domParent.attr(&#x27;id&#x27;)+idPrefix;
+
+            if (typeof field != &quot;undefined&quot;) {
+                this.setup(field, val);
+            }
+        }
+    };
+
+    return searchFilter;
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

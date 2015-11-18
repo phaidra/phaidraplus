@@ -1,0 +1,250 @@
+.timelineView {
+	#display-slideshow,
+	#logout-button {
+		display:inline-block;
+	}
+	#sidebar {
+		.displayMode {
+			display:none;
+		}
+	}
+	#mainsection {
+		padding:10px 0px !important;
+	}
+}
+
+#timeline-container {
+	font-family:colfax;
+	padding-left: 45px;
+	margin-top:46px;
+	background-color:$body-bg;
+	.timeline-axis-grid {
+		border-left:1px solid lighten($body-bg,10%);
+	}
+	.timeline-axis-grid.timeline-axis-grid-minor {
+		border-left:1px solid lighten($body-bg,5%);
+	}
+	.timeline-axis {
+		
+	}
+	.timeline-axis-text {
+	    color: $secondary-color;
+		font-size:14px;
+		font-family:colfax;
+    	padding: 3px;
+    	white-space: nowrap;
+	}
+
+	.timeline-frame {
+
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+			border:none !important;
+		//	background: rgba(224, 224, 224,0) !important;
+	    //overflow: hidden;
+	    position: relative;
+	}
+	.timeline-event-cluster {
+
+	}
+	.timeline-event-dot-container {
+	  	.gen-enclosed {
+	  		padding:0;
+	  		border-radius:0;
+	  		border:none;
+			img {
+				height:42px;
+				max-width:300px;
+			}
+		}
+		.timeline-event-content {
+			margin:0px;
+			margin-left: 0 !important;
+
+			a {
+				//background: #F0F0F0;
+				border: 1px #ccc;
+				border-radius: 3px;
+				display: block;
+				padding: 2px 6px 0px 6px;
+				line-height: 1.5;
+				vertical-align: bottom;
+				font-size:13px;
+				font-family:colfax;
+
+				&::before {
+					padding-right: 0.5em;
+				}
+
+				&:hover {
+					//color: #1e96fc;
+				}
+
+				&.fi-star::before {
+					//color: #1e96fc;
+					font-weight: thin;
+				}
+			}
+		}
+
+		.timeline-event-dot {
+			display: none !important;
+		}
+
+		.timeline-object {
+			
+			//border-radius: 3px;
+			bottom: 100%;
+			//box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 14px 0px;
+			//box-sizing: border-box;
+			display: none;
+			//font-family:colfax;
+			//font-size:13px;
+			left: -140px;
+			opacity: 1;
+			//padding: 15px;
+			position: absolute;
+			padding:5px;
+			z-index: 10;
+			height:140px;
+			.image {
+				width:140px;
+				margin:5px;
+				img {
+
+					max-height:90px !important;
+				}
+			}
+			.content {
+				width:190px;
+			}
+
+			.title,.body,.author {
+				padding:0;
+			}
+			.body {
+				margin-top:.5rem;
+				padding-top:.5rem;
+			}
+
+			width:370px;
+
+			// .thumb {
+			// 	height: auto;
+			// 	margin: 0 13px 0 0;
+			// 	max-height: 100px;
+			// 	max-width: 100px;
+			// 	width: auto;
+			// }
+
+			// .preview {
+			// 	//float: left;
+			// 	height: auto;
+			// 	//margin: 0 13px 0 0;
+			// 	max-height: 200px;
+			// 	max-width: 200px;
+			// 	width: auto;
+			// }
+
+		
+
+
+		}
+
+		&:hover {
+			z-index: 10;
+
+			.timeline-object {
+				display: block;
+			}
+		}
+	}
+}
+
+.navigate {
+	position:fixed;
+	top:50%;
+	margin-top:-50px;
+	width:100px;
+	height:100px;
+	color:$secondary-color;
+	&.left {
+		left:-20px;
+	}
+	&.right {
+		right:-20px;
+	}
+	&:hover {
+		color:lighten($secondary-color,20%);
+	}
+	&:before {
+		font-size:100px;
+		line-height:100px;
+	}
+}
+#timeline-nav {
+	//border: 1px solid #888;
+	//border-radius:5px;
+	//box-shadow:0 0 4px rgba(0,0,0,.2);
+	right: 50px;
+	width:64px;
+	overflow:hidden;
+	position: fixed;
+	top: 120px;
+	z-index: 99;
+
+	a {
+		
+		// 
+		// clear: both;
+		// color: #222;
+		// display: block;
+		// font-size: 13px;
+		// margin: 0;
+		// padding: 3px 8px;
+		// position: relative;
+		// text-align: left;
+
+		// &:first-child {
+		// 	border-bottom: 1px solid #ccc; 	
+		// }
+
+		// &:hover {
+		// 	background-color: #1e96fc;
+		// 	color: #F0F0F0;
+		// }
+	}
+}
+
+.timelineView #sidebar .optionsblock.gridoptions {
+	display: none;
+}
+
+.timelineView.orbit {
+
+	#display-slideshow,
+	#logout-button {
+		display:none;
+	}
+
+	height:100%;
+	.top-bar {
+		display:none;
+	}
+
+	#sidebar {
+		display:none;
+	}
+
+	.image {
+		//display:table-cell;
+		vertical-align:middle;
+		text-align:center;
+		//line-height:100%;
+		background:transparent !important;
+		border:0px solid rgba(255,255,255,.1) !important;
+		img {
+			display:inline !important
+		}
+	}
+}

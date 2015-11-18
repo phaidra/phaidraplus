@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>searchFilter - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>searchFilter Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/components_search-filter.js.html#l7"><code>components&#x2F;search-filter.js:7</code></a>
+        </div>
+
+            Module: <a href="../modules/search.html">search</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>The searchFilter class is used to create and manage a certain search input field.
+The searchFilter supports multiple types:</p>
+<ul>
+<li>boolean</li>
+<li>date</li>
+<li>enum</li>
+<li>objects</li>
+<li>radio</li>
+<li>select</li>
+<li>text</li>
+</ul>
+<h2 id="todos">Todos</h2>
+<ul>
+<li>add range selections</li>
+</ul>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_searchFilter" class="method item">
+            <h3 class="name"><code>searchFilter</code></h3>
+        
+                <div class="args">
+                    <span class="paren">(</span><ul class="args-list inline commas">
+                        <li class="arg">
+                                <code>dP</code>
+                        </li>
+                        <li class="arg">
+                                <code>field</code>
+                        </li>
+                        <li class="arg">
+                                <code class="optional">[val]</code>
+                        </li>
+                    </ul><span class="paren">)</span>
+                </div>
+        
+        
+        
+        
+        
+        
+        
+        
+            <div class="meta">
+                        <p>
+                        Defined in
+                <a href="../files/components_search-filter.js.html#l7"><code>components&#x2F;search-filter.js:7</code></a>
+                </p>
+        
+        
+        
+            </div>
+        
+            <div class="description">
+                
+            </div>
+        
+                <div class="params">
+                    <h4>Parameters:</h4>
+        
+                    <ul class="params-list">
+                        <li class="param">
+                                <code class="param-name">dP</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        
+        
+                            <div class="param-description">
+                                <p>The DOM parent to insert the filter into</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name">field</code>
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        
+        
+                            <div class="param-description">
+                                <p>The name of the META Tag to represent - according to config/searchfields.js</p>
+        
+                            </div>
+        
+                        </li>
+                        <li class="param">
+                                <code class="param-name optional">[val]</code>
+                                <span class="type">Mixed</span>
+                                <span class="flag optional" title="This parameter is optional.">optional</span>
+        
+        
+                            <div class="param-description">
+                                <p>The start value assigned to the META Tag</p>
+        
+                            </div>
+        
+                        </li>
+                    </ul>
+                </div>
+        
+        
+        
+        </div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method_createDom">createDom</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_destroyDom">destroyDom</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_display">display</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_focus">focus</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getData">getData</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getId">getId</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getMetaName">getMetaName</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getValue">getValue</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_hide">hide</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_remove">remove</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setData">setData</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_setup">setup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setValue">setValue</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_startInputManagement">startInputManagement</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_stopInputManagement">stopInputManagement</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_translate">translate</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property private">
+                                <a href="#property_dom">dom</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_domId">domId</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_domParent">domParent</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_filled">filled</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_htmlType">htmlType</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_idPrefix">idPrefix</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_metaName">metaName</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_multipleValues">multipleValues</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_possibleValues">possibleValues</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_self">self</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_value">value</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_cleared">cleared</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_delete">delete</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_enter">enter</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_escape">escape</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_filled">filled</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_createDom" class="method item private">
+    <h3 class="name"><code>createDom</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[type]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l185"><code>components&#x2F;search-filter.js:185</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>The method actually creating the HTML representation of the filter.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[type]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>The HTML type to create. See the supported types in the class description</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_destroyDom" class="method item private">
+    <h3 class="name"><code>destroyDom</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l307"><code>components&#x2F;search-filter.js:307</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to remove the HTML of the filter from the DOM.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_display" class="method item">
+    <h3 class="name"><code>display</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l321"><code>components&#x2F;search-filter.js:321</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to display the HTML representation of the filter.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_focus" class="method item">
+    <h3 class="name"><code>focus</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l341"><code>components&#x2F;search-filter.js:341</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to set focus on the filter&#39;s input.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_getData" class="method item">
+    <h3 class="name"><code>getData</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l371"><code>components&#x2F;search-filter.js:371</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to get data from the dom object. Only working after the dom has been created!</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>null on failure (no dom) or the data stored in the dom.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getId" class="method item">
+    <h3 class="name"><code>getId</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l382"><code>components&#x2F;search-filter.js:382</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to get the ID of dom object.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>the dom ID</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getMetaName" class="method item">
+    <h3 class="name"><code>getMetaName</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l392"><code>components&#x2F;search-filter.js:392</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to get the metatag&#39;s name the filter is representing.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>The name of the tag represented by the filter UI.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getValue" class="method item">
+    <h3 class="name"><code>getValue</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l402"><code>components&#x2F;search-filter.js:402</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to retrieve the current value of the filter.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>The value stored currently in the filter.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_hide" class="method item">
+    <h3 class="name"><code>hide</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l460"><code>components&#x2F;search-filter.js:460</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to hide the HTML representation of the filter.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_remove" class="method item">
+    <h3 class="name"><code>remove</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l471"><code>components&#x2F;search-filter.js:471</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to destroy the whole filter object.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_setData" class="method item">
+    <h3 class="name"><code>setData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>newData</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l482"><code>components&#x2F;search-filter.js:482</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method setting data on the dom object. Only working after the dom has been created!</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">newData</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>the data to store</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>null on failure (no dom) or the object</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setup" class="method item private">
+    <h3 class="name"><code>setup</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[v]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l496"><code>components&#x2F;search-filter.js:496</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method called when filter is first initiated.
+Sets up the config for HTML, the DOM id, etc.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>Name of the META Tag to represent</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[v]</code>
+                        <span class="type">Mixed</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>Value of the META Tag</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setValue" class="method item">
+    <h3 class="name"><code>setValue</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[v]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l600"><code>components&#x2F;search-filter.js:600</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to set the value of the filter. Updates the input in the created DOM.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[v]</code>
+                        <span class="type">Mixed</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>Value of the META Tag</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_startInputManagement" class="method item private">
+    <h3 class="name"><code>startInputManagement</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>e</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l648"><code>components&#x2F;search-filter.js:648</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Eventhandler called when the input receives focus.
+Enables the keyboard event handler to check the states cleared, filled, enter, escape.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>The event object delivered by the event handler.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_stopInputManagement" class="method item private">
+    <h3 class="name"><code>stopInputManagement</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>e</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l705"><code>components&#x2F;search-filter.js:705</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Eventhandler called when the input looses focus.
+Disables the keyboard event handler to check the states cleared, filled, enter, escape.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">e</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>The event object delivered by the event handler.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_translate" class="method item private">
+    <h3 class="name"><code>translate</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-filter.js.html#l718"><code>components&#x2F;search-filter.js:718</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to translate the META Tag names into descriptive names.
+Uses the translation library in  nls depending on the language indicated by the browser.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>Name of the META Tag to translate.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>the translation, if existing.</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_dom" class="property item private">
+                        <h3 class="name"><code>dom</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l60"><code>components&#x2F;search-filter.js:60</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Property storing the jquery DOM object</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_domId" class="property item private">
+                        <h3 class="name"><code>domId</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l68"><code>components&#x2F;search-filter.js:68</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Property containing the ID of jquery DOM object - for convenience reasons</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_domParent" class="property item private">
+                        <h3 class="name"><code>domParent</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l76"><code>components&#x2F;search-filter.js:76</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Backreference to the jquery DOM object containing the own DOM object.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_filled" class="property item private">
+                        <h3 class="name"><code>filled</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l85"><code>components&#x2F;search-filter.js:85</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Flag indicating whether the current input field has a valid input or is empty.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_htmlType" class="property item private">
+                        <h3 class="name"><code>htmlType</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l93"><code>components&#x2F;search-filter.js:93</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The html type used to display the current filter.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_idPrefix" class="property item private">
+                        <h3 class="name"><code>idPrefix</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                            <span class="flag final">final</span>
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l101"><code>components&#x2F;search-filter.js:101</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A config variable containing the ID prefix to add to each DOM object</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;-filter-&#x27;</p>
+                    
+                    
+                    </div>
+                    <div id="property_metaName" class="property item private">
+                        <h3 class="name"><code>metaName</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l111"><code>components&#x2F;search-filter.js:111</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The interal name of the META tag represented - according to config/searchfields.js</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_multipleValues" class="property item private">
+                        <h3 class="name"><code>multipleValues</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l119"><code>components&#x2F;search-filter.js:119</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Flag indicating whether the selection of multiple values is possible or not</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_possibleValues" class="property item private">
+                        <h3 class="name"><code>possibleValues</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l127"><code>components&#x2F;search-filter.js:127</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Property containing a template (either Array or Object) with the possible values (i.e. select, enum, etc.)</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_self" class="property item private">
+                        <h3 class="name"><code>self</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l136"><code>components&#x2F;search-filter.js:136</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Backreference</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_value" class="property item private">
+                        <h3 class="name"><code>value</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a> | <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l173"><code>components&#x2F;search-filter.js:173</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The current value of the filter</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_cleared" class="events item">
+                        <h3 class="name"><code>cleared</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l29"><code>components&#x2F;search-filter.js:29</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event called when the input changes from filled (valid input) to an empty input.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_delete" class="events item">
+                        <h3 class="name"><code>delete</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l34"><code>components&#x2F;search-filter.js:34</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event fired when the filter is removed from the UI.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_enter" class="events item">
+                        <h3 class="name"><code>enter</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l39"><code>components&#x2F;search-filter.js:39</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event fired when enter is pressed on the input.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_escape" class="events item">
+                        <h3 class="name"><code>escape</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l44"><code>components&#x2F;search-filter.js:44</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event fired when escape is pressed on the input.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_filled" class="events item">
+                        <h3 class="name"><code>filled</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-filter.js.html#l49"><code>components&#x2F;search-filter.js:49</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Event fired when the input changes from empty to an filled state, meaning that some valid content is available.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

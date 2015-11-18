@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="./assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="./assets/css/main.css" id="site_styles">
+    <link rel="icon" href="./assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="./assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="./classes/basics.html">basics</a></li>
+                                <li><a href="./classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="./classes/dataManager.html">dataManager</a></li>
+                                <li><a href="./classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="./classes/geoView.html">geoView</a></li>
+                                <li><a href="./classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="./classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="./classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="./classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="./classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="./classes/search.html">search</a></li>
+                                <li><a href="./classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="./classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="./classes/singleView.html">singleView</a></li>
+                                <li><a href="./classes/standalone.html">standalone</a></li>
+                                <li><a href="./classes/timeline.html">timeline</a></li>
+                                <li><a href="./classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="./classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="./modules/basics.html">basics</a></li>
+                                <li><a href="./modules/helpers.html">helpers</a></li>
+                                <li><a href="./modules/main.html">main</a></li>
+                                <li><a href="./modules/resources.html">resources</a></li>
+                                <li><a href="./modules/search.html">search</a></li>
+                                <li><a href="./modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+    <div class="apidocs">
+        <div id="docs-main" class="content">
+            <p>
+            Browse to a module or class using the sidebar to view its API documentation.
+            </p>
+
+            <h2>Keyboard Shortcuts</h2>
+
+            <ul>
+                <li><p>Press <kbd>s</kbd> to focus the API search box.</p></li>
+
+                <li><p>Use <kbd>Up</kbd> and <kbd>Down</kbd> to select classes, modules, and search results.</p></li>
+
+                <li class="mac-only"><p>With the API search box or sidebar focused, use <kbd><span class="cmd">&#x2318;</span>-Left</kbd> or <kbd><span class="cmd">&#x2318;</span>-Right</kbd> to switch sidebar tabs.</p></li>
+
+                <li class="pc-only"><p>With the API search box or sidebar focused, use <kbd>Ctrl+Left</kbd> and <kbd>Ctrl+Right</kbd> to switch sidebar tabs.</p></li>
+            </ul>
+
+
+            <h2>Project Structure</h2>
+    <p>The application is build using javascript files (in the components and external folder). UI Design is defined via the files located in the theme folder
+      and text chunks can be edited in the nls folder.</p>
+    <p>
+      The main application states are defined in the corresponding configuration files. Some general configurations can be made in the .json files of the config folder.</p>
+
+    <h2>File Structure</h2>
+    <dl>
+      <dt>app-standalone.js</dt><dd>the main js application file for the <b>standalone</b> mode</dd>
+      <dt>app.js</dt><dd>the main js application file for the <b>normal</b> mode</dd>
+      <dt>components/</dt><dd>self created components</dd>
+      <dt>config/</dt><dd>basic configuration of phaidra+</dd>
+      <dt>docs/</dt><dd>documentation</dd>
+      <dt>external/</dt><dd>external libraries used</dd>
+      <dt>Gruntfile.js</dt><dd>grunt file required to create the style sheets in the theme folder</dd>
+      <dt>index.php</dt><dd>the startfile for both normal and standalone mode</dd>
+      <dt>nls/</dt><dd>language versions of the various text chunks used</dd>
+      <dt>node_modules/</dt><dd>node.js modules used</dd>
+      <dt>ppt.php</dt><dd>PHP Script generating the Powerpoint files</dd>
+      <dt>states-standalone.js</dt><dd>application states defined in the <b>standalone</b> mode</dd>
+      <dt>states.js</dt><dd>application states defined in the <b>normal</b> mode</dd>
+      <dt>templates/</dt><dd>Handlebars templates used for the application</dd>
+      <dt>theme/</dt><dd>.CSS, .SCSS files and images</dd>
+      <dt>yuidoc.json</dt><dd>The yuidoc config file used to generate this documentation</dd>
+    </dl>
+
+    <h2>Basic Functionality</h2>
+    
+    <p>The application uses require.js to load the required libraries for each application state.</p>
+    <p>Application states are switched by triggering the appropriate events on the $(window) object.</p>
+    <p>The main event handler is located in the resourceManager, which takes care of closing the current state
+      and opening the new one. The switching between the main views is handled this way.</p>
+    <ul></ul>
+    <p>The dataManager also plays an essential role in the app. All parties can store Objects in the dataManager and can register
+      for getting updates whenever data changes. This is mainly used to check changes such as objects get marked, search results get restricted to
+      a keyword, collection or similar.</p>
+    <ul></ul>
+    <p>Data is loaded from two different resources. One is the Google Search Appliance and the second is the Phaidra API.
+      The former is done by the searchRequestManager, the later by the phaidraQue class</p>
+
+      
+        </div>
+    </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="./assets/js/yui-prettify.js"></script>
+<script src="./assets/../api.js"></script>
+<script src="./assets/js/api-filter.js"></script>
+<script src="./assets/js/api-list.js"></script>
+<script src="./assets/js/api-search.js"></script>
+<script src="./assets/js/apidocs.js"></script>
+</body>
+</html>

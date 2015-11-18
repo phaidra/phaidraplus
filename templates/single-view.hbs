@@ -1,0 +1,162 @@
+{{!
+{
+  "name" : "Single View Template",
+  "description" : "Template for the detailed view on a phaidra+ object.",
+}
+}}
+<section id="single-view-container" class="clearfix">
+	<div class="main-description">
+		<select class="actions-menu">
+				<option value="">{{translate "actionsMenuCalltoAction"}}</option>
+				<!--<option>{{translate "actionsMenuShowAnnotations"}}</option>
+				<option>{{translate "actionsMenuShowSimilar"}}</option>
+				<option>{{translate "actionsMenuShowNetwork"}}</option>-->
+				<option value="collection">{{translate "actionsMenuAddtoCollection"}}</option>
+				<option value="download">{{translate "downloadImage"}}</option>
+				{{#unless single }}
+					<option value="mark">{{translate "actionsMenuMarkObject"}}</option>
+				{{/unless}}
+				<!--<option>{{translate "actionsMenuAddtoPresention"}}</option>-->
+			</select>
+		<div class="scroll-content">
+			
+
+
+			<h1 class="title">{{ title }}</h1>
+			
+			{{#if artist}}
+			<div class="artist">
+				{{translate "byArtist"}} <span class="forename">{{forename}}</span> <span class="surname">{{surname}}</span>
+			</div>
+			{{/if}}
+
+			<span class="object-date">{{ obj_date }}</span>
+
+			{{#if subtitle}}
+			<h2 class="subtitle">{{ this }}</h2>
+			{{/if}}
+
+			{{#if alttitle}}
+			{{translate "altTitleBefore"}} <h3 class="alttitle">{{ this }}</h3>
+			{{/if}}
+
+			<article>
+			{{{ description }}}
+			</article>
+			
+			<div class="description-copyrights">{{{ copyrights }}}</div>
+
+			<p><a target="_blank" href="{{dbUrl}}">{{pid}} in Phaidra öffnen</a></p>
+
+
+			{{#if author}}
+			<div class="author">
+				{{translate "byAuthor"}} <span class="forename">{{ author.forename }}</span> <span class="surname">{{ author.surname }}</span>
+			</div>
+			{{/if}}
+
+
+			<dl class="accordion" data-accordion>
+				{{#if objectdata }}
+				<dd>
+				  <a href="#panel5">{{translate "metadata-objectdata-title"}}</a>
+				  <div class="content" data-section-content id="panel5">
+				    {{{ objectdata }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+				{{#if attributions}}
+				<dd>
+				  <a href="#panel4">{{translate "metadata-attributions-title"}}</a>
+				  <div class="content" data-section-content id="panel4">
+				    {{{ attributions }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+				{{#if history}}
+				<dd>
+				  <a href="#panel7">{{translate "metadata-objecthistory-title"}}</a>
+				  <div class="content" data-section-content id="panel7">
+				    {{{ history }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+				
+				{{#if copyrights}}
+				<dd>
+				  <a href="#panel6">{{translate "metadata-copyrights-title"}}</a>
+				  <div class="content" data-section-content id="panel6">
+				    {{{ copyrights }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+
+				{{#if collections}}
+				<dd>
+				  <a href="#panel1">{{translate "myCollections"}}</a>
+				  <div class="content" data-section-content id="panel1">
+				    {{{ collections }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+				{{#if annotations}}
+				<dd>
+				  <a href="#pane21">{{translate "annotations"}}</a>
+				  <div class="content" data-section-content id="panel2">
+			    {{{ annotations }}}
+				  </div>
+				</dd>
+				{{/if}}
+
+				{{#if categories}}
+				<dd>
+				  <a href="#panel3">{{translate "metadata-categories-title"}}</a>
+				  <div class="content meta-categories" data-section-content  id="panel3">
+				    {{{ categories }}}
+				  </div>
+				</dd>
+				{{/if}}
+				
+			</dl>
+		</div>
+	</div>
+	<div class="std-preview-image">
+		<div class="image-cropper" data-image="{{ preview_large }}">
+	      <div class="cropit-image-background-container">
+	      	<img src="{{ preview_large }}" alt="preview image" />
+	      </div>
+	      <div class="cropit-image-preview-container">
+	        <div class="cropit-image-preview"></div>
+	      </div>
+	     
+	      <div class="slider-wrapper">
+	      	<div class="zoom-slider">
+	      		<span class="icon icon-size small"></span>
+	      		<input type="range" class="cropit-image-zoom-input custom" min="0" max="1" step="0.01">
+	      		<span class="icon icon-size large"></span>
+	      	</div>
+	      </div>
+
+	     {{#if showObjectLink}}
+	     	<a href="{{file}}" target="_blank" class="button std-open-file">{{translate "open-document"}}</a>
+	     {{/if}}
+
+	    </div>
+		
+	</div>
+
+	
+	<div class="button-group">
+		<button class="prevBtn dark lighter tiny"><span class="icon icon-prev"/></button>
+		<button class="nextBtn dark lighter tiny"><span class="icon icon-next"/></button>
+		<button class="closeBtn dark lighter tiny"><span class="icon icon-close"/></button>
+	</div>
+	<!--{{translate "singleViewCloseBtnTitle"}}-->
+
+	
+</section>

@@ -1,0 +1,43 @@
+#marker-actions {
+	position:fixed;
+	right:50px;
+	bottom:50px;
+	z-index:97;
+
+	text-align:center;
+	margin-left:-102px;
+    //border-radius: 100px;
+	box-shadow:0 0 8px rgba(0,0,0,.1);
+	background-color:scale-color($secondary-color,$alpha:-20%);
+	
+	height:auto;
+	padding: 0 .5rem;
+
+	a {
+		float:none;
+		padding:.6rem;
+		//border-radius:100px;
+		margin:8px 2px;
+		&.active {
+			background-color:lighten($primary-color,15%);
+		}
+
+		&:focus {
+			outline:none;
+		}
+	}
+
+	.disabled {
+		display:none !important;
+	}
+
+	.persistant {
+		color: #fff !important;
+		display: inline-block !important;
+		opacity: 1 !important;
+
+		&:hover {
+			background-color: $primary-color !important;
+		}
+	}
+}

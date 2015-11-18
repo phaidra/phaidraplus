@@ -1,0 +1,33 @@
+<a href="#" id="lightroom-whiteboard-close" class="button dark lighter icon icon-close"></a>
+<div id="lightroom-whiteboard-actions">
+</div>
+
+
+<div id="stage">
+	<div class="row">
+		<div class="medium-12 columns">
+			<div class="mainimage">{{image}}</div>
+			<div class="images">
+				<ul class="medium-block-grid-3">
+					{{#each images}}
+						<li><div class="image"><img src='{{data.preview}}'></div></li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+		<div class="medium-6 columns">
+			<div class="mainimage">{{image}}</div>
+			<div class="images">
+				<ul class="medium-block-grid-3">
+					{{#each images}}
+						<li><div class="image"><img src='{{data.preview}}'></div></li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="prev"></div>
+<div class="next"></div>

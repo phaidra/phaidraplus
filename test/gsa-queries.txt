@@ -1,0 +1,2 @@
+https://phaidra-entw.univie.ac.at/google_search?access=a&client=default_frontend&entqr=1&entqrm=2&entsp=0&filter=1&ie=utf8&num=100&oe=utf8&output=json&start=0&query=berlin+inmeta%3Alicense~%C3%96sterreich+inmeta%3Atype~Image+AND+inmeta%3AinstallationID~PhaidraProduction
+https://phaidra-entw.univie.ac.at/google_search?access=a&client=default_frontend&entqr=1&entqrm=2&entsp=0&filter=1&ie=utf8&num=100&oe=utf8&output=json&start=0&query=berlin+inmeta%3Alicense~Namensnennung+inmeta%3Atype~Image+AND+inmeta%3AinstallationID~PhaidraProduction

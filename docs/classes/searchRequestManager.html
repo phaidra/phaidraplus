@@ -1,0 +1,2146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>searchRequestManager - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>searchRequestManager Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/components_search-request-manager.js.html#l1"><code>components&#x2F;search-request-manager.js:1</code></a>
+        </div>
+
+            Module: <a href="../modules/resources.html">resources</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>The search query manager should be used to call the GSA with specific search queries.
+It provides methods to set a normal search term and search terms for specific meta tags.</p>
+<p>The basic process should be like:</p>
+<ol>
+<li>create an instance of the searchRequestManager</li>
+<li>register for &#39;searchFinished&#39; event.</li>
+<li>set the query parameters (META Search – method:setQueryParam or Fulltext method:setQueryTerm)</li>
+<li>load the search results (method:load) or trigger the event &#39;search&#39; on $(window) and provide search field data, start and pagesize.
+and repeat with 2. if required</li>
+</ol>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_clearMetas">clearMetas</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_createMetaQueryString">createMetaQueryString</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getQueryMetas">getQueryMetas</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getQuerySetup">getQuerySetup</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getRequestDefaults">getRequestDefaults</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_load">load</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadError">loadError</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadNextPage">loadNextPage</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadPreviousPage">loadPreviousPage</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadSuccess">loadSuccess</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_loadTimeout">loadTimeout</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_matchValueToBoolean">matchValueToBoolean</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_matchValueToEnum">matchValueToEnum</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_matchValueToNumber">matchValueToNumber</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_matchValueToObject">matchValueToObject</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_matchValueToText">matchValueToText</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_parseQueryParamValue">parseQueryParamValue</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_rawLoad">rawLoad</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_rawSearch">rawSearch</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setPageSize">setPageSize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setQueryParam">setQueryParam</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setQueryTerm">setQueryTerm</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_showShareLink">showShareLink</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_startSearch">startSearch</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_translate">translate</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property private">
+                                <a href="#property_currentMetas">currentMetas</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_currentRequest">currentRequest</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_gsaEndPoint">gsaEndPoint</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_loading">loading</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_maxLoadTime">maxLoadTime</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_pageSize">pageSize</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_self">self</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_timer">timer</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_clearMetas" class="method item">
+    <h3 class="name"><code>clearMetas</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l137"><code>components&#x2F;search-request-manager.js:137</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method setting all META Tag search parameters to default values.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_createMetaQueryString" class="method item">
+    <h3 class="name"><code>createMetaQueryString</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l92"><code>components&#x2F;search-request-manager.js:92</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method compacting all set META Tags and search values to a request String.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>An encoded String of the search terms for the META Tags</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getQueryMetas" class="method item">
+    <h3 class="name"><code>getQueryMetas</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l161"><code>components&#x2F;search-request-manager.js:161</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Returns a copy of the current object containing all set search META Tags with their query terms.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    <p>the current search query terms associated with their META Tags.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getQuerySetup" class="method item">
+    <h3 class="name"><code>getQuerySetup</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l181"><code>components&#x2F;search-request-manager.js:181</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to retrieve the overall search query - i.e. the META Tags search setup plus the normal GSA search setup.
+All cleaned of non-set properties</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    <p>the query setup</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getRequestDefaults" class="method item">
+    <h3 class="name"><code>getRequestDefaults</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l151"><code>components&#x2F;search-request-manager.js:151</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Creates a copy of the default request object and returns it for own usage.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    <p>a clone of the requestDefaults. See: config/gsa-request.js</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_load" class="method item">
+    <h3 class="name"><code>load</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code class="optional">[q]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[start]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[num]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l202"><code>components&#x2F;search-request-manager.js:202</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to query the GSA. It creates the AJAX get query and sets a timeout function.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name optional">[q]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>the normal search term</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[start]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>the index of the first result to load (pagination)</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[num]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>the number of results to load (pagination)</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_loadError" class="method item">
+    <h3 class="name"><code>loadError</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l266"><code>components&#x2F;search-request-manager.js:266</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method called when GSA returned an error.
+Triggers <a href="searchRequestManager.html#events">&#39;searchFinished&#39; event</a>.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>the event data</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_loadNextPage" class="method item">
+    <h3 class="name"><code>loadNextPage</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l301"><code>components&#x2F;search-request-manager.js:301</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A method to load the next page of the result set. Increases the <a href="searchRe">currentRequest&#39;s</a> start property by one and reloads the search.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either self or false if still loading another request.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_loadPreviousPage" class="method item">
+    <h3 class="name"><code>loadPreviousPage</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l318"><code>components&#x2F;search-request-manager.js:318</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A method to load the previous page of the result set.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either self or false if still loading another request.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_loadSuccess" class="method item">
+    <h3 class="name"><code>loadSuccess</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>data</code>
+                </li>
+                <li class="arg">
+                        <code>callback</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[reset=true]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l237"><code>components&#x2F;search-request-manager.js:237</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method called when GSA returns results successfully.
+Triggers <a href="searchRequestManager.html#events">&#39;searchFinished&#39; event</a>.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>the result of the GSA call.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">callback</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>a callback to execute instead of the event.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[reset=true]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>shall the gsaData be reset?</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_loadTimeout" class="method item">
+    <h3 class="name"><code>loadTimeout</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+        <span class="flag async">async</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l284"><code>components&#x2F;search-request-manager.js:284</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Event handler called when GSA request ended in an timeout.
+Triggers <a href="searchRequestManager.html#events">&#39;searchFinished&#39; event</a>.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_matchValueToBoolean" class="method item private">
+    <h3 class="name"><code>matchValueToBoolean</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l335"><code>components&#x2F;search-request-manager.js:335</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A private helper method to check whether a value is boolean</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>The value to test</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either null on failure or the value.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_matchValueToEnum" class="method item private">
+    <h3 class="name"><code>matchValueToEnum</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+                <li class="arg">
+                        <code>template</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l347"><code>components&#x2F;search-request-manager.js:347</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A method to match a value against a template if the template is an enum|select.
+It simply looks in the template array if the value is found.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>The value to test</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">template</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+
+
+                    <div class="param-description">
+                        <p>The possible values</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either null on failure or the value.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_matchValueToNumber" class="method item private">
+    <h3 class="name"><code>matchValueToNumber</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l361"><code>components&#x2F;search-request-manager.js:361</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to check whether a value is a valid Integer or Float.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>The value can be Integer, Float or smaller/greater String (..[Integer]..) - see GSA documentation</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either null on validation failure or the value</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_matchValueToObject" class="method item private">
+    <h3 class="name"><code>matchValueToObject</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>template</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l395"><code>components&#x2F;search-request-manager.js:395</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A method to match a value against a template if the template is an object.
+It simply compares the properties of both and checks if all are set in the value,
+that are required by the template.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">template</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>The object representing the template</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>The object to test</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either null on failure or the value.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_matchValueToText" class="method item private">
+    <h3 class="name"><code>matchValueToText</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l417"><code>components&#x2F;search-request-manager.js:417</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Helper function matching a value to be a text (not undefined or null or of zero length)</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>null if not a text or the string</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_parseQueryParamValue" class="method item">
+    <h3 class="name"><code>parseQueryParamValue</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l432"><code>components&#x2F;search-request-manager.js:432</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A method to parse and match a given value against the META Tag definition defined by name.
+Gets the type of the META Tag and checks if the given value is possible or not.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>the name of the META Tag to validate against</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>the proposed value to check</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either false on failure or the value if correct.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_rawLoad" class="method item">
+    <h3 class="name"><code>rawLoad</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>query</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[callback]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[reset=true]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l473"><code>components&#x2F;search-request-manager.js:473</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method executing the GSA query setup. Basically starts $.getJSON with the appropriate event handler and adds a loading spinner to the body.
+A timeout is started to check for connection timeouts.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">query</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                        <p>The query to execute</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[callback]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>a callback to execute after the result has been loaded</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[reset=true]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>shall the gsaData be reset?</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_rawSearch" class="method item">
+    <h3 class="name"><code>rawSearch</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>query</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[required]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[start=0]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[number=100]</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[callback]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l524"><code>components&#x2F;search-request-manager.js:524</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to start a raw search, meaning the query term has to be provided, but therefore won&#39;t be touched</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">query</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>The query to execute</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[required]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>The requiredfields to use for the query; content types for image, text, picture, pdf and paper are defaults.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[start=0]</code>
+                        <span class="type">Integer</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>the first result object to retrieve</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[number=100]</code>
+                        <span class="type">Integer</span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>the number of results to fetch; maximum is 100.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[callback]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>a callback to execute after the result has been loaded</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either the searchRequestManager or false if currently loading another query.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setPageSize" class="method item">
+    <h3 class="name"><code>setPageSize</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>s</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l656"><code>components&#x2F;search-request-manager.js:656</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to set the query page size</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">s</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+                    <div class="param-description">
+                        <p>The new pagesize for the next request.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_setQueryParam" class="method item">
+    <h3 class="name"><code>setQueryParam</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>name</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[bool]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l670"><code>components&#x2F;search-request-manager.js:670</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to set one query string for a META Tag search.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">name</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>The name of the META Tag to set.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Mixed</span>
+
+
+                    <div class="param-description">
+                        <p>The query term / object by which to search the META Tag.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[bool]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>The boolean operator to add between the current and before value.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either false on failure (validation of the value fails) or the searchRequestManager object itself (for chaining).</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setQueryTerm" class="method item">
+    <h3 class="name"><code>setQueryTerm</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>q</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l701"><code>components&#x2F;search-request-manager.js:701</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to set the general query term for GSA search.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">q</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>The query term.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_showShareLink" class="method item">
+    <h3 class="name"><code>showShareLink</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Mixed</span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l554"><code>components&#x2F;search-request-manager.js:554</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method displaying a link which can be used to display a link in a modal dialog to the current search and view in the standalone version.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Mixed</span>:
+                    <p>Either self or false on failure</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_startSearch" class="method item">
+    <h3 class="name"><code>startSearch</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>fields</code>
+                </li>
+                <li class="arg">
+                        <code class="optional">[start]</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l614"><code>components&#x2F;search-request-manager.js:614</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Method to start a search immediately from scratch.
+Provide an  array of field values ({ &#39;key&#39;:value, &#39;boolean&#39;:[AND|OR] }),
+the start position of the first item to return and the number of items to fetch.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">fields</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+
+
+                    <div class="param-description">
+                        <p>An array of key:values pairs representing the search fields.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name optional">[start]</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                        <span class="flag optional" title="This parameter is optional.">optional</span>
+
+
+                    <div class="param-description">
+                        <p>The first search result to fetch</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>[size] The number of results to get (maximum).</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_translate" class="method item">
+    <h3 class="name"><code>translate</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>q</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/components_search-request-manager.js.html#l714"><code>components&#x2F;search-request-manager.js:714</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Helper method for Handlebars to translate terms. See <a href="http://handlebarsjs.com/block_helpers.html">Handlebars.registerHelper</a></p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">q</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+                    <div class="param-description">
+                        <p>The query term.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>the translation result</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_currentMetas" class="property item private">
+                        <h3 class="name"><code>currentMetas</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l24"><code>components&#x2F;search-request-manager.js:24</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>An object containing all META Tags for query</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_currentRequest" class="property item private">
+                        <h3 class="name"><code>currentRequest</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l32"><code>components&#x2F;search-request-manager.js:32</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Object containing the config of the current request.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_gsaEndPoint" class="property item private">
+                        <h3 class="name"><code>gsaEndPoint</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l68"><code>components&#x2F;search-request-manager.js:68</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The Endpoint of the GSA to call for all requests.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_loading" class="property item private">
+                        <h3 class="name"><code>loading</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l40"><code>components&#x2F;search-request-manager.js:40</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Flag indication whether the object is in the stage of loading at the moment or not.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_maxLoadTime" class="property item private">
+                        <h3 class="name"><code>maxLoadTime</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                            <span class="flag final">final</span>
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l48"><code>components&#x2F;search-request-manager.js:48</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The maximum time for a request. After this time the request is aborted/timed out.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 6000</p>
+                    
+                    
+                    </div>
+                    <div id="property_pageSize" class="property item private">
+                        <h3 class="name"><code>pageSize</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l59"><code>components&#x2F;search-request-manager.js:59</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The number of search results to retrieve from the GSA</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 50</p>
+                    
+                    
+                    </div>
+                    <div id="property_self" class="property item private">
+                        <h3 class="name"><code>self</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l76"><code>components&#x2F;search-request-manager.js:76</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Backreference</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_timer" class="property item private">
+                        <h3 class="name"><code>timer</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/components_search-request-manager.js.html#l84"><code>components&#x2F;search-request-manager.js:84</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The load timeout handler</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

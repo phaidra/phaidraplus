@@ -1,0 +1,65 @@
+<nav class="top-bar" data-topbar="">
+    <ul class="title-area">
+      <li class="name">
+       <h1>
+	<a href="#" class="logo" data-event="openLightRoomCollections">Phaidra+</a></h1>
+      </li>
+    </ul>
+    <div class="top-bar-section">
+      <ul class="menu">
+         <li class="collections">
+          <a href="#" id="menu-collections" class="icon icon-folder folder active" data-tooltip data-event="openLightRoomCollections" title="{{translate "menu-collections"}}"></a>
+        </li>
+        
+        <li class="suche">
+           <a href="#suche" id="menu-search" class="icon icon-search" data-tooltip title="{{translate "menu-search"}}" data-dropdown="search-dropdown-container"><span class='icon icon-plus'></span></a>
+        </li>
+         <li class="search-previouspage pagination">
+           <a href="#" class="icon icon-prev disabled" data-tooltip title="{{translate "previous"}}" data-event="searchPreviousPage"></a>
+        </li>
+        <li class="search-nextpage pagination">
+           <a href="#" class="icon icon-next disabled" data-tooltip title="{{translate "next"}}" data-event="searchNextPage"></a>
+        </li>
+        
+
+     
+        <li class="lightroom pp-view pp-view-first">
+	         <a href="#lightroom" class="icon icon-lightroom" data-tooltip data-event="openLightRoom" title="{{translate "menu-lightroom"}}"></a>
+        </li>
+        <li class="landkarte pp-view">
+	         <a href="#landkarte" class="icon icon-map" data-tooltip data-event="openGeoView" title="{{translate "menu-map"}}"></a>
+        </li>
+        <li class="timeline pp-view">
+	         <a href="#timeline" class="icon icon-timeline" data-tooltip data-event="openTimelineView" title="{{translate "menu-timeline"}}"></a>
+        </li>
+        <li class="semantic pp-view">
+	         <a href="#semantic" class="icon icon-semantic" data-tooltip title="{{translate "menu-network"}}" data-event="openSemanticView"></a>
+        </li>
+        <li class="share pp-view">
+           <a href="#share" class="icon icon-share toggle" data-tooltip title="{{translate "menu-share"}}" data-event="showShareLink"></a>
+        </li>
+        
+       
+      </ul>
+
+      <h1 class="username right">
+        <a ></a>
+      </h1>
+      <a href="#" class="button secondary icon icon-slideshow" data-options="disable-for-touch: true" title="{{translate "slideshow"}}" data-tooltip id="display-slideshow"></a>      
+      {{#if login}} 
+        <a href="#" id="logout-button" title="{{translate 'logout'}}" class="button secondary icon icon-logout icon-large" data-tooltip></a>
+      {{else}}
+        <form method="POST" action="/" id="logout-button">
+        <input type="hidden" name="login" value="1">
+        <button type="submit" id="login-button" title="{{translate 'login'}}" title="{{translate 'login'}}" class="button secondary icon icon-logout icon-large" data-tooltip></button>
+        </form>
+      {{/if}}
+
+    </div>
+</nav>
+
+<div id="lightroom-whiteboard-actions">
+  <a href="#" id="lightroom-whiteboard-close" class="button dark lighter icon icon-close"></a>
+  <a href="#" id="lightroom-whiteboard-single" class="button dark lighter active" title="{{translate "slideshow-single-view"}}" data-tooltip><span class="item icon icon-pane"></span></a>
+  <a href="#" id="lightroom-whiteboard-double" class="button dark lighter" title="{{translate "slideshow-paralell-view"}}" data-tooltip><span class="item icon icon-pane"></span><span class="item icon icon-pane"></span></a>
+</div>

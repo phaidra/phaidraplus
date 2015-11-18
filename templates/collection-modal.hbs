@@ -1,0 +1,48 @@
+{{!
+{
+  "name" : "Collection Modal Template",
+  "description" : "",
+}
+}}
+<div class="collection-modal reveal-modal large action-modal" id="modal-collection" data-reveal>
+		<h4>{{translate 'collection-modal-title'}}</h4>
+
+		<dl class="accordion" data-accordion>
+		  {{#each collection}}
+		  	{{#ifCond uid '!=' -1}}
+		  <dd data-collection='{{uid}}'>
+				 <a href="#{{uid}}"><i class="fi-folder"></i> <i class="fi-folder-add"></i>  
+		   		 {{#if title}}
+				    <span class='name'>{{title}}</span> (<span class='num'>{{objects.length}}</span>)
+				  {{else}}
+				    Unbenannter Ordner
+				 {{/if}}
+		   		</a>
+		  
+		   		<div class="content" id="{{uid}}">
+		   			<ul class="inline-list">
+			   			<li>
+		   					<a href="#" data-tooltip data-options="disable-for-touch: true" title="Hier hinzufügen" class="has-tip tip-top add-here icon icon-plus" data-collection='{{uid}}'>
+		   					</a>
+		   				</li>
+	   					{{#each_upto objects 10}}
+		   				<li class='col-item' data-pid="{{data.pid}}">
+		   					<a href="#" data-tooltip title="{{data.title}}" data-options="disable-for-touch: true" class="has-tip tip-top">
+		   						<img src="{{data.preview}}" alt="{{data.title}}" height="40">
+		   					</a>
+		   				</li>
+	  					{{/each_upto}} 		
+	  				</ul>
+		  		</div>
+		  </dd>
+		  	{{/ifCond}}
+		  {{/each}}
+		</dl>
+
+	  <a href="#" id="add-collection" class="button dark icon icon-plus small">{{translate 'collectionAdd'}}</a>
+
+	  <div class="modal-actions">
+	  	<a href="#" id="modal-collection-close-btn" class="button alert">{{translate 'close'}}</a>
+	  </div>
+	  
+</div>

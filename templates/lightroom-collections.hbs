@@ -1,0 +1,77 @@
+
+<div class="row">
+	<div class="medium-8 columns">
+		<a class="button right dark tiny lighter icon icon-add-collection tip-bottom " id="add-collection" title="{{translate "collectionAddTooltip"}}" href="#" data-tooltip>{{translate "collectionAdd"}}</a>
+		<h3 id="my-collections">{{translate "collectionsTitle"}}</h3>
+		<ul class="collections medium-block-grid-1 large-block-grid-2">
+			{{#each collections}}
+			<li class="collection" data-uid="{{uid}}">
+				<div class="inner">
+					<h4>
+						<span class="name" contenteditable="true" title="{{translate 'click-to-edit'}}">{{title}}</span> 
+						<a href="#" class="button tiny dark lighter right tip-top icon icon-delete delete-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="delete" data-warning="{{translate 'delete-warning'}}" title="{{translate "collectionDelete"}}"></a>
+						<a href="#" class="button icon icon-edit tip-top dark lighter tiny right show-all" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="edit" data-title="{{translate "collectionEdit"}}" data-active-title="{{translate "collectionunEdit"}}" title="{{translate "collectionEdit"}}"></a>
+						<a href="#" class="button tiny right dark lighter tip-top icon icon-ppt download-ppt" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="pptdown" title="{{translate "download-ppt"}}"></a>
+						<a href="#" class="button tiny right dark lighter  tip-top icon icon-full-image open-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="{{translate "collectionOpen"}}"></a>
+						<div class="move"><i class="fi-icon fi-list"></i></div>
+					</h4>
+
+					<ul class="collection-items grid medium-block-grid-6 large-block-grid-3">
+					</ul>
+					<div class="show-date left">{{timeago}}</div>
+					<a href="#" class="show-more right">
+						{{objects.length}} {{translate 'objects'}}
+						
+					</a>
+				</div>
+				
+					
+			</li>
+			{{/each}}
+		</ul>
+		
+	</div>
+
+	<div class="medium-4 columns" id="my-objects">
+		<a class="button right dark tiny lighter icon icon-add-object tip-bottom" id="add-object" href="http://phaidra-temp.univie.ac.at" target="_blank" title="{{translate "objectAddTooltip"}}" data-tooltip>{{translate "objectAdd"}}</a>
+		<h3 id="my-objects-title">{{translate "objectsTitle"}}</h3>
+		<h4 class="clearfix">
+			<a href="#" class="button tiny right dark lighter  tip-top icon icon-full-image open-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="{{translate "collectionOpen"}}"></a>
+			<div class="move"><i class="fi-icon fi-list"></i></div>
+		</h4>
+		<ul class="objects medium-block-grid-3">
+		</ul>
+	</div>
+	
+</div>
+<p>&nbsp;</p>
+<!--<div class="search-row">
+	<div class="row">
+		<input type="text" class="large center dark" value="" placeholder="{{translate "findObjectsTitle"}}">
+	</div>
+</div>-->
+
+<div class="currentobjects-row">
+	<div class="row">
+		<!--<h3>{{translate "currentObjectsTitle"}}</h3>-->
+		<ul class="currentimages medium-block-grid-3">
+		
+		</ul>
+	</div>
+</div>
+
+<div id="collection-template" style="display:none">
+	<h2>
+			<span class="name" contenteditable="true">Neuer Ordner</span> (<span class="num">0</span>)
+			<a href="#" class="button tiny alert right tip-top icon icon-delete delete-collection" data-tooltip="" title="{{translate "collectionDelete"}}"></a>
+			<a href="#" class="button icon icon-edit tip-top dark lighter tiny right show-all" data-tooltip="" title="{{translate "collectionEdit"}}"></a>
+			<a href="#" class="button tiny right dark lighter  tip-top icon icon-open open-collection" data-tooltip="" title="{{translate "collectionOpen"}}"></a>
+			<div class="move"><i class="fi-icon fi-list"></i></div>
+		</h2>
+
+		<ul class="collection-items orbit" data-orbit>
+		</ul>
+		<div class="show-date left">{{timeago}}</div>
+		<a href="#" class="show-more right">{{objects.length}} {{translate 'Objects'}}</a>
+</div>
+

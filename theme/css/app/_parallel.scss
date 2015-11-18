@@ -1,0 +1,42 @@
+body.paralellProjectionView {
+	body {
+		overflow:hidden !important;
+		padding-top:0px;
+	}
+	.top-bar {
+		display:none !important;
+	}
+	.top-bar ul.right {
+		display:none !important;
+	}
+	#sidebar-toggle,#sidebar,#lightroom-displaymode {
+		display:none;
+	}
+	#lightroom-whiteboard-close {
+		right:50px;
+		display:block;
+	}
+	#mainsection {
+		width:100% !important;
+		margin:0px !important;
+	}
+	#marker-actions {
+		display:none;
+	}
+	.markers,#keywords {
+		display:none;
+	}
+}
+
+#stage {
+	position:fixed;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	.images {
+		img {
+			max-height:80px;
+		}
+	}
+}

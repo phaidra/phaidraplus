@@ -1,0 +1,37 @@
+{{!
+{
+  "name" : "Download Modal Template",
+  "description" : "",
+}
+}}
+<div class="download-modal reveal-modal medium action-modal" id="modal-download" data-reveal>
+			
+			<h4>{{ translate "download-modal-title" }}</h4>
+			{{#if image}}
+				<div class="image">
+					<img src="{{image.preview}}" alt="{{title}}" />
+				</div>
+			{{/if}}
+			<div class="content">
+				{{#if image.isDocument}}
+					<a href="{{image.download_original}}" data-size="large" class="a-download icon icon-photo-original large"> {{ translate "download-original-file" }} {{image.filetype}}, {{image.filesize_human}})</a><br>
+				{{/if}}
+				{{#if image.isImage}}
+					<a href="{{image.download_original}}" data-size="large" class="a-download icon icon-photo-original large"> {{ translate "download-original" }} ({{image.image.width}}x{{image.image.height}}px, {{image.filetype}}, {{image.filesize_human}})</a><br>
+					<a href="{{image.download}}" data-size="large" class="a-download icon icon-photo large"> {{ translate "download-large" }} (960px, {{image.filetype}})</a><br>
+					<a href="{{image.download_medium}}" data-size="medium" class="a-download icon icon-photo medium"> {{ translate "download-medium" }} (480px, {{image.filetype}})</a><br>
+
+					<!--
+						<a href="{{image.download_small}}" data-size="small" class="a-download icon icon-photo"> {{ translate "download-small" }} (960px, {{image.filetype}})</a><br>
+						<a href="#"  data-size="custom" class="a-download"><i class="fi-download small"></i> herunterladen</a>
+					<br>-->
+
+				{{/if}}
+
+				<div class="modal-actions">
+				  	<a href="#" id="download-modal-close-btn" class="button alert">{{ translate "close" }}</a>
+				 </div>
+
+			</div>
+</div>
+	

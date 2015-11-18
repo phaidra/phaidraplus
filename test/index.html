@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Phaidra Plus Tests</title>
+  <link rel="stylesheet" href="qunit.css">
+  <script src="qunit.js"></script>
+  <script>
+    var require = {
+          paths: {
+            jquery: '../external/jquery.min',
+            jqueryui: '../external/jquery-ui/ui/minified/jquery-ui.min',
+            i18n: '../external/require.i18n',
+            text: '../external/require.text',
+            'foundation': '../external/foundation/js/foundation.min',
+            'handlebars': '../external/handlebars',
+            'jquery.cookie': '../external/jquery.cookie',
+            'jquery.history': '../external/jquery.history',
+            'jquery.lazyload': '../external/jquery.lazyload.min',
+            'QUnit': 'qunit',
+            config: '../config',
+          },
+          shim: {
+            'foundation': {
+              'deps': ['jquery'],
+              'exports': 'Foundation',
+            },
+            'handlebars': {
+              'exports': 'Handlebars'
+            },
+            'jquery.history': {
+              'deps': ['jquery'],
+              'exports': 'History',
+            },
+            'jquery.lazyload': ['jquery'],
+            'QUnit': {
+              exports: 'QUnit',
+                init: function() {
+                  QUnit.config.autoload = false;
+                  QUnit.config.autostart = false;
+              }
+            },
+          }
+        };
+  </script>
+  <script data-main="tests" src="../external/require.min.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <ol id="qunit-tests"></ol>
+</body>
+</html>

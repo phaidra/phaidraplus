@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>components/search-request-manager.js - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: components/search-request-manager.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * The search query manager should be used to call the GSA with specific search queries.
+ * It provides methods to set a normal search term and search terms for specific meta tags.
+ * 
+ * The basic process should be like:
+ * 
+ * 1. create an instance of the searchRequestManager
+ * 2. register for &#x27;searchFinished&#x27; event.
+ * 3. set the query parameters (META Search – method:setQueryParam or Fulltext method:setQueryTerm)
+ * 4. load the search results (method:load) or trigger the event &#x27;search&#x27; on $(window) and provide search field data, start and pagesize.
+ * and repeat with 2. if required
+ * 
+ * @module resources
+ * @class searchRequestManager
+ */
+define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27;, &#x27;config/gsa-request&#x27;, &#x27;config/searchfields&#x27;, &#x27;text!templates/share-modal.hbs&#x27;, &#x27;i18n!nls/texts&#x27;,
+                &#x27;foundation&#x27;],
+             function($, _H, _B, requestDefaults, searchFieldDefs, _rawTemplate, _texts) {
+    /**
+     * @constructor
+     */
+    var searchRequestManager = function() {
+        var _p = {};
+        /**
+         * An object containing all META Tags for query
+         * 
+         * @private
+         * @property currentMetas
+         * @type {Object}
+         */
+        var currentMetas = null;
+        /**
+         * Object containing the config of the current request.
+         * 
+         * @private
+         * @property currentRequest
+         * @type {Object}
+         */
+        var currentRequest = null;
+        /**
+         * Flag indication whether the object is in the stage of loading at the moment or not.
+         * 
+         * @private
+         * @property loading
+         * @type {Boolean}
+         */
+        var loading = false;
+        /**
+         * The maximum time for a request. After this time the request is aborted/timed out.
+         * 
+         * @default 6000
+         * @private
+         * @property maxLoadTime
+         * @static
+         * @final
+         * @type {Number}
+         */
+        var maxLoadTime = 6000;
+        /**
+         * The number of search results to retrieve from the GSA
+         * 
+         * @default 50
+         * @private
+         * @property pageSize
+         * @type {Number}
+         */
+        var pageSize = 50;
+        /**
+         * The Endpoint of the GSA to call for all requests.
+         * 
+         * @private
+         * @property gsaEndPoint
+         * @type {String}
+         */
+        var gsaEndPoint = &quot;https://phaidra-entw.univie.ac.at/google_search&quot;;
+        /**
+         * Backreference
+         * 
+         * @private
+         * @property self
+         * @type {Object}
+         */
+        var self = this;
+        /**
+         * The load timeout handler
+         * 
+         * @private
+         * @property timer
+         * @type {Object}
+         */
+        var timer = null;
+        /**
+         * Method compacting all set META Tags and search values to a request String.
+         * 
+         * @method createMetaQueryString
+         * @return {String} An encoded String of the search terms for the META Tags
+         */
+        this.createMetaQueryString = function()
+        {
+            var m = self.getQueryMetas();
+            if (m == null) { return null; }
+
+            var parts = [];
+            var fullquery = [];
+            var first = true;
+            var boolToQueryTerm = &#x27;and&#x27;;
+            for(var p in m) {
+                if (m[p].length == 0) {
+                    continue;
+                }
+                var partialquery = [];
+                for(var i=0;i&lt;m[p].length;i++) {
+                    var s = m[p][i].value;
+                    if (typeof s == &quot;object&quot;) {
+                        s = JSON.stringify(s);
+                    }
+
+                    s = encodeURIComponent(s);
+                    s = s.replace(/\!/g,&#x27;%21&#x27;)
+                    s = s.replace(/\&#x27;/g,&#x27;%27&#x27;)
+                    s = s.replace(/\(/g,&#x27;%28&#x27;)
+                    s = s.replace(/\)/g,&#x27;%29&#x27;)
+                    s = s.replace(/\*/g,&#x27;%2A&#x27;)
+                    s = s.replace(/\~/g,&#x27;%7E&#x27;)
+                    var operator = (s.indexOf(&#x27;..&#x27;) != -1) ? &#x27;:&#x27; : &#x27;~&#x27;;
+                    partialquery.push(m[p][i].bool.toUpperCase());
+                    partialquery.push(&#x27;inmeta:&#x27;+p+operator+s);
+                }
+                if (first) {
+                    boolToQueryTerm = partialquery.shift();
+                    first = false;
+                }
+                fullquery.push(partialquery.join(&#x27; &#x27;));
+            }
+            return (fullquery.length &gt; 0) ? boolToQueryTerm+&#x27; &#x27;+fullquery.join(&#x27; &#x27;) : &#x27;&#x27;;
+        };
+        /**
+         * Method setting all META Tag search parameters to default values.
+         * 
+         * @method clearMetas
+         * @chainable
+         */
+        this.clearMetas = function()
+        {
+            currentMetas = {};
+            for(var p in searchFieldDefs) {
+                currentMetas[p] = null;
+            }
+            return self;
+        };
+        /**
+         * Creates a copy of the default request object and returns it for own usage.
+         * 
+         * @method getRequestDefaults
+         * @return {Object} a clone of the requestDefaults. See: config/gsa-request.js
+         */
+        this.getRequestDefaults = function()
+        {
+            return $.extend(true, {}, requestDefaults);
+        };
+        /**
+         * Returns a copy of the current object containing all set search META Tags with their query terms.
+         * 
+         * @method getQueryMetas
+         * @return {Object} the current search query terms associated with their META Tags.
+         */
+        this.getQueryMetas = function()
+        {
+            var o = $.extend(true, {}, currentMetas);
+            for(var p in o) {
+                if (o[p] instanceof Array) {
+                    if (o[p].length == 0 || o[p].join(&#x27;&#x27;) == &#x27;&#x27;) { delete o[p]; }
+                    continue;
+                }
+                if (o[p] === null) {
+                    delete o[p];
+                }
+            }
+            return o;
+        };
+        /**
+         * Method to retrieve the overall search query - i.e. the META Tags search setup plus the normal GSA search setup.
+         * All cleaned of non-set properties
+         * 
+         * @method getQuerySetup
+         * @return {Object} the query setup
+         */
+        this.getQuerySetup = function()
+        {
+            var source = currentRequest || requestDefaults;
+            var setup = $.extend(true, {}, source);
+
+            setup.partialfields = self.createMetaQueryString();
+
+            for(var p in setup) {
+                if (setup[p] === &#x27;&#x27;) {
+                    delete setup[p];
+                }
+            }
+            return setup;
+        };
+        /**
+         * Method to query the GSA. It creates the AJAX get query and sets a timeout function.
+         * 
+         * @chainable
+         * @method load
+         * @param {String} [q] the normal search term
+         * @param {Number} [start] the index of the first result to load (pagination)
+         * @param {Number} [num] the number of results to load (pagination)
+         */
+        this.load = function(q, start, num)
+        {
+            var setup = self.getQuerySetup();
+
+            if (loading) { return false; }
+            if (typeof q == &quot;undefined&quot; || q == null) {
+                q = setup.query;
+            }
+            
+            start = (typeof start == &#x27;undefined&#x27;) ? setup.start : start;
+            num = num || pageSize;
+
+            start = (start &lt; 0) ? 0 : start;
+            setup.query = q;
+            if (typeof setup.partialfields != &#x27;undefined&#x27;) {
+                setup.query += &#x27; &#x27;+setup.partialfields;
+                delete setup.partialfields;
+            }
+            setup.num = num;
+            setup.start = start*num;
+
+            setup.requiredfields = &quot;(type%3AImage|type%3APicture|type%3APDF|type%3APaper|type%3AText)&quot;;
+
+            self.rawLoad(setup);
+            return self;
+        };
+        /**
+         * Method called when GSA returns results successfully.
+         * Triggers [&#x27;searchFinished&#x27; event](searchRequestManager.html#events).
+         * 
+         * @async
+         * @method loadSuccess
+         * @param {Object} data the result of the GSA call.
+         * @param {Object} callback a callback to execute instead of the event.
+         * @param {Boolean} [reset=true] shall the gsaData be reset?
+         * @chainable
+         */
+        this.loadSuccess = function(data, cb, reset)
+        {
+            loading = false;
+            cb = cb || null;
+            reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;
+            window.clearTimeout(timer);
+
+            if (!cb &amp;&amp; reset) {
+                resourceMan.setResource(&#x27;gsaData&#x27;, data.RES);
+            }
+
+            if (cb == null) {
+                $(window).trigger(&#x27;searchFinished&#x27;, [data.RES, data.TOTAL, data.start, data.num]);
+            } else {
+                _B.executeCallback(cb, [data.RES]);
+            }
+            return self;
+        };
+        /**
+         * Method called when GSA returned an error.
+         * Triggers [&#x27;searchFinished&#x27; event](searchRequestManager.html#events).
+         * 
+         * @async
+         * @method loadError
+         * @param {Object} event the event data
+         * @chainable
+         */
+        this.loadError = function(e)
+        {
+            log(&#x27;loadError&#x27;, e);
+            loading = false;
+            window.clearTimeout(timer);
+            resourceMan.setResource(&#x27;gsaData&#x27;, { &#x27;error&#x27;:true });
+            $(window).trigger(&#x27;searchFinished&#x27;, [&#x27;error&#x27;]);
+            return self;
+        };
+        /**
+         * Event handler called when GSA request ended in an timeout.
+         * Triggers [&#x27;searchFinished&#x27; event](searchRequestManager.html#events).
+         * 
+         * @async
+         * @method loadTimeout
+         * @chainable
+         */
+        this.loadTimeout = function()
+        {
+            log(&#x27;loadTimeout&#x27;);
+            loading = false;
+            resourceMan.setResource(&#x27;gsaData&#x27;, { &#x27;timeout&#x27;:true });
+            $(window).trigger(&#x27;searchFinished&#x27;, [&#x27;timeout&#x27;]);
+            return self;
+        };
+
+        /**
+         * A method to load the next page of the result set. Increases the [currentRequest&#x27;s](searchRe) start property by one and reloads the search.
+         * 
+         * @chainable
+         * @method loadNextPage
+         * @return {Mixed} Either self or false if still loading another request.
+         */
+        this.loadNextPage = function()
+        {
+            if (loading) { return false; }
+            if (currentRequest == null) {
+                currentRequest = self.getQuerySetup();
+            }
+            currentRequest.start++;
+            self.load();
+            return self;
+        };
+        /**
+         * A method to load the previous page of the result set.
+         * 
+         * @chainable
+         * @method loadPreviousPage
+         * @return {Mixed} Either self or false if still loading another request.
+         */
+        this.loadPreviousPage = function()
+        {
+            if (loading) { return false; }
+            if (currentRequest == null) {
+                currentRequest = self.getQuerySetup();
+            }
+            currentRequest.start--;
+            self.load();
+            return self;
+        };
+        /**
+         * A private helper method to check whether a value is boolean
+         * 
+         * @method matchValueToBoolean
+         * @param {Mixed} value The value to test
+         * @private
+         * @return {Mixed} Either null on failure or the value.
+         */
+        _p.matchValueToBoolean = function(value)
+        {
+            return !!value;
+        };
+        /**
+         * A method to match a value against a template if the template is an enum|select.
+         * It simply looks in the template array if the value is found.
+         * 
+         * @method matchValueToEnum
+         * @param {Mixed} value The value to test
+         * @param {Array} template The possible values
+         * @private
+         * @return {Mixed} Either null on failure or the value.
+         */
+        _p.matchValueToEnum = function(value, template)
+        {
+            return (template.indexOf(value) != -1) ? value : null;
+        };
+        /**
+         * Method to check whether a value is a valid Integer or Float.
+         *
+         * @private
+         * @method matchValueToNumber
+         * @param {Mixed} value The value can be Integer, Float or smaller/greater String (..[Integer]..) - see GSA documentation
+         * @return {Mixed} Either null on validation failure or the value
+         */
+        _p.matchValueToNumber = function(value)
+        {
+            if (typeof value == &#x27;undefined&#x27; || value == null || value == &#x27;..&#x27;) {
+                return null;
+            }
+
+            var ltOrGt = value.indexOf(&#x27;..&#x27;);
+            if (ltOrGt != -1) {
+                value = value.replace(/\.\./g, &#x27;&#x27;);
+            }
+
+            var isFloat = (value.indexOf(&#x27;.&#x27;) != -1);
+
+            value = new String(value);
+            var regEx = (isFloat) ? new RegExp(&#x27;[+-]?\\d+\\.\\d+&#x27;, &#x27;g&#x27;) : new RegExp(&#x27;[+-]?\\d+&#x27;, &#x27;g&#x27;);
+            value = value.match(regEx);
+            value = (value &amp;&amp; value.length &gt; 0) ? value[0] : null;
+
+            value = (isFloat) ? parseFloat(value) : parseInt(value);
+
+            if (isNaN(value)) { value = null; }
+            if (ltOrGt != -1) {
+                value = (ltOrGt == 0) ? &#x27;..&#x27;+value : value+&#x27;..&#x27;;
+            }
+            return value;
+        };
+        /**
+         * A method to match a value against a template if the template is an object.
+         * It simply compares the properties of both and checks if all are set in the value,
+         * that are required by the template.
+         * 
+         * @method matchValueToObject
+         * @param {Object} template The object representing the template
+         * @param {Object} value The object to test
+         * @private
+         * @return {Mixed} Either null on failure or the value.
+         */
+        _p.matchValueToObject = function(value, template)
+        {
+            if (typeof value == &#x27;undefined&#x27; || value == null) {
+                return null;
+            }
+
+            for(var p in template) {
+                if (typeof value[p] == &quot;undefined&quot;) { return null; }
+            }
+            return value;
+        };
+        /**
+         * Helper function matching a value to be a text (not undefined or null or of zero length)
+         *
+         * @private
+         * @method matchValueToText
+         * @param {String} value 
+         * @return {String} null if not a text or the string
+         */
+        _p.matchValueToText = function(value)
+        {
+            if (typeof value == &#x27;undefined&#x27; || value == null || value == &#x27;&#x27;) {
+                return null;
+            }
+            return String(value);
+        };
+        /**
+         * A method to parse and match a given value against the META Tag definition defined by name.
+         * Gets the type of the META Tag and checks if the given value is possible or not.
+         * 
+         * @method parseQueryParamValue
+         * @param {String} name the name of the META Tag to validate against
+         * @param {Mixed} value the proposed value to check
+         * @return {Mixed} Either false on failure or the value if correct.
+         */
+        this.parseQueryParamValue = function(name, value)
+        {
+            if (searchFieldDefs[name] instanceof Boolean) {
+                return _p.matchValueToBoolean(value);
+            }
+
+            if (searchFieldDefs[name] instanceof Number) {
+                return _p.matchValueToNumber(value);
+            }
+
+            if (searchFieldDefs[name] instanceof String) {
+                return _p.matchValueToText(value);
+            }
+
+            switch(typeof searchFieldDefs[name]) {
+                case &#x27;object&#x27; :
+                        var t = &quot;Object&quot;;
+                        var template = typeof searchFieldDefs[name];
+                        if (typeof searchFieldDefs[name].type != &quot;undefined&quot;) {
+                            t = searchFieldDefs[name].type;
+                        }
+                        if (typeof searchFieldDefs[name].template != &quot;undefined&quot;) {
+                            template = searchFieldDefs[name].template;
+                        }
+                        var f = &quot;matchValueTo&quot;+t;
+                        value = _p[f](value, template);
+                        if (value === false &amp;&amp; t == &#x27;Object&#x27;) { value = null; }
+                        return value;
+                    break;
+            }
+            return false;
+        };
+        /**
+         * Method executing the GSA query setup. Basically starts $.getJSON with the appropriate event handler and adds a loading spinner to the body.
+         * A timeout is started to check for connection timeouts.
+         *
+         * @chainable
+         * @method rawLoad
+         * @param {Object} query The query to execute
+         * @param {Object} [callback] a callback to execute after the result has been loaded
+         * @param {Boolean} [reset=true] shall the gsaData be reset?
+         * @chainable
+         */
+        this.rawLoad = function(setup, cb, reset)
+        {
+            cb = cb || null;
+            reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;
+            currentRequest = setup;
+
+            if (!cb &amp;&amp; reset) {
+                resourceMan.setResource(&#x27;gsaData&#x27;, {});
+            }
+
+            _B.makeLoading($(&#x27;body&#x27;));
+
+            $.getJSON(gsaEndPoint, setup, function(data, textStatus, jqXHR) {
+                data.num = setup.num;
+                data.start = setup.start/setup.num;
+                 self.loadSuccess(data, cb, reset);
+            })
+             .fail(function(jqXHR) {
+                 try {
+                     if(jqXHR.status == 200) {
+                         var r = $.trim(jqXHR.responseText)
+                         
+                         r = r.replace(&quot;↵&quot;,&quot;&quot;);
+                         var d = eval(&quot;(&quot;+r+&quot;)&quot;);
+                         self.loadSuccess(d, cb, reset);
+                     } else {
+                         self.loadError(jqXHR);
+                     }
+                 } catch(e) {
+                     self.loadError(jqXHR);
+                 }
+             })
+             .always(function() {
+                 _B.removeLoading($(&#x27;body&#x27;));
+             }
+            );
+
+            timer = window.setTimeout(self.loadTimeout, maxLoadTime);
+            return self;
+        };
+        /**
+         * Method to start a raw search, meaning the query term has to be provided, but therefore won&#x27;t be touched
+         *
+         * @chainable
+         * @method rawSearch
+         * @param {String} query The query to execute
+         * @param {String} [required] The requiredfields to use for the query; content types for image, text, picture, pdf and paper are defaults.
+         * @param {Integer} [start=0] the first result object to retrieve
+         * @param {Integer} [number=100] the number of results to fetch; maximum is 100.
+         * @param {Object} [callback] a callback to execute after the result has been loaded
+         * @return {Mixed} Either the searchRequestManager or false if currently loading another query.
+         */
+        this.rawSearch = function(query, required, start, num, cb, reset)
+        {
+            cb = cb || null;
+            start = start || 0;
+            reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;            
+            if (loading) { return false; }
+
+            self.clearMetas();
+            var setup = self.getQuerySetup();
+
+            setup.num = (num &gt; 0 &amp;&amp; num &lt; 101) ? num : 100;
+            setup.query = query;
+            setup.requiredfields = required || &quot;(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)&quot;;
+            setup.start = ((start &lt; 0) ? 0 : start) * setup.num;
+
+            self.rawLoad(setup, cb, reset);
+            return self;
+        };
+        /**
+         * Method displaying a link which can be used to display a link in a modal dialog to the current search and view in the standalone version.
+         *
+         * @method showShareLink
+         * @chainable
+         * @return {Mixed} Either self or false on failure
+         */
+        this.showShareLink = function()
+        {
+            var link = &#x27;?standalone=true&amp;view=&#x27;;
+
+            switch (resourceMan.currentState) {
+                case &#x27;dataManaged&#x27;:
+                    link += resourceMan.states[&#x27;dataManaged&#x27;][0].open.scope.name;
+                    break;
+                case &#x27;openGeoView&#x27;:
+                    link += &#x27;geo&#x27;;
+                    break;
+                case &#x27;openLightRoom&#x27;:
+                    link += &#x27;lightroom&#x27;;
+                    break;
+                case &#x27;openSemanticView&#x27;:
+                    link += &#x27;semantic&#x27;;
+                    break;
+                case &#x27;openTimelineView&#x27;:
+                    link += &#x27;timeline&#x27;;
+                    break;
+                default:
+                    return false;
+            }
+
+          _H.registerHelper(&#x27;translate&#x27;, self.translate);
+            
+            var template = _H.compile($.trim(_rawTemplate));
+            var setup = self.getQuerySetup();
+
+            link += &#x27;&amp;query=&#x27;+setup.query;
+            link += &#x27;&amp;requiredfields=(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)&#x27;;
+            link += &#x27;&amp;start=&#x27;+setup.start;
+            link += &#x27;&amp;num=&#x27;+pageSize;
+
+            var dom = $($.trim(template({
+                &quot;link&quot;: location.protocol+&#x27;//&#x27;+location.host+location.pathname+link
+            })));
+            $(&#x27;body&#x27;).append(dom);
+
+            
+            dom.find(&quot;input[type=text]&quot;).focus();
+            dom.find(&quot;input[type=text]&quot;).select();
+
+            dom.find(&quot;#share-modal-close-btn&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                dom.foundation(&#x27;reveal&#x27;, &#x27;close&#x27;);
+                return false;
+            });
+
+            dom.foundation();
+            dom.foundation(&quot;reveal&quot;, &quot;open&quot;);
+            return self;
+        };
+
+        /**
+         * Method to start a search immediately from scratch.
+         * Provide an  array of field values ({ &#x27;key&#x27;:value, &#x27;boolean&#x27;:[AND|OR] }),
+         * the start position of the first item to return and the number of items to fetch.
+         * 
+         * @chainable
+         * @method startSearch
+         * @param {Array} fields An array of key:values pairs representing the search fields.
+         * @param {Number} [start] The first search result to fetch
+         * @return {Number} [size] The number of results to get (maximum).
+         */
+        this.startSearch = function(fields, start, size)
+        {
+            start = start || 0;
+            size = size || pageSize;
+            currentMetas = null;
+            for(var i=0; i&lt;fields.length; i++) {
+                if (&#x27;query&#x27; in fields[i]) {
+                    self.setQueryTerm(fields[i][&#x27;query&#x27;]);
+                    continue;
+                }
+                var fieldKey, fieldValue, fieldBool = null;
+
+                outerloop:
+                for (var key in fields[i]) {
+                    switch (key) {
+                        case &#x27;boolean&#x27;:
+                            fieldBool = fields[i][key];
+                            break;
+                        default:
+                            fieldKey = key;
+                            fieldValue = fields[i][key];
+                            break;
+                    }
+                }
+                self.setQueryParam(fieldKey, fieldValue, fieldBool);
+            }
+
+            self.load(null, start, size);
+            return self;
+        };
+
+        /**
+         * Method to set the query page size
+         *
+         * @chainable
+         * @method setPageSize
+         * @param {Number} s The new pagesize for the next request.
+         */
+        this.setPageSize = function(s)
+        {
+            currentRequest = currentRequest || self.getQuerySetup();
+            currentRequest.num = s;            
+            return self;
+        };
+
+        /**
+         * Method to set one query string for a META Tag search.
+         * 
+         * @chainable
+         * @method setQueryParam
+         * @param {String} name The name of the META Tag to set.
+         * @param {Mixed} value The query term / object by which to search the META Tag.
+         * @param {String} [bool] The boolean operator to add between the current and before value.
+         * @return {Mixed} Either false on failure (validation of the value fails) or the searchRequestManager object itself (for chaining).
+         */
+        this.setQueryParam = function(name, value, bool)
+        {
+            bool = bool || &#x27;and&#x27;;
+            if (!(name in searchFieldDefs)) {
+                return false;
+            }
+
+            if (currentMetas == null) {
+                self.clearMetas();
+            }
+
+            value = self.parseQueryParamValue(name, value);
+            if (value != null) {
+                if (currentMetas[name] == null) {
+                    currentMetas[name] = [];
+                }
+                currentMetas[name].push({ &#x27;value&#x27;:value, &#x27;bool&#x27;: bool });
+            }
+            return self;
+        };
+
+        /**
+         * Method to set the general query term for GSA search.
+         * 
+         * @chainable
+         * @method setQueryTerm
+         * @param {String} q The query term.
+         */
+        this.setQueryTerm = function(q)
+        {
+            currentRequest = currentRequest || self.getQuerySetup();
+            currentRequest.query = q;
+            return self;
+        };
+        /**
+         * Helper method for Handlebars to translate terms. See [Handlebars.registerHelper](http://handlebarsjs.com/block_helpers.html)
+         * 
+         * @method translate
+         * @param {String} q The query term.
+         * @return {String} the translation result
+         */
+        this.translate = function(term)
+        {
+        if (typeof _texts[term] != &#x27;undefined&#x27;) {
+          return _texts[term];
+        } else {
+          return term;
+        }                
+        };
+    };
+
+    return searchRequestManager;
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

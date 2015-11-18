@@ -1,0 +1,12 @@
+{
+  "name": "Phaidra+",
+  "description": "The Phaidra+ visually enhanced UI for Phaidra",
+  "version": "1.0",
+  "options": {
+    "exclude": ".git,external,docs,nls,test",
+  	"linkNatives": "true",
+    "outdir": "./docs",
+    "paths": ["./components"],
+    "tabtospace": 4
+  }
+}

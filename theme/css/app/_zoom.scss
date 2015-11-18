@@ -1,0 +1,134 @@
+
+/* Show load indicator when image is being loaded */
+.cropit-image-preview.cropit-image-loading .spinner {
+  opacity: 1;
+}
+
+/* Show move cursor when image has been loaded */
+.cropit-image-preview.cropit-image-loaded {
+  cursor: move;
+}
+
+/* Gray out zoom slider when the image cannot be zoomed */
+.cropit-image-zoom-input[disabled] {
+  opacity: .2;
+}
+
+/* Hide default file input button if you want to use a custom button */
+input.cropit-image-input {
+  visibility: hidden;
+}
+
+/* The following styles are only relevant to when background image is enabled */
+
+/* Translucent background image */
+.cropit-image-background {
+  opacity: .2;
+}
+
+.slider-wrapper {
+  
+  z-index: 1;
+overflow: hidden;
+border-radius: 5px;
+position: absolute;
+bottom: 10px;
+left: 0;
+right: 0;
+text-align: center;
+margin: 0 auto;
+  .zoom-slider {
+    margin: 5px auto;
+    text-align: center;
+    background: scale-color($body-bg,$alpha:-15%);
+    width: auto;
+    display: inline-block;
+    padding: 0px 20px;
+    vertical-align: middle;
+    border-radius: 10px;
+    line-height: 36px;
+    height: 30px;
+    input {
+      vertical-align:baseline;
+    }
+    .icon {
+      display:none;
+    }
+  }
+}
+.cropit-image-preview-container {
+  z-index:2;
+  position:relative;
+}
+/*
+ * If the slider or anything else is covered by the background image,
+ * use relative or absolute position on it
+ */
+ .cropit-image-background-container {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1;
+  img {
+    //display:none;
+  }
+ }
+input.cropit-image-zoom-input {
+  position: relative;
+}
+
+/* Limit the background image by adding overflow: hidden */
+.image-cropper {
+  margin:0 auto;
+  //overflow: hidden;
+  position:relative;
+  .slider-wrapper,
+  .open-modal {
+    opacity:0;
+    @include transition(opacity .3s ease-out);
+    z-index:5;
+  }
+  &:hover {
+   .slider-wrapper,
+   .open-modal {
+      opacity:1;
+    }
+  }
+}
+
+ .cropit-image-preview {
+        //background-color: $secondary-font-color;
+        background-size: cover;
+        border: 0px solid $secondary-color;
+        //border-radius: 3px;
+        margin-top: 0px;
+        //width: 250px;
+        //height: 250px;
+        cursor: move;
+      }
+
+      .cropit-image-background {
+        opacity: 1;
+        cursor: auto;
+      }
+
+      .image-size-label {
+        margin-top: 0.6rem;
+      }
+    .open-modal {
+      margin:5px;
+      position:absolute;
+      left:10px;
+      top:10px;
+      border-radius:100px;
+      width:30px;
+      height:30px;
+
+      &:before {
+        margin-left: -8px;
+        line-height:1.3rem;
+        vertical-align:text-bottom;
+      }
+      //margin-left:20px;
+    }

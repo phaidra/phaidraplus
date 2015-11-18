@@ -1,0 +1,17 @@
+{{!
+{
+  "name" : "Sharing Modal Template",
+  "description" : "",
+}
+}}
+<div class="reveal-modal large action-modal" data-reveal id="share-modal">
+	<h4>{{ translate "share-modal-title" }}</h4>
+
+	<p>{{ translate "share-explanation" }}</p>
+
+	<input type="text" id="share-modal-input" value="{{ link }}" />
+
+  <div class="modal-actions">
+  	<a href="#" id="share-modal-close-btn" class="button alert">{{ translate "close" }}</a>
+  </div>	  
+</div>

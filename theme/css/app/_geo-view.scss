@@ -1,0 +1,160 @@
+
+
+
+.map-object-view {
+	box-shadow:none;
+	border:none;
+	font-size:14px;
+	font-weight:300;
+	width:440px;
+	margin:0px;
+	overflow:hidden;
+	.image {
+		float:left;
+		//height:200px;
+		width:200px;
+		margin:8px;
+		img {
+			width:auto;
+			height:auto;
+			max-height:200px !important;
+			max-width:200px !important;
+		}
+	}
+	.actions {
+		margin:0px;
+		margin-top:4px;
+	}
+	.content {
+		width:200px;
+		margin:10px;
+		float:left;
+		.title,.body,.author {
+			display:block;
+			padding:0px;
+			padding:.75rem 0;
+		}
+		.title {
+			font-size:1rem;
+		}
+		.body {
+			font-size:.825rem;
+			line-height:1.2;
+		}
+		
+	}
+}
+
+#main {
+	height: 100%;
+}
+
+#mainsection {
+	overflow: hidden;
+}
+
+.geoView #sidebar #sidebar-attributes-selector {
+	display: none;
+}
+
+.geoView.orbit {
+	#display-slideshow,
+	#logout-button {
+		display:none;
+	}
+
+	height:100%;
+	.top-bar {
+		display:none;
+	}
+
+	#sidebar {
+		display:none;
+	}
+
+	.image {
+		//display:table-cell;
+		vertical-align:middle;
+		text-align:center;
+		//line-height:100%;
+		background:transparent !important;
+		border:0px solid rgba(255,255,255,.1) !important;
+		img {
+			display:inline !important
+		}
+	}
+}
+
+#geo-view-container {
+	bottom:0px;
+	left: 0px;
+	position: fixed;
+	right: 0;
+	top:0;
+
+	#map {
+		height: 100%;
+		width: 100%;
+	}
+	.leaflet-div-icon {
+		border:none;
+		background-color: transparent;
+	}
+	.mapicon {
+		border:3px solid $dark-bg;
+		box-shadow: 0px 0px 6px rgba(0,0,0,.5);
+		-moz-box-shadow: 0px 0px 6px rgba(0,0,0,.5);
+  		-webkit-box-shadow: 0px 0px 6px rgba(0,0,0,.5);
+		width:40px;
+		border-radius:1px;
+		-webkit-border-radius:1px;
+		background-position: center center;
+		height:40px;
+		display:block;
+
+		&.highlight {
+			border:3px solid $primary-color;
+		}
+	}
+
+	#map .map-object-view {
+		img {
+			margin-bottom: 0.3em;
+			max-height: 200px;
+		}
+
+		.object-date,
+		.artist {
+			display: none;
+		}
+	}
+}
+.leaflet-popup-content {
+	margin:0px !important;
+}
+.leaflet-popup-content-wrapper {
+	border-radius:2px !important;
+	background:$body-bg !important;
+}
+.leaflet-popup-tip {
+	background:$body-bg !important;
+}
+.leaflet-marker-icon {
+	position:relative;
+}
+.leaflet-marker-icon .number {
+	border-radius: 1000px;
+	position:absolute;
+	right:-6px;
+	width:18px;
+	height:18px;
+	vertical-align:midle;
+	color:white;
+	top:-6px;
+	border:2px solid $darker-bg;
+	background: $dark-bg;
+	text-align: center;
+	line-height: 12px;
+	font-size:11px;
+	padding:2px;
+}

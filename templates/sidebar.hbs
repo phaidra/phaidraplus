@@ -1,0 +1,55 @@
+<div class="markers button-group" id="marker-actions">
+        <div style="display:none"><label for="imagesize">{{translate "markedImages"}} (<span id="markedimages">0</span>)</label><br></div>
+
+        <!--<div class="actions">-->
+
+        <a href="#" class="button small action disabled icon icon-mark-all secondary" title="{{translate "markAllObjects"}}" data-tooltip data-options="disable-for-touch: true" id="marker-all" data-tooltip></a>
+        <a href="#" class="button small action icon icon-mark-image" title="{{translate "filterByMarks"}}" data-tooltip data-options="disable-for-touch: true" id="collection-marker-filter" data-tooltip></a>
+        <a href="#" class="button small action icon icon-collection-image" title="{{translate "addToCollection"}}" data-tooltip data-options="disable-for-touch: true" id="collection-marker-add"></a>
+        <a href="#" class="button small action icon icon-reverse" title="{{translate "invertSelection"}}" data-tooltip data-options="disable-for-touch: true" id="collection-marker-reverse"></a>
+        <a href="#" class="button small action disabled icon icon-clear" title="{{translate "clearSelection"}}" data-tooltip data-options="disable-for-touch: true" id="collection-marker-remove"></a>
+
+        <!--</div>-->
+
+        
+ </div>
+
+ <div id="sidebar" class="">
+			
+			<div class="block options floatblock sidebar-block" id="keywords">
+				<select name="filterkeywords">
+					<option value="showall">{{translate "showAll"}}</option>
+					<optgroup label='{{translate "filterByKeywords"}}'></optgroup>
+				</select>
+			</div>
+
+				<div class="block options sidebar-block lightroom-block">
+				<form id="options">
+					<select class="displayMode">
+						<option value="grid">{{translate "Tableau"}}</option>
+						<option value="list">{{translate "list"}}</option>
+			  		</select>
+
+
+				    <div class="optionsblock gridoptions imagesize">
+						<div class="floatblock imagesize">
+					    	<label for="imagesize" class="left">{{translate "imageSize"}}</label>
+					    	<input type="range" name="imagesize" class="right inline" id="imagesize" min="2" max="7" value="5">
+						</div>
+					</div>
+				    
+					<div class="optionsblock gridoptions displays" id="sidebar-attributes-selector">
+					  <label><input id="title" name="switch-title" type="checkbox" value="true"> {{translate "show-title"}}</label>				
+					  <label><input id="desc" name="switch-desc" type="checkbox" value="true"> {{translate "show-desc"}}</label>				 				
+					</div>
+
+
+				</form>			 
+			</div>
+			
+			
+			
+		</div>
+
+
+

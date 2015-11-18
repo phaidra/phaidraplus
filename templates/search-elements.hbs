@@ -1,0 +1,72 @@
+{{#if selectType}}
+  <div class="sf select ui-front clearer">
+    <a class="remove-filter icon icon-remove" href="#" title="remove"></a>
+    <label for="{{id}}">{{translate label}}</label>
+    <select id="{{id}}">
+    {{#each options}}
+      {{#if this.optgroupstart }}
+        <optgroup label="{{translate this.label}}">
+      {{/if}}
+      {{#if this.option}}
+        <option value="{{this.value}}">{{translate this.label}}</option>
+      {{/if}}
+      {{#if this.optgroupend }}
+        </optgroup>
+      {{/if}}
+    {{/each}}
+    </select>
+  </div>
+{{/if}}
+
+{{#if radioType}}
+  <div class="sf radio ui-front clearer">
+    <a class="remove-filter icon icon-remove" href="#" title="remove"></a>
+    <label>{{translate label}}</label>
+    {{#each options}}
+      <input type="radio" value="{{this.value}}" name="{{../id}}" id="{{../id}}-{{@index}}" />
+      <label for="{{../id}}-{{@index}}" class="secondary value-label">{{this.label}}</label>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if objectType}}
+  <div class="sf object ui-front clearer">
+    <a class="remove-filter icon icon-remove" href="#" title="remove"></a>
+    <span class="title">{{translate title}}</span>
+    {{#each fields}}
+      <label for="{{../id}}-{{this.name}}" class="secondary">{{this.label}}</label>
+      <input id="{{../id}}-{{this.name}}" type="text" />
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if textType}}
+  <div class="sf text ui-front clearer">
+    <a class="remove-filter icon icon-remove" href="#" title="remove"></a>
+    <label for="{{id}}">{{translate label}}</label>
+    {{#if comparisons}}
+    <select id="{{../id}}-comparison" class="comparison-ops">
+      {{#each ../comparisons}}
+      <option value="{{this.value}}" selected>{{translate this.display}}</option>
+      {{/each}}
+    </select>
+    {{/if}}
+    <input id="{{id}}" value="{{value}}" type="{{type}}" 
+    {{#if comparisons}}
+    class="with-comparison-operators"
+    {{/if}}
+    {{#if pattern}}
+    pattern="{{pattern}}"
+    {{/if}}
+    min="{{min}}"
+    max="{{max}}"
+    />
+  </div>
+{{/if}}
+
+{{#if booleanOperators}}
+<select id="{{id}}-booleans" class="boolean-ops">
+  <option value="and">{{translate "booleanAnd"}}</option>
+  <option value="or">{{translate "booleanOr"}}</option>
+</select>
+{{/if}}

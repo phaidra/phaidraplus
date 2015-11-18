@@ -1,0 +1,9 @@
+.standalone {
+	#marker-actions,
+	.sidebar,
+	//#uncategorised-objs,
+	.actions.action-mark,
+	*:hover .actions.action-mark {
+		display:none !important;
+	}
+}

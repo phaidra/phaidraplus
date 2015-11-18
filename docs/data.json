@@ -1,0 +1,3851 @@
+{
+    "project": {
+        "name": "Phaidra+",
+        "description": "The Phaidra+ visually enhanced UI for Phaidra",
+        "version": "1.0"
+    },
+    "files": {
+        "components/_P_.js": {
+            "name": "components/_P_.js",
+            "modules": {
+                "helpers": 1
+            },
+            "classes": {
+                "phaidraObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/basics.js": {
+            "name": "components/basics.js",
+            "modules": {
+                "basics": 1
+            },
+            "classes": {
+                "basics": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/bottom-objs-container.js": {
+            "name": "components/bottom-objs-container.js",
+            "modules": {},
+            "classes": {
+                "uncategorizesObjects": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/collection-manager.js": {
+            "name": "components/collection-manager.js",
+            "modules": {},
+            "classes": {
+                "collectionManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/data-manager.js": {
+            "name": "components/data-manager.js",
+            "modules": {},
+            "classes": {
+                "dataManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/download-manager.js": {
+            "name": "components/download-manager.js",
+            "modules": {},
+            "classes": {
+                "downloadManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/geo-view.js": {
+            "name": "components/geo-view.js",
+            "modules": {
+                "main": 1
+            },
+            "classes": {
+                "geoView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/lightroom-collections.js": {
+            "name": "components/lightroom-collections.js",
+            "modules": {},
+            "classes": {
+                "lightroomCollections": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/phaidra-que.js": {
+            "name": "components/phaidra-que.js",
+            "modules": {},
+            "classes": {
+                "phaidraQue": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/ppt.js": {
+            "name": "components/ppt.js",
+            "modules": {},
+            "classes": {
+                "pptCreator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/resource-manager.js": {
+            "name": "components/resource-manager.js",
+            "modules": {},
+            "classes": {
+                "resourceManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/search-filter.js": {
+            "name": "components/search-filter.js",
+            "modules": {},
+            "classes": {
+                "searchFilter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/search-request-manager.js": {
+            "name": "components/search-request-manager.js",
+            "modules": {
+                "resources": 1
+            },
+            "classes": {
+                "searchRequestManager": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/search.js": {
+            "name": "components/search.js",
+            "modules": {
+                "search": 1
+            },
+            "classes": {
+                "search": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/single-view.js": {
+            "name": "components/single-view.js",
+            "modules": {},
+            "classes": {
+                "singleView": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/standalone.js": {
+            "name": "components/standalone.js",
+            "modules": {},
+            "classes": {
+                "standalone": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/timeline-object.js": {
+            "name": "components/timeline-object.js",
+            "modules": {},
+            "classes": {
+                "timelineObject": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/timeline.js": {
+            "name": "components/timeline.js",
+            "modules": {},
+            "classes": {
+                "timeline": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "resources": {
+            "name": "resources",
+            "submodules": {
+                "basics": 1
+            },
+            "classes": {
+                "phaidraObject": 1,
+                "basics": 1,
+                "resourceManager": 1,
+                "searchRequestManager": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "components/search-request-manager.js",
+            "line": 1,
+            "description": "The search query manager should be used to call the GSA with specific search queries.\nIt provides methods to set a normal search term and search terms for specific meta tags.\n\nThe basic process should be like:\n\n1. create an instance of the searchRequestManager\n2. register for 'searchFinished' event.\n3. set the query parameters (META Search – method:setQueryParam or Fulltext method:setQueryTerm)\n4. load the search results (method:load) or trigger the event 'search' on $(window) and provide search field data, start and pagesize.\nand repeat with 2. if required"
+        },
+        "helpers": {
+            "name": "helpers",
+            "submodules": {},
+            "classes": {
+                "phaidraObject": 1,
+                "uncategorizesObjects": 1,
+                "collectionManager": 1,
+                "downloadManager": 1,
+                "pptCreator": 1,
+                "timelineObject": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "viewControllers",
+            "namespace": "",
+            "file": "components/timeline-object.js",
+            "line": 10,
+            "description": "Phaidra+ Objekt is a generic data container which helps normalize data from the GSA and can render the contents tailored to the needs a certain view.\nThe templates for each view are stored in the Handlebars templates in the template folder."
+        },
+        "basics": {
+            "name": "basics",
+            "submodules": {},
+            "classes": {
+                "basics": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "resources",
+            "namespace": "",
+            "file": "components/basics.js",
+            "line": 7,
+            "description": "A collection of helper functions."
+        },
+        "viewControllers": {
+            "name": "viewControllers",
+            "submodules": {
+                "helpers": 1,
+                "main": 1
+            },
+            "classes": {
+                "uncategorizesObjects": 1,
+                "collectionManager": 1,
+                "dataManager": 1,
+                "downloadManager": 1,
+                "geoView": 1,
+                "lightroomCollections": 1,
+                "phaidraQue": 1,
+                "pptCreator": 1,
+                "singleView": 1,
+                "standalone": 1,
+                "timelineObject": 1,
+                "timeline": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "file": "components/timeline.js",
+            "line": 8
+        },
+        "main": {
+            "name": "main",
+            "submodules": {},
+            "classes": {
+                "geoView": 1,
+                "lightroomCollections": 1,
+                "singleView": 1,
+                "standalone": 1,
+                "timeline": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "viewControllers",
+            "namespace": "",
+            "file": "components/timeline.js",
+            "line": 8,
+            "description": "The geo view class displays the search result on a map\n\n## Global Events Consumed\n- changeDisplayed\n- marked\n\n## Global Events Triggered\n- addToCollection\n- downloadSingleObject\n- openSingleView\n\n## Dependencies\n- [resourceManager](resourceManager.html)\n- [template:geo-view.hbs](../../templates/geo-view.hbs)\n- [template:marker.hbs](../../templates/marker.hbs)\n- [uncategorizesObjects](uncategorizesObjects.html)"
+        },
+        "search": {
+            "name": "search",
+            "submodules": {},
+            "classes": {
+                "searchFilter": 1,
+                "search": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "components/search.js",
+            "line": 1,
+            "description": "This is a class used as a single instance in the phaidra+ app.\nIt creates a search dropdown which includes all UI to configure a search request.\nIf any useful search query can be created, the search is executed by triggering **search.ph-plus** event.\nOn all other occassions, an error is displayed.\n\n### Todo's\n\n- update search UI depending on search results"
+        }
+    },
+    "classes": {
+        "phaidraObject": {
+            "name": "phaidraObject",
+            "shortname": "phaidraObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "resources",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/_P_.js",
+            "line": 12,
+            "description": "Phaidra+ Objekt is a generic data container which helps normalize data from the GSA and can render the contents tailored to the needs a certain view.\nThe templates for each view are stored in the Handlebars templates in the template folder.",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The GSA Dataset",
+                    "type": "Object"
+                },
+                {
+                    "name": "view",
+                    "description": "The view to create the HTML Code for",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "is_constructor": 1
+        },
+        "basics": {
+            "name": "basics",
+            "shortname": "basics",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "resources",
+            "submodule": "basics",
+            "namespace": "",
+            "file": "components/basics.js",
+            "line": 7,
+            "description": "A collection of helper functions.",
+            "static": 1,
+            "final": 1
+        },
+        "uncategorizesObjects": {
+            "name": "uncategorizesObjects",
+            "shortname": "uncategorizesObjects",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/bottom-objs-container.js",
+            "line": 7,
+            "description": "If an object has no time or location data it is displayed in the bottom container of the corresponding view.\nThis class provides the means to do so.\n\n## Dependencies\n- [template:uncategorised-objs.hbs](../../templates/uncategorised-objs.hbs)\n- [template:map-object.hbs](../../templates/map-object.hbs)",
+            "static": 1,
+            "final": 1,
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The uncategorized objects' data.",
+                    "type": "Array"
+                },
+                {
+                    "name": "title",
+                    "description": "The title of the bottom container",
+                    "type": "String"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "collectionManager": {
+            "name": "collectionManager",
+            "shortname": "collectionManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/collection-manager.js",
+            "line": 8,
+            "description": "If an object has no time or location data it is displayed in the bottom container of the corresponding view.\nThis class provides the means to do so.\n\n## Defines\n- 'collectionMan' in the resourceManager\n\n## Events Consumed\n- addToCollection.ph-plus\n- changeCollectionProperty.ph-plus\n- createCollection.ph-plus\n- deleteCollection.ph-plus\n- deleteItemFromCollection.ph-plus\n- updateCollectionOrder.ph-plus\n\n## Events Triggered\n- openLightRoomCollections\n- rawSearch\n\n## Dependencies\n- [basics](basics.html)\n- [dataManager](dataManager.html)\n- [phaidraObject](phaidraObject.html)\n- [phaidraQue](phaidraQue.html)\n- [resourceManager](resourceManager.html)\n- [template:collection-modal.hbs](../../templates/collection-modal.hbs)",
+            "static": 1,
+            "final": 1,
+            "requires": [
+                "phaidraObject",
+                "basics"
+            ],
+            "is_constructor": 1
+        },
+        "dataManager": {
+            "name": "dataManager",
+            "shortname": "dataManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "namespace": "",
+            "file": "components/data-manager.js",
+            "line": 6,
+            "description": "The data manager gets the raw data from a search request, transform it into usable and displayable objects\nand provides useful methods to sort, restrict data or manipulate it.",
+            "is_constructor": 1
+        },
+        "downloadManager": {
+            "name": "downloadManager",
+            "shortname": "downloadManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/download-manager.js",
+            "line": 9,
+            "description": "View helper creating download dialogs\n\n## Events Consumed\n- downloadSingleObject.ph-plus\n- downloadMultiObject.ph-plus\n\n## Dependencies\n- [basics](basics.html)\n- [phaidraObject](phaidraObject.html)\n- [template:download-modal.hbs](../../templates/download-modal.hbs)",
+            "static": 1,
+            "final": 1,
+            "is_constructor": 1
+        },
+        "geoView": {
+            "name": "geoView",
+            "shortname": "geoView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "main",
+            "namespace": "",
+            "file": "components/geo-view.js",
+            "line": 8,
+            "description": "The geo view class displays the search result on a map\n\n## Global Events Consumed\n- changeDisplayed\n- marked\n\n## Global Events Triggered\n- addToCollection\n- downloadSingleObject\n- openSingleView\n\n## Dependencies\n- [resourceManager](resourceManager.html)\n- [template:geo-view.hbs](../../templates/geo-view.hbs)\n- [template:marker.hbs](../../templates/marker.hbs)\n- [uncategorizesObjects](uncategorizesObjects.html)",
+            "is_constructor": 1
+        },
+        "lightroomCollections": {
+            "name": "lightroomCollections",
+            "shortname": "lightroomCollections",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "main",
+            "namespace": "",
+            "file": "components/lightroom-collections.js",
+            "line": 10,
+            "description": "The lightroom collections class displays the owner's collections on the startpage of phaidra+.\n\n## Events Triggered\n- changeCollectionProperty\n- clearSearchUI\n- createCollection\n- dataManaged\n- deleteCollection\n- deleteItemFromCollection\n- ingestObject\n- updateCollectionOrder\n\n## Dependencies\n- [basics](basics.html)\n- [ppt](ppt.html)\n- [resourceManager](resourceManager.html)\n- [template:lightroom-collections.hbs](../../templates/lightroom-collections.hbs)",
+            "static": 1,
+            "final": 1,
+            "is_constructor": 1
+        },
+        "phaidraQue": {
+            "name": "phaidraQue",
+            "shortname": "phaidraQue",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "namespace": "",
+            "file": "components/phaidra-que.js",
+            "line": 7,
+            "description": "The phaidra que eases the communication with the phaidra API.\nIt provides registering queries on a que and execution one after the other.\nCallbacks are executed then each query is successfully finished.",
+            "is_constructor": 1
+        },
+        "pptCreator": {
+            "name": "pptCreator",
+            "shortname": "pptCreator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/ppt.js",
+            "line": 8,
+            "description": "This helper class is used to create a Powerpoint Presentation on the fly from an array of phaidra objects.\nThe class basically displays a modal dialog and when a PPT is requested, the class calls the pptEndPoint\nto have the Powerpoint File created. The returned file path is set as the new location of the window and hence\nthe download is started. After this process the class instance is deleted.\n\n## Dependencies\n- [basics](basics.html)\n- [template:ppt-modal.hbs](../../templates/ppt-modal.hbs)",
+            "params": [
+                {
+                    "name": "collectionData",
+                    "description": "An array of objects - preferably from a collection",
+                    "type": "Array"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "resourceManager": {
+            "name": "resourceManager",
+            "shortname": "resourceManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "resources",
+            "namespace": "",
+            "file": "components/resource-manager.js",
+            "line": 6,
+            "description": "Register global sitewide events and handlers with the resourceManager.",
+            "is_constructor": 1
+        },
+        "searchFilter": {
+            "name": "searchFilter",
+            "shortname": "searchFilter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "search",
+            "namespace": "",
+            "file": "components/search-filter.js",
+            "line": 7,
+            "description": "The searchFilter class is used to create and manage a certain search input field.\nThe searchFilter supports multiple types:\n\n- boolean\n- date\n- enum\n- objects\n- radio\n- select\n- text\n\n## Todos\n\n- add range selections",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "dP",
+                    "description": "The DOM parent to insert the filter into",
+                    "type": "Object"
+                },
+                {
+                    "name": "field",
+                    "description": "The name of the META Tag to represent - according to config/searchfields.js",
+                    "type": "String"
+                },
+                {
+                    "name": "val",
+                    "description": "The start value assigned to the META Tag",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ]
+        },
+        "searchRequestManager": {
+            "name": "searchRequestManager",
+            "shortname": "searchRequestManager",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "resources",
+            "namespace": "",
+            "file": "components/search-request-manager.js",
+            "line": 1,
+            "description": "The search query manager should be used to call the GSA with specific search queries.\nIt provides methods to set a normal search term and search terms for specific meta tags.\n\nThe basic process should be like:\n\n1. create an instance of the searchRequestManager\n2. register for 'searchFinished' event.\n3. set the query parameters (META Search – method:setQueryParam or Fulltext method:setQueryTerm)\n4. load the search results (method:load) or trigger the event 'search' on $(window) and provide search field data, start and pagesize.\nand repeat with 2. if required"
+        },
+        "search": {
+            "name": "search",
+            "shortname": "search",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "search",
+            "namespace": "",
+            "file": "components/search.js",
+            "line": 1,
+            "description": "This is a class used as a single instance in the phaidra+ app.\nIt creates a search dropdown which includes all UI to configure a search request.\nIf any useful search query can be created, the search is executed by triggering **search.ph-plus** event.\nOn all other occassions, an error is displayed.\n\n### Todo's\n\n- update search UI depending on search results"
+        },
+        "singleView": {
+            "name": "singleView",
+            "shortname": "singleView",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "main",
+            "namespace": "",
+            "file": "components/single-view.js",
+            "line": 9,
+            "description": "The geo view class displays the search result on a map\n\n## Global Events Triggered\n- window:addToCollection\n- window:back\n\n## Dependencies\n- [template:single-view.hbs](../../templates/single-view.hbs)",
+            "is_constructor": 1
+        },
+        "standalone": {
+            "name": "standalone",
+            "shortname": "standalone",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "main",
+            "namespace": "",
+            "file": "components/standalone.js",
+            "line": 6,
+            "description": "The standalone class is only used in the standalone mode and is a bridging class to get the query parameters from the calling url\ninto work by starting a standalone-search.\n\n## Global Events Triggered\n- window:standalone-error\n- window:standalone-search",
+            "is_constructor": 1
+        },
+        "timelineObject": {
+            "name": "timelineObject",
+            "shortname": "timelineObject",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "helpers",
+            "namespace": "",
+            "file": "components/timeline-object.js",
+            "line": 10,
+            "description": "The timeline object class is used to display one datapoint on the timeline including the mouseover dialog. \n\n## Global Events Triggered\n- window:addToCollection\n- window:downloadSingleObject\n- window:openSingleView\n\n## Dependencies\n- [template:timeline-object.hbs](../../templates/timeline-object.hbs)",
+            "params": [
+                {
+                    "name": "timeItem",
+                    "description": "An item from the timeline libary. The DOM Object is of main interest.",
+                    "type": "Object"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "saveMode",
+                    "description": "Toggle to disable specific functions not supported in standalone mode.",
+                    "type": "Boolean"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "timeline": {
+            "name": "timeline",
+            "shortname": "timeline",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "viewControllers",
+            "submodule": "main",
+            "namespace": "",
+            "file": "components/timeline.js",
+            "line": 8,
+            "description": "The timeline class displays the search result on a timeline.\n\n## Global Events Consumed\n- dataManager:changeDisplayed\n- dataManager:marked\n- $(window):resize\n\n## Dependencies\n- [template:timeline.hbs](../../templates/geo-view.hbs)\n- [timelineObject](timelineObject.html)\n- [uncategorizesObjects](uncategorizesObjects.html)",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "components/_P_.js",
+            "line": 110,
+            "description": "Create DOM for a specific View from template, Use Handlebar to insert data",
+            "itemtype": "method",
+            "name": "createDom",
+            "params": [
+                {
+                    "name": "view",
+                    "description": "[\"timeline\",\"map\",\"full\",\"semantic\",\"lightroom\"]",
+                    "type": "Enum"
+                },
+                {
+                    "name": "saveMode",
+                    "description": "prevents the object from loading and showing the collection image",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "class": "phaidraObject",
+            "module": "resources",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/_P_.js",
+            "line": 151,
+            "description": "Destroy the complete object",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "phaidraObject",
+            "module": "resources",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/_P_.js",
+            "line": 161,
+            "description": "Destroy exisiting DOM and unbind events / garbage collector",
+            "itemtype": "method",
+            "name": "destroyDom",
+            "class": "phaidraObject",
+            "module": "resources",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 16,
+            "description": "Method to execute a callback.",
+            "itemtype": "method",
+            "name": "executeCallback",
+            "params": [
+                {
+                    "name": "Callback",
+                    "description": "Definition of the callback: { 'func': (function), 'scope': (targetScope), 'data': (data for the function*) }",
+                    "type": "Object"
+                },
+                {
+                    "name": "DataBefore",
+                    "description": "Additional data to prepend to the data defined in def",
+                    "type": "Object"
+                },
+                {
+                    "name": "DataAfter",
+                    "description": "Additional data to append to the data defined in def",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Value returned by the called function",
+                "type": "Mixed"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 73,
+            "description": "Method to extract the query parameters from the current website url query part",
+            "itemtype": "method",
+            "name": "queryStringToJSON",
+            "return": {
+                "description": "An object where properties are named according to the query parameter names and receiving the values defined in the query.",
+                "type": "Json"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 92,
+            "description": "Method to check whether a jQuery has a certain event registered or not. Event namespaces are supported",
+            "itemtype": "method",
+            "name": "hasEvent",
+            "params": [
+                {
+                    "name": "jQueryObject",
+                    "description": "The Object to check",
+                    "type": "Object"
+                },
+                {
+                    "name": "EventName",
+                    "description": "The event which should be checked for",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 121,
+            "description": "Method creates a spinner over the specified object. Uses the external/spin.js library.\nAttaches a function under 'ph-plus-removeLoader' which can remove the spinner from the object.\nIf a spinner has already been attached, the spinner is cleared from the object and the object returned.",
+            "itemtype": "method",
+            "name": "makeLoading",
+            "params": [
+                {
+                    "name": "jQueryObject",
+                    "description": "The target jQuery object where to apply the spinner to.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the manipulated target object",
+                "type": "Object"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 146,
+            "description": "Method to remove the loading spinner from the specified object.\nLooks for a function under 'ph-plus-removeLoader' and executes it.",
+            "itemtype": "method",
+            "name": "removeLoading",
+            "params": [
+                {
+                    "name": "jQueryObject",
+                    "description": "The target jQuery object where to apply the spinner to.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the manipulated target object",
+                "type": "Object"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 161,
+            "description": "Method to turn a string into a camelCased string.\nFor instance 'ph-plus-removeLoader' gets converted to 'phPlusRemoveLoader'.",
+            "itemtype": "method",
+            "name": "toCamel",
+            "params": [
+                {
+                    "name": "String",
+                    "description": "The string to convert",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/basics.js",
+            "line": 174,
+            "description": "Bridging function for the jquery.timeago plugin (external/jquery.timeago.js)\nA plugin that makes it easy to support automatically updating fuzzy timestamps (e.g. \"4 minutes ago\" or \"about 1 day ago\").\nhttp://plugins.jquery.com/timeago/",
+            "itemtype": "method",
+            "name": "timeago",
+            "params": [
+                {
+                    "name": "Datetime",
+                    "description": "The datetime to convert into a relative time phrase",
+                    "type": "Datetime"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
+            "file": "components/collection-manager.js",
+            "line": 93,
+            "description": "Create the collection manager.",
+            "itemtype": "method",
+            "name": "create",
+            "class": "collectionManager",
+            "module": "viewControllers",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 13,
+            "description": "Event called when something changes in the data manager",
+            "itemtype": "event",
+            "name": "dataManager:change",
+            "params": [
+                {
+                    "name": "self",
+                    "description": "the data manager instance",
+                    "type": "Object"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 19,
+            "description": "Event called when something changes in the data manager",
+            "itemtype": "event",
+            "name": "dataManager:changeDisplayed",
+            "params": [
+                {
+                    "name": "self",
+                    "description": "the data manager instance",
+                    "type": "Object"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 25,
+            "description": "Event called when a collection is added, changed or removed",
+            "itemtype": "event",
+            "name": "dataManager:collections",
+            "params": [
+                {
+                    "name": "collections",
+                    "description": "the available collections",
+                    "type": "Array"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 31,
+            "description": "Event called when the preferred set of objects to be displayed changes",
+            "itemtype": "event",
+            "name": "dataManager:displayModeChanged",
+            "params": [
+                {
+                    "name": "mode",
+                    "description": "the new display mode",
+                    "type": "String"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 37,
+            "description": "Event called when the keywords of an object are changed",
+            "itemtype": "event",
+            "name": "dataManager:keywords",
+            "params": [
+                {
+                    "name": "keywords",
+                    "description": "the available keywords",
+                    "type": "Array"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 43,
+            "description": "Event called when an object is marked or unmarked",
+            "itemtype": "event",
+            "name": "dataManager:marked",
+            "params": [
+                {
+                    "name": "marked",
+                    "description": "the currently marked objects",
+                    "type": "Array"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 49,
+            "description": "Event called when objects are added, changed or removed",
+            "itemtype": "event",
+            "name": "dataManager:objects",
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "the currently available objects",
+                    "type": "Array"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 57,
+            "description": "Property containing all objects",
+            "itemtype": "property",
+            "name": "objects",
+            "type": "{Array}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 64,
+            "description": "Array containing all unique keywords of the objects",
+            "itemtype": "property",
+            "name": "keywords",
+            "type": "{Array}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 71,
+            "description": "Object referencing elements from the objects array by its keywords.\nReferences start with 't', i.e. 'tMyTerm': {object}",
+            "itemtype": "property",
+            "name": "keywordhash",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 79,
+            "description": "Object containing a keyword count by term.\nReferences start with 't', i.e. 'tMyTerm': {object}",
+            "itemtype": "property",
+            "name": "keywordnums",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 87,
+            "description": "Array containing the collections found in the {{#crossLink \"dataManager:objects\"}}objects Array{{/crossLink}}.\nReferences start with 't', i.e. 'tMyTerm': {object}",
+            "itemtype": "property",
+            "name": "collections",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 95,
+            "description": "Object containing the maximum geographic boundary of the objects found in the {{#crossLink \"dataManager:objects\"}}objects Array{{/crossLink}}.\nObject according to { southWest: { south: [Integer], west: [Integer] }, northEast: { north: [Integer], east: [Integer] }}",
+            "itemtype": "property",
+            "name": "bounds",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 103,
+            "description": "Array containing all objects stared/marked by the user.",
+            "itemtype": "property",
+            "name": "objectsmarked",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 110,
+            "description": "Backreference",
+            "itemtype": "property",
+            "name": "self",
+            "access": "private",
+            "tagname": "",
+            "type": "{Object}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 118,
+            "description": "Flag indicating which displaymode is currently active (null|all|marked|collection|keyword)",
+            "itemtype": "property",
+            "name": "displayMode",
+            "access": "private",
+            "tagname": "",
+            "type": "{Enum}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 126,
+            "description": "The UID of the currently selected collection if dataManager:displayMode is collection.",
+            "itemtype": "property",
+            "name": "selectedCollection",
+            "default": "'all'",
+            "access": "private",
+            "tagname": "",
+            "type": "{String}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 135,
+            "description": "The currently selected keyword if dataManager:displayMode is keyword.",
+            "itemtype": "property",
+            "name": "selectedKeyword",
+            "access": "private",
+            "tagname": "",
+            "type": "{String}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 143,
+            "description": "Index of the currently selected Object in the dataManager:currentObjects Array.",
+            "itemtype": "property",
+            "name": "selectedObject",
+            "access": "private",
+            "tagname": "",
+            "type": "{Integer}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 151,
+            "description": "Array containing the currently selected objects resulting from changes in the dataManager:displayMode.",
+            "itemtype": "property",
+            "name": "currentObjects",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 159,
+            "description": "Method to clear all marked objects in the result set.\nSets display mode to 'all'. Triggers  {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}},\n{{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}} if appropriate.",
+            "itemtype": "method",
+            "name": "clearMarked",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 186,
+            "description": "Helper method to convert an angle in degrees, minutes and seconds to full degrees",
+            "itemtype": "method",
+            "name": "convertDMSToDD",
+            "params": [
+                {
+                    "name": "degrees",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "minutes",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "seconds",
+                    "description": "",
+                    "type": "Float"
+                },
+                {
+                    "name": "direction",
+                    "description": "(S|W|N|E)",
+                    "type": "Enum"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Float"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 204,
+            "description": "Method reseting all important attributes.",
+            "itemtype": "method",
+            "name": "clear",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 226,
+            "description": "Method to register the {{#crossLink \"dataManager\"}}{{/crossLink}} with the {{#crossLink \"resourceManager\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "create",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 251,
+            "description": "Method returns an array of all collection the object belongs to.",
+            "itemtype": "method",
+            "name": "objectFindCollections",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "An Array of UIDs the object is already member of",
+                "type": "Array"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 272,
+            "description": "Method to sort the collections depending on the sort array (uids).",
+            "itemtype": "method",
+            "name": "sortCollections",
+            "params": [
+                {
+                    "name": "sort",
+                    "description": "An array of uids",
+                    "type": "Array"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 292,
+            "description": "Method to retrieve a collection's index in the {{#crossLink \"dataMan/collections:attribute\"}}{{/crossLink}} array based on its UID.",
+            "itemtype": "method",
+            "name": "getCollectionIndex",
+            "return": {
+                "description": "the index in the array or -1 if not found",
+                "type": "Integer"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 307,
+            "description": "Method to create/register a collection with certain data.\n\n\tdata = { objects: [], d.uid: new String(), title: new String(), updated: new Date() }\n\nThe data is converted and stored in the {{#crossLink \"dataMan/collections:attribute\"}}{{/crossLink}} array.",
+            "itemtype": "method",
+            "name": "createCollection",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "The data to create/store a collection from",
+                    "type": "Object"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 337,
+            "description": "Method to get a collection depending on the collection's title.",
+            "itemtype": "method",
+            "name": "getCollection",
+            "params": [
+                {
+                    "name": "title",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The collection or null if not found",
+                "type": "Array"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 358,
+            "description": "Get a specific object from the result set by its PID.",
+            "itemtype": "method",
+            "name": "getObject",
+            "params": [
+                {
+                    "name": "pid",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The object or null if not found.",
+                "type": "String"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 374,
+            "description": "Getter Function for {{#crossLink \"dataManager/currentObjects:attribute\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "currentObjects",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 384,
+            "description": "Method updating the the {{#crossLink \"dataManager/keywords:attribute\"}}{{/crossLink}},\n{{#crossLink \"dataManager/keywordshash:attribute\"}}{{/crossLink}} and {{#crossLink \"dataManager/keywordnums:attribute\"}}{{/crossLink}} arrays.",
+            "itemtype": "method",
+            "name": "updateKeywords",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 405,
+            "description": "Method extracting the keyword of an object and adding it to the {{#crossLink \"dataManager/keywords:attribute\"}}{{/crossLink}},\n{{#crossLink \"dataManager/keywordshash:attribute\"}}{{/crossLink}} and {{#crossLink \"dataManager/keywordnums:attribute\"}}{{/crossLink}} arrays.",
+            "itemtype": "method",
+            "name": "getKeywords",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "The object to check",
+                    "type": "Object"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 441,
+            "description": "Getter method for the {{#crossLink \"dataManager/objectsmarked:attribute\"}}{{/crossLink}} array.",
+            "itemtype": "method",
+            "name": "getMarked",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 451,
+            "description": "Method to retrieve all objects in the result set for a certain keyword (regex).",
+            "itemtype": "method",
+            "name": "getObjectsForKeyword",
+            "params": [
+                {
+                    "name": "term",
+                    "description": "the keyword term",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "An array of matching objects from the result set.",
+                "type": "Array"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 477,
+            "description": "Getter function for the currently selected collection (uid).",
+            "itemtype": "method",
+            "name": "getSelectedObject",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 487,
+            "description": "Extended Getter function to retrieve the currently selected object.",
+            "itemtype": "method",
+            "name": "getSelectedObject",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 497,
+            "description": "Method called after data has been loaded from the GSA.\nChecks the results, repairs the data and creates _P_ objects from the data.\nAfter successful conversation, sets itself as the resource 'gsaData' with the resource manager and triggers all events of the class.",
+            "itemtype": "method",
+            "name": "manageData",
+            "params": [
+                {
+                    "name": "Data",
+                    "description": "The result data to convert into a result set.",
+                    "type": "Object"
+                },
+                {
+                    "name": "alert",
+                    "description": "Shall there be an alert when no results were returned?",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 563,
+            "description": "Method to mark a specific object identified by its pid.\nTriggers  {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}},\n{{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}} if appropriate.",
+            "itemtype": "method",
+            "name": "markObject",
+            "params": [
+                {
+                    "name": "PID",
+                    "description": "The pid of the object to mark",
+                    "type": "String"
+                },
+                {
+                    "name": "unmark",
+                    "description": "Shall the object be unmarked or marked?",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "return": {
+                "description": "An encoded String of the search terms for the META Tags",
+                "type": "String"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 603,
+            "description": "Method extending the raw objects with the _marked flag and sets it value according to 'how'.",
+            "itemtype": "method",
+            "name": "markObjects",
+            "params": [
+                {
+                    "name": "how",
+                    "description": "the value the flag shall be set to.",
+                    "type": "Boolean"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 622,
+            "description": "Method checking whether an object is marked or not. Object is referenced by its PID.",
+            "itemtype": "method",
+            "name": "isMarked",
+            "params": [
+                {
+                    "name": "PID",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "returns the current marking state of the object or null if the object is not found.",
+                "type": "Boolean"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 638,
+            "description": "Method checking whether an object is marked or not",
+            "itemtype": "method",
+            "name": "isObjMarked",
+            "params": [
+                {
+                    "name": "Object",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 653,
+            "description": "Method removing a collection from the collection array",
+            "itemtype": "method",
+            "name": "removeCollection",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "uid",
+                    "description": "Uid of the colleciton",
+                    "type": "Number|String"
+                },
+                {
+                    "name": "silent",
+                    "description": "Flag whether to trigger events on the dataManager (objects, collections, changeDisplayed, change)",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 683,
+            "description": "Method performing various data transformations on a result object.",
+            "itemtype": "method",
+            "name": "repairData",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "The raw object to repair.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The repaired object.",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 872,
+            "description": "Getter function for {{#crossLink \"dataManager/selectedKeyword:attribute\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "getSelectedKeyword",
+            "return": {
+                "description": "The currently selected keyword",
+                "type": "String"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 896,
+            "description": "Method to invert the marked objects. So all marked objects get unmarked and vice versa.\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "reverseMarked",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 933,
+            "description": "Getter for {{#crossLink \"dataManager/displayMode:attribute\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "getDisplayMode",
+            "return": {
+                "description": "displayMode The currently used display mode.",
+                "type": "String"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 943,
+            "description": "Method to select a collection to be displayed. Sets display mode to 'collection'\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "selectCollection",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "Collection-uid",
+                    "description": "The title of the collection to display.\nreturn {Object} self",
+                    "type": "String"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 960,
+            "description": "Method to select the next object in the resultset.",
+            "itemtype": "method",
+            "name": "selectNextObject",
+            "return": {
+                "description": "Object The resulting object delivered from {{#crossLink \"dataManager/selectObject:method\"}}{{/crossLink}}",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 970,
+            "description": "Method select an object from the result set either by its index number or by the object's PID number.",
+            "itemtype": "method",
+            "name": "selectObject",
+            "params": [
+                {
+                    "name": "Identifier",
+                    "description": "Either the object index or the object to select (i.e. a js object with pid attribute)",
+                    "type": "Number|Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 1001,
+            "description": "Method to select the previous object in the resultset.",
+            "itemtype": "method",
+            "name": "selectPreviousObject",
+            "return": {
+                "description": "Object The resulting object delivered from {{#crossLink \"dataManager/selectObject:method\"}}{{/crossLink}}",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 1011,
+            "description": "Set a specific display mode (all|marked|collection|keyword).\nIf set to 'collection' the value of {{#crossLink \"dataManager/selectedCollection:attribute\"}}{{/crossLink}} is used.\nIf set to 'keyword' the value of {{#crossLink \"dataManager/selectedKeyword:attribute\"}}{{/crossLink}} is used.\nTriggers {{#crossLink \"dataManager/displayModeChanged:event\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "setDisplayMode",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "Enum",
+                    "description": "The display mode to set (all|marked|collection|keyword)\nreturn {Object} self",
+                    "type": "Enum"
+                }
+            ],
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 1051,
+            "description": "Method to remove all display restrictions and show all objects of the current result set.\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.\nIf the former display mode was 'marked' it also triggers {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}}.",
+            "itemtype": "method",
+            "name": "showAll",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 1078,
+            "description": "Method updating the currently marked objects array (dataManager:objectsmarked).\nUses {{#crossLink \"dataManager/isObjMarked:method\"}}{{/crossLink}} to check whether an object was stared/marked.",
+            "itemtype": "method",
+            "name": "updateMarked",
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/geo-view.js",
+            "line": 49,
+            "itemtype": "method",
+            "name": "close",
+            "class": "geoView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/geo-view.js",
+            "line": 86,
+            "itemtype": "method",
+            "name": "create",
+            "class": "geoView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/geo-view.js",
+            "line": 181,
+            "itemtype": "method",
+            "name": "show",
+            "class": "geoView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/geo-view.js",
+            "line": 239,
+            "class": "geoView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/lightroom-collections.js",
+            "line": 61,
+            "itemtype": "method",
+            "name": "create",
+            "class": "lightroomCollections",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/lightroom-collections.js",
+            "line": 522,
+            "itemtype": "method",
+            "name": "show",
+            "class": "lightroomCollections",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/lightroom-collections.js",
+            "line": 528,
+            "itemtype": "method",
+            "name": "close",
+            "class": "lightroomCollections",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 15,
+            "description": "Event called when the connection times out.",
+            "itemtype": "event",
+            "name": "phaidraQue:connection-timeout",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 22,
+            "description": "connection timer.",
+            "itemtype": "property",
+            "name": "connectionTimer",
+            "access": "private",
+            "tagname": "",
+            "type": "Integer",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 30,
+            "description": "The user credentials to use with the phaidra endpoint.\n\n    { 'username': 'XXX', 'password': 'XXX', 'realname': 'XXX' }",
+            "itemtype": "property",
+            "name": "credentials",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 40,
+            "description": "The currently run que item. The que item carries the following properties:\n\n- 'cb': the callback\n- 'd': the call data\n- 'p': the url\n- 'st': send authentication token or credentials?\n- 't': ajax send type; see [jQuery Ajax send types](http://api.jquery.com/jQuery.ajax/), which are basically GET or POST",
+            "itemtype": "property",
+            "name": "currentQueItem",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 54,
+            "description": "The endpoint to call.",
+            "itemtype": "property",
+            "name": "endPoint",
+            "access": "private",
+            "tagname": "",
+            "type": "String",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 62,
+            "description": "The query que.",
+            "itemtype": "property",
+            "name": "que",
+            "access": "private",
+            "tagname": "",
+            "type": "Array",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 70,
+            "description": "Flag indicating whether the query que is currently running a query or is idle.",
+            "itemtype": "property",
+            "name": "processing",
+            "access": "private",
+            "tagname": "",
+            "type": "Boolean",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 78,
+            "description": "Backreference.",
+            "itemtype": "property",
+            "name": "self",
+            "access": "private",
+            "tagname": "",
+            "type": "Object",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 86,
+            "description": "Fixed timeout timespan after which a broken connection will be assumed.",
+            "itemtype": "property",
+            "name": "self",
+            "access": "private",
+            "tagname": "",
+            "type": "Integer",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 94,
+            "description": "The XSRF-TOKEN returned by the API after credentials have been sent.\nCan be used instead of sending credentials again and saving exposure of security relevant information.",
+            "itemtype": "property",
+            "name": "xsrfToken",
+            "access": "private",
+            "tagname": "",
+            "type": "String",
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 105,
+            "description": "Method diguesting connection timeout error",
+            "itemtype": "method",
+            "name": "connectionTimeoutError",
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 117,
+            "description": "Getter Function for the real username of the [credentials](phaidraQue.html#properties).",
+            "itemtype": "method",
+            "name": "getUser",
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 127,
+            "description": "Setter Function for the real username of the [credentials](phaidraQue.html#properties).",
+            "itemtype": "method",
+            "name": "setUser",
+            "params": [
+                {
+                    "name": "realname",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 143,
+            "description": "Setter Function for the [xsrfToken](phaidraQue.html#properties).",
+            "itemtype": "method",
+            "name": "setToken",
+            "params": [
+                {
+                    "name": "token",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 156,
+            "description": "Getter Function for the [credentials](phaidraQue.html#properties).",
+            "itemtype": "method",
+            "name": "getCredentials",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 166,
+            "description": "Error handler for ajax requests. For parameters see [jQuery Ajax error option](http://api.jquery.com/jQuery.ajax/).",
+            "itemtype": "method",
+            "name": "errorHandler",
+            "params": [
+                {
+                    "name": "jqXHR",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "textStatus",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "errorThrown",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 187,
+            "description": "Event handler for ajax requests. If the response includes a new XSRF-TOKEN it is saved.\nPossible username, realname and XSRF-TOKEN are saved in the cookies.\nIf the current que item had a callback it will be executed.",
+            "itemtype": "method",
+            "name": "eventHandler",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 225,
+            "description": "Method to execute a API query with a certain setup specified via the given parameters.\nPushes a query setup onto the que and starts the que.",
+            "itemtype": "method",
+            "name": "execute",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "The sub path to call",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The data to send",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "callback",
+                    "description": "An optional callback to execute after response",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "type",
+                    "description": "The HTTP method to use",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "GET"
+                },
+                {
+                    "name": "sendToken",
+                    "description": "Flag indicating whether login credentials shall be sent or not.",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "false"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 266,
+            "description": "Method executing a login query on the API",
+            "itemtype": "method",
+            "name": "login",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "the username",
+                    "type": "String"
+                },
+                {
+                    "name": "pswd",
+                    "description": "the password",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 285,
+            "description": "Success event handler for the [login method](phaidraQue.html#methods)",
+            "itemtype": "method",
+            "name": "loginSuccess",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "the username",
+                    "type": "String"
+                },
+                {
+                    "name": "pswd",
+                    "description": "the password",
+                    "type": "String"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 298,
+            "description": "Method to execute a logout action on the API",
+            "itemtype": "method",
+            "name": "logout",
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 310,
+            "description": "Method to execute a keep alive action on the API",
+            "itemtype": "method",
+            "name": "keepAlive",
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/phaidra-que.js",
+            "line": 322,
+            "description": "Method executing the next action on the process que if there is any.",
+            "itemtype": "method",
+            "name": "processNext",
+            "chainable": 1,
+            "return": {
+                "description": "self",
+                "type": "Object"
+            },
+            "class": "phaidraQue",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/ppt.js",
+            "line": 28,
+            "description": "The path to call to have the powerpoint created.",
+            "itemtype": "property",
+            "name": "pptEndPoint",
+            "access": "private",
+            "tagname": "",
+            "type": "{String}",
+            "class": "pptCreator",
+            "module": "viewControllers",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 14,
+            "description": "Property holding the current active state of the resource manager, i.e. the event which has been fired last.",
+            "itemtype": "property",
+            "name": "currentState",
+            "type": "{String}",
+            "default": "null",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 22,
+            "description": "A default configuration object. All provided configuration objects get extended by this to get the appropriate default values.\n\n\t\t\t{\n\t\t\t\t'close': { 'func': function() {}, 'scope': null, 'data': null },\n\t\t\t\t'deps': null,\n\t\t\t\t'open': { 'func': function() {}, 'scope': null, 'data': null },\n\t\t\t}\n\nAlternatively func and scope can be a string.\n\n- If func is a string and scope is null, a global function is assumed and called.\n- If scope is a string, then an object of that class is created and func is called as a method of that object.",
+            "itemtype": "property",
+            "name": "defaultConf",
+            "type": "{Object}",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 43,
+            "description": "Property containing the list of last states. Used for reverting back to the old state by .back()",
+            "itemtype": "property",
+            "name": "oldStates",
+            "type": "{Array}",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 50,
+            "description": "An array containing all registered events and the connected handlers",
+            "itemtype": "property",
+            "name": "states",
+            "type": "{Array}",
+            "default": "Array()",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 58,
+            "description": "An array containing all registered resources.",
+            "itemtype": "property",
+            "name": "resources",
+            "type": "{Array}",
+            "default": "Array()",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 66,
+            "description": "Backreference",
+            "itemtype": "property",
+            "name": "self",
+            "access": "private",
+            "tagname": "",
+            "type": "{Object}",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 74,
+            "description": "Method to enable further state switching. I.e. if a switch gets requested, these will get processed.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "continue",
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 85,
+            "description": "Method to camelcase a str",
+            "itemtype": "method",
+            "name": "createClassName",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "the String to transform",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the camelcased String",
+                "type": "String"
+            },
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 97,
+            "description": "Method to switch to a new [state] or close an old one depending on [dir]. Additional data might be appended to the calls.",
+            "itemtype": "method",
+            "name": "doState\nchainable",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "the state to open/close",
+                    "type": "String"
+                },
+                {
+                    "name": "dir",
+                    "description": "the direction to go (open|close)",
+                    "type": "Enum"
+                },
+                {
+                    "name": "addData",
+                    "description": "the data to append",
+                    "type": "Object"
+                }
+            ],
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 146,
+            "description": "Method to retrieve a set resource by name",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "the name of the resource to retrieve",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the resource if set",
+                "type": "Mixed"
+            },
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 156,
+            "description": "Method to pause execution of state switches",
+            "itemtype": "method",
+            "name": "pause",
+            "chainable": 1,
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 167,
+            "description": "Method to register a global event and the corresponding handler.\nYou can add multiple handlers to the same event by altering the name.\nThe handler configuration will be expanded by the default configuration object of the resource manager.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "register",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "the sitewide event to listen to",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "a name for this specific handler",
+                    "type": "String"
+                },
+                {
+                    "name": "conf",
+                    "description": "a configuration object following {{#crossLink \"resourceManager/currentState:attribute\"}}{{/crossLink}}",
+                    "type": "Object"
+                }
+            ],
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 214,
+            "description": "Method to remove an event handler from the handler stack {{#crossLink \"resourceManager/states:attribute\"}}{{/crossLink}}.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "remove",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "the sitewide event to listen to",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "a name for this specific handler",
+                    "type": "String"
+                }
+            ],
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 240,
+            "description": "function checking what to call or create for the current state.\nThe logic is as follows (refering to the object in states.js - property open or close):\n\n'scope' : {String | Object | undefined}\n'func' : {String | Function | undefined}\n\n- if neither scope nor function is defined: return;\n- if only a scope is defined: create an object of class scope and return it;\n- if only a function is defined: execute the function;\n- if a scope and a function is defined: create an object and execute the method on the object;",
+            "itemtype": "method",
+            "name": "requireCallback",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "Parameters for the function/method call",
+                    "type": "Object"
+                },
+                {
+                    "name": "func",
+                    "description": "The function/method to execute",
+                    "type": "String|Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "The scope/classname of the method to execute or the class to create",
+                    "type": "String|Object"
+                },
+                {
+                    "name": "dependency",
+                    "description": "a dependecy object containing the class to create",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 284,
+            "description": "Method to set new config settings on a specific state (or wildcard '*') and name in the states array.\nUseful to set the instance of an object or similar circumstances when the scope object or function is\nnot available at startup.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setConfig",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "the sitewide event to listen to",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "a name for this specific handler",
+                    "type": "String"
+                },
+                {
+                    "name": "conf",
+                    "description": "a configuration object following {{#crossLink \"resourceManager/currentState:defaultConf\"}}{{/crossLink}}",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the resource manager itself",
+                "type": "Object"
+            },
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 335,
+            "description": "Method to add a resource to the resourceManager.",
+            "itemtype": "method",
+            "name": "setResource",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the new resource / resource to overwrite.",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "The resource(data)",
+                    "type": "Mixed"
+                }
+            ],
+            "chainable": 1,
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/resource-manager.js",
+            "line": 348,
+            "description": "Generic event handler called on all global events registered.\nThe handler calls all __close handlers__ of the current state,\nthen changes the {{#crossLink \"resourceManager/currentState:property\"}}{{/crossLink}} property to the new state\nand now calls all open handlers for the new state.\nDependencies are loaded using requirejs methods.",
+            "itemtype": "method",
+            "name": "switch",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "newState",
+                    "description": "The new state to switch to",
+                    "type": "String"
+                },
+                {
+                    "name": "addData",
+                    "description": "Additional Data provided by the event handler",
+                    "type": "Array",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "returns true of newState was not found. false if state switching was successfully started.",
+                "type": "Boolean"
+            },
+            "class": "resourceManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 29,
+            "description": "Event called when the input changes from filled (valid input) to an empty input.",
+            "itemtype": "event",
+            "name": "cleared",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 34,
+            "description": "Event fired when the filter is removed from the UI.",
+            "itemtype": "event",
+            "name": "delete",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 39,
+            "description": "Event fired when enter is pressed on the input.",
+            "itemtype": "event",
+            "name": "enter",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 44,
+            "description": "Event fired when escape is pressed on the input.",
+            "itemtype": "event",
+            "name": "escape",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 49,
+            "description": "Event fired when the input changes from empty to an filled state, meaning that some valid content is available.",
+            "itemtype": "event",
+            "name": "filled",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 60,
+            "description": "Property storing the jquery DOM object",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "dom",
+            "type": "{Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 68,
+            "description": "Property containing the ID of jquery DOM object - for convenience reasons",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "domId",
+            "type": "{String}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 76,
+            "description": "Backreference to the jquery DOM object containing the own DOM object.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "domParent",
+            "type": "{Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 85,
+            "description": "Flag indicating whether the current input field has a valid input or is empty.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "filled",
+            "type": "{Boolean}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 93,
+            "description": "The html type used to display the current filter.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "htmlType",
+            "type": "{String}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 101,
+            "description": "A config variable containing the ID prefix to add to each DOM object",
+            "default": "'-filter-'",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "idPrefix",
+            "type": "{String}",
+            "final": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 111,
+            "description": "The interal name of the META tag represented - according to config/searchfields.js",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "metaName",
+            "type": "{String}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 119,
+            "description": "Flag indicating whether the selection of multiple values is possible or not",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "multipleValues",
+            "type": "{Boolean}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 127,
+            "description": "Property containing a template (either Array or Object) with the possible values (i.e. select, enum, etc.)",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "possibleValues",
+            "type": "{Array | Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 136,
+            "description": "Backreference",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "self",
+            "type": "{Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 173,
+            "description": "The current value of the filter",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "value",
+            "type": "{String | Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 185,
+            "description": "The method actually creating the HTML representation of the filter.",
+            "itemtype": "method",
+            "name": "createDom",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "The HTML type to create. See the supported types in the class description",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 307,
+            "description": "Method to remove the HTML of the filter from the DOM.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "destroyDom",
+            "access": "private",
+            "tagname": "",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 321,
+            "description": "Method to display the HTML representation of the filter.",
+            "itemtype": "method",
+            "name": "display",
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 341,
+            "description": "Method to set focus on the filter's input.",
+            "itemtype": "method",
+            "name": "focus",
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 371,
+            "description": "Method to get data from the dom object. Only working after the dom has been created!",
+            "itemtype": "method",
+            "name": "getData",
+            "return": {
+                "description": "null on failure (no dom) or the data stored in the dom.",
+                "type": "Mixed"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 382,
+            "description": "Method to get the ID of dom object.",
+            "itemtype": "method",
+            "name": "getId",
+            "return": {
+                "description": "the dom ID",
+                "type": "String"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 392,
+            "description": "Method to get the metatag's name the filter is representing.",
+            "itemtype": "method",
+            "name": "getMetaName",
+            "return": {
+                "description": "The name of the tag represented by the filter UI.",
+                "type": "String"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 402,
+            "description": "Method to retrieve the current value of the filter.",
+            "itemtype": "method",
+            "name": "getValue",
+            "return": {
+                "description": "The value stored currently in the filter.",
+                "type": "Mixed"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 460,
+            "description": "Method to hide the HTML representation of the filter.",
+            "itemtype": "method",
+            "name": "hide",
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 471,
+            "description": "Method to destroy the whole filter object.",
+            "itemtype": "method",
+            "name": "remove",
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 482,
+            "description": "Method setting data on the dom object. Only working after the dom has been created!",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setData",
+            "params": [
+                {
+                    "name": "newData",
+                    "description": "the data to store",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "null on failure (no dom) or the object",
+                "type": "Mixed"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 496,
+            "description": "Method called when filter is first initiated.\nSets up the config for HTML, the DOM id, etc.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setup",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the META Tag to represent",
+                    "type": "String"
+                },
+                {
+                    "name": "v",
+                    "description": "Value of the META Tag",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 600,
+            "description": "Method to set the value of the filter. Updates the input in the created DOM.",
+            "itemtype": "method",
+            "name": "setValue",
+            "params": [
+                {
+                    "name": "v",
+                    "description": "Value of the META Tag",
+                    "type": "Mixed",
+                    "optional": true
+                }
+            ],
+            "chainable": 1,
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 648,
+            "description": "Eventhandler called when the input receives focus.\nEnables the keyboard event handler to check the states cleared, filled, enter, escape.",
+            "itemtype": "method",
+            "name": "startInputManagement",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The event object delivered by the event handler.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 705,
+            "description": "Eventhandler called when the input looses focus.\nDisables the keyboard event handler to check the states cleared, filled, enter, escape.",
+            "itemtype": "method",
+            "name": "stopInputManagement",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "The event object delivered by the event handler.",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 718,
+            "description": "Method to translate the META Tag names into descriptive names.\nUses the translation library in  nls depending on the language indicated by the browser.",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the META Tag to translate.",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the translation, if existing.",
+                "type": "String"
+            },
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 19,
+            "is_constructor": 1,
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 24,
+            "description": "An object containing all META Tags for query",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "currentMetas",
+            "type": "{Object}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 32,
+            "description": "Object containing the config of the current request.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "currentRequest",
+            "type": "{Object}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 40,
+            "description": "Flag indication whether the object is in the stage of loading at the moment or not.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "loading",
+            "type": "{Boolean}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 48,
+            "description": "The maximum time for a request. After this time the request is aborted/timed out.",
+            "default": "6000",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "maxLoadTime",
+            "static": 1,
+            "final": 1,
+            "type": "{Number}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 59,
+            "description": "The number of search results to retrieve from the GSA",
+            "default": "50",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "pageSize",
+            "type": "{Number}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 68,
+            "description": "The Endpoint of the GSA to call for all requests.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "gsaEndPoint",
+            "type": "{String}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 76,
+            "description": "Backreference",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "self",
+            "type": "{Object}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 84,
+            "description": "The load timeout handler",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "timer",
+            "type": "{Object}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 92,
+            "description": "Method compacting all set META Tags and search values to a request String.",
+            "itemtype": "method",
+            "name": "createMetaQueryString",
+            "return": {
+                "description": "An encoded String of the search terms for the META Tags",
+                "type": "String"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 137,
+            "description": "Method setting all META Tag search parameters to default values.",
+            "itemtype": "method",
+            "name": "clearMetas",
+            "chainable": 1,
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 151,
+            "description": "Creates a copy of the default request object and returns it for own usage.",
+            "itemtype": "method",
+            "name": "getRequestDefaults",
+            "return": {
+                "description": "a clone of the requestDefaults. See: config/gsa-request.js",
+                "type": "Object"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 161,
+            "description": "Returns a copy of the current object containing all set search META Tags with their query terms.",
+            "itemtype": "method",
+            "name": "getQueryMetas",
+            "return": {
+                "description": "the current search query terms associated with their META Tags.",
+                "type": "Object"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 181,
+            "description": "Method to retrieve the overall search query - i.e. the META Tags search setup plus the normal GSA search setup.\nAll cleaned of non-set properties",
+            "itemtype": "method",
+            "name": "getQuerySetup",
+            "return": {
+                "description": "the query setup",
+                "type": "Object"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 202,
+            "description": "Method to query the GSA. It creates the AJAX get query and sets a timeout function.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "q",
+                    "description": "the normal search term",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "start",
+                    "description": "the index of the first result to load (pagination)",
+                    "type": "Number",
+                    "optional": true
+                },
+                {
+                    "name": "num",
+                    "description": "the number of results to load (pagination)",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 237,
+            "description": "Method called when GSA returns results successfully.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
+            "async": 1,
+            "itemtype": "method",
+            "name": "loadSuccess",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "the result of the GSA call.",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "a callback to execute instead of the event.",
+                    "type": "Object"
+                },
+                {
+                    "name": "reset",
+                    "description": "shall the gsaData be reset?",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "chainable": 1,
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 266,
+            "description": "Method called when GSA returned an error.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
+            "async": 1,
+            "itemtype": "method",
+            "name": "loadError",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "the event data",
+                    "type": "Object"
+                }
+            ],
+            "chainable": 1,
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 284,
+            "description": "Event handler called when GSA request ended in an timeout.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
+            "async": 1,
+            "itemtype": "method",
+            "name": "loadTimeout",
+            "chainable": 1,
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 301,
+            "description": "A method to load the next page of the result set. Increases the [currentRequest's](searchRe) start property by one and reloads the search.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "loadNextPage",
+            "return": {
+                "description": "Either self or false if still loading another request.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 318,
+            "description": "A method to load the previous page of the result set.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "loadPreviousPage",
+            "return": {
+                "description": "Either self or false if still loading another request.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 335,
+            "description": "A private helper method to check whether a value is boolean",
+            "itemtype": "method",
+            "name": "matchValueToBoolean",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "The value to test",
+                    "type": "Mixed"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Either null on failure or the value.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 347,
+            "description": "A method to match a value against a template if the template is an enum|select.\nIt simply looks in the template array if the value is found.",
+            "itemtype": "method",
+            "name": "matchValueToEnum",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "The value to test",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "template",
+                    "description": "The possible values",
+                    "type": "Array"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Either null on failure or the value.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 361,
+            "description": "Method to check whether a value is a valid Integer or Float.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "matchValueToNumber",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "The value can be Integer, Float or smaller/greater String (..[Integer]..) - see GSA documentation",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "Either null on validation failure or the value",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 395,
+            "description": "A method to match a value against a template if the template is an object.\nIt simply compares the properties of both and checks if all are set in the value,\nthat are required by the template.",
+            "itemtype": "method",
+            "name": "matchValueToObject",
+            "params": [
+                {
+                    "name": "template",
+                    "description": "The object representing the template",
+                    "type": "Object"
+                },
+                {
+                    "name": "value",
+                    "description": "The object to test",
+                    "type": "Object"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Either null on failure or the value.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 417,
+            "description": "Helper function matching a value to be a text (not undefined or null or of zero length)",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "matchValueToText",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "null if not a text or the string",
+                "type": "String"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 432,
+            "description": "A method to parse and match a given value against the META Tag definition defined by name.\nGets the type of the META Tag and checks if the given value is possible or not.",
+            "itemtype": "method",
+            "name": "parseQueryParamValue",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "the name of the META Tag to validate against",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "the proposed value to check",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "Either false on failure or the value if correct.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 473,
+            "description": "Method executing the GSA query setup. Basically starts $.getJSON with the appropriate event handler and adds a loading spinner to the body.\nA timeout is started to check for connection timeouts.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "rawLoad",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "The query to execute",
+                    "type": "Object"
+                },
+                {
+                    "name": "callback",
+                    "description": "a callback to execute after the result has been loaded",
+                    "type": "Object",
+                    "optional": true
+                },
+                {
+                    "name": "reset",
+                    "description": "shall the gsaData be reset?",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "true"
+                }
+            ],
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 524,
+            "description": "Method to start a raw search, meaning the query term has to be provided, but therefore won't be touched",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "rawSearch",
+            "params": [
+                {
+                    "name": "query",
+                    "description": "The query to execute",
+                    "type": "String"
+                },
+                {
+                    "name": "required",
+                    "description": "The requiredfields to use for the query; content types for image, text, picture, pdf and paper are defaults.",
+                    "type": "String",
+                    "optional": true
+                },
+                {
+                    "name": "start",
+                    "description": "the first result object to retrieve",
+                    "type": "Integer",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "number",
+                    "description": "the number of results to fetch; maximum is 100.",
+                    "type": "Integer",
+                    "optional": true,
+                    "optdefault": "100"
+                },
+                {
+                    "name": "callback",
+                    "description": "a callback to execute after the result has been loaded",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Either the searchRequestManager or false if currently loading another query.",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 554,
+            "description": "Method displaying a link which can be used to display a link in a modal dialog to the current search and view in the standalone version.",
+            "itemtype": "method",
+            "name": "showShareLink",
+            "chainable": 1,
+            "return": {
+                "description": "Either self or false on failure",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 614,
+            "description": "Method to start a search immediately from scratch.\nProvide an  array of field values ({ 'key':value, 'boolean':[AND|OR] }),\nthe start position of the first item to return and the number of items to fetch.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "startSearch",
+            "params": [
+                {
+                    "name": "fields",
+                    "description": "An array of key:values pairs representing the search fields.",
+                    "type": "Array"
+                },
+                {
+                    "name": "start",
+                    "description": "The first search result to fetch",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "[size] The number of results to get (maximum).",
+                "type": "Number"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 656,
+            "description": "Method to set the query page size",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setPageSize",
+            "params": [
+                {
+                    "name": "s",
+                    "description": "The new pagesize for the next request.",
+                    "type": "Number"
+                }
+            ],
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 670,
+            "description": "Method to set one query string for a META Tag search.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setQueryParam",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "The name of the META Tag to set.",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The query term / object by which to search the META Tag.",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "bool",
+                    "description": "The boolean operator to add between the current and before value.",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Either false on failure (validation of the value fails) or the searchRequestManager object itself (for chaining).",
+                "type": "Mixed"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 701,
+            "description": "Method to set the general query term for GSA search.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setQueryTerm",
+            "params": [
+                {
+                    "name": "q",
+                    "description": "The query term.",
+                    "type": "String"
+                }
+            ],
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 714,
+            "description": "Helper method for Handlebars to translate terms. See [Handlebars.registerHelper](http://handlebarsjs.com/block_helpers.html)",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "q",
+                    "description": "The query term.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the translation result",
+                "type": "String"
+            },
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search.js",
+            "line": 14,
+            "itemtype": "event",
+            "name": "window:error.ph-plus",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "The message to display",
+                    "type": "String"
+                }
+            ],
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 18,
+            "itemtype": "event",
+            "name": "window:search.ph-plus",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "An array of search parameter which are a key:value pair object.",
+                    "type": "Array"
+                },
+                {
+                    "name": "cb",
+                    "description": "The callback to execute, when the search has been finished.",
+                    "type": "Callback"
+                }
+            ],
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 27,
+            "is_constructor": 1,
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 33,
+            "description": "The own dom object.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "dom",
+            "type": "{Object}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 42,
+            "description": "The dom object containing the search filters.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "filterCanvas",
+            "type": "{Object}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 51,
+            "description": "An array containing all [search filters](searchFilter.html).",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "filters",
+            "type": "{Array}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 60,
+            "description": "A container object having all private functions.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "_p",
+            "type": "{Object}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 69,
+            "description": "Flag indicating whether there is enough input to start a search or not.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "searchable",
+            "type": "{Boolean}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 78,
+            "description": "Array containing the search setup if available.",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 86,
+            "description": "A copy of this for convienence and to help readability (especially in event handlers).",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "self",
+            "type": "{Object}",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 96,
+            "description": "Private event handler executed to add a new search filter to the UI.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "addFilter",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the private functions container **_p**.",
+                "type": "Object"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 121,
+            "description": "Method called by the [search filters](searchFilter.html) to check if current input qualifies for search query.",
+            "itemtype": "method",
+            "name": "checkFilter",
+            "access": "private",
+            "tagname": "",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 136,
+            "description": "Method called by the [search filters](searchFilter.html) when enter is hit on the input.",
+            "itemtype": "method",
+            "name": "focusNextFilter",
+            "access": "private",
+            "tagname": "",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 160,
+            "description": "Method called by the [search filters](searchFilter.html) when the filter is deleted.",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "removeFilter",
+            "access": "private",
+            "tagname": "",
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 186,
+            "description": "Method to controll the UI depending on the possibility to search or not.",
+            "itemtype": "method",
+            "name": "searchable",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the private methods container",
+                "type": "Object"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 206,
+            "description": "Method to enable the search",
+            "itemtype": "method",
+            "name": "enableSearch",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the private methods container",
+                "type": "Object"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 219,
+            "description": "Method to reset the UI.",
+            "itemtype": "method",
+            "name": "resetSearch",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "nothing"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 233,
+            "description": "Method to start the search. If not enough input is avaible an error is thrown.\nOtherwise the search event is fired together with the search data.",
+            "itemtype": "method",
+            "name": "startSearch",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the private methods container",
+                "type": "Object"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/search.js",
+            "line": 317,
+            "description": "Method to translate the META Tag names into descriptive names.\nUses the translation library in  nls depending on the language indicated by the browser.",
+            "itemtype": "method",
+            "name": "translate",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name of the META Tag to translate.",
+                    "type": "String"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "the translation, if existing.",
+                "type": "String"
+            },
+            "class": "search",
+            "module": "search"
+        },
+        {
+            "file": "components/single-view.js",
+            "line": 120,
+            "itemtype": "method",
+            "name": "close",
+            "class": "singleView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/single-view.js",
+            "line": 355,
+            "itemtype": "method",
+            "name": "show",
+            "class": "singleView",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/timeline-object.js",
+            "line": 48,
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "timelineObject",
+            "module": "viewControllers",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/timeline-object.js",
+            "line": 65,
+            "itemtype": "method",
+            "name": "mark",
+            "class": "timelineObject",
+            "module": "viewControllers",
+            "submodule": "helpers"
+        },
+        {
+            "file": "components/timeline.js",
+            "line": 80,
+            "itemtype": "method",
+            "name": "close",
+            "class": "timeline",
+            "module": "viewControllers",
+            "submodule": "main"
+        },
+        {
+            "file": "components/timeline.js",
+            "line": 199,
+            "itemtype": "method",
+            "name": "show",
+            "class": "timeline",
+            "module": "viewControllers",
+            "submodule": "main"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " components/geo-view.js:239"
+        },
+        {
+            "message": "Missing item type\nMethod to retrieve a set resource by name",
+            "line": " components/resource-manager.js:146"
+        },
+        {
+            "message": "Missing item type",
+            "line": " components/search-request-manager.js:19"
+        },
+        {
+            "message": "Missing item type",
+            "line": " components/search.js:27"
+        },
+        {
+            "message": "Missing item type\nArray containing the search setup if available.",
+            "line": " components/search.js:78"
+        }
+    ]
+}

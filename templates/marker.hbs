@@ -1,0 +1,20 @@
+<div class="map-object-view">
+	<a href="#" class="image" title="{{title}}">
+    <img src="assets/test-960.jpg" alt="{{title}}" />
+
+		<div class="content">
+			<div class="title">{{title}}</div>
+			<div class="artist">{{author.forename}} {{author.surname}}</div>
+
+			<span class="object-date">{{ obj_date }}</span>
+
+			{{#if subtitle}}
+			<h2 class="subtitle">{{ this }}</h2>
+			{{/if}}
+
+			{{#if alttitle}}
+			<h3 class="alttitle">{{ this }}</h3>
+			{{/if}}
+		</div>
+	</a>
+</div>
