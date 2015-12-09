@@ -29,6 +29,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 			this.nodecount = 1;
 			this.cw = 100;
 			this.ch = 100;
+			this.color1 = "#AAA";
 			var SIGMA;
 			var dataMan = null;
 			var currentObject;
@@ -185,9 +186,9 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 					var n = nodes[i];
 					
 					if(n.attr && n.attr.data) {
-						
-						n.preview = n.attr.data.data.preview;
+						n.preview = n.attr.data.data.preview.replace("/480","/80");
 					}
+					log(n.preview)
 					n.type = n.attr.type;
 					n.nid = n.attr.nid;
 					var rgb = sigma.tools.getRGB(n.color);
@@ -222,6 +223,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 			}
 
 			this.calculateGraph = function (){
+				self.color1 = $(".top-bar .active").css("color");
 				var container = $('#container');
 				container.css("width","100%");
 				container.height($(window).height()-55);
@@ -243,7 +245,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 				
 				$(objs).each(function (i, e) {
 					
-					var node = {id:self.nodecount,label:e.data.title,nid:e.data.pid,type:"node",x:self.randx(),y:self.randy(),size:3,color:"#1A9DBC",data:e};
+					var node = {id:self.nodecount,label:e.data.title,nid:e.data.pid,type:"node",x:self.randx(),y:self.randy(),size:3,color:'#AAA',data:e};
 					self.NODES.push(node);
 					self.NODEHASH["h"+node.id] = self.NODES[self.NODES.length-1];
 					self.nodecount++;
@@ -261,7 +263,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 								continue;
 							}
 							if(!self.SUBJECTHASH["h"+term]) {
-								var termNode= {id:self.nodecount,label:term,nid:term,type:"term",x:self.randx(),y:self.randy(),size:1,color:"#E82652"};//C94504
+								var termNode= {id:self.nodecount,label:term,nid:term,type:"term",x:self.randx(),y:self.randy(),size:1,color:"#0173CA"};//C94504
 								self.NODES.push(termNode);
 								if(!self.NODEEDGES["h"+termNode.id]) {
 									self.NODEEDGES["h"+termNode.id] = 0;

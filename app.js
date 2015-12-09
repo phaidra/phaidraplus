@@ -220,7 +220,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		$(window).trigger("logout");
 		return false;
 	})
-	$(".top-bar-section ul:first a[data-event], .top-bar-section .username a").on("click.ph-plus",function(e){
+	$(".top-bar-section a[data-event], .top-bar-section .username a").on("click.ph-plus",function(e){
 		if ($(this).hasClass('disabled')) {
 			return false;
 		}
@@ -232,7 +232,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		}
 
 		if (!$(this).hasClass('toggle')) {
-			$(".top-bar-section ul:first a").removeClass("active");
+			$(".top-bar-section a").removeClass("active");
 
 			$(this).addClass("active");
 			$(this).closest(".has-dropdown a").addClass("active");

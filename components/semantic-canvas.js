@@ -6,8 +6,9 @@
  *    Jaakko Salonen (Finnish)
  *    Zeynep Akata (Turkish)
  *    Σωτήρης Φραγκίσκος (Greek)
- * */
-
+ *
+ * Edited by JR
+ */
 // Namespace
 var GexfJS = {
     lensRadius : 200,
@@ -34,21 +35,6 @@ var GexfJS = {
     totalScroll : 0,
     autoCompletePosition : 0,
     i18n : {
-        "el" : {
-            "search" : "Αναζήτηση Κόμβων",
-            "nodeAttr" : "Χαρακτηριστικά",
-            "nodes" : "Κόμβοι",
-            "inLinks" : "Εισερχόμενοι δεσμοί από",
-            "outLinks" : "Εξερχόμενοι δεσμοί προς",
-            "undirLinks" : "Ακατεύθυντοι δεσμοί με",
-            "lensOn" : "Ενεργοποίηση φακού",
-            "lensOff" : "Απενεργοποίηση φακού",
-            "edgeOn" : "Εμφάνιση ακμών",
-            "edgeOff" : "Απόκρυψη ακμών",
-            "zoomIn" : "Μεγέθυνση",
-            "zoomOut" : "Σμίκρυνση",
-            "browserErr" : 'Ο περιηγητής σας δεν μπορεί να εμφανίσει σωστά αυτή τη σελίδα.<br />Σας προτείνουμε να χρησιμοποιήσετε την τελευταία έκδοση του <a href="http://www.mozilla.com/" target="_blank">Firefox</a> ή του <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>'
-        },
         "en" : {
             "search" : "Search nodes",
             "nodeAttr" : "Attributes",
@@ -79,105 +65,7 @@ var GexfJS = {
             "zoomOut" : "Zoom Out",
             "browserErr" : 'Your browser cannot properly display this page.<br />We recommend you use the latest <a href="http://www.mozilla.com/" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome/" target="_blank">Chrome</a> version'
         },
-        "es" : {
-            "search" : "Buscar un nodo",
-            "nodeAttr" : "Atributos",
-            "nodes" : "Nodos",
-            "inLinks" : "Aristas entrantes desde :",
-            "outLinks" : "Aristas salientes hacia :",
-            "undirLinks" : "Aristas no dirigidas con :",
-            "lensOn" : "Activar el modo lupa",
-            "lensOff" : "Desactivar el modo lupa",
-            "edgeOn" : "Mostrar aristas",
-            "edgeOff" : "Ocultar aristas",
-            "zoomIn" : "Acercar",
-            "zoomOut" : "Alejar",
-            "browserErr" : 'Tu navegador no es capaz de mostrar esta p&aacute;gina correctamente.<br />Le recomendamos utilizar la &uacute;ltima versi&oacute;n de <a href="http://www.mozilla.com/" target="_blank">Firefox</a> o <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>',
-            "modularity_class" : "Clase de modularidad",
-            "degree" : "Grado",
-            "indegree" : "Grado de entrada",
-            "outdegree" : "Grado de salida",
-            "weighted degree" : "Grado ponderado",
-            "weighted indegree" : "Grado de entrada ponderado",
-            "weighted outdegree" : "Grado de salida ponderado",
-            "closnesscentrality" : "Cercan&iacute;a",
-            "betweenesscentrality" : "Intermediaci&oacute;n",
-            "authority" : "Puntuaci&oacute;n de autoridad (HITS)",
-            "hub" : "Puntuaci&oacute; de hub (HITS)",
-            "pageranks" : "Puntuaci&oacute; de PageRank"
-        },
-        "fi" : {
-            "search" : "Etsi solmuja",
-            "nodeAttr" : "Attribuutit",
-            "nodes" : "Solmut",
-            "inLinks" : "Lähtevät yhteydet :",
-            "outLinks" : "Tulevat yhteydet :",
-            "undirLinks" : "Yhteydet :",
-            "lensOn" : "Ota linssitila käyttöön",
-            "lensOff" : "Poista linssitila käytöstä",
-            "edgeOn" : "Näytä kaikki yhteydet",
-            "edgeOff" : "Näytä vain valitun solmun yhteydet",
-            "zoomIn" : "Suurenna",
-            "zoomOut" : "Pienennä",
-            "browserErr" : 'Selaimesi ei voi näyttää tätä sivua.<br />Suosittelemme käyttämään uusinta versiota <a href="http://www.mozilla.com/" target="_blank">Firefox</a>- tai <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>-selaimesta'
-        },
-        "fr" : {
-            "search" : "Rechercher un n&oelig;ud",
-            "nodeAttr" : "Attributs",
-            "nodes" : "N&oelig;uds",
-            "inLinks" : "Liens entrants depuis :",
-            "outLinks" : "Liens sortants vers :",
-            "undirLinks" : "Liens non-dirigés avec :",
-            "lensOn" : "Activer le mode loupe",
-            "lensOff" : "Désactiver le mode loupe",
-            "edgeOn" : "Afficher les sommets",
-            "edgeOff" : "Cacher les sommets",
-            "zoomIn" : "S'approcher",
-            "zoomOut" : "S'éloigner",
-            "browserErr" : 'Votre navigateur n\'est malheureusement pas compatible avec les fonctionnalités de ce site<br />Nous vous suggérons d\'utiliser une version récente de <a href="http://www.mozilla.com/" target="_blank">Firefox</a> ou <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>',
-            "modularity_class" : "Classe de modularité",
-            "degree" : "Degr&eacute;",
-            "indegree" : "&frac12; degr&eacute; int&eacute;rieur",
-            "outdegree" : "&frac12; degr&eacute; ext&eacute;rieur",
-            "weighted degree" : "Degr&eacute; pond&eacute;r&eacute;",
-            "weighted indegree" : "&frac12; degr&eacute; int&eacute;rieur pond&eacute;r&eacute;",
-            "weighted outdegree" : "&frac12; degr&eacute; ext&eacute;rieur pond&eacute;r&eacute;",
-            "closnesscentrality" : "Centralit&eacute; de proximit&eacute;",
-            "betweenesscentrality" : "Centralit&eacute; d'interm&eacute;diarit&eacute;",
-            "authority" : "Score d'autorit&eacute; (HITS)",
-            "hub" : "Score de hub (HITS)",
-            "pageranks" : "Score de PageRank"
-        },
-        "it" : {
-            "search" : "Cerca i nodi",
-            "nodeAttr" : "Attributi",
-            "nodes" : "Nodi",
-            "inLinks" : "Link in entrata da :",
-            "outLinks" : "Link in uscita verso :",
-            "undirLinks" : "Link non direzionati con :",
-            "lensOn" : "Attiva la lente d'ingrandimento",
-            "lensOff" : "Disattiva la lente d'ingrandimento",
-            "edgeOn" : "Mostra gli spigoli",
-            "edgeOff" : "Nascondi gli spigoli",
-            "zoomIn" : "Zoom in avanti",
-            "zoomOut" : "Zoom indietro",
-            "browserErr" : 'Il tuo browser non pu&ograve; visualizzare correttamente questa pagina.<br />Ti raccomandiamo l\'uso dell\'ultima versione di  <a href="http://www.mozilla.com/" target="_blank">Firefox</a> o <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>'
-        },
-        "tr" : {
-            "search" : "Düğüm ara",
-            "nodeAttr" : "Özellikler",
-            "nodes" : "Düğümler",
-            "inLinks" : "Gelen bağlantılar",
-            "outLinks" : "Giden bağlantılar",
-            "undirLinks" : "Yönsüz bağlantılar",
-            "lensOn" : "Merceği etkinleştir",
-            "lensOff" : "Merceği etkisizleştir",
-            "edgeOn" : "Kenar çizgilerini göster",
-            "edgeOff" : "Kenar çizgilerini gizle",
-            "zoomIn" : "Yaklaştır",
-            "zoomOut" : "Uzaklaştır",
-            "browserErr" : "Tarayıcınız sayfayı doğru bir biçimde görüntüleyemiyor.<br />En son Firefox veya Chrome sürümünü kullanmanızı tavsiye ederiz."
-        }
+       
     },
     lang : "de"
 }
@@ -207,41 +95,8 @@ function displayNode(_nodeIndex, _recentre) {
     GexfJS.params.currentNode = _nodeIndex;
     if (_nodeIndex != -1) {
         var _d = GexfJS.graph.nodeList[_nodeIndex],
-            _b = _d.coords.base/*,
-            _str = '',
-            _cG = $("#leftcolumn");
-            _cG.animate({
-                "left" : "0px"
-            }, function() {
-                $("#aUnfold").attr("class","leftarrow");
-                $("#zonecentre").css({
-                    left: _cG.width() + "px"
-                });
-            });
-        _str += '<h3><div class="largepill" style="background: ' + _d.color.base +'"></div>' + _d.label + '</h3>';
-        _str += '<h4>' + strLang("nodeAttr") + '</h4>';
-        _str += '<ul><li><b>id</b> : ' + _d.id + '</li>';
-        for (var i in _d.attributes) {
-            _str += '<li><b>' + strLang(i) + '</b> : ' + replaceURLWithHyperlinks( _d.attributes[i] ) + '</li>';
-        }
-        _str += '</ul><h4>' + ( GexfJS.graph.directed ? strLang("inLinks") : strLang("undirLinks") ) + '</h4><ul>';
-        for (var i in GexfJS.graph.edgeList) {
-            var _e = GexfJS.graph.edgeList[i]
-            if ( _e.target == _nodeIndex ) {
-                var _n = GexfJS.graph.nodeList[_e.source];
-                _str += '<li><div class="smallpill" style="background: ' + _n.color.base +'"></div><a href="#" onmouseover="GexfJS.params.activeNode = ' + _e.source + '" onclick="displayNode(' + _e.source + ', true); return false;">' + _n.label + '</a>' + ( GexfJS.params.showEdgeWeight && _e.weight ? ' [' + _e.weight + ']' : '') + '</li>';
-            }
-        }
-        if (GexfJS.graph.directed) _str += '</ul><h4>' + strLang("outLinks") + '</h4><ul>';
-        for (var i in GexfJS.graph.edgeList) {
-            var _e = GexfJS.graph.edgeList[i]
-            if ( _e.source == _nodeIndex ) {
-                var _n = GexfJS.graph.nodeList[_e.target];
-                _str += '<li><div class="smallpill" style="background: ' + _n.color.base +'"></div><a href="#" onmouseover="GexfJS.params.activeNode = ' + _e.target + '" onclick="displayNode(' + _e.target + ', true); return false;">' + _n.label + '</a>' + ( GexfJS.params.showEdgeWeight && _e.weight ? ' [' + _e.weight + ']' : '') + '</li>';
-            }
-        }
-        _str += '</ul><p></p>';
-        $("#leftcontent").html(_str);*/
+            _b = _d.coords.base
+           
         if (_recentre) {
             GexfJS.params.centreX = _b.x;
             GexfJS.params.centreY = _b.y;
@@ -515,7 +370,7 @@ function createGraph(data) {
                 //GexfJS.ctxMini.drawImage(this,$t.data("x"),$t.data("y"),30,30);
             })
             if(_image) {
-                img.src = _image.replace(/\/\d{3}/,"/160");
+                 img.src = _image//.replace(/\/\d{3}/,"/160");
             }
             _d.image = {img:img};
             _d.image.w = 0;
@@ -842,32 +697,7 @@ function traceMap(now) {
     
     ctx.fill();
     
-    /*
-    // for (var i in GexfJS.graph.nodeList) {
-    //     var _d = GexfJS.graph.nodeList[i];
-    //     if (_d.visible && _d.withinFrame) {
-    //         if (i != _centralNode) {
-    //             var _fs = _d.coords.real.r * _textSizeFactor;
-    //             if (_d.isTag) {
-    //                 if (_centralNode != -1) {
-    //                     var _dist = Math.sqrt( Math.pow( _d.coords.real.x - _dnc.coords.real.x, 2 ) + Math.pow( _d.coords.real.y - _dnc.coords.real.y, 2 ) );
-    //                     if (_dist > 80) {
-    //                         _fs = Math.max(GexfJS.params.textDisplayThreshold + 2, _fs);
-    //                     }
-    //                     _fs = Math.max(GexfJS.params.textDisplayThreshold + 2, _fs);
-    //                 }
-    //             }
-    //             if (_fs > GexfJS.params.textDisplayThreshold) {
-    //                 GexfJS.ctxGraphe.fillStyle = ( ( i != GexfJS.params.activeNode ) && _tagsMisEnValeur.length && ( ( !_d.isTag ) || ( _centralNode != -1 ) ) ? "rgba(60,60,60,0.7)" : "rgb(0,0,0)" );
-    //                 GexfJS.ctxGraphe.font = " "+Math.floor( _fs )*.7+"px colfax";
-    //                 GexfJS.ctxGraphe.textAlign = "center";
-    //                 GexfJS.ctxGraphe.textBaseline = "middle";
-    //                 GexfJS.ctxGraphe.fillText(_d.label, _d.coords.real.x, _d.coords.real.y);
-    //             }
-    //         }
-    //     }
-    // }
-    */
+
     if (_centralNode != -1) {
 
         GexfJS.ctxGraphe.fillStyle = _dnc.color.active;

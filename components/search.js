@@ -278,7 +278,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 			if (reset) {
 				self.clearSearchUI();
 			} else {
-				$('nav.top-bar .top-bar-section .menu').find('.search-previouspage, .search-nextpage').hide();				
+				$('nav.top-bar').find('.search-previouspage, .search-nextpage').hide();				
 				resourceMan.getResource('gsaData').dontClearAll();
 			}
 
@@ -334,7 +334,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		_p.updatePaginationButtons = function()
 		{
-			var m = $('nav.top-bar .top-bar-section .menu');
+			var m = $('nav.top-bar');
 			var n = m.find('.search-nextpage a');
 			var p = m.find('.search-previouspage a');
 
@@ -399,11 +399,11 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 			if (spc.length == 0) {
 				spc = $('<li id="search-params">');
-				$('nav.top-bar .top-bar-section .menu .search-previouspage').before(spc);
+				$('nav.top-bar .search-previouspage').before(spc);
 	
 				if (!_standalone) {
 					spc.on('click.ph-plus', function(e) {
-						$('nav.top-bar .menu .suche .icon-search').trigger('click');
+						$('nav.top-bar .icon-search').trigger('click');
 						return false;
 					});
 				}
@@ -415,7 +415,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 				
 				if (!_standalone) {
 					pic.on('click.ph-plus', function(e) {
-						$('nav.top-bar .menu .suche .icon-search').trigger('click');
+						$('nav.top-bar .icon-search').trigger('click');
 						return false;
 					});
 				}
@@ -426,12 +426,13 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 				.addClass('open');
 
 			pic
-				.text(((currentPage)*searchPageSize+1)+"-"+Math.min(results,(currentPage+1)*searchPageSize) + '/'+results)
 				.attr("title",str.join(' '))
 				.attr("data-tooltip","")
-				.show();
+				.show()
+				.find(".num").text(((currentPage)*searchPageSize+1)+"-"+Math.min(results,(currentPage+1)*searchPageSize) + '/'+results);
+				
 			pic.foundation();
-			$('nav.top-bar .top-bar-section .menu').find('.search-previouspage, .search-nextpage').show();
+			$('nav.top-bar').find('.search-previouspage, .search-nextpage').show();
 			_p.updatePaginationButtons();
 		};
 
@@ -451,7 +452,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		this.clearSearchUI = function()
 		{
-			$('nav.top-bar .top-bar-section .menu').find('.search-previouspage, .search-nextpage').hide();
+			$('nav.top-bar').find('.search-previouspage, .search-nextpage').hide();
 			currentSearchPage = 0;
 			$('#search-params').removeClass('open');
 			$('#pagination-info').hide();

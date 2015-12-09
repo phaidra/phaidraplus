@@ -16,7 +16,7 @@
 #timeline-container {
 	font-family:colfax;
 	padding-left: 45px;
-	margin-top:46px;
+	//margin-top:46px;
 	background-color:$body-bg;
 	.timeline-axis-grid {
 		border-left:1px solid lighten($body-bg,10%);
@@ -186,11 +186,11 @@
 	//border: 1px solid #888;
 	//border-radius:5px;
 	//box-shadow:0 0 4px rgba(0,0,0,.2);
-	right: 50px;
-	width:64px;
+	right: 30px;
+	//width:64px;
 	overflow:hidden;
 	position: fixed;
-	top: 120px;
+	top: 160px;
 	z-index: 99;
 
 	a {

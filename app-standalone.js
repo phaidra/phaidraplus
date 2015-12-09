@@ -53,35 +53,16 @@ function showPage(e,data)
 {
 	pageModal.empty();
 	pageModal.html(pages[data]);
-	if(data != "page-intro") {
-		pageModal.removeClass("intro small");
-		pageModal.append('<a href="#" id="modal-page-close-btn" class="button alert small">Schließen</a>')
+	pageModal.append('<a href="#" id="modal-page-close-btn" class="button alert small">Schließen</a>')
 		
-		pageModal.find("#modal-page-close-btn").on("click",function(){
-			$(".page-modal").foundation("reveal", "close");
-		})
-		pageModal.find("form").off("submit");
-	} else {
-		pageModal.addClass("intro small");
-		pageModal.find("form").on("submit",function(e){
-			var t = $(".page-modal input").val();
-			//log(t)
-			pageModal.foundation("reveal", "close");
-			$("#filter-canvas-filter-0").val(t);
-			//$("#filter-canvas-filter-0").trigger("keydown").trigger("keyup").trigger("change");
-			var q = t;
-    		var r = "type%3AImage.installationID%3APhaidraProduction";
-    		var s = 0;
-    		var n = 50;
-    		$(window).trigger('standalone-search', [q, r, s, n]);
-    		$("#filter-canvas-filter-0").val(t);
-			//$("#start-search-button").trigger("click")
-			
-			return false;
-		})
-	}
+	pageModal.find("#modal-page-close-btn").on("click",function(){
+		$(".page-modal").foundation("reveal", "close");
+	})
+	pageModal.find("form").off("submit");
+	
 	pageModal.foundation("reveal", "open");
 }
+var queryTerm;
 
 function initTopbar () {
 	}
@@ -91,20 +72,20 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 				 'text!templates/page-modal.hbs',
 				 'text!templates/footer.hbs',
 				 'text!templates/help.hbs',
+				 'text!templates/page-intro.hbs',
 				 'text!pages/page-imprint.html',
 				 'text!pages/page-contact.html',
 				 'text!pages/page-help.html',
- 				 'text!pages/page-intro.html',
 				 'foundation'],
 				function ($, _H, resourceManClass, states, _srm, _phQueClass, _downloadMan, topBarTemplate, _texts,_B,
 					loginTemplate,
 					pageTemplate,
 					footerTemplate,
 					helpTemplate,
+					introTemplate,
 					pageImprintHTML,
 					pageContactHTML,
-					pageHelpHTML,
-					pageIntroHTML
+					pageHelpHTML
 					) {
 	
 	var self = this;
@@ -130,12 +111,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 		.on('rawSearch.ph-plus', function (e, q, r, s, n, cb) {
 			srm.rawSearch(q, r, s, n, cb);
 		})		
-		.on('beforeunload.ph-plus', function(e) {
-			var confMessage = self.translate('navigateAwayMessage');
-
-			e.returnValue = confMessage;
-			return confMessage;
-		});
+		
 	
 	resourceMan.setResource('phaidra-que', new _phQueClass());
 
@@ -157,23 +133,56 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 	topBar.find('.collections, .share').remove();
 	topBar.find('a.icon-lightroom').data('event', 'openLightroomView'); // adjustment
 
+	var introPage = _H.compile($.trim(introTemplate));
+	introPage = $($.trim(introPage()));
+	$("#mainsection").append(introPage);
+	$("#intro").find("#introsearch").on("submit",function(e){
+		var t = $("#intro input").val();
+		$("#filter-canvas-filter-0").val(t);
+		queryTerm = t;
+		var q = t;
+		var r = "installationID%3APhaidraProduction";
+		var s = 0;
+		var n = 50;
+		$(window).trigger('standalone-search', [q, r, s, n]);
+		// setTimeout(function(){
+		// 	$("#filter-canvas-filter-0").val(queryTerm);
+		// },1500)
+
+		$("#intro").fadeOut();
+		//$("#start-search-button").trigger("click")
+		
+		return false;
+	})
+	//$("#intro").fadeIn();
+
+
 	var footer = _H.compile($.trim(footerTemplate));
 	footer = $($.trim(footer()));
-	$("body").append(footer)
+	$("#main").append(footer)
 
 	pageModal = _H.compile($.trim(pageTemplate));
 	pageModal = $($.trim(pageModal()));
 	pages["page-imprint"] = pageImprintHTML;
 	pages["page-contact"] = pageContactHTML;
 	pages["page-help"] = pageHelpHTML;
-	pages["page-intro"] = pageIntroHTML;
 
-	$("footer a[href='#']").on("click",function(){
+	
+	
+	$("#intro a[href='#'], footer a[href='#']").on("click",function(e){
+		log(e)
+		if($(this).hasClass("submit")) {
+			$("#introform").submit();
+			return false;
+		}
 		if($(this).attr("data-page")) {
 			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
 		}
 		return false;
 	})
+
+
+
 	$(window)
 		.on('showpage.ph-plus', showPage);
 
@@ -197,7 +206,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 	});
 
 
-	$(".top-bar-section ul:first a[data-event]").on("click.ph-plus",function(e) {
+	$(".top-bar-section a[data-event]").on("click.ph-plus",function(e) {
 		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;
 		}
@@ -209,7 +218,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 		}
 
 		if (!$(this).hasClass('toggle')) {
-			$(".top-bar-section ul:first a").removeClass("active");
+			$(".top-bar-section a").removeClass("active");
 
 			$(this).addClass("active");
 			$(this).closest(".has-dropdown a").addClass("active");
@@ -221,9 +230,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 
 
 	$(document).foundation();
-
-	showPage(null,"page-intro")
-
+	
 	$(window).trigger('init');
 });
 

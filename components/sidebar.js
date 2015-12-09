@@ -21,7 +21,7 @@ define(['jquery', 'Handlebars', 'components/basics', 'text!templates/sidebar.hbs
 			dom = $(dom);
 					      
 			$('body').append(dom);
-			$('body').append($("#marker-actions"));
+			//$('body').append($("#marker-actions"));
 
 			$("#imagesize").on("change.ph-plus-sidebar", function () {
 				if (imageResizeCb != null) {
