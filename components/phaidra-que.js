@@ -141,6 +141,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 				credentials = {};
 			}
 			credentials.realname = realname;
+			$(".username").text(credentials.realname)
 			return self;
 		}
 		/**
@@ -205,6 +206,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 			if (typeof data['XSRF-TOKEN'] != 'undefined') {
 			 	xsrfToken = data['XSRF-TOKEN'];
 			}
+			//console.log(credentials)
 			
 			if (typeof data['user'] != 'undefined') {
 				credentials.realname = data['user'].firstname+ " "+data['user'].lastname
@@ -212,8 +214,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 				var date = new Date();
 				var minutes = 45;
 				date.setTime(date.getTime() + (minutes * 60 * 1000));
-
-				$(".username > a").text(credentials.realname)
+				//console.log(credentials.realname)
 				$.cookie("username",credentials.username);
 				$.cookie("realname",credentials.realname);
 				$.cookie("token",xsrfToken,{ expires: date });
@@ -244,9 +245,6 @@ define(['jquery', 'components/basics','jquery.cookie'],
 		this.execute = function(path, data, callback, type, sendToken)
 		{	
 
-			//console.log("Execute")
-			//console.log(path)
-			//console.log(data);
 
 			if (path != "signin" && path != "signout" && path != "keepalive" && path.indexOf("proxy")==-1 && path.indexOf("standalone")==-1) {
 				path = "ls/"+path;
@@ -304,6 +302,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 		 */
 		this.loginSuccess = function(e,data)
 		{
+
 			return self;
 		};
 		/**
@@ -355,7 +354,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 					'type': currentQueItem.t,
 					'url': currentQueItem.p,
 				}
-				console.log(currentQueItem)
+				
 				if(!currentQueItem.d) {
 					currentQueItem.d = {};
 				}

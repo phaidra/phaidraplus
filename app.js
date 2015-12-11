@@ -215,21 +215,21 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");
 	});
 
-	//$("body").append($("#logout-button"));
+	
 	$("#logout-button").on("click",function(){
 		$(window).trigger("logout");
 		return false;
 	})
-	$(".top-bar-section a[data-event], .top-bar-section .username a").on("click.ph-plus",function(e){
-		if ($(this).hasClass('disabled')) {
+	$(".top-bar-section a[data-event], .top-bar-section .username a").on("click.ph-plus, touchend.ph-plus",function(e){
+		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;
 		}
-
-		var eve = $(this).attr("data-event");
 		if($(this).parent().hasClass("pp-view") && $("html").hasClass("lightRoomCollectionView")) {
 			e.preventDefault();
 			return;
 		}
+		
+		var eve = $(this).attr("data-event");
 
 		if (!$(this).hasClass('toggle')) {
 			$(".top-bar-section a").removeClass("active");
@@ -240,6 +240,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 
 		$(window).trigger(eve);
 		e.preventDefault();
+		return false;
 	})
 
 	

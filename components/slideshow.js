@@ -36,6 +36,13 @@ define(['jquery', 'spin'], function ($, S)
 			self.s = new S();
 			
 			$('#display-slideshow').on('click.ph-plus-slideshow', function (e) {
+				if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
+					return false;
+				}
+				if($(this).parent().hasClass("pp-view") && $("html").hasClass("lightRoomCollectionView")) {
+					e.preventDefault();
+					return false;
+				}
 				$("body").scrollTop(0);
 				$(this).removeClass("secondary");					
 				self.createSlideshow();

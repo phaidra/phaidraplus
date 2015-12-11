@@ -365,8 +365,8 @@ function createGraph(data) {
                 n.image.ow = w;
                 n.image.oh = h;
                 calcImageSize(n);
-                GexfJS.forceReDraw = true;
-                window.requestAnimationFrame(traceMap);
+                //GexfJS.forceReDraw = true;
+                //window.requestAnimationFrame(traceMap);
                 //GexfJS.ctxMini.drawImage(this,$t.data("x"),$t.data("y"),30,30);
             })
             if(_image) {
@@ -455,6 +455,16 @@ function createGraph(data) {
     });
     
     GexfJS.imageMini = GexfJS.ctxMini.getImageData(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
+    var pixels = GexfJS.overviewWidth*GexfJS.overviewHeight;
+    var imageData = GexfJS.imageMini.data; // here we detach the pixels array from DOM
+    // while(--pixels){
+    //    imageData[4*pixels+0] = r; // Red value
+    //    imageData[4*pixels+1] = g; // Green value
+    //    imageData[4*pixels+2] = b; // Blue value
+    //    imageData[4*pixels+3] = a; // Alpha value
+    // }
+    GexfJS.imageMini.data = imageData; // And here we attache it back (not needed cf. update)
+    //context.putImageData(image, 0, 0);
 
     window.requestAnimationFrame(traceMap);
 }
@@ -524,18 +534,24 @@ function traceArc(contexte, source, target) {
     }
     contexte.stroke();
 }
-
+var frameCount =0;
 function traceMap(now) {
     //updateWorkspaceBounds();
     if(!GexfJS.running) {
         return;
     }
     requestAnimationFrame(traceMap);
+    frameCount++;
+    if(frameCount%3==0) {
+        return;
+    }
+    
 
     if (!GexfJS.graph) {
         return;
     }
     
+
 
     var _identical = GexfJS.areParamsIdentical;
     GexfJS.params.mousePosition = ( GexfJS.params.useLens ? ( GexfJS.mousePosition ? ( GexfJS.mousePosition.x + "," + GexfJS.mousePosition.y ) : "out" ) : null );
@@ -551,6 +567,8 @@ function traceMap(now) {
             GexfJS.oldParams[i] = GexfJS.params[i];
         }
     }
+    
+
     GexfJS.forceReDraw = false;
     
     //GexfJS.echelleGenerale = Math.pow( Math.SQRT2, GexfJS.params.zoomLevel );
@@ -598,6 +616,8 @@ function traceMap(now) {
     
     var _displayEdges = ( GexfJS.params.showEdges && GexfJS.params.currentNode == -1 );
     
+
+
     for (var i in GexfJS.graph.edgeList) {
         var _d = GexfJS.graph.edgeList[i],
             _six = _d.source,
@@ -624,7 +644,7 @@ function traceMap(now) {
             GexfJS.ctxGraphe.lineWidth = _edgeSizeFactor * _d.width;
             var _coords = ( ( GexfJS.params.useLens && GexfJS.mousePosition ) ? calcCoord( GexfJS.mousePosition.x , GexfJS.mousePosition.y , _ds.coords.actual ) : _ds.coords.actual );
             _coordt = ( (GexfJS.params.useLens && GexfJS.mousePosition) ? calcCoord( GexfJS.mousePosition.x , GexfJS.mousePosition.y , _dt.coords.actual ) : _dt.coords.actual );
-            GexfJS.ctxGraphe.strokeStyle = ( _isLinked ? _d.color : _centralNode != -1 ? "rgba(255,255,255,.05)" : _d.color );
+            GexfJS.ctxGraphe.strokeStyle = ( _isLinked ? _d.color : _centralNode != -1 ? "rgba(240,240,240,1)" : _d.color );
             traceArc(GexfJS.ctxGraphe, _coords, _coordt);
         }
     }
@@ -647,7 +667,7 @@ function traceMap(now) {
                 var _isLinked = ( _tagsMisEnValeur.length && !_d.isTag );
                 ctx.fillStyle = ( _isLinked ? _d.color.gris : _d.color.base );  
                 ctx.beginPath();
-                ctx.arc( _d.coords.real.x , _d.coords.real.y , _d.coords.real.r , 0 , mpi2 , true );
+                ctx.arc( _d.coords.real.x , _d.coords.real.y , _d.coords.real.r+2 , 0 , mpi2 , true );
                 ctx.closePath();
                 ctx.fill();
                 // //ctx.shadowColor = 'rgba(0,0,0,.1)';
@@ -663,31 +683,34 @@ function traceMap(now) {
                     ctx.arc(_d.coords.real.x, _d.coords.real.y, _d.coords.real.r, 0, Math.PI * 2, true);
                     ctx.closePath();
                     ctx.clip();
+                    
                     calcImageSize(_d,_d.coords.real.r);
+                    //log(img.w,img.h);
+                    ctx.drawImage(img.img,Math.floor(_d.coords.real.x+img.marginX),Math.floor(_d.coords.real.y+img.marginY),img.w,img.h);
                     
-                    ctx.drawImage(img.img,_d.coords.real.x+img.marginX,_d.coords.real.y+img.marginY,img.w,img.h);
-                    //ctx.drawImage(thumbImg, 0, 0, 50, 50);
 
-                    ctx.beginPath();
-                    ctx.arc(_d.coords.real.x, _d.coords.real.y, _d.coords.real.r*1.5, 0, Math.PI * 2, true);
-                    ctx.clip();
-                    ctx.closePath();
+                    //ctx.beginPath();
+                    // ctx.arc(_d.coords.real.x, _d.coords.real.y, _d.coords.real.r*1.5, 0, Math.PI * 2, true);
+                    // ctx.clip();
+                    // ctx.closePath();
                     ctx.restore();
-                    //
+                    // // //
                     
-                    ctx.beginPath();
-                    ctx.strokeStyle = ctx.fillStyle;
-                    ctx.lineWidth = 2;
-                    ctx.arc( _d.coords.real.x , _d.coords.real.y ,_d.coords.real.r , 0 , Math.PI*2 , true );
-                    ctx.closePath();
-                    ctx.stroke();
-                    if(_isLinked) {
-                        ctx.beginPath();
-                        ctx.fillStyle =  _d.color.overlay;
-                        ctx.arc( _d.coords.real.x , _d.coords.real.y ,_d.coords.real.r , 0 , Math.PI*2 , true );
-                        ctx.closePath();
-                        ctx.fill();
-                    }
+                    // ctx.beginPath();
+                    // ctx.strokeStyle = ctx.fillStyle;
+                    // ctx.lineWidth = 2;
+                    // ctx.arc( _d.coords.real.x , _d.coords.real.y ,_d.coords.real.r , 0 , Math.PI*2 , true );
+                    // ctx.closePath();
+                    // ctx.stroke();
+
+
+                    // if(_isLinked) {
+                    //     ctx.beginPath();
+                    //     ctx.fillStyle =  _d.color.overlay;
+                    //     ctx.arc( _d.coords.real.x , _d.coords.real.y ,_d.coords.real.r , 0 , Math.PI*2 , true );
+                    //     ctx.closePath();
+                    //     ctx.fill();
+                    // }
                     
                 }
             }
@@ -757,7 +780,7 @@ function traceMap(now) {
         ctx.fill();
 
        
-        ctx.fillStyle = "rgba(255,255,255,.8)";
+        ctx.fillStyle = "rgba(255,255,255,1)";
         //ctx.fillStyle = "#ccc";
         ctx.fillText(_dnc.label, _dnc.coords.real.x-_dnc.coords.real.r+10-20, _dnc.coords.real.y-_dnc.coords.real.r-17);
     }
@@ -770,9 +793,9 @@ function traceMap(now) {
         _w = _r * GexfJS.graphZone.width,
         _h = _r * GexfJS.graphZone.height;
     
-    GexfJS.ctxMini.strokeStyle = "#1e2a36";
+    GexfJS.ctxMini.strokeStyle = "#CCC";
     GexfJS.ctxMini.lineWidth = 2;
-    GexfJS.ctxMini.fillStyle = "rgba(0,0,0,0.1)";
+    GexfJS.ctxMini.fillStyle = "rgba(250,250,250,.5)";
     GexfJS.ctxMini.beginPath();
     GexfJS.ctxMini.fillRect( _x, _y, _w, _h );
     GexfJS.ctxMini.strokeRect( _x, _y, _w, _h );
@@ -804,10 +827,10 @@ function calcImageSize(n,s) {
             sw = s;
             sh = s/w*h;
         }
-        n.image.w = sw;
-        n.image.h = sh;
-        n.image.marginX = -(sw)/2
-        n.image.marginY = -(sh)/2
+        n.image.w = Math.floor(sw);
+        n.image.h = Math.floor(sh);
+        n.image.marginX = Math.floor(-(sw)/2)
+        n.image.marginY = Math.floor(-(sh)/2)
 }
 function updateAutoComplete(_sender) {
     var _val = $(_sender).val().toLowerCase();
@@ -998,17 +1021,6 @@ function initGEXFJS(opts) {
         .mouseup(endMove)
         .mouseout(endMove)
         .mousewheel(onGraphScroll);
-    //$("#sidebar").append($("#overview"));
-    /*$("#sidebar").append($("#overviewzone"));
-    $("#overviewzone").css("right",10);
-    $("#overviewzone").css("bottom",10);
-    $("#overviewzone").css("border",0);*/
-    // $(window).on("scroll",function(e){
-    //     console.log(e)
-    // });
-    // $("#carte").on("scroll",function(e){
-    //     console.log(e)
-    // });
 
     $("#zoomMinusButton").click(function() {
         GexfJS.params.zoomLevel = Math.max( GexfJS.minZoom, GexfJS.params.zoomLevel - 1);

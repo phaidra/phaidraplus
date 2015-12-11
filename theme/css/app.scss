@@ -126,16 +126,18 @@ a.annotate-image {
 	border-bottom:1px solid #DDD;
 	
 	.name h1 {
+		line-height: 1;
 		svg {
 			vertical-align:middle;
-			height:42px;
+			height:38px;
 		}
 		a {
-			padding:0 30px;
+			padding:12px 20px 0 30px;
 		}
 	}
+
 	.title-area {
-		width:260px;
+		width:220px;
 	}
 	.top-bar-section {
 		float: left;
@@ -194,13 +196,18 @@ a.annotate-image {
 	.top-bar-section .menu {
 
 		&.search {
-			width:232px;
+			width:202px;
+		}
+		&.user {
+		    margin-right: 20px;
 		}
 		background:transparent;
 		float: left;
 		margin-left:1px;
 		li.divider {
-			height:2rem;
+			height:1rem;
+			margin:.5rem;
+			border-right-color:$dark-bg;
 		}
 		
 		li {
@@ -213,6 +220,10 @@ a.annotate-image {
 			padding:0 12px;
 			&:hover {
 			//	background-color:#7DA1AE;
+			}
+			&.username,&.loginout {
+				display:inline !important;
+				line-height: 60px;
 			}
 		}
 		
@@ -235,6 +246,11 @@ a.annotate-image {
 			//	border-radius: 100px;
 			//	padding: .6rem;
 			//	line-height: 1;
+			}
+		}
+		.slideshow {
+			a {
+				display: inline;
 			}
 		}
 		.share,.options {
@@ -270,8 +286,13 @@ a.annotate-image {
 	}
 	
 }
-
+@media #{$large-only} { 
+	.top-bar .top-bar-section .menu li a {
+		padding:0 12px;
+	}
+}
 @media #{$medium-only} { 
+
 }
 @media #{$small-only} { 
 	.top-bar {
@@ -334,8 +355,7 @@ body.init,
 .lightRoomCollectionView {
 	height:auto;
 	.top-bar li {
-		&.share,&.options,
-		&.slideshow {
+		&.share,&.options {
 			display:none;
 		}
 	}
@@ -736,10 +756,14 @@ body.init,
 	background:transparent;
 }
 
+body {
+	@include transition(background .3s ease-out);
+}
 html.orbit {
 	body {
 		overflow:hidden !important;
 		padding-top:0px;
+		background:#4f5a64;
 	}
 	.top-bar {
 		display:none !important;
@@ -982,11 +1006,11 @@ html.semanticView {
 	position:fixed;
 	top:20px;
 	z-index:97;
-	right:50px;
+	right:30px;
 	height:45px;
 }
 #lightroom-whiteboard-actions {
-	right:150px;
+	right:130px;
 	top:20px;
 	width:64px;
 	a {
@@ -1032,21 +1056,7 @@ html.semanticView {
 		padding: .7rem 0.5rem;
 	}
 }
-// #display-slideshow,
-// .top-bar #logout-button,
-// .top-bar #login-button {
-// 	position:fixed;
-// 	top:20px;
-// 	z-index:101;
-// 	padding: .7rem 0.5rem;
-// 	display:none;
-// 	width:55px;
-// 	height:45px;
-// 	right:50px;
-// }
-// #display-slideshow {
-// 	right: 125px;
-// }
+
 .standalone {
 	.init {
 		// #logout-button, #login-button {
@@ -1133,7 +1143,8 @@ html.semanticView {
 	}
 }
 .top-bar .username {
-	display:none;
+	//display:none;
+	display:inline;
 	a {
 		background:transparent !important;
 	}
@@ -1148,20 +1159,16 @@ html.semanticView {
 		display:block;
 	}
 	height:auto;
-	.username {
-		position:fixed;
-		display:block !important;
-		right:130px;
-		top:30px;
-		color:#95A5A6;
-	}
+	
 	.top-bar {
 		//right:50px;
 		.options,.share {
 			display:none;
 		}
+
 		.pp-view {
-			opacity:.4;
+			//display:none;
+			opacity:.3;
 		}
 	}
 	#marker-actions,

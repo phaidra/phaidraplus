@@ -188,7 +188,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 					if(n.attr && n.attr.data) {
 						n.preview = n.attr.data.data.preview.replace("/480","/80");
 					}
-					log(n.preview)
+					//log(n.preview)
 					n.type = n.attr.type;
 					n.nid = n.attr.nid;
 					var rgb = sigma.tools.getRGB(n.color);

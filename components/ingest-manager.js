@@ -16,6 +16,7 @@ define(['jquery', 'Handlebars', 'components/_P_', 'text!templates/ingest-modal.h
 
 			$(window)
 				.on("ingestObject", function(e,o) {
+					log("ingest man")
 					self.showOverlay(e,o);
 				})
 				

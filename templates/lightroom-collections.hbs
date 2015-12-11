@@ -1,7 +1,7 @@
 
 <div class="row">
 	<div class="medium-8 columns">
-		<a class="button right secondary tiny lighter icon icon-add-collection tip-bottom " id="add-collection" title="{{translate "collectionAddTooltip"}}" href="#" data-tooltip>{{translate "collectionAdd"}}</a>
+		<a class="button right secondary tiny lighter icon icon-add-collection tip-bottom " id="add-collection" title="{{translate "collectionAddTooltip"}}" href="#" data-tooltip></a>
 		<h3 id="my-collections">{{translate "collectionsTitle"}}</h3>
 		<ul class="collections medium-block-grid-1 large-block-grid-2">
 			{{#each collections}}
@@ -33,10 +33,10 @@
 	</div>
 
 	<div class="medium-4 columns" id="my-objects">
-		<a class="button right secondary tiny lighter icon icon-add-object tip-bottom" id="add-object" href="http://phaidra-temp.univie.ac.at" target="_blank" title="{{translate "objectAddTooltip"}}" data-tooltip>{{translate "objectAdd"}}</a>
+		<a class="button right secondary tiny lighter icon icon-add-object tip-bottom" id="add-object" href="#" data-event="ingestObject" title="{{translate "objectAddTooltip"}}" data-tooltip></a>
 		<h3 id="my-objects-title">{{translate "objectsTitle"}}</h3>
 		<h4 class="clearfix">
-			<a href="#" class="button tiny right secondary lighter  tip-top icon icon-full-image open-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="{{translate "collectionOpen"}}"></a>
+			<a href="#" class="button tiny right secondary lighter  tip-top icon icon-full-image open-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="{{translate "objectsOpen"}}"></a>
 			<div class="move"><i class="fi-icon fi-list"></i></div>
 		</h4>
 		<ul class="objects medium-block-grid-3">
@@ -45,15 +45,9 @@
 	
 </div>
 <p>&nbsp;</p>
-<!--<div class="search-row">
-	<div class="row">
-		<input type="text" class="large center dark" value="" placeholder="{{translate "findObjectsTitle"}}">
-	</div>
-</div>-->
 
 <div class="currentobjects-row">
 	<div class="row">
-		<!--<h3>{{translate "currentObjectsTitle"}}</h3>-->
 		<ul class="currentimages medium-block-grid-3">
 		
 		</ul>

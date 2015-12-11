@@ -1,17 +1,22 @@
 
+$body-bg:#FFF;//#4F5A5E;//$darker-bg;
+
+$topbar-bg-color: #f7f7f7;
+
+$dark-bg:#CCC;//#4F5A5E;//$darker-bg;
+$darker-bg: darken($dark-bg,7%);
+$body-bg-darker:darken($body-bg,3%);//$darker-bg;
+
 $primary-color: #0173CA;//#1AA0D3;//#1ABC9C;//#3498db;//#3498DB;///1e96fc;//#8cdefc;//#f4ff54;
-$dark-grey:#FFF;//#2C3E50;//rgb(42,48,59);
-$dark-bg: $dark-grey;
-$darker-bg: darken($dark-grey,7%);
+//$dark-grey:#FFF;//#2C3E50;//rgb(42,48,59);
 
-$dark-bg-transparent: scale-color($dark-grey,$alpha:-10%);
-
+//$dark-bg-transparent: scale-color($dark-grey,$alpha:-10%);
 $bg: #FFF;
 
-$yellow: #c2d051;
-$purple: #561983;
-$blue: #179FD0;
-$green:#6AD897;
+//$yellow: #c2d051;
+//$purple: #561983;
+//$blue: #179FD0;
+//$green:#6AD897;
 $red:$primary-color;
 
 
@@ -40,9 +45,6 @@ $em-base: 16px !default;
 
 $default-float: left;
 
-$body-bg:#FFF;//#4F5A5E;//$darker-bg;
-$dark-bg:#DDD;//#4F5A5E;//$darker-bg;
-$body-bg-darker:darken($body-bg,3%);//$darker-bg;
 $body-font-color:#75808A;// #515A75;
 $text-color: $body-font-color;
 
@@ -109,8 +111,8 @@ $shiny-edge-active-color: rgba(#000, .2);
 // Media Queries
 
 $small-range: (0rem, 40rem);
-$medium-range: (40.063rem, 64rem);
-$large-range: (64.063rem, 90rem);
+$medium-range: (40.063rem, 66rem);
+$large-range: (66.063rem, 90rem);
 $xlarge-range: (90.063em, 160em);
 //$xxlarge-range: (120.063em);
 
@@ -662,7 +664,7 @@ $f-dropdown-margin-top: 2px;
 
 // We use this to control the background color
 
-$f-dropdown-bg: $darker-bg;
+$f-dropdown-bg: $topbar-bg-color;
 
 // We use this to set the border styles for dropdowns.
 

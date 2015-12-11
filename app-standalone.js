@@ -206,16 +206,18 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 	});
 
 
-	$(".top-bar-section a[data-event]").on("click.ph-plus",function(e) {
+	$(".top-bar-section a[data-event]").on("click.ph-plus touchend.ph-plus",function(e) {
 		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;
 		}
 
-		var eve = $(this).data("event");
+		
 		if($(this).parent().hasClass("pp-view") && $("html").hasClass("lightRoomCollectionView")) {
 			e.preventDefault();
 			return;
 		}
+
+		var eve = $(this).data("event");
 
 		if (!$(this).hasClass('toggle')) {
 			$(".top-bar-section a").removeClass("active");

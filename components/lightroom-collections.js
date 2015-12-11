@@ -7,10 +7,10 @@
  * - Update View when data is changed
  *
  */
-define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','text!templates/lightroom-collections.hbs','i18n!nls/texts', 'components/_P_', 'spin',
+define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','text!templates/lightroom-collections.hbs','text!templates/ingest-modal.hbs','i18n!nls/texts', 'components/_P_', 'spin',
 				'foundation', 'jquery.cookie'],
 
-	function ($, _H, Hallo, _B, _pptCreatorClass, _template, _texts, _P_, _spinner)
+	function ($, _H, Hallo, _B, _pptCreatorClass, _template,_ingestTemplate, _texts, _P_, _spinner)
 	{
 	/**
 	 * The lightroom collections class displays the owner's collections on the startpage of phaidra+.
@@ -160,12 +160,15 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 
 				$(window).trigger('rawSearch', ['', req, 0, 100, cb, false, adds]);
 				
-				self.updateHandlers();
+				
 				$("#container").foundation();
 				$("#container").show();
 				$("body").removeClass("init");
 				self.resizeImages(2);
 				$(window).trigger('clearSearchUI');
+
+				
+				self.updateHandlers();
 				
 				if(!$.cookie("joyride")) {
 					$(document).foundation("joyride","start");
@@ -173,6 +176,7 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					$.cookie("joyride",true);
 				}
 			};
+
 
 
 			this.ownerObjectsLoaded = function (d)
@@ -216,11 +220,17 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 							dataMan.selectCollection(-1);
 							$(window).trigger("openSingleView",[$(this).data('data'), true]);
 							return false;
-						});
+						})
 
 					ownerObjectsContainer.append(cdom);
 					num++;
 				}
+				// myObjsDom.find("#add-object").on("touchend.ph-plus click.ph-plus",function (e) {
+				// 	log("add click")
+				// 	log(e)
+				// 	$(window).trigger("ingestObject");
+				// 	return false;
+				// });
 
 				self.updateImageSize(self.CURSIZE,true);
 
@@ -233,7 +243,7 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 
 					myObjsDom.find('h4').fadeIn('400');
 
-					myObjsDom.find(".button").off(".ph-plus");
+					myObjsDom.find(".open-collection").off(".ph-plus");
 					myObjsDom.find(".open-collection").on("click.ph-plus", function (e) {
 						dataMan.selectCollection(-1)
 						$(window).trigger("dataManaged");
@@ -550,15 +560,19 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					$(this).data("active",!$(this).data("active"));					
 					e.preventDefault();
 				});
+				
+				dom.find("#add-collection,#add-object").off(".ph-plus");
 
-				dom.find("#add-collection").on("click.ph-plus",function (e) {
+				dom.find("#add-collection").on("touchend.ph-plus click.ph-plus",function (e) {
 					if(dom.find("#add-collection").hasClass("disabled")) return false;
 					dom.find("#add-collection").addClass("disabled");
 					self.createCollection();
 					return false;
 				});
-
-				dom.find("#add-object").on("click.ph-plus",function (e) {
+				//log(dom.find("#add-object"))
+				dom.find("#add-object").on("touchend.ph-plus click.ph-plus",function (e) {
+					log("add click")
+					log(e)
 					$(window).trigger("ingestObject");
 					return false;
 				});

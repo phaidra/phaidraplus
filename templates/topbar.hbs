@@ -16,15 +16,13 @@
              <a href="#suche" id="menu-search" class="" data-dropdown="search-dropdown-container"> <span class='icon icon-next'></span></a>
         </li>
       </ul>
-      <!--<h1 class="username right">
-        <a ></a>
-      </h1>-->
+      
     </div>
     <div class="top-bar-section right">
-    <ul class="menu">
+    <ul class="menu user">
       <li>
       {{#if login}} 
-        <a href="#" id="logout-button" title="{{translate 'logout'}}" class="secondary icon icon-logout icon-small" data-tooltip>{{translate 'logout'}}</a>
+        <a href='#' data-event='openLightRoomCollections' class="username"></a> <a href="#" id="logout-button" title="{{translate 'logout'}}" class="loginout secondary icon icon-logout icon-small" data-tooltip>{{translate 'logout'}}</a>
       {{else}}
         <form method="POST" action="/" id="logout-button">
         <input type="hidden" name="login" value="1">
@@ -38,8 +36,7 @@
     <div class="top-bar-section main">
       <ul class="menu search">
         <li id="pagination-info">
-          <span class="num"></span>
-          {{translate 'results'}}
+          <span class="num" data-tooltip title="{{translate 'results'}}"></span>
         </li>
         <li class="search-previouspage pagination">
            <a href="#" class="icon icon-prev disabled" data-tooltip title="{{translate "previous"}}" data-event="searchPreviousPage"></a>
@@ -51,8 +48,8 @@
       <ul class="menu">
          <li class="collections">
           <a href="#" id="menu-collections" class="icon icon-folder folder active" data-event="openLightRoomCollections" title="">{{translate "menu-collections"}}</a>
-        </li>
-        
+         </li>
+        <li class="divider pp-view collections"></li>
              
         <li class="lightroom pp-view pp-view-first">
 	         <a href="#lightroom" class="icon icon-lightroom" data-event="openLightRoom" title="{{translate "menu-lightroom"}}">
@@ -76,12 +73,12 @@
            </a>
         </li>
         <li class="divider pp-view"></li>
-        <li class="pp-view">
-          <a href="#" class="secondary icon icon-slideshow" data-options="disable-for-touch: true" title="{{translate "slideshow"}}" data-tooltip id="display-slideshow">{{translate "slideshow"}}</a>      
+        <li class="pp-view slideshow">
+          <a href="#" class="icon icon-slideshow" data-options="disable-for-touch: true" title="{{translate "slideshow"}}" data-tooltip id="display-slideshow"><span class='hide-for-medium hide-for-small'>{{translate "slideshow"}}</span></a>      
         </li>       
       </ul>
       <ul class="right menu">
-        <li class="pp-view">
+        <li class="pp-view options">
           <a href="#"  data-dropdown="sidebar" class="icon icon-options" title="{{translate "displayOptions"}}" data-tooltip data-option="disable-for-touch:true"></a>
         </li>
         
@@ -104,7 +101,7 @@
 </nav>
 </div>
 <div id="lightroom-whiteboard-actions">
-  <a href="#" id="lightroom-whiteboard-close" class="button dark lighter icon icon-close"></a>
-  <a href="#" id="lightroom-whiteboard-single" class="button dark lighter active" title="{{translate "slideshow-single-view"}}" data-tooltip><span class="item icon icon-pane"></span></a>
-  <a href="#" id="lightroom-whiteboard-double" class="button dark lighter" title="{{translate "slideshow-paralell-view"}}" data-tooltip><span class="item icon icon-pane"></span><span class="item icon icon-pane"></span></a>
+  <a href="#" id="lightroom-whiteboard-close" class="button lighter icon icon-close"></a>
+  <a href="#" id="lightroom-whiteboard-single" class="button secondary lighter active" title="{{translate "slideshow-single-view"}}" data-tooltip><span class="item icon icon-pane"></span></a>
+  <a href="#" id="lightroom-whiteboard-double" class="button secondary lighter" title="{{translate "slideshow-paralell-view"}}" data-tooltip><span class="item icon icon-pane"></span><span class="item icon icon-pane"></span></a>
 </div>
