@@ -77,6 +77,8 @@ define({
     'open-in-phaidra-temp':     "in PhaidraTemp öffnen",
     
     'open-document': 'Dokument in neuem Fenster öffnen',
+    'open-original-prefix': '',
+    'open-original-postfix': "öffnen",
 
 
 
@@ -131,6 +133,8 @@ define({
     "cancel": "Abbrechen",
     'close': 'Schließen',
     'copyright': 'Copyright',
+    'yes': 'Ja',
+    'no': 'Nein',
     'costs' : 'Kosten',
     'coverage': 'Gültigkeit',
     'datapool': 'Datenpool',

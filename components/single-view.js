@@ -51,6 +51,9 @@ define(['jquery', 'Handlebars','spin', 'text!templates/single-view.hbs', 'i18n!n
       'title': function(val) {
         return val;
       },
+      'instance': function(val) {
+        return val;
+      },
       'title_de': function(val) {
         return val;
       },
@@ -296,7 +299,7 @@ define(['jquery', 'Handlebars','spin', 'text!templates/single-view.hbs', 'i18n!n
         } else if (typeof data[key] == "string") {
           v = data[key];
         }
-        //console.log(v,key)
+        
         // mapping the value to the right output fields
         if (typeof _propMapping[key] != 'undefined') {
           k = _propMapping[key];
@@ -317,9 +320,12 @@ define(['jquery', 'Handlebars','spin', 'text!templates/single-view.hbs', 'i18n!n
     this.renderProperty = function (obj)
     {
       var str = "<dl>";
-    
+      var val = obj[1];
+      if(val && val.indexOf('http')===0) {
+        val = "<a href='"+val+"' target='_blank'>"+val+"</a>";
+      }
       str+= '<dt>'+self.translate(obj[0])+'</dt>';
-      str+= '<dd>'+obj[1]+'</dt>';
+      str+= '<dd>'+self.translate(val)+'</dt>';
       str+= '</dl>';
       return str;
     };

@@ -266,9 +266,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		$(window).trigger('init');
 	} else {
 		$.removeCookie("joyride");
-		//$(window).trigger('init');
 		loginModal.foundation("reveal", "open");
-
 	}
 	
 

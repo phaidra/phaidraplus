@@ -857,6 +857,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 			var preview = obj.preview;
 
 			obj.dbUrl = 'https://'+instanceURL+".univie.ac.at/"+obj.pid;
+			obj.instance = instanceURL.replace("-t","T").replace("ph","Ph");
 			obj.preview = 'https://'+instanceURL+".univie.ac.at/"+obj.preview;
 			obj.preview_large = obj.preview.replace(/\/\d{3}/,"/1600");
 			obj.thumbnail = obj.preview.replace(/\/\d{3}/,"/120");
@@ -900,13 +901,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 				}
 				obj.obj_date = date;
 			}
-			// RANDOM DATE
-			// if (typeof obj.obj_date == 'undefined') {
-			// 	if (Math.random() > 0.2) {
-			// 		obj.obj_date = self.randomDate(new Date(1500,01,01),new Date(2014,12,31)).toISOString();
-			// 		//console.log(obj.obj_date)
-			// 	}
-			// }
+			
 			if (typeof obj.provenience != 'undefined' && typeof obj.provenience.contribute != 'undefined') {
 				var date = null;
 				try {
@@ -934,7 +929,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 				try {
 					var year = obj.obj_date.getYear();
 					if (year == 1970) {
-						throw("error","");
+						//throw("error","");
 					}
 				} catch (e) {
 
