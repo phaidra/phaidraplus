@@ -101,7 +101,7 @@
 		background-color: transparent;
 	}
 	.mapicon {
-		border:3px solid $dark-bg;
+		border:3px solid $body-line-color;
 		box-shadow: 0px 0px 6px rgba(0,0,0,.5);
 		-moz-box-shadow: 0px 0px 6px rgba(0,0,0,.5);
   		-webkit-box-shadow: 0px 0px 6px rgba(0,0,0,.5);
@@ -151,8 +151,8 @@
 	vertical-align:midle;
 	color:white;
 	top:-6px;
-	border:2px solid $darker-bg;
-	background: $dark-bg;
+	border:2px solid $body-line-color;
+	background: $body-line-color;
 	text-align: center;
 	line-height: 12px;
 	font-size:11px;

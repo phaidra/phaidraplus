@@ -177,7 +177,7 @@ define(['jquery', 'jqueryui', 'components/basics', 'Handlebars', 'text!templates
 			}
 
 			if(metaName=="query") {
-				$(".top-bar .suche a").prepend(dom)
+				$(".top-bar .suche").prepend(dom)
 			}
 
 			return self;

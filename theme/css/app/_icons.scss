@@ -32,11 +32,19 @@
 		}
 	}
 }
+.top-bar {
+	.icon {
+		&:before {
+			font-size:1.2rem;
+			line-height:1.2rem;
+		}
+	}
+}
 .actions {
 	.icon {
 		&:before {
-			font-size:1.3rem;
-			line-height:1.3rem;
+			font-size:1.6rem;
+			line-height:1.6rem;
 		}
 	}
 }
@@ -50,7 +58,9 @@
 .icon-logout:before {
 	content: "\e090";
 }
-
+.icon-arrow-down:before {
+	content:"\e11d";
+}
 //-
 .icon-map:before {
 	content:"\e089";
@@ -95,10 +105,10 @@
 
 .icon-options {
 	&:before {
-		content:"\e058";
+		content:"\e051";
 	}
 }
-	
+
 .icon-delete:before,
 .icon-remove:before {
 	content:"\e0cf";
@@ -117,6 +127,15 @@
 .icon-filter:before {
 	content:"\e0e2";
 }
+
+.icon-filter {
+	&:before {
+		content:"\e12A";
+	}
+}
+	
+
+
 .icon-clear:before {
 	content:"\e0cf";
 }
@@ -130,7 +149,7 @@
 }
 
 .icon-mark-all:before {
-	content: "\e0D5";
+	content: "\e0ab";
 }
 
 .icon-full-image:before {

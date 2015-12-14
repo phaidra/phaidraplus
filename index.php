@@ -31,6 +31,8 @@
   <script src="http://rangy.googlecode.com/svn/trunk/currentrelease/rangy-core.js"></script>-->
 
   <script>
+    var LANGUAGE = "de";
+    
     var require = {
           baseUrl: '.',
            map: {
@@ -127,8 +129,7 @@
 
 <body class="init">
       
-  <div id="search-dropdown-container" data-dropdown-content class="template medium f-dropdown content">
-    
+  <div id="search-dropdown-container" data-dropdown-content class="template medium f-dropdown content right">
     <div id="search-canvas" class="">
       <div id="filter-canvas" class="clearer"></div>
     </div>

@@ -5,7 +5,7 @@
  - highligh objects in network
  - show calculation display
  */
-define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.hbs','text!templates/semantic-popup.hbs','text!templates/gephi-node.hbs','text!templates/gephi-edge.hbs','i18n!nls/texts','spin','sigma', 'foundation', 'jquery.cookie','sigma.force','jquery.mousewheel'],
+define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.hbs','text!templates/semantic-popup.hbs','text!templates/semantic-node.hbs','text!templates/semantic-edge.hbs','i18n!nls/texts','spin','sigma', 'foundation', 'jquery.cookie','sigma.force','jquery.mousewheel'],
 	function ($, _H,_G,_gephiview_template,_popuptemplate,_nodetemplate,_edgetemplate,_texts,S)
 	{
 
@@ -379,7 +379,7 @@ define(['jquery', 'Handlebars','semantic-canvas','text!templates/semantic-view.h
 					$("a.mark-image").on("click",function (e) {
 						var unmark = !!dataMan.isMarked(currentObject.pid);
 						$(".tooltip").hide();
-						$(this).toggleClass("dark");
+						$(this).toggleClass("active");
 						dataMan.markObject(currentObject.pid, unmark);
 						return false;
 					});

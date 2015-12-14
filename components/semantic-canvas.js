@@ -67,6 +67,9 @@ var GexfJS = {
         },
        
     },
+    loadingQue:[],
+    isLoading: false,
+    loadedNum: 0,
     lang : "de"
 }
 
@@ -262,6 +265,9 @@ function initializeMap() {
     //clearInterval(GexfJS.timeRefresh);
     
     GexfJS.oldParams = {};
+    GexfJS.loadingQue = [];
+    GexfJS.isLoading = false;
+    GexfJS.loadedNum = 0;
     //GexfJS.overviewScale = 200/GexfJS.graphZone.width
     GexfJS.ctxGraphe.clearRect(0, 0, GexfJS.graphZone.width, GexfJS.graphZone.height);
     
@@ -325,11 +331,11 @@ function createGraph(data) {
         _ymax = Math.max(_y, _ymax);
     });
 
-    GexfJS.baseHeight = $(window).height();
+    GexfJS.baseHeight = $(window).height()-$(".top-bar").height();
 
     var _echelle = Math.min( ( GexfJS.baseWidth - _marge ) / ( _xmax - _xmin ) , ( GexfJS.baseHeight - _marge ) / ( _ymax - _ymin ) );
     var _deltax = ( GexfJS.baseWidth - _echelle * ( _xmin + _xmax ) ) / 2;
-    var _deltay = ( GexfJS.baseHeight - _echelle * ( _ymin + _ymax ) ) / 2;
+    var _deltay = ( GexfJS.baseHeight - _echelle * ( _ymin + _ymax ) ) / 2+$(".top-bar").height();
     
     GexfJS.ctxMini.clearRect(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
     
@@ -365,17 +371,30 @@ function createGraph(data) {
                 n.image.ow = w;
                 n.image.oh = h;
                 calcImageSize(n);
-                //GexfJS.forceReDraw = true;
-                //window.requestAnimationFrame(traceMap);
-                //GexfJS.ctxMini.drawImage(this,$t.data("x"),$t.data("y"),30,30);
+                GexfJS.loadedNum++;
+                if(GexfJS.loadedNum==4 || GexfJS.loadingQue.length < 4) {
+                    GexfJS.loadedNum = 0;
+                    GexfJS.isLoading = false;
+                }
+                GexfJS.forceReDraw = true;
+                window.requestAnimationFrame(traceMap);
+            }).on("error",function(){
+                //GexfJS.loadedNum++;
+                GexfJS.loadedNum++;
+                GexfJS.isLoading = false;
+                window.requestAnimationFrame(traceMap);
             })
+            var src =null;
             if(_image) {
-                 img.src = _image//.replace(/\/\d{3}/,"/160");
+                src= _image//.replace(/\/\d{3}/,"/160");
+
             }
-            _d.image = {img:img};
-            _d.image.w = 0;
-            _d.image.h = 0;
-            _d.image.loaded = false;
+            _d.image = {img:img,src:src,loaded:false,w:0,h:0};
+            if(src) {
+                GexfJS.loadingQue.push(_d.image);    
+            }
+            
+
             _d.type = _type;
             $(img).data("node",_d);
 
@@ -457,12 +476,7 @@ function createGraph(data) {
     GexfJS.imageMini = GexfJS.ctxMini.getImageData(0, 0, GexfJS.overviewWidth, GexfJS.overviewHeight);
     var pixels = GexfJS.overviewWidth*GexfJS.overviewHeight;
     var imageData = GexfJS.imageMini.data; // here we detach the pixels array from DOM
-    // while(--pixels){
-    //    imageData[4*pixels+0] = r; // Red value
-    //    imageData[4*pixels+1] = g; // Green value
-    //    imageData[4*pixels+2] = b; // Blue value
-    //    imageData[4*pixels+3] = a; // Alpha value
-    // }
+  
     GexfJS.imageMini.data = imageData; // And here we attache it back (not needed cf. update)
     //context.putImageData(image, 0, 0);
 
@@ -475,7 +489,6 @@ function loadGraph() {
         dataType: "xml",
         success: function(data) {
             createGraph(data);
-        //changeNiveau(0);
         }
     });
 }
@@ -544,6 +557,17 @@ function traceMap(now) {
     frameCount++;
     if(frameCount%3==0) {
         return;
+    }
+    if(frameCount%20==0) {
+        if(!GexfJS.isLoading) {
+            if(GexfJS.loadingQue.length) {
+                for (var i = 0; i < 4 && i < GexfJS.loadingQue.length; i++) {
+                    var image = GexfJS.loadingQue.shift();    
+                    image.img.src = image.src;
+                };    
+                GexfJS.isLoading = true;
+            }
+        }
     }
     
 
@@ -884,6 +908,8 @@ function pauseGEXFJS() {
 }
 function stopGEXFJS() {
     GexfJS.running = false;
+    GexfJS.isLoading = true;
+
     $(document).off("click.semantic");
     $("#overview").off();
     $("#searchinput").off();

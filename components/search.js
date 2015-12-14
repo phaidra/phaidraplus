@@ -334,21 +334,26 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		_p.updatePaginationButtons = function()
 		{
-			var m = $('nav.top-bar');
+			var m = $('#search-info');
+
 			var n = m.find('.search-nextpage a');
 			var p = m.find('.search-previouspage a');
+			
 
 			if (currentSearchPage == 0) {
 				p.addClass('disabled');
 			} else {
 				p.removeClass('disabled');
+				m.show();
 			}
 
 			if (currentSearchPage >= totalResultPages-1) {
 				n.addClass('disabled');
 			} else {
 				n.removeClass('disabled');
+				m.show();
 			}
+
 		};
 
 		_p.updateSearch = function(newData, results, currentPage, pageSize) {
@@ -424,15 +429,34 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 			spc
 				.attr("title",str.join(' '))
 				.addClass('open');
-
+			
+			var t_ofpages = Math.min(results,(currentPage+1)*searchPageSize)
+			var t_page = ((currentPage)*searchPageSize);
+			
+			if(!t_ofpages) {
+				pic
+				.attr("title","Keine Treffer")
+				.attr("data-tooltip","")
+				.show()
+				.find(".num").text("keine");
+				$('#search-info').show();
+				
+				$('.search-previouspage, .search-nextpage').hide();
+				return;
+			} else {
+				t_page +=1
+			}
 			pic
 				.attr("title",str.join(' '))
 				.attr("data-tooltip","")
 				.show()
-				.find(".num").text(((currentPage)*searchPageSize+1)+"-"+Math.min(results,(currentPage+1)*searchPageSize) + '/'+results);
+				.find(".num").text(t_page+"-"+t_ofpages + '/'+results);
 				
 			pic.foundation();
-			$('nav.top-bar').find('.search-previouspage, .search-nextpage').show();
+			$('#search-info').show();
+			$('.search-previouspage, .search-nextpage').show();
+			//$('.pagination').show();
+
 			_p.updatePaginationButtons();
 		};
 
@@ -452,10 +476,11 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		this.clearSearchUI = function()
 		{
-			$('nav.top-bar').find('.search-previouspage, .search-nextpage').hide();
+			//$('#search-info').find('.search-previouspage, .search-nextpage').hide();
+			$('#search-info').hide();
 			currentSearchPage = 0;
 			$('#search-params').removeClass('open');
-			$('#pagination-info').hide();
+			//$('#pagination-info').hide();
 		};
 
 		this.create = function() {

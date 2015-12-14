@@ -36,6 +36,7 @@ define(['jquery', 'spin'], function ($, S)
 			self.s = new S();
 			
 			$('#display-slideshow').on('click.ph-plus-slideshow', function (e) {
+				console.log(e)
 				if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 					return false;
 				}

@@ -1,19 +1,14 @@
-
-<ol class="joyride-list" data-joyride>
-  <li data-id="menu-collections" data-text="{{translate 'continue-tour'}}" data-options="tip_location: bottom; prev_button: false">
-    <h3>{{translate 'menu-collections'}}</h3>
-    <p>{{translate 'help-menu-collections'}}</p>
-  </li>
-  <li data-id="menu-search" data-class="custom so-awesome" data-text="{{translate 'continue-tour'}}" data-prev-text="Zurück">
-    <h3>{{translate 'menu-search'}}</h3>
-    <p>{{translate 'help-menu-suche'}}</p>
-  </li>
-  <li data-id="my-collections" data-button="{{translate 'continue-tour'}}" data-prev-text="Zurück" data-options="tip_location:bottom;tip_animation:fade">
-    <h3>{{translate 'collectionsTitle'}}</h3>
-    <p>{{translate 'help-my-collections'}}</p>
-  </li>
-  <li data-id="my-objects-title" data-button="{{translate 'finish-tour'}}" data-prev-text="Zurück">
-    <h3>{{translate 'objectsTitle'}}</h3>
-    <p>{{translate 'help-my-objects'}}</p>
-  </li>
+<ol class="joyride-list" data-joyride id="help">
+  {{#each items}}
+    <li data-id="{{item_id}}" data-text="{{translate 'continue-tour'}}" data-options="tip_location: {{tip_position}}">
+      <h3>{{title}}</h3>
+      <p>{{text}}</p>
+    </li>
+  {{/each}}
+  {{#if endtext}}
+  <li data-text="{{translate 'end-tour'}}" data-button="Ok">
+      <h3>{{endtitle}}</h3>
+      <p>{{endtext}}</p>
+    </li>
+   {{/if}}
 </ol>

@@ -645,6 +645,12 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 			self.updateMarked();
 			currentObjects = self.getMarked();
 
+			if(!$.cookie("joyride-mark")) {
+				var helpItems=["marker-actions"];
+				$(window).trigger("showhelp",[{items:helpItems}]);
+				$.cookie("joyride-mark",true);
+			}
+
 			$(self).trigger('marked', [self.getMarked()]);
 			if (displayMode == 'marked') {
 				$(self).trigger('changeDisplayed', [self]);	
@@ -880,16 +886,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 					obj.latlon.lon = self.convertDMSToDD(p[0], p[1], p[2], p[3]);
 				}
 			}
-			// RANDOM LOCATION
-			// if(!obj.latlon) {
-			// 	if (Math.random() > 0.2) {
-			// 		obj.latlon = {};
-			// 		var bounds = self.bounds;
-			// 		obj.latlon.lat = bounds.southWest.south+(bounds.northEast.north-bounds.southWest.south)*Math.random();
-			// 		obj.latlon.lon = bounds.southWest.west+(bounds.southWest.west+bounds.northEast.east)*Math.random();
-			// 	}
-			// }
-
+			
 			if (typeof obj.obj_date != 'undefined' || typeof obj.DATE != 'undefined') {
 				var date = null;
 				try {
@@ -901,7 +898,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 				}
 				obj.obj_date = date;
 			}
-			
+
 			if (typeof obj.provenience != 'undefined' && typeof obj.provenience.contribute != 'undefined') {
 				var date = null;
 				try {
@@ -929,7 +926,7 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 				try {
 					var year = obj.obj_date.getYear();
 					if (year == 1970) {
-						//throw("error","");
+						
 					}
 				} catch (e) {
 
@@ -1205,6 +1202,8 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 					self.objectsmarked.push(self.allLoadedObjects[i]);
 				}
 			}
+			
+			$("#markedimages").text(self.objectsmarked.length)
 			return self;
 		};
 	}

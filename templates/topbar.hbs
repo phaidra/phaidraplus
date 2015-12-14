@@ -10,98 +10,106 @@
         </a></h1>
       </li>
     </ul>
-    <div class="top-bar-section">
-      <ul class="no-bullet">
-        <li class="suche">
-             <a href="#suche" id="menu-search" class="" data-dropdown="search-dropdown-container"> <span class='icon icon-next'></span></a>
-        </li>
-      </ul>
-      
+    <div class="top-bar-section suche">
+             <a href="#suche" id="menu-search" class="" data-dropdown="search-dropdown-container" data-options="align:right"> <span class='icon icon-arrow-down' title="{{translate 'extended-search'}}" data-tooltip></span></a>
     </div>
-    <div class="top-bar-section right">
-    <ul class="menu user">
+    {{#if login}} 
+    <div class="top-bar-section right user">
+      <ul class="menu">
       <li>
-      {{#if login}} 
-        <a href='#' data-event='openLightRoomCollections' class="username"></a> <a href="#" id="logout-button" title="{{translate 'logout'}}" class="loginout secondary icon icon-logout icon-small" data-tooltip>{{translate 'logout'}}</a>
-      {{else}}
-        <form method="POST" action="/" id="logout-button">
-        <input type="hidden" name="login" value="1">
-        <button type="submit" id="login-button" title="{{translate 'login'}}" title="{{translate 'login'}}" class="secondary icon icon-logout icon-small" data-tooltip>{{translate 'login'}}</button>
-        </form>
-      {{/if}}
+        <a href="#" id="logout-button" title="{{translate 'logout'}}" class="loginout username secondary icon icon-logout icon-small" data-tooltip>
+        </a>
+      
       </li>
     </ul>
     </div>
+    {{/if}}
 
-    <div class="top-bar-section main">
+    <div class="top-bar-section main main-menu">
+
       <ul class="menu search">
-        <li id="pagination-info">
-          <span class="num" data-tooltip title="{{translate 'results'}}"></span>
-        </li>
-        <li class="search-previouspage pagination">
-           <a href="#" class="icon icon-prev disabled" data-tooltip title="{{translate "previous"}}" data-event="searchPreviousPage"></a>
-        </li>
-        <li class="search-nextpage pagination">
-           <a href="#" class="icon icon-next disabled" data-tooltip title="{{translate "next"}}" data-event="searchNextPage"></a>
-        </li>
-      </ul>
-      <ul class="menu">
-         <li class="collections">
+        <li class="collections">
           <a href="#" id="menu-collections" class="icon icon-folder folder active" data-event="openLightRoomCollections" title="">{{translate "menu-collections"}}</a>
          </li>
-        <li class="divider pp-view collections"></li>
-             
+         <li class="login">
+         <form method="POST" action="/" id="logout-button">
+          <input type="hidden" name="login" value="1">
+          <button type="submit" id="login-button" title="{{translate 'login'}}" title="{{translate 'login'}}" class="secondary icon icon-logout icon-small" data-tooltip>{{translate 'login'}}</button>
+          </form>
+         </li>
+      </ul>
+
+      <ul class="menu right" id="main-menu">             
+
         <li class="lightroom pp-view pp-view-first">
-	         <a href="#lightroom" class="icon icon-lightroom" data-event="openLightRoom" title="{{translate "menu-lightroom"}}">
+	         <a href="#lightroom" class="icon icon-lightroom" data-event="openLightRoom" id="menu-lightroom" title="{{translate "menu-lightroom"}}">
            <span class='title'>{{translate "menu-lightroom"}}</span>
            </a>
         </li>
         <li class="landkarte pp-view">
-	         <a href="#landkarte" class="icon icon-map" data-event="openGeoView" title="{{translate "menu-map"}}">
-           <span class='title'>{{translate "menu-map"}}</span>
+	         <a href="#landkarte" class="icon icon-map" data-event="openGeoView" id="menu-geo" title="{{translate "menu-geo"}}">
+           <span class='title'>{{translate "menu-geo"}}</span>
            </a>
         </li>
         <li class="timeline pp-view">
-	         <a href="#timeline" class="icon icon-timeline" data-event="openTimelineView" title="{{translate "menu-timeline"}}">
+	         <a href="#timeline" class="icon icon-timeline" data-event="openTimelineView" id="menu-timeline" title="{{translate "menu-timeline"}}">
             <span class='title'>{{translate "menu-timeline"}}</span>
            </a>
         </li>
         <li class="semantic pp-view">
-
-	         <a href="#semantic" class="hide-for-medium hide-for-small icon icon-semantic" title="{{translate "menu-network"}}" data-event="openSemanticView">
-           <span class='title'>{{translate "menu-network"}}</span>
+	         <a href="#semantic" class="icon icon-semantic" title="{{translate "menu-semantic"}}" id="menu-semantic" data-event="openSemanticView">
+           <span class='title'>{{translate "menu-semantic"}}</span>
            </a>
         </li>
-        <li class="divider pp-view"></li>
         <li class="pp-view slideshow">
-          <a href="#" class="icon icon-slideshow" data-options="disable-for-touch: true" title="{{translate "slideshow"}}" data-tooltip id="display-slideshow"><span class='hide-for-medium hide-for-small'>{{translate "slideshow"}}</span></a>      
+          <a href="#" class="icon icon-slideshow" id="display-slideshow">{{translate "display-slideshow"}}</a>      
         </li>       
       </ul>
-      <ul class="right menu">
-        <li class="pp-view options">
-          <a href="#"  data-dropdown="sidebar" class="icon icon-options" title="{{translate "displayOptions"}}" data-tooltip data-option="disable-for-touch:true"></a>
-        </li>
-        
-        <li class="share pp-view">
-           <a href="#share" class="icon icon-share toggle" data-tooltip title="{{translate "menu-share"}}" data-option="disable-for-touch:true" data-event="showShareLink"></a>
-        </li>
-      </ul>
+      
     </div>
-    <div class="top-bar-section main markers button-group"  id="marker-actions">
-      <ul class="menu">
-        <li style="display:none"><label for="imagesize">{{translate "markedImages"}} (<span id="markedimages">0</span>)</label></li>
+    <div class="top-bar-section main submenu button-group">
+
+      <ul id="search-info" class="menu left  sub-nav">
+        <li>
+          <a href="#" id="pagination-info"><span class="num"></span> {{translate 'results'}}</a>
+        </li>
+
+        <li class="search-previouspage">
+           <a href="#" class="icon icon-prev disabled" data-tooltip title="{{translate "previous"}}" data-event="searchPreviousPage"></a>
+        </li>
+        <li class="search-nextpage">
+           <a href="#" class="icon icon-next disabled" data-tooltip title="{{translate "next"}}" data-event="searchNextPage"></a>
+        </li>
+        <li class="divider"></li>
+      </ul>
+
+      <ul class="menu left sub-nav" id="marker-actions">
+        <li><a href="#" class="action icon icon-mark-image disabled mark-menu" title="{{translate "marked-menu"}}" id="menu-marker" data-tooltip>(<span id="markedimages">0</span>)</a></li>
         <li><a href="#" class="action disabled icon icon-mark-all secondary" id="marker-all">{{translate "markAllObjects"}}</a></li>
-        <li><a href="#" class="action icon icon-mark-image" id="collection-marker-filter">{{translate "filterByMarks"}}</a></li>
-        <li><a href="#" class="action icon icon-collection-image" id="collection-marker-add">{{translate "addToCollection"}}</a></li>
-        <li><a href="#" class="action icon icon-reverse" title="{{translate "invertSelection"}}" id="collection-marker-reverse">{{translate "invertSelection"}}</a></li>
+        <li><a href="#" class="action icon icon-collection-image disabled" id="collection-marker-add">{{translate "addToCollection"}}</a></li>
+        <li><a href="#" class="action icon icon-filter disabled" id="collection-marker-filter">{{translate "filterByMarks"}}</a></li>
+        <li><a href="#" class="action icon icon-reverse disabled" title="{{translate "invertSelection"}}" id="collection-marker-reverse">{{translate "invertSelection"}}</a></li>
         <li><a href="#" class="action disabled icon icon-clear" id="collection-marker-remove">{{translate "clearSelection"}}</a></li>
 
       </ul>
+
+      <ul class="right menu sub-nav">
+        <li class="pp-view options">
+          <a href="#"  data-dropdown="sidebar" class="icon icon-options" id="display-options" id="1" title="{{translate "display-options"}}" data-tooltip data-option="disable-for-touch:true">{{translate "display-options-title"}}</a>
+        </li>
+        
+        <li class="share pp-view">
+           <a href="#share" class="icon icon-share toggle" id="menu-share" data-tooltip title="{{translate "menu-share"}}" data-option="disable-for-touch:true" data-event="showShareLink">{{translate "menu-share"}}</a>
+        </li>
+      </ul>
+
+      </div>
+
     </div>
 </nav>
 </div>
 <div id="lightroom-whiteboard-actions">
-  <a href="#" id="lightroom-whiteboard-close" class="button lighter icon icon-close"></a>
-  <a href="#" id="lightroom-whiteboard-single" class="button secondary lighter active" title="{{translate "slideshow-single-view"}}" data-tooltip><span class="item icon icon-pane"></span></a>
-  <a href="#" id="lightroom-whiteboard-double" class="button secondary lighter" title="{{translate "slideshow-paralell-view"}}" data-tooltip><span class="item icon icon-pane"></span><span class="item icon icon-pane"></span></a>
+  <a href="#" id="lightroom-whiteboard-close" class="button alert icon icon-close"></a>
+  <a href="#" id="lightroom-whiteboard-single" class="button secondary active" title="{{translate "slideshow-single-view"}}" data-tooltip><span class="item icon icon-pane"></span></a>
+  <a href="#" id="lightroom-whiteboard-double" class="button secondary" title="{{translate "slideshow-paralell-view"}}" data-tooltip><span class="item icon icon-pane"></span><span class="item icon icon-pane"></span></a>
 </div>

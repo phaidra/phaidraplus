@@ -132,18 +132,18 @@ define(['jquery', 'leaflet', 'Handlebars', 'components/bottom-objs-container', '
 
 			$("a.mark-image").off(".ph-plus-geoview");
 			$("a.mark-image").on("click.ph-plus-geoview",function (e) {
-				var unmark = !$(this).hasClass('dark');
+				var unmark = !$(this).hasClass('active');
 				$(".tooltip").hide();
-				$(this).toggleClass("dark");
+				$(this).toggleClass("active");
 				dataMan.markObject(currentObject.pid, unmark);
 				map.closePopup();
 				return false;
 			});
 
 			if(dataMan.isMarked(currentObject.pid)) {
-				$("a.mark-image").removeClass("dark");
+				$("a.mark-image").removeClass("active");
 			} else {
-				$("a.mark-image").addClass("dark");
+				$("a.mark-image").addClass("active");
 			}
 			$(".leaflet-popup [data-original]").attr("src",$(".leaflet-popup [data-original]").attr("data-original"));
 			$(".leaflet-popup [data-original]").removeAttr("data-original")

@@ -289,7 +289,25 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 							.trigger('change.ph-plus-lightroom');
 					}
 				}
-				log(sConf)
+				if($("html").hasClass("standalone")) return;
+				if(!$.cookie("joyride-lr") || !$.cookie("joyride-lr-login")) {
+					var helpItems=["menu-lightroom","menu-geo","menu-timeline","menu-semantic","display-slideshow","display-options"];
+					if(!$("html").hasClass("standalone")) {
+						if($.cookie("joyride-lr-login")) {
+							return;
+						}
+						helpItems.push("menu-share");
+						helpItems.push("marker-actions");
+						$.cookie("joyride-lr-login",true)
+						$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+					} else if(!$.cookie("joyride-lr")) {
+						helpItems.push("login-button");
+						$.cookie("joyride-lr",true);
+						$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+					} 
+					
+					
+				}
 			};
 
 			this.showOverlay = function (e)

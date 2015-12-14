@@ -6,18 +6,21 @@
 }}
 <section id="single-view-container" class="clearfix">
 	<div class="main-description">
-		<select class="actions-menu">
+			<!--<select class="actions-menu">
 				<option value="">{{translate "actionsMenuCalltoAction"}}</option>
-				<!--<option>{{translate "actionsMenuShowAnnotations"}}</option>
 				<option>{{translate "actionsMenuShowSimilar"}}</option>
-				<option>{{translate "actionsMenuShowNetwork"}}</option>-->
 				<option value="collection">{{translate "actionsMenuAddtoCollection"}}</option>
 				<option value="download">{{translate "downloadImage"}}</option>
 				{{#unless single }}
 					<option value="mark">{{translate "actionsMenuMarkObject"}}</option>
 				{{/unless}}
-				<!--<option>{{translate "actionsMenuAddtoPresention"}}</option>-->
-			</select>
+			</select>-->
+				<div class="actions main">
+						<a href="#" class="tip-bottom tiny button secondary icon icon-collection-image collection-image" data-options="disable_for_touch:true;hover_delay:1000" title="{{translate "addToCollection"}}" data-tooltip></a>
+						<a href="#" class="tip-bottom tiny button secondary icon icon-download-image download-image"  data-options="disable_for_touch:true;hover_delay:1000" title="{{translate "downloadImage"}}" data-tooltip></a>
+						<a href="#" class="tip-bottom button secondary tiny icon icon-mark-image mark-image right" data-options="disable_for_touch:true;hover_delay:2000" data-title-active="{{translate "unmarkObject"}}"  data-title="{{translate "markObject"}}" title="{{translate "markObject"}}" data-tooltip></a>
+				</div>
+
 		<div class="scroll-content">
 			
 
@@ -152,9 +155,9 @@
 
 	
 	<div class="button-group">
-		<button class="prevBtn button secondary lighter tiny"><span class="icon icon-prev"/></button>
-		<button class="nextBtn button secondary lighter tiny"><span class="icon icon-next"/></button>
-		<button class="closeBtn button lighter tiny"><span class="icon icon-close"/></button>
+		<button class="prevBtn button secondary"><span class="icon icon-prev"/></button>
+		<button class="nextBtn button secondary"><span class="icon icon-next"/></button>
+		<button class="closeBtn button alert"><span class="icon icon-close"/></button>
 	</div>
 	<!--{{translate "singleViewCloseBtnTitle"}}-->
 

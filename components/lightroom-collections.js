@@ -170,11 +170,11 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 				
 				self.updateHandlers();
 				
-				if(!$.cookie("joyride")) {
-					$(document).foundation("joyride","start");
-					$(document).foundation("joyride","start");
-					$.cookie("joyride",true);
+				if(!$.cookie("joyride-lc")) {
+					$(window).trigger("showhelp",[{items:["menu-collections","my-collections","my-objects-title",'queryterm-field','main-menu'],endtitle:'',endtext:translate("tour-collections-end")}]);//{items:[{item_id:"menu-collections",title:'',text:"text"}]])	
+					$.cookie("joyride-lc",true);
 				}
+				
 			};
 
 
@@ -373,7 +373,7 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 						var myself = $(this).closest('li'); 
 						var ownId = myself.data('pid');
 						var collectionId = myself.closest('ul').data('uid');
-						
+						log("click delete")
 						$(window).trigger('deleteItemFromCollection', [ownId, collectionId, {
 							'func': function() {
 								var obj = cdom;
@@ -542,7 +542,7 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					var uid = col.data("uid");
 					
 					if ($(this).data("active")) {
-						$(this).addClass("dark");
+						$(this).removeClass("active");
 						$(".show-more").show();
 						col.removeClass("editable");
 						self.showAll(uid,false);
@@ -553,7 +553,8 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 						self.updateHandlers(col,true);
 						col.addClass("editable");
 						$(this).attr("title",$(this).attr("data-active-title"));
-						$(this).removeClass("dark");
+						$(this).addClass("active");
+						col.find(".name").trigger("click");
 						$(".show-more").hide();						
 					}
 
@@ -613,15 +614,17 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 
 					cols.attr("class","collection-items");
 					
-					var c = v+2;
-					c = 6;
-					cols.addClass("medium-block-grid-"+(c));
-					cols.addClass("large-block-grid-3");
+					// var c = v+2;
+					// c = 6;
+					//cols.addClass("medium-block-grid-"+(c));
+					// cols.addClass("large-block-grid-3");
+					cols.addClass("medium-block-grid-8");
+					cols.addClass("large-block-grid-6");
 					
-					var wh = $(window).width()>=1024?3:6
-					var w = ($("#container .collection").width()-10*wh)/wh;
+					var wh = $(window).width()>=1024?8:6
+					var w = ($("#container .collection .collection-object-view .image").width()-10)//-10*wh)/wh;
 					
-					$("#container").find(".collection-object-view .image").css("height",Math.floor(w*0.8))
+					$("#container").find(".collection-object-view .image").css("height",Math.floor(w))//Math.floor(w*0.8))
 				}
 			}
 			/**

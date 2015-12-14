@@ -615,13 +615,17 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 
 			var dataMan = resourceMan.getResource('gsaData');
 			var setup = null;
+			console.log(resourceMan)
+			console.log(dataMan)
+			console.log(dataMan.getDisplayMode())
+			console.log(dataMan.getSelectedCollection())
 
 			if (dataMan.getDisplayMode() == 'collection' && dataMan.getSelectedCollection() != null) {
 				// exit for own documents
+				//log("exit")
 				if (dataMan.getSelectedCollection() == -1) {
 					return self;
 				} else {
-					link += 'collection';
 					
 					setup = {
 						'query': dataMan.getSelectedCollection(),
@@ -629,7 +633,9 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 					};
 				}
 			} else {
-				switch (resourceMan.currentState) {
+				
+			}
+			switch (resourceMan.currentState) {
 					case 'dataManaged':
 						link += resourceMan.states['dataManaged'][0].open.scope.name;
 						break;
@@ -649,7 +655,6 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 						return false;
 				}
 				setup = self.getQuerySetup();
-			}
 
 		  _H.registerHelper('translate', self.translate);
 			

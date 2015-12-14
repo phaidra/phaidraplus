@@ -9,8 +9,8 @@
 var _standalone = false;
 
 var CDN0 = "https://phaidra-plus.univie.ac.at";
-var CDN1 = CDN0//"http://cdn1.r-g.io";
-var CDN2 = CDN0//"http://cdn1.r-g.io";
+var CDN1 = CDN0;
+var CDN2 = CDN0;
 
 var loginModal,pageModal = null;
 var pages = {};
@@ -27,6 +27,7 @@ function log(str) {
 		console.log(str)
 	}
 }
+
 
 function removeSplashEvent() {
 	$('#splashscreen').one('click.ph-plus', function() {
@@ -88,29 +89,41 @@ function loginRequired()
 	},300);
 }
 
-require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'components/search-request-manager',
-				 'components/phaidra-que','components/download-manager','components/ingest-manager', 'text!templates/login-modal.hbs',
+require([		'jquery', 
+				 'Handlebars', 
+				 'states', 
+				 'config/general', 
+
+				 'components/resource-manager', 
+				 'components/search-request-manager',
+				 'components/phaidra-que',
+				 'components/download-manager',
+				 'components/ingest-manager',
+				 'components/help-manager',
+				 'components/basics',
+
+				 'text!templates/login-modal.hbs',
 				 'text!templates/page-modal.hbs',
 				 'text!templates/footer.hbs',
-				 'text!templates/help.hbs',
-				 'text!pages/page-imprint.html',
-				 'text!pages/page-contact.html',
-				 'text!pages/page-help.html',
-				 'text!templates/topbar.hbs', 'i18n!nls/texts','components/basics',
-				 'foundation','jquery.cookie'],
-				function ($, _H, resourceManClass, states, _srm, _phQueClass, _downloadMan, _ingestMan, 
-					loginTemplate,
-					pageTemplate,
-					footerTemplate,
-					helpTemplate,
-					pageImprintHTML,
-					pageContactHTML,
-					pageHelpHTML,
-					topBarTemplate, _texts,_B) {
+				 'text!templates/topbar.hbs',
+				 'text!templates/help.hbs', 
+
+				 'text!nls/'+LANGUAGE+'/page-imprint.html',
+				 'text!nls/'+LANGUAGE+'/page-contact.html',
+				 'i18n!nls/texts',
+				 
+				 'foundation',
+				 'jquery.cookie'],
+
+				function ($, _H, states, CONF, 
+					_ressourceMan, _srm, _phQueClass, _downloadMan, _ingestMan, _helpMan,_B, 
+					loginTemplate, pageTemplate, footerTemplate, topBarTemplate, helpTemplate,
+					pageImprintHTML, pageContactHTML,
+					_texts) {
 	
 	var self = this;
 
-	resourceMan = new resourceManClass();
+	resourceMan = new _ressourceMan();
 	for(var key in states) {
 		if (typeof states[key].conf != 'undefined') {
 			resourceMan.register(states[key].state, states[key].name, states[key].conf);
@@ -128,6 +141,9 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 
 	var ingestMan = new _ingestMan();
 	resourceMan.setResource('ingest-man', ingestMan);
+
+	var helpMan = new _helpMan();
+	resourceMan.setResource('help-man', helpMan);
 
 	$(window)
 		.on('showShareLink.ph-plus', srm.showShareLink)
@@ -163,9 +179,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 	// asking for login
 	loginModal = _H.compile($.trim(loginTemplate));
 	loginModal = $($.trim(loginModal()));
-
 	loginModal.find('#login-modal-cancel-btn').one('click.ph-plus', loginRequired);
-	//loginModal.find('#login-modal-login-btn').one('click.ph-plus', makeLogin);
 	loginModal.find("form").on("submit",function(e){
 		makeLogin();
 		return false;
@@ -175,7 +189,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 	pageModal = $($.trim(pageModal()));
 	pages["page-imprint"] = pageImprintHTML;
 	pages["page-contact"] = pageContactHTML;
-	pages["page-help"] = pageHelpHTML;
+
 	$("footer a[href='#']").on("click",function(){
 		if($(this).attr("data-page")) {
 			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
@@ -200,27 +214,31 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		$.removeCookie('realname'); 
 		$.removeCookie('token'); 
 		$.removeCookie('username'); 
-		//$.removeCookie("joyride");
 		$(window).off('.ph-plus');
 		window.location.href="/";
 	})
 	
+
+
 	$(document).on("mouseenter.ph-plus","[data-tooltip]",function(){
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");
 		_B.delay(function(e){
 			Foundation.libs.tooltip.getTip(e).addClass("show");
-		},$(this),1000);
+		},$(this),500);
 	}).on("mouseleave.ph-plus",function(){
 		_B.noDelay($(this));
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");
 	});
 
-	
-	$("#logout-button").on("click",function(){
+	$(document).on("click touchend",".lightRoomCollectionView #main-menu a",function(){
+		alert("Um Darstellungsformen zu aktivieren, öffnen Sie einen bestehenden Ordner, oder führen Sie eine Suchabfrage durch.")
+	});
+	$("#logout-button").on("click touchend",function(){
 		$(window).trigger("logout");
 		return false;
 	})
 	$(".top-bar-section a[data-event], .top-bar-section .username a").on("click.ph-plus, touchend.ph-plus",function(e){
+
 		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;
 		}
@@ -243,17 +261,10 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		return false;
 	})
 
-	
 
 	$('body').append(loginModal);
 	$('body').append(pageModal);
 
-	if(!$.cookie("joyride")) {
-		//HELP
-		var help = _H.compile($.trim(helpTemplate));
-		help = $($.trim(help()));
-		$("body").append(help)
-	}
 
 	$(document).foundation();
 	var phaidraQue = resourceMan.getResource('phaidra-que');
@@ -266,12 +277,16 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states', 'compo
 		$(window).trigger('init');
 	} else {
 		$.removeCookie("joyride");
+		$.removeCookie("joyride-lc");
+		$.removeCookie("joyride-lr");
+		$.removeCookie("joyride-lr-login");
+		$.removeCookie("joyride-mark");
+
 		loginModal.foundation("reveal", "open");
 	}
 	
 
 });
-
 
 
 (function() {

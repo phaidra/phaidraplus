@@ -54,7 +54,7 @@
 }
 
 #recherche {
-    border-top:1px solid $darker-bg;
+    border-top:1px solid $body-line-color;
     background:$secondary-color;
     width:100%;
   &:before {
@@ -114,10 +114,8 @@
 /* ZOOM IN OUT */
 
 #ctlzoom {
-    position: fixed; right: 50px; top: 120px; list-style: none; padding: 0; margin: 0;
+    position: fixed; right: 50px; top: 160px; list-style: none; padding: 0; margin: 0;
     width:200px;
-    //box-shadow:0 0 4px rgba(0,0,0,.3);
-    //background-color:$dark-bg;
 }
 
 #overviewzone {
@@ -125,8 +123,8 @@
     // right: 20px; 
     // top: 60px;
     z-index:22;
-    margin-top:50px;   
-    background-color: darken($darker-bg,2%);
+    margin-top:10px;   
+    background-color: $topbar-bg-color-dark;
     
 }
 #zoomSliderzone {
@@ -141,17 +139,10 @@
     height:35px;
     padding:0px;
     &:before {
-        @include inline-icon("\e06A",1.8rem,rgba(255,255,255,.5));
+        @include inline-icon("\e06A",1.8rem,$body-font-color);
         vertical-align:middle;
         display:inline-block;
         line-height:2.5rem;
-        //background-color:$dark-bg;
-        //border:2px solid $dark-bg;
-        //border-bottom:2px solid $darker-bg;
-        
-        //line-height:2.5rem;
-        //width:50px;
-        //height:45px;
     }
    
 }
@@ -266,7 +257,7 @@ div.smallpill {
     z-index:0;
     overflow:hidden;
     box-shadow:0 0 4px rgba(0,0,0,.2);
-    background: scale-color($dark-bg,$alpha:-10%);
+    background: $topbar-bg-color-dark;
     padding-top:40px;
     left:50%;
     margin-left:-200px;

@@ -67,30 +67,41 @@ var queryTerm;
 function initTopbar () {
 	}
 
-require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalone', 'components/search-request-manager', 'components/phaidra-que', 'components/download-manager', 'text!templates/topbar.hbs', 'i18n!nls/texts','components/basics',
+require([		'jquery', 
+				 'Handlebars', 
+				 'states-standalone', 
+				 'config/general', 
+
+				 'components/resource-manager', 
+				 'components/search-request-manager',
+				 'components/phaidra-que',
+				 'components/download-manager',
+				 'components/help-manager',
+				 'components/basics',
+
 				 'text!templates/login-modal.hbs',
 				 'text!templates/page-modal.hbs',
-				 'text!templates/footer.hbs',
-				 'text!templates/help.hbs',
 				 'text!templates/page-intro.hbs',
-				 'text!pages/page-imprint.html',
-				 'text!pages/page-contact.html',
-				 'text!pages/page-help.html',
-				 'foundation'],
-				function ($, _H, resourceManClass, states, _srm, _phQueClass, _downloadMan, topBarTemplate, _texts,_B,
-					loginTemplate,
-					pageTemplate,
-					footerTemplate,
-					helpTemplate,
-					introTemplate,
-					pageImprintHTML,
-					pageContactHTML,
-					pageHelpHTML
-					) {
+				 'text!templates/footer.hbs',
+				 'text!templates/topbar.hbs',
+				 'text!templates/help.hbs', 
+
+				 'text!nls/'+LANGUAGE+'/page-imprint.html',
+				 'text!nls/'+LANGUAGE+'/page-contact.html',
+				 'i18n!nls/texts',
+				 
+				 'foundation',
+				 'jquery.cookie'],
+
+				 function ($, _H, states, CONF, 
+					_ressourceMan, _srm, _phQueClass, _downloadMan, _helpMan, _B, 
+					loginTemplate, pageTemplate, introTemplate, footerTemplate, topBarTemplate, helpTemplate,
+					pageImprintHTML, pageContactHTML,
+					_texts) {
 	
 	var self = this;
 
-	resourceMan = new resourceManClass();
+	resourceMan = new _ressourceMan();
 	for(var key in states) {
 		if (typeof states[key].conf != 'undefined') {
 			resourceMan.register(states[key].state, states[key].name, states[key].conf);
@@ -105,6 +116,9 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 
 	var downloadMan = new _downloadMan();
 	resourceMan.setResource('download-man', downloadMan);
+
+	var helpMan = new _helpMan();
+	resourceMan.setResource('help-man', helpMan);
 
 	$(window)
 		.on('showShareLink.ph-plus', srm.showShareLink)
@@ -145,17 +159,12 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 		var s = 0;
 		var n = 50;
 		$(window).trigger('standalone-search', [q, r, s, n]);
-		// setTimeout(function(){
-		// 	$("#filter-canvas-filter-0").val(queryTerm);
-		// },1500)
+		$("#search-info").show();
 
 		$("#intro").fadeOut();
-		//$("#start-search-button").trigger("click")
 		
 		return false;
 	})
-	//$("#intro").fadeIn();
-
 
 	var footer = _H.compile($.trim(footerTemplate));
 	footer = $($.trim(footer()));
@@ -165,12 +174,9 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 	pageModal = $($.trim(pageModal()));
 	pages["page-imprint"] = pageImprintHTML;
 	pages["page-contact"] = pageContactHTML;
-	pages["page-help"] = pageHelpHTML;
-
 	
 	
 	$("#intro a[href='#'], footer a[href='#']").on("click",function(e){
-		log(e)
 		if($(this).hasClass("submit")) {
 			$("#introform").submit();
 			return false;
@@ -188,7 +194,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 
 	
 	$('body').append(pageModal);
-	$("body").prepend(topBar);
+	$('body').prepend(topBar);
 
 	$(".top-bar .folder").addClass("active")
 	$('.top-bar a, #main').on("click",function(e){
@@ -199,7 +205,7 @@ require(['jquery', 'Handlebars', 'components/resource-manager', 'states-standalo
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");
 		_B.delay(function(e){
 			Foundation.libs.tooltip.getTip(e).addClass("show");
-		},$(this),1000);
+		},$(this),500);
 	}).on("mouseleave.ph-plus",function(){
 		_B.noDelay($(this));
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");

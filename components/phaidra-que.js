@@ -1,8 +1,8 @@
 	/*
  * @module resources
  */
-define(['jquery', 'components/basics','jquery.cookie'],
-				function($, _B) {
+define(['jquery','config/general', 'components/basics','jquery.cookie'],
+				function($, CONF,_B) {
 
 	/**
 	 * The phaidra que eases the communication with the phaidra API.
@@ -58,7 +58,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 		 * @private
 		 * @type String
 		 */
-		var endPoint = "https://phaidra-plus.univie.ac.at/pp/";
+		var endPoint = CONF.endPoint;
 
 		/**
 		 * The query que.
@@ -210,7 +210,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 			
 			if (typeof data['user'] != 'undefined') {
 				credentials.realname = data['user'].firstname+ " "+data['user'].lastname
-				
+				$(".username").text(credentials.realname)
 				var date = new Date();
 				var minutes = 45;
 				date.setTime(date.getTime() + (minutes * 60 * 1000));
@@ -266,7 +266,7 @@ define(['jquery', 'components/basics','jquery.cookie'],
 					t: type,
 				}
 			);
-			//console.log(que)
+
 			if (que.length >= 1) {
 				self.processNext();
 			}
@@ -302,7 +302,6 @@ define(['jquery', 'components/basics','jquery.cookie'],
 		 */
 		this.loginSuccess = function(e,data)
 		{
-
 			return self;
 		};
 		/**

@@ -1,7 +1,8 @@
 #sidebar {
 	box-shadow:0 0 8px rgba(0,0,0,.1);
 	font-size:.875rem;
-	
+	//position:absolute;
+	//display:none;
 	.displays {
 		label.left {
 			display:none;
@@ -23,25 +24,7 @@
 		font-size:.825rem;
 		margin-right: .5rem;
 	}
-	div.switch {
-		border-color:$darker-bg;
-		margin-bottom:0;
-		label {
-			font-weight: 300;
-			line-height:1.25rem;
-			padding:.2rem .5rem;
-			
-			&:first-child {
-				color:inherit;
-			}
-			&:last-child {
-				color:white;
-			}
-		}
-	}
-	div.switch input:last-of-type:checked + label {
-		color:white !important;
-	}
+	
 	select {
 		width:100px;
 		float:left;

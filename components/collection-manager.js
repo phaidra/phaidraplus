@@ -76,7 +76,7 @@ define(['jquery', 'Handlebars', 'components/_P_', 'text!templates/collection-mod
 
 		this.addToCollection = function(index, obj)
 		{
-			collections[index].objects.push(obj);
+			collections[index].objects.unshift(obj);
 			collections[index].saved = false;
 		};
 
@@ -134,7 +134,7 @@ define(['jquery', 'Handlebars', 'components/_P_', 'text!templates/collection-mod
 				'loaded'			: false,
 				'objects'		  : [],
 				'saved'				: false,
-				'title' 			: _texts["untitledCollection"],
+				'title' 			: _texts["click-to-edit"],
 			});
 
 			self.saveCollection(index-1, false, {
