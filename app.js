@@ -60,13 +60,29 @@ function showTopbar () {
 
 function makeLogin()
 {
-	loginModal.foundation("reveal", "close");
+	
 	var phaidraQue = resourceMan.getResource('phaidra-que');
-
 	phaidraQue.login(loginModal.find('input[name=user]').val(), loginModal.find('input[name=pswd]').val());
-	//phaidraQue.execute("proxy/objects", null, { 'func': function(e){}, 'scope': null }, 'GET', true);
+}
+function authSuccess() {
+	loginModal.foundation("reveal", "close");
+}
+function showLogin(e){
+	if(!loginModal) {
+		alert("Bitte laden Sie die Seite erneut");
+		return false;
+	}
+	loginModal.find(".alert").hide();
+	$(window).off("authSuccess");
+	$(window).on("authSuccess",authSuccess);
+	
+	if(e && e.type == "authError") {
+		loginModal.find(".alert").show();
+	}
+	loginModal.find('input[name=user]').val('');
+	loginModal.find('input[name=pswd]').val('');
 
-	$(window).trigger('init');
+	loginModal.foundation("reveal", "open");
 }
 
 function showPage(e,data)
@@ -152,7 +168,6 @@ require([		'jquery',
 		})
 		.on('beforeunload.ph-plus', function(e) {
 			var confMessage = self.translate('navigateAwayMessage');
-
 			e.returnValue = confMessage;
 			return confMessage;
 		});
@@ -282,7 +297,8 @@ require([		'jquery',
 		$.removeCookie("joyride-lr-login");
 		$.removeCookie("joyride-mark");
 
-		loginModal.foundation("reveal", "open");
+		$(window).on("authError",showLogin);
+		showLogin();
 	}
 	
 

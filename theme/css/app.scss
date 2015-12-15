@@ -32,12 +32,6 @@ b, strong {
 	display:block;
 	padding-top:10%;
 	text-align:center;
-	.search {
-		//max-width:440px;
-	}
-	p {
-
-	}
 }
 .init #intro {
 	opacity:1;
@@ -134,9 +128,7 @@ h1.alert {
 		}
 		overflow:hidden;
 		&.main {
-			width:100%;
-			//background:#FFF;
-			
+			width:100%;			
 			color: inherit;
     		font-size: .875rem;
     		line-height: 2rem;
@@ -407,7 +399,7 @@ body.init {
 	.top-bar-section.submenu {
 		display: none;
 	}	
-	.username {
+	.user,.main-menu .collections {
 		display:none;
 	}
 	.pp-view,.options,
@@ -467,6 +459,10 @@ body.init,
 .button.alert {
 	color:$alert-color;
 	background:transparent;
+}
+span.alert,p.alert {
+	color:$alert-color;
+	font-weight:400;
 }
 .button.secondary {
 	$color:$body-font-color;

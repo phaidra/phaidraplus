@@ -193,6 +193,9 @@ define({
     'lessThan': 'kleiner als <',
     'license': 'Lizenz',
     'login': 'Anmelden',
+    'loginUseAccountMessage':'Bitte verwenden Sie zum Anmelden Ihren u:account',
+    'authErrorMessage': 'Anmeldung fehlgeschlagen, bitte überprüfen Sie Ihre Angaben.',
+
     'login-button': 'Anmelden',
     'logout': 'Abmelden',
     'members': 'Mitglieder',

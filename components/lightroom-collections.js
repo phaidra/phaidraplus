@@ -361,16 +361,9 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 				} else {
 					COLDOM.find('.show-all, .download-ppt, .open-collection').addClass('disabled');
 				}
-
-				return COLDOM;
-			};
-
-			this.attachEvents = function(cdom,e)
-			{
-				cdom
-					.data("pid", e.data.pid)
-					.find('.delete-item').on('click.ph-plus', function() {
-						var myself = $(this).closest('li'); 
+				COLDOM.on('click.ph-plus touchend.ph-plus','.delete-item', function() {
+						var myself = $(this).closest('li');
+						var cdom = myself
 						var ownId = myself.data('pid');
 						var collectionId = myself.closest('ul').data('uid');
 						log("click delete")
@@ -394,6 +387,14 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 						}]);
 						return false;
 					});
+				return COLDOM;
+			};
+
+			this.attachEvents = function(cdom,e)
+			{
+				cdom
+					.data("pid", e.data.pid)
+				
 			};
 
 			this.showAll = function(uid,bool)

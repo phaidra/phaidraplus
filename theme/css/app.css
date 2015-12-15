@@ -4483,7 +4483,7 @@ div#search-canvas {
       color: #666666;
       font-size: 11px; }
     div#search-canvas label.value-label, div#search-canvas span.title.value-label {
-      color: white;
+      color: #69737c;
       display: inline;
       margin-right: 0.5em; }
 
@@ -4520,7 +4520,7 @@ div#search-canvas {
       width: 100px; }
       #filter-canvas .sf .boolean-ops:hover {
         background-color: #1e96fc;
-        color: white; }
+        color: #1565c0; }
     #filter-canvas .sf .comparison-ops {
       clear: both;
       float: left;
@@ -4556,7 +4556,7 @@ div#search-canvas {
     margin-right: -0.5em;
     padding: 0.2em 0em 0.2em 1em; }
     #filter-canvas .remove-filter:hover {
-      color: white; }
+      color: #1565c0; }
     #filter-canvas .remove-filter:before {
       font-size: 1.5rem;
       display: inline;
@@ -5314,7 +5314,7 @@ div.smallpill {
   .slick-list:focus {
     outline: none; }
   .slick-loading .slick-list {
-    background: white url("x���/ajax-loader.gif") center center no-repeat; }
+    background: white url("x��^/ajax-loader.gif") center center no-repeat; }
   .slick-list.dragging {
     cursor: pointer;
     cursor: hand; }
@@ -5924,7 +5924,7 @@ h1.alert {
 
 body.init .top-bar-section.submenu {
   display: none; }
-body.init .username {
+body.init .user, body.init .main-menu .collections {
   display: none; }
 body.init .pp-view, body.init .options, body.init #search-params, body.init #pagination-info {
   display: none; }
@@ -5962,6 +5962,10 @@ body.init, .lightRoomCollectionView {
 .button.alert {
   color: #e51c23;
   background: transparent; }
+
+span.alert, p.alert {
+  color: #e51c23;
+  font-weight: 400; }
 
 .button.secondary {
   background: transparent; }

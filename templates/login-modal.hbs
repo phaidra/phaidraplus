@@ -5,21 +5,17 @@
 }
 }}
 <div class="reveal-modal action-modal small" data-reveal>
-		<!--<div class="clearfix">
-			<h1 class="left"><a href="./" class="logo">Phaidra+</a></h1>
-	  	</div>-->
-		
 
 		<h4>{{translate "please-login"}}</h4>
 		<form method="get" action="/">
 			<label style="color: #fff;display:none;">{{translate "username"}}</label> <input type="text" name="user" value="" placeholder="{{translate "username"}}">
 			<label style="color: #fff;display:none;">{{translate "password"}}</label><input type="password" name="pswd" value="" placeholder="{{translate "password"}}">
-			<p>Bitte verwenden Sie zum Anmelden Ihren u:account</p>
+			<p class="alert">{{translate 'authErrorMessage'}}</p>
+			<p>{{translate 'loginUseAccountMessage'}}</p>
 
 	  <div class="modal-actions">
 	  	<input type="submit" href="#" id="login-modal-login-btn" class="button" value="{{translate "login"}}">
-	  	<!--<div class="right"><img src="theme/img/unibiblogosmaller.png" height="30">&nbsp;</div>-->
-	  	<div class="right"><img src="theme/img/uni_logo_farbe_02_small.png" height="30"></div>
+	  	<!--<div class="right"><img src="theme/img/uni_logo_farbe_02_small.png" height="30"></div>-->
 	  </div>
 	  </form>
 </div>

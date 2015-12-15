@@ -180,12 +180,10 @@ define(['jquery','config/general', 'components/basics','jquery.cookie'],
 		this.errorHandler = function(jqXHR, textStatus, errorThrown)
 		{
 			processing = false;
-			//console.log("error")
-			//console.log(jqXHR)
-			//console.log(textStatus)
 
-			if(jqXHR.statusText == "Unauthorized") {
-				location.reload();
+			if(jqXHR.statusText == "Unauthorized" || jqXHR.status ==404  || jqXHR.status ==403) {
+				$(window).trigger("authError");
+				_B.removeLoading($('body'));
 				return false;
 			}
 			self.processNext();
@@ -214,10 +212,12 @@ define(['jquery','config/general', 'components/basics','jquery.cookie'],
 				var date = new Date();
 				var minutes = 45;
 				date.setTime(date.getTime() + (minutes * 60 * 1000));
-				//console.log(credentials.realname)
+				
 				$.cookie("username",credentials.username);
 				$.cookie("realname",credentials.realname);
 				$.cookie("token",xsrfToken,{ expires: date });
+				$(window).trigger('init');
+				$(window).trigger("authSuccess")
 			}
 
 			if (currentQueItem.cb != null) {
