@@ -96,6 +96,30 @@ function showPage(e,data)
 	})
 	pageModal.foundation("reveal", "open");
 }
+var showTour = function(){
+
+	if(!$("html").hasClass("lightRoomCollectionView")) {
+		var helpItems=["menu-lightroom","menu-geo","menu-timeline","menu-semantic","display-slideshow","display-options"];
+		if(!$("html").hasClass("standalone")) {
+			if($.cookie("joyride-lr-login")) {
+				return;
+			}
+			helpItems.push("menu-share");
+			helpItems.push("marker-actions");
+			$.cookie("joyride-lr-login",true)
+			$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+		} else if(!$.cookie("joyride-lr")) {
+			helpItems.push("login-button");
+			$.cookie("joyride-lr",true);
+			$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+		} 
+	} else {
+		$(window).trigger("showhelp",[{items:["menu-collections","my-collections","my-objects-title",'queryterm-field','main-menu'],endtitle:'',endtext:translate("tour-collections-end")}]);//{items:[{item_id:"menu-collections",title:'',text:"text"}]])	
+		$.cookie("joyride-lc",true);
+	}
+	
+}
+
 
 function loginRequired()
 {
@@ -214,6 +238,9 @@ require([		'jquery',
 	$(window)
 		.on('showpage.ph-plus', showPage);
 
+	$(window)
+		.on('showTour.ph-plus', showTour);
+
 	topBar = _H.compile($.trim(topBarTemplate));
 	topBar = $($.trim(topBar({login:true})));
 
@@ -245,14 +272,14 @@ require([		'jquery',
 		Foundation.libs.tooltip.getTip($(this)).removeClass("show");
 	});
 
-	$(document).on("click touchend",".lightRoomCollectionView #main-menu a",function(){
+	$(".top-bar").on("click.ph-plus touchend.ph-plus",".lightRoomCollectionView #main-menu a",function(){
 		alert("Um Darstellungsformen zu aktivieren, öffnen Sie einen bestehenden Ordner, oder führen Sie eine Suchabfrage durch.")
 	});
 	$("#logout-button").on("click touchend",function(){
 		$(window).trigger("logout");
 		return false;
 	})
-	$(".top-bar-section a[data-event], .top-bar-section .username a").on("click.ph-plus, touchend.ph-plus",function(e){
+	$(".top-bar a[data-event], .top-bar-section .username a").on("click.ph-plus, touchend.ph-plus",function(e){
 
 		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;

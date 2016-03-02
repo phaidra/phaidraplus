@@ -239,8 +239,8 @@ define(['jquery', 'spin'], function ($, S)
 			var src = img.attr("src");
 			
 			if(large != src) {
-				self.s.spin();
-				element.append(self.s.el)
+				// self.s.spin();
+				// element.append(self.s.el)
 				img.attr("src", large);
 			}
 		}

@@ -142,12 +142,12 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 			{
 				$("input").off("change.ph-plus-lightroom")
 				$("#sidebar-attributes-selector input[name=switch-title]").on("change.ph-plus-lightroom", function (e) {
-					$(".cell .title").toggle();
-
+					//console.log("change title")
 					var sConf = resourceMan.getResource('sidebarConfig');
 					sConf.title = $(this).is(':checked') ? 1 : 0;//($(this).val() == 'true');
 					resourceMan.setResource('sidebarConfig', sConf);
-					console.log(sConf)
+					$(".cell .title").toggle();
+					
 					if(sConf.title || sConf.desc) {
 						$(".cell .content").addClass("open")
 					} else {
@@ -283,33 +283,18 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 				// checking last config of the sidebar switches
 				var sConf = resourceMan.getResource('sidebarConfig');
 				for(var name in sConf) {
-					if (($('#sidebar #options input[name=switch-'+name+']').val() == 'true') != sConf[name]) {
-						$('#sidebar #options input[name=switch-'+name+'][value='+sConf[name]+']')
+					if (sConf[name]) { //($('#sidebar #options input[name=switch-'+name+']').val() == 'true') != sConf[name]) {
+						$('#sidebar #options input[name=switch-'+name+']')//([value='+sConf[name]+'])
 							.prop('checked', true)
-							.trigger('change.ph-plus-lightroom');
+					 		.trigger('change.ph-plus-lightroom');
 					}
 				}
-				if($("html").hasClass("standalone")) return;
+				
 				if(!$.cookie("joyride-lr") || !$.cookie("joyride-lr-login")) {
-					var helpItems=["menu-lightroom","menu-geo","menu-timeline","menu-semantic","display-slideshow","display-options"];
-					if(!$("html").hasClass("standalone")) {
-						if($.cookie("joyride-lr-login")) {
-							return;
-						}
-						helpItems.push("menu-share");
-						helpItems.push("marker-actions");
-						$.cookie("joyride-lr-login",true)
-						$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
-					} else if(!$.cookie("joyride-lr")) {
-						helpItems.push("login-button");
-						$.cookie("joyride-lr",true);
-						$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
-					} 
-					
-					
+					$(window).trigger("showTour");
 				}
 			};
-
+			
 			this.showOverlay = function (e)
 			{
 				if (self.CURSIZE == 1 || curMode == "slideshow") {

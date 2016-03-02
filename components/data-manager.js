@@ -1052,7 +1052,22 @@ define(['jquery', 'components/_P_', 'config/general','spin', 'jquery.cookie'], f
 			if (selectedCollection != which) {
 				self.markObjects(false);
 			}
-
+			var selCollection = self.getCollection(which)
+			
+			var pic = $('#pagination-info');
+			pic
+				.attr("title","")
+				.removeAttr("data-tooltip")
+				.show()
+				.find(".num").text(selCollection.title);
+			pic.find(".suffix").text("");
+				$('#search-info').show();
+				$('.search-previouspage, .search-nextpage').hide();
+			
+			// Clear Search Field
+			if($("#filter-canvas-filter-0").length) {
+				$("#filter-canvas-filter-0").val("")
+			}
 			selectedCollection = which;
 			setDisplayMode('collection');
 			$(self).trigger('changeDisplayed', [self]);

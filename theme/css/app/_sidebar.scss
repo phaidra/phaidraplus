@@ -2,7 +2,7 @@
 	box-shadow:0 0 8px rgba(0,0,0,.1);
 	font-size:.875rem;
 	//position:absolute;
-	//display:none;
+	display:none;
 	.displays {
 		label.left {
 			display:none;
@@ -91,6 +91,9 @@
 	}
 	input {
 		margin-bottom:0;
+	}
+	&.open {
+		display:block;
 	}
 }
 

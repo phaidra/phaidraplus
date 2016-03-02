@@ -7,10 +7,10 @@
  * - Update View when data is changed
  *
  */
-define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','text!templates/lightroom-collections.hbs','text!templates/ingest-modal.hbs','i18n!nls/texts', 'components/_P_', 'spin',
+define(['jquery', 'Handlebars','components/basics','components/ppt','text!templates/lightroom-collections.hbs','text!templates/ingest-modal.hbs','i18n!nls/texts', 'components/_P_', 'spin',
 				'foundation', 'jquery.cookie'],
 
-	function ($, _H, Hallo, _B, _pptCreatorClass, _template,_ingestTemplate, _texts, _P_, _spinner)
+	function ($, _H, _B, _pptCreatorClass, _template,_ingestTemplate, _texts, _P_, _spinner)
 	{
 	/**
 	 * The lightroom collections class displays the owner's collections on the startpage of phaidra+.
@@ -167,16 +167,13 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 				self.resizeImages(2);
 				$(window).trigger('clearSearchUI');
 
-				
 				self.updateHandlers();
-				
+					
 				if(!$.cookie("joyride-lc")) {
-					$(window).trigger("showhelp",[{items:["menu-collections","my-collections","my-objects-title",'queryterm-field','main-menu'],endtitle:'',endtext:translate("tour-collections-end")}]);//{items:[{item_id:"menu-collections",title:'',text:"text"}]])	
-					$.cookie("joyride-lc",true);
+					$(window).trigger("showTour");
 				}
 				
 			};
-
 
 
 			this.ownerObjectsLoaded = function (d)
@@ -225,19 +222,12 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					ownerObjectsContainer.append(cdom);
 					num++;
 				}
-				// myObjsDom.find("#add-object").on("touchend.ph-plus click.ph-plus",function (e) {
-				// 	log("add click")
-				// 	log(e)
-				// 	$(window).trigger("ingestObject");
-				// 	return false;
-				// });
 
 				self.updateImageSize(self.CURSIZE,true);
 
 				if (ownerObjects.length) {
-					//self.createCollectionDisplay(e.uid, e.title, e.objects, false, e.updated);
 					dataMan.createCollection({
-						'title': 'Meine Objekte', 'objects': ownerObjects, 'uid': -1,
+						'title': self.translate('my-objects-title'), 'objects': ownerObjects, 'uid': -1,
 						'updated':new Date()
 					});
 
@@ -260,7 +250,6 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 				var ownerObjectsContainer = myObjsDom.find('.objects');
 
 				var objects = ownerObjects;
-				//var col = self.getCollection(uid);
 				if(bool) {
 					for (var i = numOwnObjectsVisible; i < objects.length; i++) {
 						var o = objects[i];
@@ -268,11 +257,11 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 						cdom = cdom.clone();
 						cdom
 						.data("data", o.data)
-						.on('click.ph-plus', function (e) {
-							dataMan.selectCollection(-1);
-							$(window).trigger("openSingleView",[$(this).data('data'), true]);
-							return false;
-						});
+						// .on('click.ph-plus', function (e) {
+						// 	dataMan.selectCollection(-1);
+						// 	$(window).trigger("openSingleView",[$(this).data('data'), true]);
+						// 	return false;
+						// });
 
 						ownerObjectsContainer.append(cdom);
 					};
@@ -317,30 +306,30 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 
 				var name = COLDOM.find(".name");
 				
-				name.hallo();
+				// name.hallo();
 				
-				name
-					.on("hallodeactivated", function() {
-						var t = $(this).text();
+				// name
+				// 	.on("hallodeactivated", function() {
+				// 		var t = $(this).text();
 					
-						if (!t || t.length < 1) {
-							t = "Unbenannt";
-							$(this).text(t);
-						}
+				// 		if (!t || t.length < 1) {
+				// 			t = "Unbenannt";
+				// 			$(this).text(t);
+				// 		}
 
-						$(window).trigger('changeCollectionProperty', [$(this).closest(".collection").data("uid"), 'title', t]);
-					})
-					.on("keypress", function (e) {
-						var keycode = (e.keyCode ? e.keyCode : e.which);
+				// 		$(window).trigger('changeCollectionProperty', [$(this).closest(".collection").data("uid"), 'title', t]);
+				// 	})
+				// 	.on("keypress", function (e) {
+				// 		var keycode = (e.keyCode ? e.keyCode : e.which);
 
-						switch(keycode) {
-							case 13:
-								name.hallo('turnOff');
-								name.blur();
-								return false;
-							break;
-						}
-					});
+				// 		switch(keycode) {
+				// 			case 13:
+				// 				name.hallo('turnOff');
+				// 				name.blur();
+				// 				return false;
+				// 			break;
+				// 		}
+				// 	});
 
 				var CURCOL = COLDOM.find(".collection-items");
 				
@@ -492,8 +481,8 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					});
 				}
 
-				dom.find(".collection .button").off(".ph-plus");
-				dom.find(".open-collection").on("click.ph-plus",function (e) {
+				dom.find(".collection .button,.collection h4 a").off(".ph-plus");
+				dom.find(".open-collection, a.name").on("click.ph-plus",function (e) {
 					var col = $(this).closest(".collection");
 					var uid = col.data("uid");
 					dataMan.selectCollection(uid)
@@ -548,14 +537,22 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 						col.removeClass("editable");
 						self.showAll(uid,false);
 						self.updateHandlers(col);
-						$(this).attr("title",$(this).attr("data-title"));						
+						var colname = col.find("input.title-input").val();
+						if(!colname) {
+							colname = self.translate("untitled-collection");
+						}
+						var updateTitle = col.find(".name").text()!=colname;
+						col.find(".name").text(colname);
+						$(this).attr("title",$(this).attr("data-title"));
+						if(updateTitle) {
+							$(window).trigger('changeCollectionProperty', [$(this).closest(".collection").data("uid"), 'title', colname]);
+						}
 					} else {
 						self.showAll(uid,true);
 						self.updateHandlers(col,true);
 						col.addClass("editable");
 						$(this).attr("title",$(this).attr("data-active-title"));
 						$(this).addClass("active");
-						col.find(".name").trigger("click");
 						$(".show-more").hide();						
 					}
 
@@ -571,10 +568,7 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 					self.createCollection();
 					return false;
 				});
-				//log(dom.find("#add-object"))
 				dom.find("#add-object").on("touchend.ph-plus click.ph-plus",function (e) {
-					log("add click")
-					log(e)
 					$(window).trigger("ingestObject");
 					return false;
 				});
@@ -615,10 +609,6 @@ define(['jquery', 'Handlebars','hallo','components/basics','components/ppt','tex
 
 					cols.attr("class","collection-items");
 					
-					// var c = v+2;
-					// c = 6;
-					//cols.addClass("medium-block-grid-"+(c));
-					// cols.addClass("large-block-grid-3");
 					cols.addClass("medium-block-grid-8");
 					cols.addClass("large-block-grid-6");
 					

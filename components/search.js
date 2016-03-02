@@ -383,7 +383,9 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 								break;
 						}
 					}
-					str.push(_p.translate('boolean'+fieldBool.capitalize()));
+					if(fieldBool) {
+						str.push(_p.translate('boolean'+fieldBool.capitalize()));
+					}
 					str.push(_p.translate(fieldKey)+':"'+fieldValue+'"');
 				};
 			} else {
@@ -432,16 +434,20 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 			
 			var t_ofpages = Math.min(results,(currentPage+1)*searchPageSize)
 			var t_page = ((currentPage)*searchPageSize);
-			
+			pic.find(".suffix").text(pic.find(".suffix").attr("data-title"));
 			if(!t_ofpages) {
 				pic
-				.attr("title","Keine Treffer")
+				.attr("title",_p.translate("no-results"))
 				.attr("data-tooltip","")
 				.show()
-				.find(".num").text("keine");
+				.find(".num").text("0");
 				$('#search-info').show();
 				
 				$('.search-previouspage, .search-nextpage').hide();
+				var alert = $("<div>");
+				alert.addClass("panel alert");
+				alert.append("<p>"+_p.translate("no-results")+"</p>");
+				$("#mainsection").append(alert)
 				return;
 			} else {
 				t_page +=1
@@ -486,6 +492,11 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 		this.create = function() {
 			// creating dom Base from template
 			dom = $('#search-dropdown-container');
+			dom.find(".close-dropdown").off("click touchend")
+			dom.find(".close-dropdown").on("click touchend",function(e){
+				$(this).closest(".f-dropdown").removeClass("open")
+				return false;
+			})
 			dom.removeClass('template');
 
 			filterCanvas = dom.find('#filter-canvas');

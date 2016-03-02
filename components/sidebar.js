@@ -21,7 +21,6 @@ define(['jquery', 'Handlebars', 'components/basics', 'text!templates/sidebar.hbs
 			dom = $(dom);
 					      
 			$('body').append(dom);
-			//$('body').append($("#marker-actions"));
 
 			$("#imagesize").on("change.ph-plus-sidebar", function () {
 				if (imageResizeCb != null) {
@@ -76,6 +75,12 @@ define(['jquery', 'Handlebars', 'components/basics', 'text!templates/sidebar.hbs
 					dataMan.restrictToKeyword($(this).val());
 				}
 			});
+			dom.find(".close-dropdown").off("click touchend");
+			dom.find(".close-dropdown").on("click touchend",function(e){
+				//$(this).closest(".f-dropdown").removeClass("open")
+				self.hide();
+				return false;
+			})
 		};
 
 		this.updateSidebar = function()
@@ -185,7 +190,6 @@ define(['jquery', 'Handlebars', 'components/basics', 'text!templates/sidebar.hbs
 			self.updateSidebar();
 
 			if(typeof dataMan["getDisplayMode"] != "undefined" && dataMan.getDisplayMode() == "marked") {	
-				//$("#collection-marker-filter").removeClass("secondary");
 				$("#collection-marker-filter").addClass("active");
 			} else {
 				$("#collection-marker-filter").removeClass("active");

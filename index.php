@@ -76,8 +76,7 @@
             'waterfall' : "external/waterfall",
             'spin' : "external/spin",
             'imagesLoaded' : "external/imagesloaded.pkgd",
-            'timeago': 'external/jquery.timeago',
-            'hallo' : 'external/hallo'
+            'timeago': 'external/jquery.timeago'
           },
           shim: {
             'foundation': {
@@ -104,10 +103,6 @@
             'leaflet': {
               'exports': 'L'
             },
-            'hallo': {
-              'deps': ['jquery'],
-            },
-            
             'jquery.history': {
               'deps': ['jquery'],
               'exports': 'History',
@@ -129,7 +124,8 @@
 
 <body class="init">
       
-  <div id="search-dropdown-container" data-dropdown-content class="template medium f-dropdown content right">
+  <div id="search-dropdown-container" data-dropdown-content class="template medium f-dropdown content left">
+    <a class="close-dropdown" aria-label="Close">&#215;</a>
     <div id="search-canvas" class="">
       <div id="filter-canvas" class="clearer"></div>
     </div>

@@ -49,6 +49,32 @@ function showTopbar () {
 	$('nav.top-bar').show();
 }
 
+var showTour = function(){
+
+	if(!$("html").hasClass("lightRoomCollectionView")) {
+		var helpItems=["menu-lightroom","menu-geo","menu-timeline","menu-semantic","display-slideshow","display-options"];
+		if(!$("html").hasClass("standalone")) {
+			if($.cookie("joyride-lr-login")) {
+				return;
+			}
+			helpItems.push("menu-share");
+			helpItems.push("marker-actions");
+			$.cookie("joyride-lr-login",true)
+			$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+		} else if(!$.cookie("joyride-lr")) {
+			helpItems.push("login-button");
+			$.cookie("joyride-lr",true);
+			$(window).trigger("showhelp",[{items:helpItems,align:"left"}]);
+		} 
+	} else {
+		$(window).trigger("showhelp",[{items:["menu-collections","my-collections","my-objects-title",'queryterm-field','main-menu'],endtitle:'',endtext:translate("tour-collections-end")}]);//{items:[{item_id:"menu-collections",title:'',text:"text"}]])	
+		$.cookie("joyride-lc",true);
+	}
+	
+}
+
+
+
 function showPage(e,data)
 {
 	pageModal.empty();
@@ -192,6 +218,9 @@ require([		'jquery',
 	$(window)
 		.on('showpage.ph-plus', showPage);
 
+	$(window)
+		.on('showTour.ph-plus', showTour);
+
 	
 	$('body').append(pageModal);
 	$('body').prepend(topBar);
@@ -212,7 +241,7 @@ require([		'jquery',
 	});
 
 
-	$(".top-bar-section a[data-event]").on("click.ph-plus touchend.ph-plus",function(e) {
+	$(".top-bar a[data-event]").on("click.ph-plus touchend.ph-plus",function(e) {
 		if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 			return false;
 		}

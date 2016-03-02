@@ -8,7 +8,8 @@
 				<div class="inner">
 					<h4>
 						<div class="collection-actions">
-						<span class="name" contenteditable="true" title="{{translate 'click-to-edit'}}">{{title}}</span> 
+						<a href="#" data-action="collection-open" title="{{translate "collectionOpen"}}" class="name">{{title}}</a>
+						<input type="text" value="{{title}}" placeholder="{{ translate 'new-collection'}}" name="title" size="60" class="title-input">
 						<a href="#" class="button tiny alert right tip-top icon icon-delete delete-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="delete" data-warning="{{translate 'delete-warning'}}" title="{{translate "collectionDelete"}}"></a>
 						<a href="#" class="button icon icon-edit tip-top secondary tiny right show-all" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="edit" data-title="{{translate "collectionEdit"}}" data-active-title="{{translate "collectionunEdit"}}" title="{{translate "collectionEdit"}}"></a>
 						<a href="#" class="button tiny right secondary tip-top icon icon-ppt download-ppt" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="pptdown" title="{{translate "download-ppt"}}"></a>

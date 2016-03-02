@@ -530,20 +530,15 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 			}
 			_B.makeLoading($('body'));
 			$.support.cors = true;
-			//console.log(setup);
+			
 
 			$.getJSON(gsaEndPoint, setup, function(data, textStatus, jqXHR) {
-				//console.log("DONE")
-				//console.log(jqXHR);
-				//console.log(data);
 				data.num = setup.num;
 				data.start = setup.start/setup.num;
 
 			 	self.loadSuccess(data, cb, reset);
 			})
 			 .fail(function(jqXHR) {
-			 	//console.log("FAIL")
-			 	//console.log(jqXHR);
 			 	try {
 			 		if(jqXHR.status == 200) {
 			 			var r = $.trim(jqXHR.responseText)
@@ -615,14 +610,10 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 
 			var dataMan = resourceMan.getResource('gsaData');
 			var setup = null;
-			console.log(resourceMan)
-			console.log(dataMan)
-			console.log(dataMan.getDisplayMode())
-			console.log(dataMan.getSelectedCollection())
 
 			if (dataMan.getDisplayMode() == 'collection' && dataMan.getSelectedCollection() != null) {
 				// exit for own documents
-				//log("exit")
+				
 				if (dataMan.getSelectedCollection() == -1) {
 					return self;
 				} else {
@@ -633,7 +624,7 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 					};
 				}
 			} else {
-				
+				setup = self.getQuerySetup();
 			}
 			switch (resourceMan.currentState) {
 					case 'dataManaged':
@@ -654,7 +645,7 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 					default:
 						return false;
 				}
-				setup = self.getQuerySetup();
+				
 
 		  _H.registerHelper('translate', self.translate);
 			

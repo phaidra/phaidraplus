@@ -3,7 +3,11 @@
     <ul class="title-area">
       <li class="name">
        <h1>
-	     <a href="/" class="logo" data-event="openLightRoomCollections">
+       {{#if login}} 
+	       <a href="#" class="logo" data-event="openLightRoomCollections">
+       {{else}}
+          <a href="#" class="logo" data-event="openLightroom">
+       {{/if}}
         <svg viewBox="0 0 640 143.668">
         <use xlink:href="#svglogo"></use>
         </svg>
@@ -71,7 +75,7 @@
 
       <ul id="search-info" class="menu left  sub-nav">
         <li>
-          <a href="#" id="pagination-info"><span class="num"></span> {{translate 'results'}}</a>
+          <a href="#" id="pagination-info"><span class="num"></span> <span class="suffix" data-title="{{translate 'results'}}">{{translate 'results'}}</span></a>
         </li>
 
         <li class="search-previouspage">
@@ -101,6 +105,9 @@
         <li class="share pp-view">
            <a href="#share" class="icon icon-share toggle" id="menu-share" data-tooltip title="{{translate "menu-share"}}" data-option="disable-for-touch:true" data-event="showShareLink">{{translate "menu-share"}}</a>
         </li>
+        <!--<li class="tour pp-view">
+           <a href="#" class="icon icon-info" id="menu-tour" data-tooltip title="{{translate "menu-tour"}}" data-option="disable-for-touch:true" data-event="showTour">{{translate "menu-tour"}}</a>
+        </li>-->
       </ul>
 
       </div>
