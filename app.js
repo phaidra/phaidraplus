@@ -150,6 +150,7 @@ require([		'jquery',
 
 				 'text!nls/'+LANGUAGE+'/page-imprint.html',
 				 'text!nls/'+LANGUAGE+'/page-contact.html',
+				 'text!nls/'+LANGUAGE+'/page-help.html',
 				 'i18n!nls/texts',
 				 
 				 'foundation',
@@ -158,7 +159,7 @@ require([		'jquery',
 				function ($, _H, states, CONF, 
 					_ressourceMan, _srm, _phQueClass, _downloadMan, _ingestMan, _helpMan,_B, 
 					loginTemplate, pageTemplate, footerTemplate, topBarTemplate, helpTemplate,
-					pageImprintHTML, pageContactHTML,
+					pageImprintHTML, pageContactHTML, pageHelpHTML,
 					_texts) {
 	
 	var self = this;
@@ -228,13 +229,9 @@ require([		'jquery',
 	pageModal = $($.trim(pageModal()));
 	pages["page-imprint"] = pageImprintHTML;
 	pages["page-contact"] = pageContactHTML;
+	pages["page-help"] = pageHelpHTML;
 
-	$("footer a[href='#']").on("click",function(){
-		if($(this).attr("data-page")) {
-			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
-		}
-		return false;
-	})
+	
 	$(window)
 		.on('showpage.ph-plus', showPage);
 
@@ -250,6 +247,14 @@ require([		'jquery',
 	$(".top-bar .folder").addClass("active")
 	$('.top-bar a, #main').on("click",function(e){
 		$(".tooltip").hide();
+	})
+
+	$("a[data-page]").on("click touchend",function(e){
+		
+		if($(this).attr("data-page")) {
+			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
+		}
+		return false;
 	})
 
 	$(window).on("logout",function(e){
@@ -314,7 +319,7 @@ require([		'jquery',
 	if($.cookie("token")) {
 		phaidraQue.setToken($.cookie("token"))
 		phaidraQue.setUser($.cookie("realname"))
-		$('.top-bar .username > a').text($.cookie("realname"))
+		$('.top-bar .login-name').text($.cookie("realname"))
 		phaidraQue.execute("proxy/objects", null, { 'func': function(e){}, 'scope': null }, 'GET', true);
 		$(window).trigger('init');
 	} else {

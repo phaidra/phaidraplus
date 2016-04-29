@@ -285,15 +285,15 @@ define(['jquery', 'Handlebars','components/basics','components/ppt','text!templa
 				var COLDOM = dom.find("li.collection[data-uid='"+uid+"']");
 				
 				if (!COLDOM.length || isnew) {
-					if (!$("#mainsection li.collection").length) {
+					//if (!$("#mainsection li.collection").length) {
 						COLDOM = $("<li>");
 						COLDOM.addClass("collection");
 						COLDOM.append($("#collection-template").html())
-					} else {
-						COLDOM = dom.find(".collection").eq(0).clone();
-						COLDOM.find(".show-date").text("-");
-						COLDOM.find(".show-more").text("");
-					}
+					// } else {
+					// 	COLDOM = dom.find(".collection").eq(0).clone();
+					// 	COLDOM.find(".show-date").text("-");
+					// 	COLDOM.find(".show-more").text("");
+					// }
 
 					COLDOM.find(".collection-items").empty();
 					COLDOM.attr("data-uid",uid);
@@ -306,31 +306,6 @@ define(['jquery', 'Handlebars','components/basics','components/ppt','text!templa
 
 				var name = COLDOM.find(".name");
 				
-				// name.hallo();
-				
-				// name
-				// 	.on("hallodeactivated", function() {
-				// 		var t = $(this).text();
-					
-				// 		if (!t || t.length < 1) {
-				// 			t = "Unbenannt";
-				// 			$(this).text(t);
-				// 		}
-
-				// 		$(window).trigger('changeCollectionProperty', [$(this).closest(".collection").data("uid"), 'title', t]);
-				// 	})
-				// 	.on("keypress", function (e) {
-				// 		var keycode = (e.keyCode ? e.keyCode : e.which);
-
-				// 		switch(keycode) {
-				// 			case 13:
-				// 				name.hallo('turnOff');
-				// 				name.blur();
-				// 				return false;
-				// 			break;
-				// 		}
-				// 	});
-
 				var CURCOL = COLDOM.find(".collection-items");
 				
 				CURCOL.data("uid", uid);
@@ -348,7 +323,7 @@ define(['jquery', 'Handlebars','components/basics','components/ppt','text!templa
 						CURCOL.append(cdom);
 					});
 				} else {
-					COLDOM.find('.show-all, .download-ppt, .open-collection').addClass('disabled');
+					COLDOM.find('.download-ppt, .open-collection').addClass('disabled');
 				}
 				COLDOM.on('click.ph-plus touchend.ph-plus','.delete-item', function() {
 						var myself = $(this).closest('li');

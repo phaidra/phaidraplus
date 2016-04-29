@@ -35,8 +35,8 @@ define(['jquery', 'spin'], function ($, S)
 			resourceMan.setResource('slideshow', self);
 			self.s = new S();
 			
-			$('#display-slideshow').on('click.ph-plus-slideshow', function (e) {
-				console.log(e)
+			$('#display-slideshow').on('click.ph-plus-slideshow touchend.ph-plus-slideshow', function (e) {
+				//console.log(e)
 				if ($(this).hasClass('disabled') || $(this).hasClass('active')) {
 					return false;
 				}
@@ -51,7 +51,7 @@ define(['jquery', 'spin'], function ($, S)
 				return false;
 			});
 			
-			$("#lightroom-whiteboard-close").on("click.ph-plus-slideshow", function (e) {
+			$("#lightroom-whiteboard-close").on("click.ph-plus-slideshow touchend.ph-plus-slideshow", function (e) {
 				self.destroySlideshow();
 				$(this).removeClass("secondary");
 				$(self).trigger('slideshowClose');
@@ -255,7 +255,6 @@ define(['jquery', 'spin'], function ($, S)
 			$("#slideshow").remove();
 			$("#slideshow2").unslick();
 			$("#slideshow2").remove();
-			//$(".orbit-container").remove();
 			
 			$("html").removeClass("orbit");
 

@@ -21,19 +21,25 @@
     <div class="top-bar-section right user">
       <ul class="menu">
       <li>
-        <a href="#" id="logout-button" title="{{translate 'logout'}}" class="loginout username secondary icon icon-logout icon-small" data-tooltip>
-        </a>
-      
+        <a href="#" class="link" data-page="page-help">{{translate "Hilfe"}}</a>
+        <!--href="http://phaidraplusservice.univie.ac.at/"-->
+      </li>
+      <li>
+        <a href="#" class="link" data-page="page-contact">{{translate "Kontakt"}}</a>
+      </li>
+      <li>
+        <a href="#" class="link" data-page="page-imprint">{{translate "Impressum"}}</a>
+      </li>
+      <li>
+        <a href="#" id="logout-button" class="loginout username secondary icon icon-logout icon-small">{{translate 'logout'}}</a>
       </li>
     </ul>
     </div>
     {{/if}}
-
     <div class="top-bar-section main main-menu">
-
       <ul class="menu search">
         <li class="collections">
-          <a href="#" id="menu-collections" class="icon icon-folder folder active" data-event="openLightRoomCollections" title="">{{translate "menu-collections"}}</a>
+          <a href="#" id="menu-collections" class="icon icon-folder folder active" data-event="openLightRoomCollections" title=""><span class="login-name"></span>'s {{translate "menu-collections"}}</a>
          </li>
          <li class="login">
          <form method="POST" action="/" id="logout-button">
@@ -50,24 +56,24 @@
            <span class='title'>{{translate "menu-lightroom"}}</span>
            </a>
         </li>
-        <li class="landkarte pp-view">
-	         <a href="#landkarte" class="icon icon-map" data-event="openGeoView" id="menu-geo" title="{{translate "menu-geo"}}">
-           <span class='title'>{{translate "menu-geo"}}</span>
-           </a>
-        </li>
-        <li class="timeline pp-view">
-	         <a href="#timeline" class="icon icon-timeline" data-event="openTimelineView" id="menu-timeline" title="{{translate "menu-timeline"}}">
-            <span class='title'>{{translate "menu-timeline"}}</span>
-           </a>
+        <li class="pp-view slideshow">
+          <a href="#" class="icon icon-slideshow" id="display-slideshow">{{translate "display-slideshow"}}</a>      
         </li>
         <li class="semantic pp-view">
 	         <a href="#semantic" class="icon icon-semantic" title="{{translate "menu-semantic"}}" id="menu-semantic" data-event="openSemanticView">
            <span class='title'>{{translate "menu-semantic"}}</span>
            </a>
         </li>
-        <li class="pp-view slideshow">
-          <a href="#" class="icon icon-slideshow" id="display-slideshow">{{translate "display-slideshow"}}</a>      
-        </li>       
+        <li class="landkarte pp-view">
+           <a href="#landkarte" class="icon icon-map" data-event="openGeoView" id="menu-geo" title="{{translate "menu-geo"}}">
+           <span class='title'>{{translate "menu-geo"}}</span>
+           </a>
+        </li>
+        <li class="timeline pp-view">
+           <a href="#timeline" class="icon icon-timeline" data-event="openTimelineView" id="menu-timeline" title="{{translate "menu-timeline"}}">
+            <span class='title'>{{translate "menu-timeline"}}</span>
+           </a>
+        </li>
       </ul>
       
     </div>

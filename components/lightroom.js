@@ -142,7 +142,6 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 			{
 				$("input").off("change.ph-plus-lightroom")
 				$("#sidebar-attributes-selector input[name=switch-title]").on("change.ph-plus-lightroom", function (e) {
-					//console.log("change title")
 					var sConf = resourceMan.getResource('sidebarConfig');
 					sConf.title = $(this).is(':checked') ? 1 : 0;//($(this).val() == 'true');
 					resourceMan.setResource('sidebarConfig', sConf);
@@ -182,7 +181,7 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 						return false;
 					})
 					.on("slideshowClose.ph-plus-lightroom", function (e) {
-					
+						console.log("close slideshow",e)
 						$("select.displayMode").val($("#lightroom-whiteboard-close").data("returnto"));
 						$("select.displayMode").trigger("change");
 
@@ -190,9 +189,10 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 					});
 
 				$("#options select.displayMode").on("change",function(){
+					//console.log("change")
 					if($(this).val()=="grid") {
 						var prevMode = curMode;
-						
+						//console.log(curMode," grid")
 						curMode = "grid";
 						$('#container').show();
 						self.resetImageStyles();					
@@ -204,11 +204,10 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 							log("last scroll "+lastScrollTop)
 							$("body").scrollTop(lastScrollTop);
 						}
-
-						$(".displayMode").find("a").addClass("secondary");
+						//$(".displayMode").find("a").addClass("secondary");
 					} else {
 						var prevMode = curMode;
-						
+						console.log(curMode,"not grid")
 						curMode = "list";
 						self.resetImageStyles();
 						$(".cell").addClass("list-view");						
@@ -218,11 +217,11 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 						if(prevMode == "slideshow") {
 							$("body").scrollTop(lastScrollTop);
 						}
-
-						$(".displayMode").find("a").addClass("secondary");						
+						//$(".displayMode").find("a").addClass("secondary");						
 						$(".gridoptions").hide();											
 						$("body").scrollTop(lastScrollTop);
 					}
+					$("#container").fadeIn(400);
 				});				
 
 				if (typeof dataMan.objectsmarked == 'undefined' || !dataMan.objectsmarked.length) {
@@ -283,13 +282,15 @@ define(['jquery', 'Handlebars', 'spin', 'text!templates/lightroom.hbs', 'i18n!nl
 				// checking last config of the sidebar switches
 				var sConf = resourceMan.getResource('sidebarConfig');
 				for(var name in sConf) {
+					//console.log(name,sConf[name])
 					if (sConf[name]) { //($('#sidebar #options input[name=switch-'+name+']').val() == 'true') != sConf[name]) {
+						console.log(name,sConf[name])
 						$('#sidebar #options input[name=switch-'+name+']')//([value='+sConf[name]+'])
 							.prop('checked', true)
 					 		.trigger('change.ph-plus-lightroom');
 					}
 				}
-				
+				$("select.displayMode").trigger("change");
 				if(!$.cookie("joyride-lr") || !$.cookie("joyride-lr-login")) {
 					$(window).trigger("showTour");
 				}

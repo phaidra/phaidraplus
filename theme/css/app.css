@@ -5317,7 +5317,7 @@ div.smallpill {
   .slick-list:focus {
     outline: none; }
   .slick-loading .slick-list {
-    background: white url("x�}�/ajax-loader.gif") center center no-repeat; }
+    background: white url("x�p�/ajax-loader.gif") center center no-repeat; }
   .slick-list.dragging {
     cursor: pointer;
     cursor: hand; }
@@ -5784,6 +5784,17 @@ h1.alert {
         background: #1565c0;
         border: 1px solid #1565c0;
         color: white; }
+    .top-bar .top-bar-section.main-menu .menu li.landkarte a, .top-bar .top-bar-section.main-menu .menu li.timeline a {
+      border: 1px solid #75818a;
+      color: #75818a;
+      background-color: white; }
+      .top-bar .top-bar-section.main-menu .menu li.landkarte a:hover, .top-bar .top-bar-section.main-menu .menu li.timeline a:hover {
+        color: #1565c0;
+        border: 1px solid #1565c0; }
+      .top-bar .top-bar-section.main-menu .menu li.landkarte a.active, .top-bar .top-bar-section.main-menu .menu li.timeline a.active {
+        background: #1565c0;
+        border: 1px solid #1565c0;
+        color: white; }
     .top-bar .top-bar-section.main-menu .menu li a#menu-collections, .top-bar .top-bar-section.main-menu .menu li button#login-button {
       background: transparent;
       border: 1px solid #b2b8be;
@@ -5795,9 +5806,10 @@ h1.alert {
       padding: 0px 10px 0px 4px;
       line-height: 2rem; }
     .top-bar .top-bar-section.user {
-      padding: 0 44px; }
+      padding: 0 36px 0 0; }
       .top-bar .top-bar-section.user li {
-        line-height: 72px; }
+        line-height: 72px;
+        padding: 0 8px; }
       .top-bar .top-bar-section.user li a {
         display: inline;
         padding: 0;

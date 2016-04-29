@@ -141,7 +141,7 @@ define(['jquery','config/general', 'components/basics','jquery.cookie'],
 				credentials = {};
 			}
 			credentials.realname = realname;
-			$(".username").text(credentials.realname)
+			$(".login-name").text(credentials.realname)
 			return self;
 		}
 		/**
@@ -207,8 +207,8 @@ define(['jquery','config/general', 'components/basics','jquery.cookie'],
 			//console.log(credentials)
 			
 			if (typeof data['user'] != 'undefined') {
-				credentials.realname = data['user'].firstname+ " "+data['user'].lastname
-				$(".username").text(credentials.realname)
+				credentials.realname = data['user'].firstname//+ " "+data['user'].lastname
+				$(".login-name").text(credentials.realname)
 				var date = new Date();
 				var minutes = 45;
 				date.setTime(date.getTime() + (minutes * 60 * 1000));
@@ -387,7 +387,7 @@ define(['jquery','config/general', 'components/basics','jquery.cookie'],
 					ajaxSetup.dataType = 'json';
 				}
 				$.support.cors = true;
-				//console.log(ajaxSetup);
+				console.log(ajaxSetup);
 				ajaxSetup.error = this.errorHandler;
 				ajaxSetup.success = this.eventHandler;
 				$.ajax(ajaxSetup);

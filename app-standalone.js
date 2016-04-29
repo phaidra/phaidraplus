@@ -108,12 +108,12 @@ require([		'jquery',
 				 'text!templates/login-modal.hbs',
 				 'text!templates/page-modal.hbs',
 				 'text!templates/page-intro.hbs',
-				 'text!templates/footer.hbs',
 				 'text!templates/topbar.hbs',
 				 'text!templates/help.hbs', 
 
 				 'text!nls/'+LANGUAGE+'/page-imprint.html',
 				 'text!nls/'+LANGUAGE+'/page-contact.html',
+				 'text!nls/'+LANGUAGE+'/page-help.html',
 				 'i18n!nls/texts',
 				 
 				 'foundation',
@@ -121,8 +121,8 @@ require([		'jquery',
 
 				 function ($, _H, states, CONF, 
 					_ressourceMan, _srm, _phQueClass, _downloadMan, _helpMan, _B, 
-					loginTemplate, pageTemplate, introTemplate, footerTemplate, topBarTemplate, helpTemplate,
-					pageImprintHTML, pageContactHTML,
+					loginTemplate, pageTemplate, introTemplate, topBarTemplate, helpTemplate,
+					pageImprintHTML, pageContactHTML, pageHelpHTML,
 					_texts) {
 	
 	var self = this;
@@ -192,21 +192,24 @@ require([		'jquery',
 		return false;
 	})
 
-	var footer = _H.compile($.trim(footerTemplate));
-	footer = $($.trim(footer()));
-	$("#main").append(footer)
-
 	pageModal = _H.compile($.trim(pageTemplate));
 	pageModal = $($.trim(pageModal()));
 	pages["page-imprint"] = pageImprintHTML;
 	pages["page-contact"] = pageContactHTML;
+	pages["page-help"] = pageHelpHTML;
 	
 	
-	$("#intro a[href='#'], footer a[href='#']").on("click",function(e){
+	$("#intro a[href='#']").on("click",function(e){
 		if($(this).hasClass("submit")) {
 			$("#introform").submit();
 			return false;
 		}
+		if($(this).attr("data-page")) {
+			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
+		}
+		return false;
+	})
+	$("a[data-page]").on("click touchend",function(e){
 		if($(this).attr("data-page")) {
 			$(window).trigger("showpage.ph-plus",[$(this).attr("data-page")]);	
 		}

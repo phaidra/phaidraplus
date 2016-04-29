@@ -17,10 +17,17 @@
 						<div class="move"><i class="fi-icon fi-list"></i></div>
 						</div>
 					</h4>
-					<ul class="collection-items grid medium-block-grid-8 large-block-grid-6"></ul>
+
+					<ul class="collection-items grid medium-block-grid-8 large-block-grid-6">
+					</ul>
 					<div class="show-date left">{{timeago}}</div>
-					<a href="#" class="show-more right">{{objects.length}} {{translate 'objects'}}</a>
+					<a href="#" class="show-more right">
+						{{objects.length}} {{translate 'objects'}}
+						
+					</a>
 				</div>
+				
+					
 			</li>
 			{{/each}}
 		</ul>
@@ -28,33 +35,35 @@
 </div>
 <div class="row">
 	<div id="my-objects" class="medium-12 columns">
+
 		<a class="right secondary icon icon-add-object tip-bottom" id="add-object" href="#" data-event="ingestObject" title="{{translate "objectAddTooltip"}}">{{translate "objectAddTooltip"}}</a>
 		<a href="#" class="right secondary tip-top icon icon-full-image open-collection" data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="">{{translate "objectsOpen"}}</a>
-		<h3 id="my-objects-title" class="" data-help=''>{{translate "objectsTitle"}}</h3>	
-		<ul class="objects medium-block-grid-8 large-block-grid-12"></ul>
+		<h3 id="my-objects-title" class="" data-help=''>{{translate "objectsTitle"}}</h3>
+		
+		
+		<ul class="objects medium-block-grid-8 large-block-grid-12">
+		</ul>
 	</div>
 </div>
 <div class="currentobjects-row">
 	<div class="row">
-		<ul class="currentimages medium-block-grid-3"></ul>
+		<ul class="currentimages medium-block-grid-3">
+		
+		</ul>
 	</div>
 </div>
 <div id="collection-template" style="display:none">
-	<div class="inner">
-		<h4>
-			<div class="collection-actions">
-			<a href="#" data-action="collection-open" title="{{translate "collectionOpen"}}" class="name">{{title}}</a>
-			<input type="text" value="{{title}}" placeholder="{{ translate 'new-collection'}}" name="title" size="60" class="title-input">
-			<a href="#" class="button tiny alert right tip-top icon icon-delete delete-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="delete" data-warning="{{translate 'delete-warning'}}" title="{{translate "collectionDelete"}}"></a>
-			<a href="#" class="button icon icon-edit tip-top secondary tiny right show-all" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="edit" data-title="{{translate "collectionEdit"}}" data-active-title="{{translate "collectionunEdit"}}" title="{{translate "collectionEdit"}}"></a>
-			<a href="#" class="button tiny right secondary tip-top icon icon-ppt download-ppt" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="pptdown" title="{{translate "download-ppt"}}"></a>
-			<a href="#" class="button tiny right secondary  tip-top icon icon-full-image open-collection" data-tooltip data-options="disable_for_touch:true;hover_delay:2000" data-action="collection-open" title="{{translate "collectionOpen"}}"></a>
+		<h2>
+			<span class="name" contenteditable="true">Neuer Ordner</span> (<span class="num">0</span>)
+			<a href="#" class="button tiny alert right tip-top icon icon-delete delete-collection" data-tooltip="" title="{{translate "collectionDelete"}}"></a>
+			<a href="#" class="button icon icon-edit tip-top secondary lighter tiny right show-all" data-tooltip="" title="{{translate "collectionEdit"}}"></a>
+			<a href="#" class="button tiny right secondary lighter  tip-top icon icon-open open-collection" data-tooltip="" title="{{translate "collectionOpen"}}"></a>
 			<div class="move"><i class="fi-icon fi-list"></i></div>
-			</div>
-		</h4>
-		<ul class="collection-items grid medium-block-grid-8 large-block-grid-6"></ul>
+		</h2>
+
+		<ul class="collection-items orbit" data-orbit>
+		</ul>
 		<div class="show-date left">{{timeago}}</div>
-		<a href="#" class="show-more right">{{objects.length}} {{translate 'objects'}}</a>
-	</div>
+		<a href="#" class="show-more right">{{objects.length}} {{translate 'Objects'}}</a>
 </div>
 
