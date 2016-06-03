@@ -17,7 +17,7 @@
     <div class="top-bar-section suche">
              <a href="#suche" id="menu-search" class="" data-dropdown="search-dropdown-container" data-options="align:right"> <span class='icon icon-arrow-down' title="{{translate 'extended-search'}}" data-tooltip></span></a>
     </div>
-    {{#if login}} 
+    
     <div class="top-bar-section right user">
       <ul class="menu">
       <li>
@@ -29,12 +29,14 @@
       <li>
         <a href="#" class="link" data-page="page-imprint">{{translate "Impressum"}}</a>
       </li>
+      {{#if login}} 
       <li>
         <a href="#" id="logout-button" class="loginout username secondary icon icon-logout icon-small">{{translate 'logout'}}</a>
       </li>
+      {{/if}}
     </ul>
     </div>
-    {{/if}}
+    
     <div class="top-bar-section main main-menu">
       <ul class="menu search">
         <li class="collections">
