@@ -129,6 +129,7 @@ define({
 
     "addToCollection": "Zu Ordner hinzufügen",
     "downloadImage": "Bild herunterladen",
+    "downloadObject": "Objekt herunterladen",
     "openImage": "Vollansicht",
     "markObject": "Auswählen",
     "unmarkObject": "Auswahl entfernen",

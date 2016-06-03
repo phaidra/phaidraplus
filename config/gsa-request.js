@@ -18,7 +18,7 @@ define(function () {
 		'partialfields' : '', // storage for meta-tag based querying
 		'proxystylesheet' : '', // XSL stylesheet to transform the output
 		//'q' : '', // query string
-		'requiredfields' : '', 
+		'requiredfields' : '(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)', 
 		'proxyreload':1,
 		//'site' : 'phaidra', // the collection to search in ???
 		'sort' : '', // sorting order, etc.

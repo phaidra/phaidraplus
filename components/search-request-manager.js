@@ -209,7 +209,6 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 
 				finalSetup[p] = setup[p];
 			}
-
 			return finalSetup;
 		};
 		/**
@@ -247,7 +246,7 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 			setup.num = num;
 			setup.start = start*num;
 
-			setup.requiredfields = "(type%3AImage|type%3APicture|type%3APDF|type%3APaper|type%3AText)";
+			setup.requiredfields = requestDefaults.requiredfields;//"(type%3AImage|type%3APicture|type%3APDF|type%3APaper|type%3AText)";
 
 			self.rawLoad(setup);
 			return self;
@@ -269,13 +268,13 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 			cb = cb || null;
 			reset = (typeof reset != 'undefined') ? reset : true;
 			window.clearTimeout(timer);
-
+			
 			if (!cb && reset) {
 				resourceMan.setResource('gsaData', data[resultsField]);
 			}
 
 			if (cb == null) {
-				$(window).trigger('searchFinished', [data[resultsField], data.TOTAL, data.start, data.num]);
+				$(window).trigger('searchFinished', [data[resultsField], data.TOTAL, data.start, data.num,(data.PARAM ? data.PARAM : null)]);
 			} else {
 				_B.executeCallback(cb, [data[resultsField]]);
 			}
@@ -531,7 +530,7 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 			_B.makeLoading($('body'));
 			$.support.cors = true;
 			
-
+			
 			$.getJSON(gsaEndPoint, setup, function(data, textStatus, jqXHR) {
 				data.num = setup.num;
 				data.start = setup.start/setup.num;
@@ -594,7 +593,6 @@ define(['jquery', 'xdomainrequest','Handlebars', 'components/basics', 'config/gs
 
 			setup = $.extend(true, setup, additions);			
 			self.rawLoad(setup, cb, reset);
-
 			return self;
 		};
 		/**

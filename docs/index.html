@@ -17,7 +17,7 @@
                 <h1><img src="./assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0</em>
+            <em>API Docs for: 1.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -62,6 +62,15 @@
                                 <li><a href="./modules/basics.html">basics</a></li>
                                 <li><a href="./modules/helpers.html">helpers</a></li>
                                 <li><a href="./modules/main.html">main</a></li>
+                                <li><a href="./modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
                                 <li><a href="./modules/resources.html">resources</a></li>
                                 <li><a href="./modules/search.html">search</a></li>
                                 <li><a href="./modules/viewControllers.html">viewControllers</a></li>
@@ -115,49 +124,6 @@
 
                 <li class="pc-only"><p>With the API search box or sidebar focused, use <kbd>Ctrl+Left</kbd> and <kbd>Ctrl+Right</kbd> to switch sidebar tabs.</p></li>
             </ul>
-
-
-            <h2>Project Structure</h2>
-    <p>The application is build using javascript files (in the components and external folder). UI Design is defined via the files located in the theme folder
-      and text chunks can be edited in the nls folder.</p>
-    <p>
-      The main application states are defined in the corresponding configuration files. Some general configurations can be made in the .json files of the config folder.</p>
-
-    <h2>File Structure</h2>
-    <dl>
-      <dt>app-standalone.js</dt><dd>the main js application file for the <b>standalone</b> mode</dd>
-      <dt>app.js</dt><dd>the main js application file for the <b>normal</b> mode</dd>
-      <dt>components/</dt><dd>self created components</dd>
-      <dt>config/</dt><dd>basic configuration of phaidra+</dd>
-      <dt>docs/</dt><dd>documentation</dd>
-      <dt>external/</dt><dd>external libraries used</dd>
-      <dt>Gruntfile.js</dt><dd>grunt file required to create the style sheets in the theme folder</dd>
-      <dt>index.php</dt><dd>the startfile for both normal and standalone mode</dd>
-      <dt>nls/</dt><dd>language versions of the various text chunks used</dd>
-      <dt>node_modules/</dt><dd>node.js modules used</dd>
-      <dt>ppt.php</dt><dd>PHP Script generating the Powerpoint files</dd>
-      <dt>states-standalone.js</dt><dd>application states defined in the <b>standalone</b> mode</dd>
-      <dt>states.js</dt><dd>application states defined in the <b>normal</b> mode</dd>
-      <dt>templates/</dt><dd>Handlebars templates used for the application</dd>
-      <dt>theme/</dt><dd>.CSS, .SCSS files and images</dd>
-      <dt>yuidoc.json</dt><dd>The yuidoc config file used to generate this documentation</dd>
-    </dl>
-
-    <h2>Basic Functionality</h2>
-    
-    <p>The application uses require.js to load the required libraries for each application state.</p>
-    <p>Application states are switched by triggering the appropriate events on the $(window) object.</p>
-    <p>The main event handler is located in the resourceManager, which takes care of closing the current state
-      and opening the new one. The switching between the main views is handled this way.</p>
-    <ul></ul>
-    <p>The dataManager also plays an essential role in the app. All parties can store Objects in the dataManager and can register
-      for getting updates whenever data changes. This is mainly used to check changes such as objects get marked, search results get restricted to
-      a keyword, collection or similar.</p>
-    <ul></ul>
-    <p>Data is loaded from two different resources. One is the Google Search Appliance and the second is the Phaidra API.
-      The former is done by the searchRequestManager, the later by the phaidraQue class</p>
-
-      
         </div>
     </div>
 

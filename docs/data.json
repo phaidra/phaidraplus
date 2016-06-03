@@ -2,7 +2,7 @@
     "project": {
         "name": "Phaidra+",
         "description": "The Phaidra+ visually enhanced UI for Phaidra",
-        "version": "1.0"
+        "version": "1.1"
     },
     "files": {
         "components/_P_.js": {
@@ -76,7 +76,9 @@
         },
         "components/lightroom-collections.js": {
             "name": "components/lightroom-collections.js",
-            "modules": {},
+            "modules": {
+                "main\n\n## TODO\n\n- Update View when data is changed": 1
+            },
             "classes": {
                 "lightroomCollections": 1
             },
@@ -147,6 +149,13 @@
             "classes": {
                 "singleView": 1
             },
+            "fors": {},
+            "namespaces": {}
+        },
+        "components/slideshow.js": {
+            "name": "components/slideshow.js",
+            "modules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -236,7 +245,8 @@
             "name": "viewControllers",
             "submodules": {
                 "helpers": 1,
-                "main": 1
+                "main": 1,
+                "main\n\n## TODO\n\n- Update View when data is changed": 1
             },
             "classes": {
                 "uncategorizesObjects": 1,
@@ -262,7 +272,6 @@
             "submodules": {},
             "classes": {
                 "geoView": 1,
-                "lightroomCollections": 1,
                 "singleView": 1,
                 "standalone": 1,
                 "timeline": 1
@@ -275,6 +284,21 @@
             "file": "components/timeline.js",
             "line": 8,
             "description": "The geo view class displays the search result on a map\n\n## Global Events Consumed\n- changeDisplayed\n- marked\n\n## Global Events Triggered\n- addToCollection\n- downloadSingleObject\n- openSingleView\n\n## Dependencies\n- [resourceManager](resourceManager.html)\n- [template:geo-view.hbs](../../templates/geo-view.hbs)\n- [template:marker.hbs](../../templates/marker.hbs)\n- [uncategorizesObjects](uncategorizesObjects.html)"
+        },
+        "main\n\n## TODO\n\n- Update View when data is changed": {
+            "name": "main\n\n## TODO\n\n- Update View when data is changed",
+            "submodules": {},
+            "classes": {
+                "lightroomCollections": 1
+            },
+            "fors": {},
+            "is_submodule": 1,
+            "namespaces": {},
+            "module": "viewControllers",
+            "namespace": "",
+            "file": "components/lightroom-collections.js",
+            "line": 15,
+            "description": "The lightroom collections class displays the owner's collections on the startpage of phaidra+.\n\n## Events Triggered\n- changeCollectionProperty\n- clearSearchUI\n- createCollection\n- dataManaged\n- deleteCollection\n- deleteItemFromCollection\n- ingestObject\n- updateCollectionOrder\n\n## Dependencies\n- [basics](basics.html)\n- [ppt](ppt.html)\n- [resourceManager](resourceManager.html)\n- [template:lightroom-collections.hbs](../../templates/lightroom-collections.hbs)"
         },
         "search": {
             "name": "search",
@@ -381,7 +405,7 @@
             "namespace": "",
             "file": "components/collection-manager.js",
             "line": 8,
-            "description": "If an object has no time or location data it is displayed in the bottom container of the corresponding view.\nThis class provides the means to do so.\n\n## Defines\n- 'collectionMan' in the resourceManager\n\n## Events Consumed\n- addToCollection.ph-plus\n- changeCollectionProperty.ph-plus\n- createCollection.ph-plus\n- deleteCollection.ph-plus\n- deleteItemFromCollection.ph-plus\n- updateCollectionOrder.ph-plus\n\n## Events Triggered\n- openLightRoomCollections\n- rawSearch\n\n## Dependencies\n- [basics](basics.html)\n- [dataManager](dataManager.html)\n- [phaidraObject](phaidraObject.html)\n- [phaidraQue](phaidraQue.html)\n- [resourceManager](resourceManager.html)\n- [template:collection-modal.hbs](../../templates/collection-modal.hbs)",
+            "description": "If an object has no time or location data it is displayed in the bottom container of the corresponding view.\nThis class provides the means to do so.\n\n## Defines\n- 'collectionMan' in the resourceManager\n\n## Events Consumed\n- addToCollection.ph-plus\n- changeCollectionProperty.ph-plus\n- createCollection.ph-plus\t \n- deleteCollection.ph-plus\n- deleteItemFromCollection.ph-plus\n- updateCollectionOrder.ph-plus\n\n## Events Triggered\n- openLightRoomCollections\n- rawSearch\n- collectionSaved\n\n## Dependencies\n- [basics](basics.html)\n- [dataManager](dataManager.html)\n- [phaidraObject](phaidraObject.html)\n- [phaidraQue](phaidraQue.html)\n- [resourceManager](resourceManager.html)\n- [template:collection-modal.hbs](../../templates/collection-modal.hbs)",
             "static": 1,
             "final": 1,
             "requires": [
@@ -448,10 +472,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "viewControllers",
-            "submodule": "main",
+            "submodule": "main\n\n## TODO\n\n- Update View when data is changed",
             "namespace": "",
             "file": "components/lightroom-collections.js",
-            "line": 10,
+            "line": 15,
             "description": "The lightroom collections class displays the owner's collections on the startpage of phaidra+.\n\n## Events Triggered\n- changeCollectionProperty\n- clearSearchUI\n- createCollection\n- dataManaged\n- deleteCollection\n- deleteItemFromCollection\n- ingestObject\n- updateCollectionOrder\n\n## Dependencies\n- [basics](basics.html)\n- [ppt](ppt.html)\n- [resourceManager](resourceManager.html)\n- [template:lightroom-collections.hbs](../../templates/lightroom-collections.hbs)",
             "static": 1,
             "final": 1,
@@ -522,7 +546,7 @@
             "namespace": "",
             "file": "components/search-filter.js",
             "line": 7,
-            "description": "The searchFilter class is used to create and manage a certain search input field.\nThe searchFilter supports multiple types:\n\n- boolean\n- date\n- enum\n- objects\n- radio\n- select\n- text\n\n## Todos\n\n- add range selections",
+            "description": "The searchFilter class is used to create and manage a certain search input field.\nThe searchFilter supports multiple types:\n\n- boolean\n- date\n- enum\n- objects\n- radio\n- select with option groups\n- text\n\n## Todos\n\n- add range selections",
             "is_constructor": 1,
             "params": [
                 {
@@ -656,7 +680,7 @@
     "classitems": [
         {
             "file": "components/_P_.js",
-            "line": 110,
+            "line": 119,
             "description": "Create DOM for a specific View from template, Use Handlebar to insert data",
             "itemtype": "method",
             "name": "createDom",
@@ -680,7 +704,7 @@
         },
         {
             "file": "components/_P_.js",
-            "line": 151,
+            "line": 160,
             "description": "Destroy the complete object",
             "itemtype": "method",
             "name": "destroy",
@@ -690,7 +714,7 @@
         },
         {
             "file": "components/_P_.js",
-            "line": 161,
+            "line": 170,
             "description": "Destroy exisiting DOM and unbind events / garbage collector",
             "itemtype": "method",
             "name": "destroyDom",
@@ -854,6 +878,27 @@
             "submodule": "basics"
         },
         {
+            "file": "components/basics.js",
+            "line": 188,
+            "description": "base64 Helper for IE9",
+            "itemtype": "method",
+            "name": "btoa",
+            "params": [
+                {
+                    "name": "String",
+                    "description": "The string to encode",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "basics",
+            "module": "resources",
+            "submodule": "basics"
+        },
+        {
             "file": "components/collection-manager.js",
             "line": 93,
             "description": "Create the collection manager.",
@@ -978,7 +1023,17 @@
         {
             "file": "components/data-manager.js",
             "line": 57,
-            "description": "Property containing all objects",
+            "description": "Property containing all objects loaded over multiple pages",
+            "itemtype": "property",
+            "name": "allLoadedObjects",
+            "type": "{Array}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 64,
+            "description": "Property containing all objects of the current page",
             "itemtype": "property",
             "name": "objects",
             "type": "{Array}",
@@ -987,7 +1042,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 64,
+            "line": 71,
             "description": "Array containing all unique keywords of the objects",
             "itemtype": "property",
             "name": "keywords",
@@ -997,7 +1052,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 71,
+            "line": 78,
             "description": "Object referencing elements from the objects array by its keywords.\nReferences start with 't', i.e. 'tMyTerm': {object}",
             "itemtype": "property",
             "name": "keywordhash",
@@ -1007,7 +1062,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 79,
+            "line": 86,
             "description": "Object containing a keyword count by term.\nReferences start with 't', i.e. 'tMyTerm': {object}",
             "itemtype": "property",
             "name": "keywordnums",
@@ -1017,7 +1072,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 87,
+            "line": 94,
             "description": "Array containing the collections found in the {{#crossLink \"dataManager:objects\"}}objects Array{{/crossLink}}.\nReferences start with 't', i.e. 'tMyTerm': {object}",
             "itemtype": "property",
             "name": "collections",
@@ -1027,7 +1082,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 95,
+            "line": 102,
             "description": "Object containing the maximum geographic boundary of the objects found in the {{#crossLink \"dataManager:objects\"}}objects Array{{/crossLink}}.\nObject according to { southWest: { south: [Integer], west: [Integer] }, northEast: { north: [Integer], east: [Integer] }}",
             "itemtype": "property",
             "name": "bounds",
@@ -1037,7 +1092,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 103,
+            "line": 110,
             "description": "Array containing all objects stared/marked by the user.",
             "itemtype": "property",
             "name": "objectsmarked",
@@ -1047,7 +1102,17 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 110,
+            "line": 117,
+            "description": "Flag indicating whether the stack of all loaded objects shall be wipped or not.",
+            "itemtype": "property",
+            "name": "saveLoadedObjects",
+            "type": "{Boolean}",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 124,
             "description": "Backreference",
             "itemtype": "property",
             "name": "self",
@@ -1059,7 +1124,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 118,
+            "line": 132,
             "description": "Flag indicating which displaymode is currently active (null|all|marked|collection|keyword)",
             "itemtype": "property",
             "name": "displayMode",
@@ -1071,7 +1136,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 126,
+            "line": 140,
             "description": "The UID of the currently selected collection if dataManager:displayMode is collection.",
             "itemtype": "property",
             "name": "selectedCollection",
@@ -1084,7 +1149,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 135,
+            "line": 149,
             "description": "The currently selected keyword if dataManager:displayMode is keyword.",
             "itemtype": "property",
             "name": "selectedKeyword",
@@ -1096,7 +1161,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 143,
+            "line": 157,
             "description": "Index of the currently selected Object in the dataManager:currentObjects Array.",
             "itemtype": "property",
             "name": "selectedObject",
@@ -1108,7 +1173,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 151,
+            "line": 165,
             "description": "Array containing the currently selected objects resulting from changes in the dataManager:displayMode.",
             "itemtype": "property",
             "name": "currentObjects",
@@ -1120,7 +1185,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 159,
+            "line": 173,
             "description": "Method to clear all marked objects in the result set.\nSets display mode to 'all'. Triggers  {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}},\n{{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}} if appropriate.",
             "itemtype": "method",
             "name": "clearMarked",
@@ -1130,7 +1195,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 186,
+            "line": 200,
             "description": "Helper method to convert an angle in degrees, minutes and seconds to full degrees",
             "itemtype": "method",
             "name": "convertDMSToDD",
@@ -1165,7 +1230,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 204,
+            "line": 218,
             "description": "Method reseting all important attributes.",
             "itemtype": "method",
             "name": "clear",
@@ -1175,7 +1240,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 226,
+            "line": 247,
             "description": "Method to register the {{#crossLink \"dataManager\"}}{{/crossLink}} with the {{#crossLink \"resourceManager\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "create",
@@ -1185,7 +1250,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 251,
+            "line": 277,
             "description": "Method returns an array of all collection the object belongs to.",
             "itemtype": "method",
             "name": "objectFindCollections",
@@ -1205,7 +1270,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 272,
+            "line": 298,
             "description": "Method to sort the collections depending on the sort array (uids).",
             "itemtype": "method",
             "name": "sortCollections",
@@ -1222,7 +1287,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 292,
+            "line": 318,
             "description": "Method to retrieve a collection's index in the {{#crossLink \"dataMan/collections:attribute\"}}{{/crossLink}} array based on its UID.",
             "itemtype": "method",
             "name": "getCollectionIndex",
@@ -1235,7 +1300,29 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 307,
+            "line": 333,
+            "description": "Method to clear and add new objects to the allLoadedObjects array",
+            "itemtype": "method",
+            "name": "copyToAllLoadedObjects",
+            "params": [
+                {
+                    "name": "objects",
+                    "description": "The objects to store",
+                    "type": "Array"
+                },
+                {
+                    "name": "clear",
+                    "description": "Flag whether to clear the objects or not.",
+                    "type": "Boolean"
+                }
+            ],
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 354,
             "description": "Method to create/register a collection with certain data.\n\n\tdata = { objects: [], d.uid: new String(), title: new String(), updated: new Date() }\n\nThe data is converted and stored in the {{#crossLink \"dataMan/collections:attribute\"}}{{/crossLink}} array.",
             "itemtype": "method",
             "name": "createCollection",
@@ -1252,7 +1339,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 337,
+            "line": 384,
             "description": "Method to get a collection depending on the collection's title.",
             "itemtype": "method",
             "name": "getCollection",
@@ -1272,7 +1359,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 358,
+            "line": 405,
             "description": "Get a specific object from the result set by its PID.",
             "itemtype": "method",
             "name": "getObject",
@@ -1292,7 +1379,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 374,
+            "line": 427,
             "description": "Getter Function for {{#crossLink \"dataManager/currentObjects:attribute\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "currentObjects",
@@ -1305,7 +1392,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 384,
+            "line": 437,
             "description": "Method updating the the {{#crossLink \"dataManager/keywords:attribute\"}}{{/crossLink}},\n{{#crossLink \"dataManager/keywordshash:attribute\"}}{{/crossLink}} and {{#crossLink \"dataManager/keywordnums:attribute\"}}{{/crossLink}} arrays.",
             "itemtype": "method",
             "name": "updateKeywords",
@@ -1315,7 +1402,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 405,
+            "line": 458,
             "description": "Method extracting the keyword of an object and adding it to the {{#crossLink \"dataManager/keywords:attribute\"}}{{/crossLink}},\n{{#crossLink \"dataManager/keywordshash:attribute\"}}{{/crossLink}} and {{#crossLink \"dataManager/keywordnums:attribute\"}}{{/crossLink}} arrays.",
             "itemtype": "method",
             "name": "getKeywords",
@@ -1332,7 +1419,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 441,
+            "line": 494,
             "description": "Getter method for the {{#crossLink \"dataManager/objectsmarked:attribute\"}}{{/crossLink}} array.",
             "itemtype": "method",
             "name": "getMarked",
@@ -1345,7 +1432,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 451,
+            "line": 504,
             "description": "Method to retrieve all objects in the result set for a certain keyword (regex).",
             "itemtype": "method",
             "name": "getObjectsForKeyword",
@@ -1365,7 +1452,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 477,
+            "line": 530,
             "description": "Getter function for the currently selected collection (uid).",
             "itemtype": "method",
             "name": "getSelectedObject",
@@ -1378,7 +1465,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 487,
+            "line": 540,
             "description": "Extended Getter function to retrieve the currently selected object.",
             "itemtype": "method",
             "name": "getSelectedObject",
@@ -1391,7 +1478,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 497,
+            "line": 550,
             "description": "Method called after data has been loaded from the GSA.\nChecks the results, repairs the data and creates _P_ objects from the data.\nAfter successful conversation, sets itself as the resource 'gsaData' with the resource manager and triggers all events of the class.",
             "itemtype": "method",
             "name": "manageData",
@@ -1415,7 +1502,17 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 563,
+            "line": 633,
+            "description": "Method to mark all currently displayed objects.\nTriggers  {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}},\n{{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}} if appropriate.",
+            "itemtype": "method",
+            "name": "markObject",
+            "chainable": "return {Object} self",
+            "class": "dataManager",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/data-manager.js",
+            "line": 661,
             "description": "Method to mark a specific object identified by its pid.\nTriggers  {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}},\n{{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}} if appropriate.",
             "itemtype": "method",
             "name": "markObject",
@@ -1442,7 +1539,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 603,
+            "line": 702,
             "description": "Method extending the raw objects with the _marked flag and sets it value according to 'how'.",
             "itemtype": "method",
             "name": "markObjects",
@@ -1459,7 +1556,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 622,
+            "line": 727,
             "description": "Method checking whether an object is marked or not. Object is referenced by its PID.",
             "itemtype": "method",
             "name": "isMarked",
@@ -1479,7 +1576,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 638,
+            "line": 743,
             "description": "Method checking whether an object is marked or not",
             "itemtype": "method",
             "name": "isObjMarked",
@@ -1499,7 +1596,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 653,
+            "line": 754,
             "description": "Method removing a collection from the collection array",
             "itemtype": "method",
             "name": "removeCollection",
@@ -1521,7 +1618,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 683,
+            "line": 789,
             "description": "Method performing various data transformations on a result object.",
             "itemtype": "method",
             "name": "repairData",
@@ -1541,7 +1638,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 872,
+            "line": 968,
             "description": "Getter function for {{#crossLink \"dataManager/selectedKeyword:attribute\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "getSelectedKeyword",
@@ -1554,7 +1651,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 896,
+            "line": 992,
             "description": "Method to invert the marked objects. So all marked objects get unmarked and vice versa.\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "reverseMarked",
@@ -1564,7 +1661,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 933,
+            "line": 1031,
             "description": "Getter for {{#crossLink \"dataManager/displayMode:attribute\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "getDisplayMode",
@@ -1577,7 +1674,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 943,
+            "line": 1041,
             "description": "Method to select a collection to be displayed. Sets display mode to 'collection'\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "selectCollection",
@@ -1594,7 +1691,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 960,
+            "line": 1078,
             "description": "Method to select the next object in the resultset.",
             "itemtype": "method",
             "name": "selectNextObject",
@@ -1607,7 +1704,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 970,
+            "line": 1088,
             "description": "Method select an object from the result set either by its index number or by the object's PID number.",
             "itemtype": "method",
             "name": "selectObject",
@@ -1627,7 +1724,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 1001,
+            "line": 1119,
             "description": "Method to select the previous object in the resultset.",
             "itemtype": "method",
             "name": "selectPreviousObject",
@@ -1640,7 +1737,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 1011,
+            "line": 1129,
             "description": "Set a specific display mode (all|marked|collection|keyword).\nIf set to 'collection' the value of {{#crossLink \"dataManager/selectedCollection:attribute\"}}{{/crossLink}} is used.\nIf set to 'keyword' the value of {{#crossLink \"dataManager/selectedKeyword:attribute\"}}{{/crossLink}} is used.\nTriggers {{#crossLink \"dataManager/displayModeChanged:event\"}}{{/crossLink}}",
             "itemtype": "method",
             "name": "setDisplayMode",
@@ -1657,7 +1754,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 1051,
+            "line": 1178,
             "description": "Method to remove all display restrictions and show all objects of the current result set.\nTriggers {{#crossLink \"dataManager/changeDisplayed:event\"}}{{/crossLink}} and {{#crossLink \"dataManager/change:event\"}}{{/crossLink}}.\nIf the former display mode was 'marked' it also triggers {{#crossLink \"dataManager/marked:event\"}}{{/crossLink}}.",
             "itemtype": "method",
             "name": "showAll",
@@ -1667,7 +1764,7 @@
         },
         {
             "file": "components/data-manager.js",
-            "line": 1078,
+            "line": 1204,
             "description": "Method updating the currently marked objects array (dataManager:objectsmarked).\nUses {{#crossLink \"dataManager/isObjMarked:method\"}}{{/crossLink}} to check whether an object was stared/marked.",
             "itemtype": "method",
             "name": "updateMarked",
@@ -1690,7 +1787,7 @@
         },
         {
             "file": "components/geo-view.js",
-            "line": 86,
+            "line": 89,
             "itemtype": "method",
             "name": "create",
             "class": "geoView",
@@ -1699,7 +1796,7 @@
         },
         {
             "file": "components/geo-view.js",
-            "line": 181,
+            "line": 184,
             "itemtype": "method",
             "name": "show",
             "class": "geoView",
@@ -1708,37 +1805,37 @@
         },
         {
             "file": "components/geo-view.js",
-            "line": 239,
+            "line": 242,
             "class": "geoView",
             "module": "viewControllers",
             "submodule": "main"
         },
         {
             "file": "components/lightroom-collections.js",
-            "line": 61,
+            "line": 67,
             "itemtype": "method",
             "name": "create",
             "class": "lightroomCollections",
             "module": "viewControllers",
-            "submodule": "main"
+            "submodule": "main\n\n## TODO\n\n- Update View when data is changed"
         },
         {
             "file": "components/lightroom-collections.js",
-            "line": 522,
+            "line": 596,
             "itemtype": "method",
             "name": "show",
             "class": "lightroomCollections",
             "module": "viewControllers",
-            "submodule": "main"
+            "submodule": "main\n\n## TODO\n\n- Update View when data is changed"
         },
         {
             "file": "components/lightroom-collections.js",
-            "line": 528,
+            "line": 602,
             "itemtype": "method",
             "name": "close",
             "class": "lightroomCollections",
             "module": "viewControllers",
-            "submodule": "main"
+            "submodule": "main\n\n## TODO\n\n- Update View when data is changed"
         },
         {
             "file": "components/phaidra-que.js",
@@ -1799,7 +1896,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 62,
+            "line": 63,
             "description": "The query que.",
             "itemtype": "property",
             "name": "que",
@@ -1811,7 +1908,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 70,
+            "line": 71,
             "description": "Flag indicating whether the query que is currently running a query or is idle.",
             "itemtype": "property",
             "name": "processing",
@@ -1823,7 +1920,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 78,
+            "line": 79,
             "description": "Backreference.",
             "itemtype": "property",
             "name": "self",
@@ -1835,7 +1932,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 86,
+            "line": 87,
             "description": "Fixed timeout timespan after which a broken connection will be assumed.",
             "itemtype": "property",
             "name": "self",
@@ -1847,7 +1944,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 94,
+            "line": 95,
             "description": "The XSRF-TOKEN returned by the API after credentials have been sent.\nCan be used instead of sending credentials again and saving exposure of security relevant information.",
             "itemtype": "property",
             "name": "xsrfToken",
@@ -1859,7 +1956,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 105,
+            "line": 108,
             "description": "Method diguesting connection timeout error",
             "itemtype": "method",
             "name": "connectionTimeoutError",
@@ -1873,7 +1970,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 117,
+            "line": 120,
             "description": "Getter Function for the real username of the [credentials](phaidraQue.html#properties).",
             "itemtype": "method",
             "name": "getUser",
@@ -1886,7 +1983,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 127,
+            "line": 130,
             "description": "Setter Function for the real username of the [credentials](phaidraQue.html#properties).",
             "itemtype": "method",
             "name": "setUser",
@@ -1907,7 +2004,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 143,
+            "line": 147,
             "description": "Setter Function for the [xsrfToken](phaidraQue.html#properties).",
             "itemtype": "method",
             "name": "setToken",
@@ -1928,7 +2025,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 156,
+            "line": 160,
             "description": "Getter Function for the [credentials](phaidraQue.html#properties).",
             "itemtype": "method",
             "name": "getCredentials",
@@ -1941,7 +2038,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 166,
+            "line": 170,
             "description": "Error handler for ajax requests. For parameters see [jQuery Ajax error option](http://api.jquery.com/jQuery.ajax/).",
             "itemtype": "method",
             "name": "errorHandler",
@@ -1972,7 +2069,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 187,
+            "line": 192,
             "description": "Event handler for ajax requests. If the response includes a new XSRF-TOKEN it is saved.\nPossible username, realname and XSRF-TOKEN are saved in the cookies.\nIf the current que item had a callback it will be executed.",
             "itemtype": "method",
             "name": "eventHandler",
@@ -1993,7 +2090,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 225,
+            "line": 232,
             "description": "Method to execute a API query with a certain setup specified via the given parameters.\nPushes a query setup onto the que and starts the que.",
             "itemtype": "method",
             "name": "execute",
@@ -2040,7 +2137,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 266,
+            "line": 275,
             "description": "Method executing a login query on the API",
             "itemtype": "method",
             "name": "login",
@@ -2066,7 +2163,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 285,
+            "line": 294,
             "description": "Success event handler for the [login method](phaidraQue.html#methods)",
             "itemtype": "method",
             "name": "loginSuccess",
@@ -2092,7 +2189,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 298,
+            "line": 307,
             "description": "Method to execute a logout action on the API",
             "itemtype": "method",
             "name": "logout",
@@ -2106,7 +2203,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 310,
+            "line": 319,
             "description": "Method to execute a keep alive action on the API",
             "itemtype": "method",
             "name": "keepAlive",
@@ -2120,7 +2217,7 @@
         },
         {
             "file": "components/phaidra-que.js",
-            "line": 322,
+            "line": 331,
             "description": "Method executing the next action on the process que if there is any.",
             "itemtype": "method",
             "name": "processNext",
@@ -2625,7 +2722,19 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 173,
+            "line": 144,
+            "description": "Template Container",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "template",
+            "type": "{Object}",
+            "class": "searchFilter",
+            "module": "search"
+        },
+        {
+            "file": "components/search-filter.js",
+            "line": 185,
             "description": "The current value of the filter",
             "access": "private",
             "tagname": "",
@@ -2637,7 +2746,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 185,
+            "line": 197,
             "description": "The method actually creating the HTML representation of the filter.",
             "itemtype": "method",
             "name": "createDom",
@@ -2657,7 +2766,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 307,
+            "line": 344,
             "description": "Method to remove the HTML of the filter from the DOM.",
             "chainable": 1,
             "itemtype": "method",
@@ -2669,7 +2778,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 321,
+            "line": 358,
             "description": "Method to display the HTML representation of the filter.",
             "itemtype": "method",
             "name": "display",
@@ -2679,7 +2788,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 341,
+            "line": 378,
             "description": "Method to set focus on the filter's input.",
             "itemtype": "method",
             "name": "focus",
@@ -2689,7 +2798,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 371,
+            "line": 408,
             "description": "Method to get data from the dom object. Only working after the dom has been created!",
             "itemtype": "method",
             "name": "getData",
@@ -2702,7 +2811,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 382,
+            "line": 419,
             "description": "Method to get the ID of dom object.",
             "itemtype": "method",
             "name": "getId",
@@ -2715,7 +2824,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 392,
+            "line": 429,
             "description": "Method to get the metatag's name the filter is representing.",
             "itemtype": "method",
             "name": "getMetaName",
@@ -2728,7 +2837,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 402,
+            "line": 439,
             "description": "Method to retrieve the current value of the filter.",
             "itemtype": "method",
             "name": "getValue",
@@ -2741,7 +2850,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 460,
+            "line": 527,
             "description": "Method to hide the HTML representation of the filter.",
             "itemtype": "method",
             "name": "hide",
@@ -2751,7 +2860,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 471,
+            "line": 538,
             "description": "Method to destroy the whole filter object.",
             "itemtype": "method",
             "name": "remove",
@@ -2761,7 +2870,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 482,
+            "line": 549,
             "description": "Method setting data on the dom object. Only working after the dom has been created!",
             "chainable": 1,
             "itemtype": "method",
@@ -2782,7 +2891,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 496,
+            "line": 563,
             "description": "Method called when filter is first initiated.\nSets up the config for HTML, the DOM id, etc.",
             "chainable": 1,
             "itemtype": "method",
@@ -2807,7 +2916,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 600,
+            "line": 668,
             "description": "Method to set the value of the filter. Updates the input in the created DOM.",
             "itemtype": "method",
             "name": "setValue",
@@ -2825,7 +2934,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 648,
+            "line": 716,
             "description": "Eventhandler called when the input receives focus.\nEnables the keyboard event handler to check the states cleared, filled, enter, escape.",
             "itemtype": "method",
             "name": "startInputManagement",
@@ -2843,7 +2952,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 705,
+            "line": 778,
             "description": "Eventhandler called when the input looses focus.\nDisables the keyboard event handler to check the states cleared, filled, enter, escape.",
             "itemtype": "method",
             "name": "stopInputManagement",
@@ -2861,7 +2970,7 @@
         },
         {
             "file": "components/search-filter.js",
-            "line": 718,
+            "line": 791,
             "description": "Method to translate the META Tag names into descriptive names.\nUses the translation library in  nls depending on the language indicated by the browser.",
             "itemtype": "method",
             "name": "translate",
@@ -2967,6 +3076,18 @@
         {
             "file": "components/search-request-manager.js",
             "line": 76,
+            "description": "Results can be accessed at result[resultsField]",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "resultsField",
+            "type": "{String}",
+            "class": "searchRequestManager",
+            "module": "resources"
+        },
+        {
+            "file": "components/search-request-manager.js",
+            "line": 84,
             "description": "Backreference",
             "access": "private",
             "tagname": "",
@@ -2978,7 +3099,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 84,
+            "line": 92,
             "description": "The load timeout handler",
             "access": "private",
             "tagname": "",
@@ -2990,7 +3111,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 92,
+            "line": 100,
             "description": "Method compacting all set META Tags and search values to a request String.",
             "itemtype": "method",
             "name": "createMetaQueryString",
@@ -3003,7 +3124,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 137,
+            "line": 146,
             "description": "Method setting all META Tag search parameters to default values.",
             "itemtype": "method",
             "name": "clearMetas",
@@ -3013,7 +3134,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 151,
+            "line": 160,
             "description": "Creates a copy of the default request object and returns it for own usage.",
             "itemtype": "method",
             "name": "getRequestDefaults",
@@ -3026,7 +3147,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 161,
+            "line": 170,
             "description": "Returns a copy of the current object containing all set search META Tags with their query terms.",
             "itemtype": "method",
             "name": "getQueryMetas",
@@ -3039,7 +3160,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 181,
+            "line": 190,
             "description": "Method to retrieve the overall search query - i.e. the META Tags search setup plus the normal GSA search setup.\nAll cleaned of non-set properties",
             "itemtype": "method",
             "name": "getQuerySetup",
@@ -3052,7 +3173,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 202,
+            "line": 214,
             "description": "Method to query the GSA. It creates the AJAX get query and sets a timeout function.",
             "chainable": 1,
             "itemtype": "method",
@@ -3082,7 +3203,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 237,
+            "line": 254,
             "description": "Method called when GSA returns results successfully.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
             "async": 1,
             "itemtype": "method",
@@ -3112,7 +3233,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 266,
+            "line": 283,
             "description": "Method called when GSA returned an error.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
             "async": 1,
             "itemtype": "method",
@@ -3130,7 +3251,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 284,
+            "line": 301,
             "description": "Event handler called when GSA request ended in an timeout.\nTriggers ['searchFinished' event](searchRequestManager.html#events).",
             "async": 1,
             "itemtype": "method",
@@ -3141,7 +3262,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 301,
+            "line": 318,
             "description": "A method to load the next page of the result set. Increases the [currentRequest's](searchRe) start property by one and reloads the search.",
             "chainable": 1,
             "itemtype": "method",
@@ -3155,7 +3276,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 318,
+            "line": 335,
             "description": "A method to load the previous page of the result set.",
             "chainable": 1,
             "itemtype": "method",
@@ -3169,7 +3290,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 335,
+            "line": 352,
             "description": "A private helper method to check whether a value is boolean",
             "itemtype": "method",
             "name": "matchValueToBoolean",
@@ -3191,7 +3312,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 347,
+            "line": 364,
             "description": "A method to match a value against a template if the template is an enum|select.\nIt simply looks in the template array if the value is found.",
             "itemtype": "method",
             "name": "matchValueToEnum",
@@ -3218,7 +3339,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 361,
+            "line": 388,
             "description": "Method to check whether a value is a valid Integer or Float.",
             "access": "private",
             "tagname": "",
@@ -3240,7 +3361,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 395,
+            "line": 422,
             "description": "A method to match a value against a template if the template is an object.\nIt simply compares the properties of both and checks if all are set in the value,\nthat are required by the template.",
             "itemtype": "method",
             "name": "matchValueToObject",
@@ -3267,7 +3388,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 417,
+            "line": 444,
             "description": "Helper function matching a value to be a text (not undefined or null or of zero length)",
             "access": "private",
             "tagname": "",
@@ -3289,7 +3410,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 432,
+            "line": 459,
             "description": "A method to parse and match a given value against the META Tag definition defined by name.\nGets the type of the META Tag and checks if the given value is possible or not.",
             "itemtype": "method",
             "name": "parseQueryParamValue",
@@ -3314,7 +3435,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 473,
+            "line": 507,
             "description": "Method executing the GSA query setup. Basically starts $.getJSON with the appropriate event handler and adds a loading spinner to the body.\nA timeout is started to check for connection timeouts.",
             "chainable": 1,
             "itemtype": "method",
@@ -3344,7 +3465,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 524,
+            "line": 563,
             "description": "Method to start a raw search, meaning the query term has to be provided, but therefore won't be touched",
             "chainable": 1,
             "itemtype": "method",
@@ -3380,6 +3501,18 @@
                     "description": "a callback to execute after the result has been loaded",
                     "type": "Object",
                     "optional": true
+                },
+                {
+                    "name": "true",
+                    "description": "flag passed on to rawLoad",
+                    "type": "Boolean",
+                    "optional": true
+                },
+                {
+                    "name": "additions",
+                    "description": "an arbitrary object to extend the load setup to support additional query parameters",
+                    "type": "Object",
+                    "optional": true
                 }
             ],
             "return": {
@@ -3391,7 +3524,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 554,
+            "line": 598,
             "description": "Method displaying a link which can be used to display a link in a modal dialog to the current search and view in the standalone version.",
             "itemtype": "method",
             "name": "showShareLink",
@@ -3405,7 +3538,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 614,
+            "line": 676,
             "description": "Method to start a search immediately from scratch.\nProvide an  array of field values ({ 'key':value, 'boolean':[AND|OR] }),\nthe start position of the first item to return and the number of items to fetch.",
             "chainable": 1,
             "itemtype": "method",
@@ -3432,7 +3565,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 656,
+            "line": 720,
             "description": "Method to set the query page size",
             "chainable": 1,
             "itemtype": "method",
@@ -3449,7 +3582,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 670,
+            "line": 734,
             "description": "Method to set one query string for a META Tag search.",
             "chainable": 1,
             "itemtype": "method",
@@ -3481,7 +3614,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 701,
+            "line": 765,
             "description": "Method to set the general query term for GSA search.",
             "chainable": 1,
             "itemtype": "method",
@@ -3498,7 +3631,7 @@
         },
         {
             "file": "components/search-request-manager.js",
-            "line": 714,
+            "line": 778,
             "description": "Helper method for Handlebars to translate terms. See [Handlebars.registerHelper](http://handlebarsjs.com/block_helpers.html)",
             "itemtype": "method",
             "name": "translate",
@@ -3722,7 +3855,7 @@
         },
         {
             "file": "components/search.js",
-            "line": 219,
+            "line": 218,
             "description": "Method to reset the UI.",
             "itemtype": "method",
             "name": "resetSearch",
@@ -3736,7 +3869,7 @@
         },
         {
             "file": "components/search.js",
-            "line": 233,
+            "line": 232,
             "description": "Method to start the search. If not enough input is avaible an error is thrown.\nOtherwise the search event is fired together with the search data.",
             "itemtype": "method",
             "name": "startSearch",
@@ -3751,7 +3884,7 @@
         },
         {
             "file": "components/search.js",
-            "line": 317,
+            "line": 319,
             "description": "Method to translate the META Tag names into descriptive names.\nUses the translation library in  nls depending on the language indicated by the browser.",
             "itemtype": "method",
             "name": "translate",
@@ -3773,7 +3906,7 @@
         },
         {
             "file": "components/single-view.js",
-            "line": 120,
+            "line": 126,
             "itemtype": "method",
             "name": "close",
             "class": "singleView",
@@ -3782,12 +3915,34 @@
         },
         {
             "file": "components/single-view.js",
-            "line": 355,
+            "line": 364,
             "itemtype": "method",
             "name": "show",
             "class": "singleView",
             "module": "viewControllers",
             "submodule": "main"
+        },
+        {
+            "file": "components/slideshow.js",
+            "line": 14,
+            "description": "Backreference",
+            "itemtype": "property",
+            "name": "self",
+            "access": "private",
+            "tagname": "",
+            "type": "{Object}",
+            "class": "standalone",
+            "module": "viewControllers"
+        },
+        {
+            "file": "components/slideshow.js",
+            "line": 26,
+            "description": "Method to register the {{#crossLink \"dataManager\"}}{{/crossLink}} with the {{#crossLink \"resourceManager\"}}{{/crossLink}}",
+            "itemtype": "method",
+            "name": "create",
+            "chainable": "return {Object} self",
+            "class": "standalone",
+            "module": "viewControllers"
         },
         {
             "file": "components/timeline-object.js",
@@ -3818,7 +3973,7 @@
         },
         {
             "file": "components/timeline.js",
-            "line": 199,
+            "line": 203,
             "itemtype": "method",
             "name": "show",
             "class": "timeline",
@@ -3829,7 +3984,7 @@
     "warnings": [
         {
             "message": "Missing item type",
-            "line": " components/geo-view.js:239"
+            "line": " components/geo-view.js:242"
         },
         {
             "message": "Missing item type\nMethod to retrieve a set resource by name",

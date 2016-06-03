@@ -37,6 +37,14 @@ b, strong {
 	opacity:1;
 	@include transition(opacity .3s ease-out);
 }
+#intro .menu {
+	text-align:center;
+	list-style-type:none;
+	a,li {
+		display:inline-block;
+		float:none;
+	}
+}
 .hiddenlogo {
 	display:none;
 }

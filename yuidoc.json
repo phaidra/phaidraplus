@@ -1,7 +1,7 @@
 {
   "name": "Phaidra+",
   "description": "The Phaidra+ visually enhanced UI for Phaidra",
-  "version": "1.0",
+  "version": "1.1",
   "options": {
     "exclude": ".git,external,docs,nls,test",
   	"linkNatives": "true",

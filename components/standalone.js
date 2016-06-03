@@ -35,7 +35,7 @@ define(function() {
      }
 
     var q = params['query'];
-    var r = params['requiredfields'] || "type%3AImage.installationID%3APhaidraProduction";
+    var r = params['requiredfields'] || "(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)";
     var s = params['start'] || 0;
     var n = params['num'] || 50;
     var view = params['view'] || 'lightRoom';

@@ -104,6 +104,7 @@ require([		'jquery',
 				 'components/download-manager',
 				 'components/help-manager',
 				 'components/basics',
+				 'config/gsa-request',
 
 				 'text!templates/login-modal.hbs',
 				 'text!templates/page-modal.hbs',
@@ -120,7 +121,7 @@ require([		'jquery',
 				 'jquery.cookie'],
 
 				 function ($, _H, states, CONF, 
-					_ressourceMan, _srm, _phQueClass, _downloadMan, _helpMan, _B, 
+					_ressourceMan, _srm, _phQueClass, _downloadMan, _helpMan, _B, requestDefaults,
 					loginTemplate, pageTemplate, introTemplate, topBarTemplate, helpTemplate,
 					pageImprintHTML, pageContactHTML, pageHelpHTML,
 					_texts) {
@@ -181,12 +182,11 @@ require([		'jquery',
 		$("#filter-canvas-filter-0").val(t);
 		queryTerm = t;
 		var q = t;
-		var r = "installationID%3APhaidraProduction";
+		var r = requestDefaults.requiredfields;
 		var s = 0;
 		var n = 50;
 		$(window).trigger('standalone-search', [q, r, s, n]);
 		$("#search-info").show();
-
 		$("#intro").fadeOut();
 		
 		return false;

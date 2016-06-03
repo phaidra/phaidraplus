@@ -323,11 +323,11 @@ require([		'jquery',
 		phaidraQue.execute("proxy/objects", null, { 'func': function(e){}, 'scope': null }, 'GET', true);
 		$(window).trigger('init');
 	} else {
-		$.removeCookie("joyride");
-		$.removeCookie("joyride-lc");
-		$.removeCookie("joyride-lr");
-		$.removeCookie("joyride-lr-login");
-		$.removeCookie("joyride-mark");
+		// $.removeCookie("joyride");
+		// $.removeCookie("joyride-lc");
+		// $.removeCookie("joyride-lr");
+		// $.removeCookie("joyride-lr-login");
+		// $.removeCookie("joyride-mark");
 
 		$(window).on("authError",showLogin);
 		showLogin();

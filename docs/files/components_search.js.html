@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0</em>
+            <em>API Docs for: 1.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -62,6 +62,15 @@
                                 <li><a href="../modules/basics.html">basics</a></li>
                                 <li><a href="../modules/helpers.html">helpers</a></li>
                                 <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
                                 <li><a href="../modules/resources.html">resources</a></li>
                                 <li><a href="../modules/search.html">search</a></li>
                                 <li><a href="../modules/viewControllers.html">viewControllers</a></li>
@@ -315,7 +324,6 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
          @return {Object} the private methods container
          */
         _p.enableSearch = function() {
-            console.log(&quot;enable&quot;)
             _p.searchable(true);
         };
 
@@ -344,6 +352,7 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
          */
         _p.startSearch = function(reset)
         {
+                
             if (typeof reset == &#x27;undefined&#x27;) {
                 reset = true;
                 currentSearchPage = 0;
@@ -353,7 +362,7 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
                 $(window).trigger(&#x27;error.ph-plus&#x27;, [&#x27;No search parameters entered!&#x27;]);
                 return false;
             }
-
+            
             var d = [];
             var toRemove = [];
             for(var i=0; i&lt;filters.length;i++) {
@@ -361,7 +370,8 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
                 var o = {};
                 var v = o[n] = filters[i].getValue();
                 o[&#x27;boolean&#x27;] = filters[i].getBooleanOperator();
-                if (v == null || v == &#x27;&#x27; || v == &#x27;..&#x27;) {
+
+                if (v == null || v == &#x27;&#x27; || v == &#x27;..&#x27; || (typeof v == &#x27;string&#x27; &amp;&amp; v.length == 0)) {
                     toRemove.push(filters[i]);
                 } else {
                     d.push(o);
@@ -382,7 +392,8 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
             if (reset) {
                 self.clearSearchUI();
             } else {
-                $(&#x27;nav.top-bar .top-bar-section .menu&#x27;).find(&#x27;.search-previouspage, .search-nextpage&#x27;).hide();
+                $(&#x27;nav.top-bar&#x27;).find(&#x27;.search-previouspage, .search-nextpage&#x27;).hide();                
+                resourceMan.getResource(&#x27;gsaData&#x27;).dontClearAll();
             }
 
             $(window).trigger(&#x27;search&#x27;, [d, currentSearchPage, searchPageSize]);
@@ -391,11 +402,11 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
 
         _p.searchNext = function()
         {
+
             var n = currentSearchPage+1;
             if (n &gt; totalResultPages) {
                 n = totalResultPages;
             }
-
             if (n != currentSearchPage) {
                 currentSearchPage = n;
                 _p.startSearch(false);
@@ -437,32 +448,45 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
 
         _p.updatePaginationButtons = function()
         {
-            var m = $(&#x27;nav.top-bar .top-bar-section .menu&#x27;);
+            var m = $(&#x27;#search-info&#x27;);
+
             var n = m.find(&#x27;.search-nextpage a&#x27;);
             var p = m.find(&#x27;.search-previouspage a&#x27;);
+
 
             if (currentSearchPage == 0) {
                 p.addClass(&#x27;disabled&#x27;);
             } else {
                 p.removeClass(&#x27;disabled&#x27;);
+                m.show();
             }
 
             if (currentSearchPage &gt;= totalResultPages-1) {
                 n.addClass(&#x27;disabled&#x27;);
             } else {
                 n.removeClass(&#x27;disabled&#x27;);
+                m.show();
             }
+
         };
 
-        _p.updateSearch = function(newData, results, currentPage, pageSize) {
+        _p.updateSearch = function(newData, results, currentPage, pageSize,params) {
             currentSearchPage = currentPage;
             searchPageSize = pageSize;
+            results = (parseInt(results) &gt; 1000) ? 1000 : parseInt(results);
             totalResultPages = Math.ceil(results/pageSize);
 
             var str = [];
-
+            
+            if(!searchSetup &amp;&amp; _basics.queryStringToJSON() &amp;&amp; _basics.queryStringToJSON()[&quot;&quot;]==&quot;&quot; &amp;&amp; params &amp;&amp; params.q) {
+                searchSetup = [{&quot;query&quot;:params.q,&quot;boolean&quot;:undefined}];
+                _p.searchable(1);
+            }
+            
+            
             if (searchSetup) {
                 for (var i = 0; i &lt; searchSetup.length; i++) {
+
                     if (&#x27;query&#x27; in searchSetup[i]) {
                         str.push(_p.translate(&#x27;results-for&#x27;)+&#x27; &quot;&#x27;+searchSetup[i].query+&#x27;&quot;&#x27;);
                         continue;
@@ -480,7 +504,9 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
                                 break;
                         }
                     }
-                    str.push(_p.translate(&#x27;boolean&#x27;+fieldBool.capitalize()));
+                    if(fieldBool) {
+                        str.push(_p.translate(&#x27;boolean&#x27;+fieldBool.capitalize()));
+                    }
                     str.push(_p.translate(fieldKey)+&#x27;:&quot;&#x27;+fieldValue+&#x27;&quot;&#x27;);
                 };
             } else {
@@ -495,45 +521,70 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
 
                 str.push(&#x27;Geteilte Suche&#x27;);
             }
-
+            
+            
             var spc = $(&#x27;#search-params&#x27;);
             var pic = $(&#x27;#pagination-info&#x27;);
 
             if (spc.length == 0) {
                 spc = $(&#x27;&lt;li id=&quot;search-params&quot;&gt;&#x27;);
-                $(&#x27;nav.top-bar .top-bar-section .menu .search-previouspage&#x27;).before(spc);
+                $(&#x27;nav.top-bar .search-previouspage&#x27;).before(spc);
     
-                if (!_standalone) {
+                //if (!_standalone) {
                     spc.on(&#x27;click.ph-plus&#x27;, function(e) {
-                        $(&#x27;nav.top-bar .menu .suche .icon-search&#x27;).trigger(&#x27;click&#x27;);
+                        $(&#x27;nav.top-bar .icon-search&#x27;).trigger(&#x27;click&#x27;);
                         return false;
                     });
-                }
+                //}
             }
 
             if (pic.length == 0) {
                 pic = $(&#x27;&lt;li id=&quot;pagination-info&quot;&gt;&#x27;);
                 spc.after(pic);
                 
-                if (!_standalone) {
+                //if (!_standalone) {
                     pic.on(&#x27;click.ph-plus&#x27;, function(e) {
-                        $(&#x27;nav.top-bar .menu .suche .icon-search&#x27;).trigger(&#x27;click&#x27;);
+                        $(&#x27;nav.top-bar .icon-search&#x27;).trigger(&#x27;click&#x27;);
                         return false;
                     });
-                }
+                //}
             }
 
             spc
                 .attr(&quot;title&quot;,str.join(&#x27; &#x27;))
                 .addClass(&#x27;open&#x27;);
-
+            
+            var t_ofpages = Math.min(results,(currentPage+1)*searchPageSize)
+            var t_page = ((currentPage)*searchPageSize);
+            pic.find(&quot;.suffix&quot;).text(pic.find(&quot;.suffix&quot;).attr(&quot;data-title&quot;));
+            if(!t_ofpages) {
+                pic
+                .attr(&quot;title&quot;,_p.translate(&quot;no-results&quot;))
+                .attr(&quot;data-tooltip&quot;,&quot;&quot;)
+                .show()
+                .find(&quot;.num&quot;).text(&quot;0&quot;);
+                $(&#x27;#search-info&#x27;).show();
+                
+                $(&#x27;.search-previouspage, .search-nextpage&#x27;).hide();
+                var alert = $(&quot;&lt;div&gt;&quot;);
+                alert.addClass(&quot;panel alert&quot;);
+                alert.append(&quot;&lt;p&gt;&quot;+_p.translate(&quot;no-results&quot;)+&quot;&lt;/p&gt;&quot;);
+                $(&quot;#mainsection&quot;).append(alert)
+                return;
+            } else {
+                t_page +=1
+            }
             pic
-                .text(((currentPage)*searchPageSize+1)+&quot;-&quot;+Math.min(Math.ceil(results),(currentPage+1)*searchPageSize) + &#x27;/&#x27;+Math.ceil(results))
                 .attr(&quot;title&quot;,str.join(&#x27; &#x27;))
                 .attr(&quot;data-tooltip&quot;,&quot;&quot;)
-                .show();
+                .show()
+                .find(&quot;.num&quot;).text(t_page+&quot;-&quot;+t_ofpages + &#x27;/&#x27;+results);
+                
             pic.foundation();
-            $(&#x27;nav.top-bar .top-bar-section .menu&#x27;).find(&#x27;.search-previouspage, .search-nextpage&#x27;).show();
+            $(&#x27;#search-info&#x27;).show();
+            $(&#x27;.search-previouspage, .search-nextpage&#x27;).show();
+            //$(&#x27;.pagination&#x27;).show();
+
             _p.updatePaginationButtons();
         };
 
@@ -553,15 +604,20 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
 
         this.clearSearchUI = function()
         {
-            $(&#x27;nav.top-bar .top-bar-section .menu&#x27;).find(&#x27;.search-previouspage, .search-nextpage&#x27;).hide();
+            $(&#x27;#search-info&#x27;).hide();
             currentSearchPage = 0;
             $(&#x27;#search-params&#x27;).removeClass(&#x27;open&#x27;);
-            $(&#x27;#pagination-info&#x27;).hide();
+            //$(&#x27;#pagination-info&#x27;).hide();
         };
 
         this.create = function() {
             // creating dom Base from template
             dom = $(&#x27;#search-dropdown-container&#x27;);
+            dom.find(&quot;.close-dropdown&quot;).off(&quot;click touchend&quot;)
+            dom.find(&quot;.close-dropdown&quot;).on(&quot;click touchend&quot;,function(e){
+                $(this).closest(&quot;.f-dropdown&quot;).removeClass(&quot;open&quot;)
+                return false;
+            })
             dom.removeClass(&#x27;template&#x27;);
 
             filterCanvas = dom.find(&#x27;#filter-canvas&#x27;);
@@ -590,7 +646,6 @@ define([&#x27;require&#x27;, &#x27;jquery&#x27;, &#x27;components/basics&#x27;, 
                 _p.addFilter($(this).val());
                 $(this).val(&#x27;&#x27;);
             });
-
             // adding start button + enter event
             var btn = $(&#x27;&lt;button&gt;&#x27;);
             btn.prop({ &#x27;id&#x27;: &#x27;start-search-button&#x27;, &#x27;type&#x27;: &#x27;button&#x27; })

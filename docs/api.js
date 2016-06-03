@@ -24,6 +24,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "basics",
         "helpers",
         "main",
+        "main\n\n## TODO\n\n- Update View when data is changed",
         "resources",
         "search",
         "viewControllers"
@@ -43,6 +44,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "main",
             "name": "main",
             "description": "The geo view class displays the search result on a map\n\n## Global Events Consumed\n- changeDisplayed\n- marked\n\n## Global Events Triggered\n- addToCollection\n- downloadSingleObject\n- openSingleView\n\n## Dependencies\n- [resourceManager](resourceManager.html)\n- [template:geo-view.hbs](../../templates/geo-view.hbs)\n- [template:marker.hbs](../../templates/marker.hbs)\n- [uncategorizesObjects](uncategorizesObjects.html)"
+        },
+        {
+            "displayName": "main\n\n## TODO\n\n- Update View when data is changed",
+            "name": "main\n\n## TODO\n\n- Update View when data is changed",
+            "description": "The lightroom collections class displays the owner's collections on the startpage of phaidra+.\n\n## Events Triggered\n- changeCollectionProperty\n- clearSearchUI\n- createCollection\n- dataManaged\n- deleteCollection\n- deleteItemFromCollection\n- ingestObject\n- updateCollectionOrder\n\n## Dependencies\n- [basics](basics.html)\n- [ppt](ppt.html)\n- [resourceManager](resourceManager.html)\n- [template:lightroom-collections.hbs](../../templates/lightroom-collections.hbs)"
         },
         {
             "displayName": "resources",

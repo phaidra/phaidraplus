@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>components/collection-manager.js - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: components/collection-manager.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @module viewControllers
+ * @submodule helpers
+ */
+define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/_P_&#x27;, &#x27;text!templates/collection-modal.hbs&#x27;, &#x27;spin&#x27;, &#x27;components/basics&#x27;, &#x27;config/general&#x27;,&#x27;i18n!nls/texts&#x27;,
+            &#x27;foundation&#x27;,    &#x27;jquery.cookie&#x27;],
+                function($, H, _P_, _template, S, _B, _conf,_texts) {
+    /**
+     * If an object has no time or location data it is displayed in the bottom container of the corresponding view.
+     * This class provides the means to do so.
+     *
+     * ## Defines
+     * - &#x27;collectionMan&#x27; in the resourceManager
+     *
+     * ## Events Consumed
+     * - addToCollection.ph-plus
+     * - changeCollectionProperty.ph-plus
+     * - createCollection.ph-plus     
+     * - deleteCollection.ph-plus
+     * - deleteItemFromCollection.ph-plus
+     * - updateCollectionOrder.ph-plus
+     *
+     * ## Events Triggered
+     * - openLightRoomCollections
+     * - rawSearch
+     * - collectionSaved
+     *
+     * ## Dependencies
+     * - [basics](basics.html)
+     * - [dataManager](dataManager.html)
+     * - [phaidraObject](phaidraObject.html)
+     * - [phaidraQue](phaidraQue.html)
+     * - [resourceManager](resourceManager.html)
+     * - [template:collection-modal.hbs](../../templates/collection-modal.hbs)
+     *
+     * @class collectionManager
+     * @static
+     * @final
+     * @requires phaidraObject
+     * @requires basics
+     * @constructor
+     */
+    var collectionManager = function()
+    {
+
+        var dataMan = null;
+        var defaultRepository = &#x27;&#x27;;
+        var currentObjects;
+        var self = this;
+        var dom;
+        var collections = [];
+        var phaidraQue = null;
+        var partialData = null; // if a collection cannot be loaded at once (gsa query length restriction), data is stored here
+        var save = false;
+
+        this.addNewCollectionToModal = function(colData)
+        {
+            var coldom = dom.find(&quot;dd:last&quot;).clone();
+
+            coldom.find(&quot;ul .col-item&quot;).remove();
+            coldom.find(&quot;ul .add-here&quot;).parent().show();
+            coldom.find(&quot;.name&quot;).text(colData.title);
+            coldom.find(&quot;.num&quot;).text(0);
+
+            coldom.find(&quot;ul .add-here&quot;).attr(&quot;data-collection&quot;, colData.id);
+            coldom.attr(&quot;data-collection&quot;, colData.id);
+            coldom.find(&quot;&gt; a&quot;).attr(&quot;href&quot;,&quot;#&quot;+colData.id);
+            coldom.find(&quot;&gt; .content&quot;).attr(&quot;id&quot;, colData.id);
+
+            dom.find(&quot;dd:first&quot;).before(coldom);
+
+            self.updateHandlers();
+
+            coldom.find(&quot;&gt; a&quot;).trigger(&quot;click&quot;);            
+        };
+
+        this.addToCollection = function(index, obj)
+        {
+            collections[index].objects.unshift(obj);
+            collections[index].saved = false;
+        };
+
+        this.changeCollectionProperty = function(uid, propName, propValue, cb)
+        {
+            var colIndex = self.findCollectionOnId(uid);
+
+            if (colIndex == -1) { return false; }
+            collections[colIndex][propName] = propValue;
+
+            self.collectionChanged(colIndex);
+            self.saveCollection(colIndex, false, cb);
+        };
+        /**
+         * Create the collection manager.
+         *
+         * @method create
+         */
+        this.create = function()
+        {
+            dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);
+
+            resourceMan.setResource(&#x27;collectionMan&#x27;, self);
+            phaidraQue = resourceMan.getResource(&#x27;phaidra-que&#x27;);
+            //credentials = phaidraQue.getCredentials();
+
+            $(window)
+                .on(&quot;addToCollection.ph-plus&quot;, function(e,o) {
+                    self.showOverlay(e,o);
+                })
+                .on(&quot;changeCollectionProperty.ph-plus&quot;, function(e, uid, propName, propValue, cb) {
+                    self.changeCollectionProperty(uid, propName, propValue, cb);
+                })
+                .on(&quot;createCollection.ph-plus&quot;, function(e, cb) {
+                    self.createCollection(cb);
+                })
+                .on(&quot;deleteCollection.ph-plus&quot;, function(e, uid, cb) {
+                    self.deleteCollection(uid, cb);
+                })
+                .on(&quot;deleteItemFromCollection.ph-plus&quot;, function(e, objId, colId, cb) {
+                    self.deleteItemFromCollection(objId, colId, cb);
+                })
+                .on(&quot;updateCollectionOrder.ph-plus&quot;, function(e, uid, order) {
+                    self.updateCollectionOrder(uid, order);
+                });
+
+            self.loadCollections();
+        }
+
+        this.createCollection = function(cb)
+        {
+            var index = collections.push({
+                &#x27;description&#x27; : &quot;Beschreibung&quot;,
+                &#x27;id&#x27;                    : 0,
+                &#x27;loaded&#x27;            : false,
+                &#x27;objects&#x27;          : [],
+                &#x27;saved&#x27;                : false,
+                &#x27;title&#x27;             : _texts[&quot;click-to-edit&quot;],
+            });
+
+            self.saveCollection(index-1, false, {
+                &#x27;func&#x27; : self.createCollectionFinished,
+                &#x27;scope&#x27;: self,
+                &#x27;data&#x27; : [index-1, cb],
+            });
+        }
+
+        this.createCollectionFinished = function(index, cb)
+        {
+            if (cb) {
+                _B.executeCallback(cb, null, [collections[index]]);
+            }
+            return;
+        };
+
+        this.collectionChanged = function (index)
+        {
+            collections[index].saved = false;
+        };
+
+        this.deleteCollection = function(uid, cb)
+        {
+            if (!uid || uid == 0) {
+                window.alert(&#x27;Error: no UID!&#x27;);
+                return;
+            }
+            _B.makeLoading($(&#x27;body&#x27;));
+            phaidraQue.execute(uid+&quot;/&quot;, null, { &#x27;func&#x27;: self.deleteCollectionFinished, &#x27;scope&#x27;: self, &#x27;data&#x27;: [uid, cb] }, &#x27;DELETE&#x27;, true);
+        };
+
+        this.collections = function(){
+            return collections;
+        }
+
+        this.deleteCollectionFinished = function(d, uid, cb)
+        {
+            _B.removeLoading($(&#x27;body&#x27;));
+
+            var index = self.findCollectionOnId(uid);
+            if (index == -1) {
+                return;
+            }
+
+            collections.splice(index, 1);
+
+            resourceMan.pause();
+            self.injectCollections();
+            resourceMan.continue();
+            _B.executeCallback(cb);
+        };
+
+        this.deleteItemFromCollection = function(oId, colId, cb)
+        {
+            var colIndex = self.findCollectionOnId(colId);
+            if (colIndex == -1) {
+                window.alert(&#x27;Error:Collection not found!&#x27;);
+                return false;
+            }
+
+            if (collections[colIndex].objects.length == 1) {
+                self.deleteCollection(colId, cb);
+                return true;
+            }
+
+            var objIndex = -1;
+            for (var i = collections[colIndex].objects.length - 1; i &gt;= 0; i--) {
+                if (collections[colIndex].objects[i].data.pid == oId) {
+                    objIndex = i;
+                    break;
+                }
+            }
+
+            if (objIndex == -1) {
+                window.alert(&#x27;Error: Object in Collection not found!&#x27;);
+                return false;
+            }
+
+            collections[colIndex].objects.splice(objIndex, 1);
+            self.collectionChanged(colIndex);
+            self.saveCollection(colIndex, false, cb);
+            return self;
+        };
+
+        this.findCollectionOnId = function(id)
+        {
+            for (var i = collections.length - 1; i &gt;= 0; i--) {
+                if (collections[i].id == id) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+
+        this.hide = function()
+        {
+            return self;
+        }
+
+        this.injectCollections = function()
+        {
+            dataMan.collections = [];
+            // feeding dataManager
+            for (var i = collections.length - 1; i &gt;= 0; i--) {
+                if (!collections[i].loaded) {
+                    dataMan.manageData(collections[i].objects, false);
+                    collections[i].objects = dataMan.objects; 
+                    collections[i].loaded = true;
+                }
+                dataMan.createCollection({
+                    &#x27;title&#x27;: collections[i].title, &#x27;objects&#x27;: collections[i].objects, &#x27;uid&#x27;: collections[i].id,
+                    &#x27;updated&#x27;:collections[i].updated
+                });
+            }
+        };
+
+        // function loading all collections of the member from phaidra temp
+        this.loadCollections = function()
+        {
+            _B.makeLoading($(&#x27;body&#x27;));
+            phaidraQue.execute(&#x27;&#x27;, null, { &#x27;func&#x27;: self.loadingCollectionsFinished, &#x27;scope&#x27;: self }, &#x27;GET&#x27;, true);
+        };
+
+        this.loadSingleCollection = function(collectionId, required, start, num)
+        {
+            if (dataMan == null) {
+                dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);
+            }
+
+            if (phaidraQue == null) {
+                phaidraQue = resourceMan.getResource(&#x27;phaidra-que&#x27;);
+            }
+
+            resourceMan.setResource(&#x27;collectionMan&#x27;, self);
+            phaidraQue.execute(&#x27;standalone/&#x27;+collectionId, null, { &#x27;func&#x27;: self.loadingCollectionsFinished, &#x27;scope&#x27;: self }, &#x27;GET&#x27;, false);
+        };
+
+        this.loadCollectionMembersData = function(which, all)
+        {
+            which = which || 0;
+            all = all || false;
+
+            var col = collections[which].objects;
+            // getting all unique
+            var ids = [];
+            var numOfIds = 0;
+            var totalQueryLength = 0;
+            for(var i in col) {
+                if (typeof col[i][&#x27;loaded&#x27;] != &#x27;undefined&#x27;) {
+                    continue;
+                }
+
+                var s = &#x27;(pid%3Ao%253a&#x27;+col[i].pid.slice(2)+&#x27;.&#x27;+_conf.repositoryMeta+&#x27;%3A&#x27;+col[i].repository+&#x27;)&#x27;;
+
+                if (totalQueryLength + s.length + 8 &lt; _conf.maxQueryLength - _conf.minQueryLength) {
+                    ids[col[i].pid] = s;
+                    numOfIds += 1;
+                    totalQueryLength += s.length + 8;
+                    col[i].loaded = true;
+                } else {
+                    break;
+                }
+            }
+
+            // do not query if collection is empty
+            if (numOfIds == 0) {
+                self.loadCollectionMembersDataFinished([], which, all);
+                return;
+            }
+
+            // loading members from gsa
+            var requiredFields = &#x27;&#x27;;
+            for(var i in ids) {
+                requiredFields += ids[i]+&#x27;|&#x27;;
+            }
+            requiredFields = requiredFields.slice(0, -1);
+        $(window).trigger(&#x27;rawSearch&#x27;, [&#x27;&#x27;, requiredFields, null, null, { &#x27;scope&#x27;:self, &#x27;func&#x27;: self.loadCollectionMembersDataFinished, &#x27;data&#x27;:[which, all, numOfIds != col.length] }]);
+        };
+
+        this.loadCollectionMembersDataFinished = function(d, current, all, partial)
+        {
+            partial = (typeof partial == &#x27;undefined&#x27;) ? false : partial;
+            var newlyOrdered = [];
+            var keepOnLoading = false;
+
+            if (partial &amp;&amp; partialData != null) {
+                newlyOrdered = partialData;
+            }
+
+            for (var i = collections[current].objects.length - 1; i &gt;= 0; i--) {
+                var searchId = collections[current].objects[i].pid;
+
+                for (var j = d.length - 1; j &gt;= 0; j--) {
+                    if (d[j].MT.pid == searchId) {
+                        newlyOrdered[collections[current].objects[i].pos] = d[j];
+                        break;
+                    }
+                };
+            };
+
+            var c = 0;
+            for(var p in newlyOrdered) { c++; }
+
+            if (c &gt;= collections[current].objects.length) {
+                collections[current].objects = newlyOrdered;
+                partialData = null;
+            } else {
+                partialData = newlyOrdered;
+                keepOnLoading = true;
+            }
+
+            if (keepOnLoading) {
+                self.loadCollectionMembersData(current, all);
+            }
+            else if (all &amp;&amp; current &lt; collections.length-1) {
+                self.loadCollectionMembersData(current + 1, all);
+            } else {
+                self.injectCollections();
+
+                _B.removeLoading($(&#x27;body&#x27;));
+                if (_standalone) {
+                    dataMan.selectCollection(collections[0].id);
+                    $(window).trigger(&quot;openLightroomView&quot;);
+                } else {
+                    $(window).trigger(&quot;openLightRoomCollections&quot;);
+                }
+            }
+        };
+
+        this.loadingCollectionsFinished = function(d)
+        {
+            if (d &amp;&amp; d.lists &amp;&amp; d.lists.length &gt; 0) {
+                for(var i in d.lists) {
+                    // defaulting repository info
+                    var objs = [];
+                    for(var j in d.lists[i].list.members) {
+                        var o = d.lists[i].list.members[j];
+                        if (!o[&#x27;repository&#x27;]) {
+                            o[&#x27;repository&#x27;] = defaultRepository;
+                        }
+                        objs.push(o);
+                    }
+                    
+                    collections.push({
+                        &#x27;description&#x27; : d.lists[i].list.title,
+                        &#x27;id&#x27;                    : d.lists[i]._id,
+                        &#x27;loaded&#x27;            : false,
+                        &#x27;updated&#x27;            : d.lists[i].updated,
+                        &#x27;objects&#x27;          : objs,
+                        &#x27;saved&#x27;                : true,
+                        &#x27;title&#x27;             : d.lists[i].list.title,
+                    });
+                }
+
+                self.loadCollectionMembersData(0, true);
+            } else {
+                $(&#x27;body&#x27;).data(&#x27;ph-plus-removeLoader&#x27;)();
+                $(window).trigger(&#x27;openLightRoomCollections&#x27;);
+            }
+        };
+
+        this.saveCollection = function(index, all, cb)
+        {
+            if (collections[index].saved == true) {
+                self.saveCollectionFinished(collections[index], index, all, cb);
+                return;
+            }
+
+            all = all || false;
+            cb = cb || null;
+            var members = [];
+    
+            for (var i = collections[index].objects.length - 1; i &gt;= 0; i--) {
+                members.push({
+                    &#x27;namespace&#x27;: collections[index].objects[i].data.installation.split(&#x27;.&#x27;)[0],
+                    &#x27;pid&#x27;: collections[index].objects[i].data.pid,
+                    &#x27;pos&#x27;: i,
+                    &#x27;repository&#x27;: collections[index].objects[i].data[_conf.repositoryMeta],
+                });
+            };
+
+            var d = {
+                &#x27;description&#x27;: collections[index].description,
+                &#x27;members&#x27;: members,
+                &#x27;title&#x27;: collections[index].title,
+            };
+
+            _B.makeLoading($(&#x27;body&#x27;));
+
+            if (collections[index].id != 0) {
+                phaidraQue.execute(collections[index].id, d, { &#x27;func&#x27;: self.saveCollectionFinished, &#x27;scope&#x27;: self, &#x27;data&#x27;:[index, all, cb] }, &#x27;POST&#x27;, true);
+            } else {
+                phaidraQue.execute(&#x27;&#x27;, d, { &#x27;func&#x27;: self.saveCollectionFinished, &#x27;scope&#x27;: self, &#x27;data&#x27;:[index, all, cb] }, &#x27;PUT&#x27;, true);
+            }
+        };
+
+        this.saveCollectionFinished = function(d, index, all, cb)
+        {
+            if (!collections[index].saved) {
+                collections[index].saved = true;        
+                collections[index].updated = new Date().getTime();
+            }
+
+            if (collections[index].id == 0) {
+                collections[index].id = d.id;
+            }
+
+            $(self).trigger(&#x27;collectionSaved&#x27;, [index, collections[index] ]);
+
+            if (index &lt; collections.length-1 &amp;&amp; all) {
+                self.saveCollection(index+1, all);
+                return;
+            }
+
+            resourceMan.pause();
+            self.injectCollections();
+            resourceMan.continue();
+
+            _B.removeLoading($(&#x27;body&#x27;));
+
+            if (cb) {
+                _B.executeCallback(cb);
+            }
+        };
+
+        this.show = function()
+        {
+            return self;
+        }
+
+        this.showOverlay = function(e,d)
+        {
+            if(typeof d == &quot;object&quot;) {
+                if(!d.length) {
+                    if(d.data) {
+                        currentObjects = [dataMan.getObject(d.data.pid)];
+                    } else if(d.pid) {
+                        currentObjects = [dataMan.getObject(d.pid)];
+                    } else {
+                        alert(&quot;unknown object&quot;);
+                    }
+                    
+                }
+            } else {
+                currentObjects = dataMan.getMarked();
+            }
+            save = false;
+            $(&quot;.tooltip&quot;).hide();
+            $(&quot;#overlay&quot;).remove();
+            if(dom) {
+                dom.empty();
+                if(dom.parent()) {
+                    dom.remove();
+                }
+                dom = null;
+            }
+            
+            var template = H.compile($.trim(_template));
+            
+            var COLLECTIONS = dataMan.collections;
+            COLLECTIONS.sort(function(a,b){
+                 return a.title.toLowerCase() &gt;= b.title.toLowerCase() ? 1 : -1;
+            });
+            dom = $($.trim(template({
+                &quot;collection&quot;: COLLECTIONS
+            })));
+
+            $(&quot;body&quot;).append(dom);
+
+            dom = $(&quot;body #modal-collection&quot;).eq(0);
+
+
+            dom.find(&quot;#modal-collection-close-btn&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                dom.foundation(&#x27;reveal&#x27;, &#x27;close&#x27;);
+                return false;
+            });
+            
+            dom.find(&quot;#add-collection&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                self.createCollection({
+                    &#x27;func&#x27; : self.addNewCollectionToModal,
+                    &#x27;scope&#x27;: self,
+                });
+                return false;
+            });
+            
+            dom.foundation();
+            dom.foundation(&quot;reveal&quot;,&quot;open&quot;);
+
+            self.updateHandlers();
+
+            dom.find(&quot;dd:first &gt; a&quot;).trigger(&quot;click&quot;);
+            return false;
+        }
+
+        this.updateCollectionOrder = function(uid, order, cb)
+        {
+            var colIndex = self.findCollectionOnId(uid);
+
+            if (colIndex == -1) {
+                return false;
+            }
+
+            var col = collections[colIndex];
+            var newlyOrdered = [];
+            var membersData = [];
+
+            for (var i = order.length - 1; i &gt;= 0; i--) {
+                var searchId = order[i];
+
+                for (var j = col.objects.length - 1; j &gt;= 0; j--) {
+                    if (col.objects[j].data.pid == searchId) {
+                        newlyOrdered[i] = col.objects[j];
+                        break;
+                    }
+                };
+            };
+
+            col.objects = newlyOrdered;
+
+            self.collectionChanged(colIndex);
+            self.saveCollection(colIndex, false);
+        };
+
+        this.updateHandlers = function()
+        {
+            dom.find(&quot;a.add-here&quot;).off(&quot;.ph-plus&quot;);
+            dom.find(&quot;a.add-here&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                $(&quot;.tooltip&quot;).hide();
+                $(&quot;#modal-collection a&quot;).removeClass(&quot;disabled&quot;);
+
+                if ($(this).find(&quot;img&quot;).length) {
+                    return;
+                }
+
+                var section = $(this).closest(&quot;dd&quot;);
+                var list = section.find(&quot;ul&quot;);
+                var uid = $(this).data(&quot;collection&quot;);
+                var colIndex = self.findCollectionOnId(uid);
+
+                for (var i = currentObjects.length - 1; i &gt;= 0; i--) {
+                    var obj = currentObjects[i];
+                    var objInCols = dataMan.objectFindCollections(obj);
+
+                    if(objInCols.indexOf(uid) != -1) {
+                        var doublette = list.find(&quot;[data-pid=&#x27;&quot;+obj.data.pid+&quot;&#x27;]&quot;);
+                        if(doublette.length) {
+                            doublette.remove();
+                        }
+                    }
+                    
+                    var link = $(&#x27;&lt;a href=&quot;#&quot; data-tooltip title=&quot;&#x27;+obj.data.title+&#x27;&quot; data-options=&quot;disable-for-touch: true&quot; class=&quot;has-tip tip-top&quot; /&gt;&#x27;);
+                    var img = $(&quot;&lt;img/&gt;&quot;).attr(&quot;src&quot;, obj.data.preview);
+                    var li = $(&quot;&lt;li/&gt;&quot;).addClass(&quot;col-item&quot;).attr(&quot;data-pid&quot;,obj.data.pid);
+                    link.append(img);
+                    li.append(link);
+                    list.prepend(li);
+                    self.addToCollection(colIndex, obj);
+                }
+
+                self.collectionChanged(colIndex);
+                self.saveCollection(0, true);
+                $(this).parent().hide();
+
+                section.find(&quot;.title .num&quot;).text(section.find(&quot;ul li&quot;).length-1);
+                dom.foundation(&#x27;reveal&#x27;, &#x27;close&#x27;);
+                return false;
+            });    
+        }
+
+        defaultRepository = _conf.repositories[_conf.defaultRepository];
+    };
+
+    this.translate = function(term)
+    {    
+    if (typeof _texts[term] != &#x27;undefined&#x27;) {
+      return _texts[term];
+    } else {
+      return term;
+    }                
+    };
+
+    H.registerHelper(&#x27;translate&#x27;, self.translate);
+    H.registerHelper(&#x27;each_upto&#x27;, function(ary, max, options)
+    {
+    if(!ary || ary.length == 0) { return options.inverse(this); }
+
+    var result = [];
+    for(var i = 0; i &lt; max &amp;&amp; i &lt; ary.length; ++i) {
+      result.push(options.fn(ary[i]));
+    }
+    return result.join(&#x27;&#x27;);
+    });
+    H.registerHelper(&#x27;ifCond&#x27;, function (v1, operator, v2, options) {
+
+    switch (operator) {
+      case &#x27;==&#x27;:
+        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;===&#x27;:
+        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;!=&#x27;:
+        return (v1 != v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;&lt;&#x27;:
+        return (v1 &lt; v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;&lt;=&#x27;:
+        return (v1 &lt;= v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;&gt;&#x27;:
+        return (v1 &gt; v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;&gt;=&#x27;:
+        return (v1 &gt;= v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;&amp;&amp;&#x27;:
+        return (v1 &amp;&amp; v2) ? options.fn(this) : options.inverse(this);
+      case &#x27;||&#x27;:
+        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+      default:
+        return options.inverse(this);
+    }
+    });
+    return collectionManager;
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

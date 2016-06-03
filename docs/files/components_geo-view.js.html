@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>components/geo-view.js - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: components/geo-view.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @module viewControllers
+ * @submodule main
+ */
+define([&#x27;jquery&#x27;, &#x27;leaflet&#x27;, &#x27;Handlebars&#x27;, &#x27;components/bottom-objs-container&#x27;, &#x27;text!templates/geo-view.hbs&#x27;, &#x27;text!templates/marker.hbs&#x27;, &#x27;i18n!nls/texts&#x27;,
+                  &#x27;foundation&#x27;,&#x27;leaflet-cluster&#x27;],
+             function ($, _L, _H, bottomContainerClass, _tempRaw, _markerTemplate, _texts) {
+    /**
+     * The geo view class displays the search result on a map
+     *
+     * ## Global Events Consumed
+     * - changeDisplayed
+     * - marked
+     *
+     * ## Global Events Triggered
+     * - addToCollection
+     * - downloadSingleObject
+     * - openSingleView
+     *
+     * ## Dependencies
+     * - [resourceManager](resourceManager.html)
+     * - [template:geo-view.hbs](../../templates/geo-view.hbs)
+     * - [template:marker.hbs](../../templates/marker.hbs)
+     * - [uncategorizesObjects](uncategorizesObjects.html)
+     *
+     * @class geoView
+     * @constructor
+     */
+    var geoView = function()
+    {
+
+        var bottomContainer = null;
+        var currentMarker = null;
+        var currentObject = null;
+        var curSize = 44;
+        var dataMan = null;
+        var dom = null;
+        var enabledObject = null;
+        var icons = null;
+        var map = null;
+        var markerTemplate = null;
+        var self = this;
+        var streetLayer = null;
+        var template = null;
+        var watercolorLayer = null;
+        var loadTimer = null;
+
+        this.name = &#x27;geo&#x27;;
+        /**
+         * @method close
+         */
+        this.close = function(newState)
+        {
+            $(&quot;#geo-view-container&quot;).hide();
+              $(&quot;html&quot;).removeClass(&quot;geoView&quot;);
+
+            $(dataMan).off(&#x27;.ph-plus-geoview&#x27;);
+            resourceMan.getResource(&#x27;sidebar&#x27;).setImageResizeListener(null);
+
+            resourceMan.getResource(&#x27;slideshow&#x27;).destroySlideshow();
+            $(resourceMan.getResource(&#x27;slideshow&#x27;)).off(&quot;.ph-plus-geoview&quot;);                
+
+            if(loadTimer) {
+                clearTimeout(loadTimer);
+            }
+
+            if (newState == &#x27;openSingleView&#x27;) {
+                return;
+            }
+
+            if(map &amp;&amp; icons.length) {
+                map.remove();
+                icons = [];
+            }
+
+            if(dom) {
+                dom.remove();
+                delete dom;
+                dom = null;
+              }
+
+              $(&#x27;#mainsection&#x27;).empty();
+          
+            resourceMan.setConfig(&#x27;*&#x27;, &#x27;geoView&#x27;, {
+                &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;, &#x27;components/geo-view&#x27;],
+                &#x27;open&#x27;: { &#x27;scope&#x27;: &#x27;components_geoView&#x27;, &#x27;func&#x27;: &#x27;show&#x27; },
+            });
+    };
+        /**
+         * @method create
+         */
+       this.create = function()
+    {
+      if (template == null) {
+        template = _H.compile(_tempRaw);
+      }
+
+      $(&quot;html&quot;).addClass(&quot;geoView&quot;);
+      
+      dom = template();
+      dom = $.parseHTML($.trim(dom));
+      dom = $(dom);
+      
+      $(&#x27;#mainsection&#x27;).append(dom);
+      dom.find(&#x27;#view-modi&#x27;).val(&#x27;map&#x27;);
+      $(dom).foundation();      
+    };
+
+    this.loadImages = function() {
+        var icons = $(dom).find(&quot;.mapicon[data-original]&quot;);
+        icons.each(function(i,e){
+            if(i &gt; 5) {
+                return;
+            }
+            $(e).attr(&quot;style&quot;,&quot;background-image:url(&#x27;&quot;+$(e).attr(&quot;data-original&quot;)+&quot;&#x27;)&quot;);
+            $(e).removeAttr(&quot;data-original&quot;);
+        });
+        loadTimer = setScopedTimeout(function () { self.loadImages(); }, 1000, self);
+    }
+
+        this.enablePopupActions = function(obj)
+        {
+            currentObject = obj;
+            enabledObject = obj;
+            
+            $(&quot;.image&quot;).off(&quot;.ph-plus-geoview&quot;);
+            $(&quot;.image, a.full-image&quot;).on(&quot;click.ph-plus-geoview&quot;,function(e) {
+                e.preventDefault();
+                $(window).trigger(&quot;openSingleView&quot;,[currentObject]);
+                return false;
+            });
+
+            $(&quot;a.mark-image&quot;).off(&quot;.ph-plus-geoview&quot;);
+            $(&quot;a.mark-image&quot;).on(&quot;click.ph-plus-geoview&quot;,function (e) {
+                var unmark = !$(this).hasClass(&#x27;active&#x27;);
+                $(&quot;.tooltip&quot;).hide();
+                $(this).toggleClass(&quot;active&quot;);
+                dataMan.markObject(currentObject.pid, unmark);
+                map.closePopup();
+                return false;
+            });
+
+            if(dataMan.isMarked(currentObject.pid)) {
+                $(&quot;a.mark-image&quot;).removeClass(&quot;active&quot;);
+            } else {
+                $(&quot;a.mark-image&quot;).addClass(&quot;active&quot;);
+            }
+            $(&quot;.leaflet-popup [data-original]&quot;).attr(&quot;src&quot;,$(&quot;.leaflet-popup [data-original]&quot;).attr(&quot;data-original&quot;));
+            $(&quot;.leaflet-popup [data-original]&quot;).removeAttr(&quot;data-original&quot;)
+            $(&quot;a.collection-image&quot;)
+                .off(&quot;.ph-plus-geoview&quot;)
+                .on(&quot;click.ph-plus-geoview&quot;,function(e) {
+                $(&quot;.tooltip&quot;).hide();
+                $(window).trigger(&#x27;addToCollection&#x27;, [currentObject]); // TODO: create Collection event
+                return false;
+            });
+
+            $(&quot;a.download-image&quot;).off(&quot;click&quot;);
+            $(&quot;a.download-image&quot;).on(&quot;click&quot;, function (e) {
+                $(&quot;.tooltip&quot;).hide();
+                $(window).trigger(&#x27;downloadSingleObject&#x27;, [currentObject]); // TODO: create event handler
+                return false;
+            });
+        };
+
+        this.resizeImages = function(newVal)
+        {
+            var v = 8 - newVal;
+            var cw = ((8 - v) * 6) + 44;
+            var pane = $(&#x27;#map .leaflet-marker-pane&#x27;);
+            self.curSize = cw;
+
+            pane.find(&quot;.mapicon&quot;).css({
+                &quot;width&quot;: cw,
+                //&quot;margin-left&quot;: -cw / 2,
+                &quot;height&quot;: cw,
+                //&quot;margin-top&quot;: -cw / 2,
+            });
+
+            for(var i in icons) {
+                icons[i].update();
+            }            
+        };
+        /**
+         * @method show
+         */
+        this.show = function(d)
+        {
+            if (typeof d != &#x27;undefined&#x27; &amp;&amp; d != null) {
+                dataMan = d;
+            } else {
+                dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);
+            }
+
+            var sidebar = resourceMan.getResource(&#x27;sidebar&#x27;);
+
+            if (dom != null) {
+            self.close();
+          }
+
+            $(&quot;html&quot;).addClass(&quot;geoView&quot;);
+            
+            resourceMan.setConfig(&#x27;*&#x27;, &#x27;geoView&#x27;, {
+                &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;, &#x27;components/geo-view&#x27;],
+                &#x27;open&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.show },
+                &#x27;close&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.close }
+            });
+
+            resourceMan.setConfig(&#x27;dataManaged&#x27;, &#x27;default&#x27;, {
+                &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;, &#x27;components/geo-view&#x27;],
+                &#x27;open&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.show },
+                &#x27;close&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.close }
+            });
+
+            resourceMan.setConfig(&#x27;*&#x27;, &#x27;sidebar&#x27;, {
+                &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;],
+                &#x27;open&#x27;: { &#x27;scope&#x27;: sidebar, &#x27;func&#x27;: sidebar.show },
+            });
+
+            if (typeof dataMan == &#x27;undefined&#x27; || dataMan == null) {
+                console.log(&#x27;error: no data for geoview!&#x27;);
+                return;
+            }
+
+            if ($(&quot;#search-canvas&quot;).hasClass(&quot;open&quot;)) {
+                $(&quot;#searchdropdown&quot;).trigger(&quot;click&quot;);
+            }
+
+      self.create();
+      $(dataMan).off(&#x27;.ph-plus-geoview&#x27;)
+                          .on(&#x27;changeDisplayed.ph-plus-geoview&#x27;, self.updateData)
+                                .on(&#x27;marked.ph-plus-geoview&#x27;, self.updateMarked);
+      resourceMan.getResource(&#x27;sidebar&#x27;).setImageResizeListener({ scope: self, func: self.resizeImages });
+
+      var v = 8-$(&quot;#imagesize&quot;).val();
+          self.curSize = ((8-v)*6)+44;
+
+      if (markerTemplate == null) {
+          markerTemplate = _H.compile(_markerTemplate);
+      }
+
+      /***  little hack starts here ***/
+      _L.Map = _L.Map.extend({
+              openPopup: function(popup) {
+                if(this._popup &amp;&amp; this._popup != popup) {
+                map.closePopup();
+            }
+
+            if(this._popup == popup) {
+                return;
+            }
+                    this._popup = popup;
+
+                    var marker = popup;
+                    var data = marker._source.options.data.obj;
+                    currentObject = data;
+            
+            return this.addLayer(popup).fire(&#x27;popupopen&#x27;, {
+            popup: this._popup
+            });
+            }
+            });
+
+          map = new _L.Map(&#x27;map&#x27;);
+
+             streetLayer = _L.tileLayer(&#x27;http://api.tiles.mapbox.com/v3/jrgio.jgoi4gh8/{z}/{x}/{y}.png&#x27;, {
+                 attribution: &#x27;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors, Design: Julian Roedelius&#x27;
+             });
+            // streetLayer = _L.tileLayer(&#x27;/tiles/{z}/{x}/{y}.png&#x27;, {
+            //     attribution: &#x27;&amp;copy; &lt;a href=&quot;http://osm.org/copyright&quot;&gt;OpenStreetMap&lt;/a&gt; contributors&#x27;
+            // });
+            streetLayer.addTo(map);
+
+            markerCluster = _L.markerClusterGroup({
+                &#x27;maxClusterRadius&#x27;: 40,
+                &#x27;zoomToBoundsOnClick&#x27;: false,
+                &#x27;iconCreateFunction&#x27;: function (cluster) {
+                    var markers = cluster.getAllChildMarkers();
+                var iconHTML = markers[0].options.icon.options.html;
+                // iconHTML = $(iconHTML);
+                // var src = iconHTML.find(&quot;.mapicon&quot;).attr(&quot;data-original&quot;);
+                // if(src &amp;&amp; src != 0) {
+                //     iconHTML.find(&quot;.mapicon&quot;).attr(&quot;style&quot;,src);
+                //     iconHTML.find(&quot;.mapicon&quot;).attr(&quot;data-original&quot;,0);
+                // }
+                      
+                return L.divIcon({ 
+                &#x27;html&#x27;: iconHTML+&quot;&lt;div class=&#x27;number&#x27;&gt;&quot;+markers.length+&quot;&lt;/div&gt;&quot;,
+                &#x27;className&#x27;: &#x27;mycluster&#x27;, 
+            &#x27;iconSize&#x27;: [function() { return self.curSize; }, function() { return self.curSize; }],
+                        &#x27;iconAnchor&#x27;: [0, 0],
+                    });
+            },
+            });
+
+            markerCluster.on(&quot;clusterclick&quot;,function(m){
+               m.layer.spiderfy();
+                return false;
+            });
+
+            markerCluster.on(&quot;click&quot;,function(m){
+                if(m &amp;&amp; m.layer.options &amp;&amp; m.layer.options.data) {
+                  $(m.layer._icon).trigger(&quot;click&quot;)
+                }
+                return false;
+            });
+
+          self.updateData();
+
+      $(resourceMan.getResource(&#x27;slideshow&#x27;))
+          .off(&#x27;.ph-plus-geoview&#x27;)
+          .on(&#x27;slideshowOpen.ph-plus-geoview&#x27;, function() {
+                    $(&#x27;#mainsection&#x27;).fadeOut(400);
+                    return false;
+          })
+          .on(&#x27;slideshowClose.ph-plus-geoview&#x27;, function() {
+                    $(&#x27;#mainsection&#x27;).fadeIn(400);
+                    return false;
+          });
+        };
+
+      this.translate = function(term)
+      {
+        if (typeof _texts[term] != &#x27;undefined&#x27;) {
+          return _texts[term];
+        } else {
+          return term;
+        }      
+      };
+
+      this.updateData = function()
+      {
+          var objs = dataMan.getObjects();
+
+          if (icons != null &amp;&amp; icons.length &gt; 0) {
+              for(var i in icons) {
+                  markerCluster.removeLayer(icons[i]);
+              }
+          }
+
+            icons = [];
+            var notPossitioned = [];
+            var bounds = { southWest: { south: 36, west:-4 }, northEast: { north:50, east:20 }}; // (lat) north positive, south negative, (lon) east: positive, west: negative
+            var testData = [];
+            
+            for(var i=0;i&lt;objs.length;i++) {
+                var obj = objs[i].data;
+
+                if (typeof obj.latlon == &#x27;undefined&#x27;) {
+                    notPossitioned.push(obj);
+                    continue;
+                }
+
+                if (typeof obj.latlon.lat == &#x27;undefined&#x27; || typeof obj.latlon.lon == &#x27;undefined&#x27;) {
+                    notPossitioned.push(obj);
+                    continue;
+                }
+
+                if (obj.latlon.lat &gt; bounds.northEast.north) {
+                    bounds.northEast.north = obj.latlon.lat;
+                }
+
+                if (obj.latlon.lat &lt; bounds.southWest.south) {
+                    bounds.southWest.south = obj.latlon.lat;
+                }
+
+                if (obj.latlon.lon &gt; bounds.northEast.east) {
+                    bounds.northEast.east = obj.latlon.lon;
+                }
+
+                if (obj.latlon.lon &lt; bounds.southWest.west) {
+                    bounds.southWest.west = obj.latlon.lon;
+                }
+
+                var dm = objs[i].createDom(&quot;map&quot;, _standalone);
+                var imageIcon = _L.divIcon({
+                    iconAnchor: [ function() { return self.curSize/2; },
+                                                function() { return self.curSize/2; }
+                                            ],
+                    iconSize: [ function() { return self.curSize; },
+                                            function() { return self.curSize; }
+                                        ],
+                    &#x27;html&#x27;: &#x27;&lt;div class=&quot;mapicon&quot; data-original=&quot;&#x27;+obj.thumbnail+&#x27;&quot; data-pid=&quot;&#x27;+obj.pid+&#x27;&quot;&gt;&lt;/div&gt;&#x27;,
+                });
+
+                var marker = _L.marker([obj.latlon.lat, obj.latlon.lon], {
+                         &#x27;data&#x27;: { &quot;obj&quot;: obj},
+                         &#x27;icon&#x27;: imageIcon,
+                    })
+                    .bindPopup(dm[0], {
+                        &#x27;closePopupOnClick&#x27;: true,
+                         &#x27;maxWidth&#x27;:&quot;480&quot;
+                     });
+                
+                markerCluster.addLayer(marker);
+                icons.push(marker);
+            }
+
+            bounds.southWest = new _L.LatLng(bounds.southWest.south, bounds.southWest.west);
+            bounds.northEast = new _L.LatLng(bounds.northEast.north, bounds.northEast.east);
+            bounds = new _L.LatLngBounds(bounds.southWest, bounds.northEast);
+            map.fitBounds(bounds);
+            map.addLayer(markerCluster);
+            map.on(&#x27;popupopen&#x27;, function(e) {
+                if(enabledObject != currentObject) {
+                    self.enablePopupActions(currentObject);
+                }
+            });
+
+            self.updateMarked();
+            if(loadTimer) {
+                clearTimeout(loadTimer);
+            }
+            self.loadImages();
+
+            if (bottomContainer != null) {
+                bottomContainer.delete();
+                delete bottomContainer;
+            }
+            if (notPossitioned.length) {
+                bottomContainer = new bottomContainerClass(notPossitioned, self.translate(&#x27;unlocatedObjects&#x27;)+&quot; (&quot;+notPossitioned.length+&quot;/&quot;+objs.length+&quot;)&quot;);
+            }
+      };
+
+      this.updateMarked = function()
+      {
+          var pane = $(&#x27;#map .leaflet-marker-pane&#x27;);
+            for(var i in icons) {
+                var o = icons[i].options.data.obj;
+                if (dataMan.isMarked(o.pid)) {
+                    pane.find(&quot;.mapicon[data-pid=\&quot;&quot; + o.pid + &quot;\&quot;]&quot;).addClass(&quot;highlight&quot;);
+                } else {
+                    pane.find(&quot;.mapicon[data-pid=\&quot;&quot; + o.pid + &quot;\&quot;]&quot;).removeClass(&quot;highlight&quot;);
+                }
+            }            
+      };
+
+      _H.registerHelper(&#x27;translate&#x27;, self.translate);
+    };
+
+    return geoView;
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

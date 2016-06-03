@@ -5317,7 +5317,7 @@ div.smallpill {
   .slick-list:focus {
     outline: none; }
   .slick-loading .slick-list {
-    background: white url("x�p�/ajax-loader.gif") center center no-repeat; }
+    background: white url("x��~J/ajax-loader.gif") center center no-repeat; }
   .slick-list.dragging {
     cursor: pointer;
     cursor: hand; }
@@ -5684,6 +5684,13 @@ b, strong {
   -webkit-transition: opacity 0.3s ease-out;
   -moz-transition: opacity 0.3s ease-out;
   transition: opacity 0.3s ease-out; }
+
+#intro .menu {
+  text-align: center;
+  list-style-type: none; }
+  #intro .menu a, #intro .menu li {
+    display: inline-block;
+    float: none; }
 
 .hiddenlogo {
   display: none; }

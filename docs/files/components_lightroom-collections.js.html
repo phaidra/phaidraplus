@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>components/lightroom-collections.js - Phaidra+</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/basics.html">basics</a></li>
+                                <li><a href="../classes/collectionManager.html">collectionManager</a></li>
+                                <li><a href="../classes/dataManager.html">dataManager</a></li>
+                                <li><a href="../classes/downloadManager.html">downloadManager</a></li>
+                                <li><a href="../classes/geoView.html">geoView</a></li>
+                                <li><a href="../classes/lightroomCollections.html">lightroomCollections</a></li>
+                                <li><a href="../classes/phaidraObject.html">phaidraObject</a></li>
+                                <li><a href="../classes/phaidraQue.html">phaidraQue</a></li>
+                                <li><a href="../classes/pptCreator.html">pptCreator</a></li>
+                                <li><a href="../classes/resourceManager.html">resourceManager</a></li>
+                                <li><a href="../classes/search.html">search</a></li>
+                                <li><a href="../classes/searchFilter.html">searchFilter</a></li>
+                                <li><a href="../classes/searchRequestManager.html">searchRequestManager</a></li>
+                                <li><a href="../classes/singleView.html">singleView</a></li>
+                                <li><a href="../classes/standalone.html">standalone</a></li>
+                                <li><a href="../classes/timeline.html">timeline</a></li>
+                                <li><a href="../classes/timelineObject.html">timelineObject</a></li>
+                                <li><a href="../classes/uncategorizesObjects.html">uncategorizesObjects</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/basics.html">basics</a></li>
+                                <li><a href="../modules/helpers.html">helpers</a></li>
+                                <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
+                                <li><a href="../modules/resources.html">resources</a></li>
+                                <li><a href="../modules/search.html">search</a></li>
+                                <li><a href="../modules/viewControllers.html">viewControllers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: components/lightroom-collections.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @module viewControllers
+ * @submodule main
+ *
+ * ## TODO
+ *
+ * - Update View when data is changed
+ *
+ */
+define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;,&#x27;components/basics&#x27;,&#x27;components/ppt&#x27;,&#x27;text!templates/lightroom-collections.hbs&#x27;,&#x27;text!templates/ingest-modal.hbs&#x27;,&#x27;i18n!nls/texts&#x27;, &#x27;components/_P_&#x27;, &#x27;spin&#x27;,
+                &#x27;foundation&#x27;, &#x27;jquery.cookie&#x27;],
+
+    function ($, _H, _B, _pptCreatorClass, _template,_ingestTemplate, _texts, _P_, _spinner)
+    {
+    /**
+     * The lightroom collections class displays the owner&#x27;s collections on the startpage of phaidra+.
+     *
+     * ## Events Triggered
+     * - changeCollectionProperty
+     * - clearSearchUI
+     * - createCollection
+     * - dataManaged
+     * - deleteCollection
+     * - deleteItemFromCollection
+     * - ingestObject
+     * - updateCollectionOrder
+     *
+     * ## Dependencies
+     * - [basics](basics.html)
+     * - [ppt](ppt.html)
+     * - [resourceManager](resourceManager.html)
+     * - [template:lightroom-collections.hbs](../../templates/lightroom-collections.hbs)
+     *
+     * @class lightroomCollections
+     * @static
+     * @final
+     * @constructor
+     */
+        return function lightroomCollections()
+        {
+            var self = this;
+            this.data = null;
+            var dataMan;
+            this.WALL;
+            this.CURWIDTH;
+            this.GRIDWIDTH;
+            this.LISTWIDTH;
+            this.CURSIZE;
+            this.CURMODE = &quot;grid&quot;;
+            var dom;
+            var template;
+            var curCol;
+            var phaidraQue;
+            var numVisible = 6;
+            var numOwnObjectsVisible = 18;
+            var ownerObjects = [];
+
+            this.name = &#x27;collection&#x27;;
+
+            this.addCollection = function(d) {
+                if (typeof d != &#x27;undefined&#x27; &amp;&amp; d != null) {
+                    dataMan = d;
+                } else {
+                    dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);
+                }
+            }
+            /**
+             * @method create
+             */
+            this.create = function (d)
+            {
+                var COLLECTIONS = [];
+                
+                $(&quot;html&quot;).addClass(&quot;lightRoomCollectionView&quot;);
+
+                if (typeof d != &#x27;undefined&#x27; &amp;&amp; d != null) {
+                    dataMan = d;
+                } else {
+                    dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);                    
+                }
+
+                if (dataMan == null) {
+                    return;
+                }
+                
+                // if we are coming from the single view
+                if ($(&#x27;#container&#x27;).length) {
+                    $(&quot;#container&quot;).fadeIn(&#x27;400&#x27;);
+                    return;
+                }
+
+                resourceMan.setConfig(&#x27;*&#x27;, &#x27;lightRoomCollections&#x27;, {
+                    &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;, &#x27;components/lightroom-collections&#x27;],
+                    &#x27;open&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.create },
+                    &#x27;close&#x27;: { &#x27;scope&#x27;: self, &#x27;func&#x27;: self.close }
+                });
+
+                // set the lightroom (!not the lightRoomCollections) mode as default for dataManaged
+                resourceMan.setConfig(&#x27;dataManaged&#x27;, &#x27;default&#x27;, {
+                    &#x27;deps&#x27;: [&#x27;components/sidebar&#x27;, &#x27;components/lightroom&#x27;],
+                    &#x27;open&#x27;: { &#x27;scope&#x27;: &#x27;components_lightroom&#x27;, &#x27;func&#x27;: &#x27;show&#x27; },
+                    &#x27;close&#x27;: { &#x27;scope&#x27;: &#x27;components_lightroom&#x27;, &#x27;func&#x27;: &#x27;close&#x27; },
+                });
+
+                phaidraQue = resourceMan.getResource(&#x27;phaidra-que&#x27;);
+                
+                if(!$(&quot;#container&quot;).length) {
+                    $(&#x27;#mainsection&#x27;).append($(&#x27;&lt;div id=&quot;container&quot;&gt;&#x27;));
+                }
+
+                if (dom) {
+                    dom.remove();
+                    dom = null;
+                    template = null;
+                }
+
+                if (template == null) {
+                      template = _H.compile(_template);
+                }
+                
+                dataMan.removeCollection(-1, true);
+                COLLECTIONS = dataMan.collections;
+                COLLECTIONS.sort(function(a,b){
+                     return a.title.toLowerCase() &gt;= b.title.toLowerCase() ? 1 : -1;
+                });
+                
+                $(COLLECTIONS).each(function (i, e) {
+                    e.moreentries = e.objects.length-numVisible;
+                    e.moreentries = Math.max(0,e.moreentries);
+                    if(!e.updated) e.updated = new Date().getTime();
+                    e.timeago = _B.timeago(e.updated);
+                });
+
+
+                dom = template({collections:COLLECTIONS});
+                  dom = $.parseHTML($.trim(dom));
+                  dom = $(dom);
+
+                $(&quot;#container&quot;).append(dom);
+
+                var COLS = [];
+                $(COLLECTIONS).each(function (i, e) {
+                    self.createCollectionDisplay(e.uid, e.title, e.objects, false, e.updated);
+                });
+
+                // attaching to save completed event
+                $(resourceMan.getResource(&#x27;collectionMan&#x27;)).on(&#x27;collectionSaved.ph-plus&#x27;, function(e, i, d) {
+                    $(&#x27;#container .collection[data-uid=&#x27;+d.id+&#x27;] .show-date&#x27;).text(_B.timeago(new Date()));
+                    return false;
+                });
+
+                // getting owner objects
+                var adds = { &#x27;sort&#x27;: &#x27;meta%3Aupload_date%3AD%3ASD&#x27; };
+                var req = &quot;(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)&quot;;
+                req += &#x27;.(ownerID%3A&#x27;+$.cookie(&#x27;username&#x27;)+&#x27;)&#x27;;
+                var cb = {
+                    &#x27;scope&#x27;: self,
+                    &#x27;func&#x27;: self.ownerObjectsLoaded
+                };
+
+                $(window).trigger(&#x27;rawSearch&#x27;, [&#x27;&#x27;, req, 0, 100, cb, false, adds]);
+                
+                
+                $(&quot;#container&quot;).foundation();
+                $(&quot;#container&quot;).show();
+                $(&quot;body&quot;).removeClass(&quot;init&quot;);
+                self.resizeImages(2);
+                $(window).trigger(&#x27;clearSearchUI&#x27;);
+
+                self.updateHandlers();
+                    
+                if(!$.cookie(&quot;joyride-lc&quot;)) {
+                    $(window).trigger(&quot;showTour&quot;);
+                }
+                
+            };
+
+
+            this.ownerObjectsLoaded = function (d)
+            {
+                var myObjsDom = dom.find(&#x27;#my-objects&#x27;);
+                var ownerObjectsContainer = myObjsDom.find(&#x27;.objects&#x27;);
+                
+                ownerObjects = [];
+                var num = 0;
+                for (var i in d) {
+                    
+                    var obj = d[i];
+                    
+                    if(!obj.MT) {
+                        log(&quot;error no MT&quot;)
+                        continue;
+                    }
+                    
+                    obj = obj.MT;
+                    
+                    if (!obj.preview &amp;&amp; !obj.file) {
+                        log(&quot;error no file&quot;)
+                        continue;
+                    }
+                    
+                    obj = dataMan.repairData(obj);
+                    if(!obj) continue;
+                    
+                    var p = new _P_(obj);
+                    
+                    
+                    ownerObjects.push(p);
+
+                    if(num&gt;=numOwnObjectsVisible) continue;
+                    
+                    var cdom = p.createDom(&quot;collection&quot;, _standalone);
+                    cdom = cdom.clone();
+                    cdom
+                        .data(&quot;data&quot;, p.data)
+                        .on(&#x27;click.ph-plus&#x27;, function (e) {
+                            dataMan.selectCollection(-1);
+                            $(window).trigger(&quot;openSingleView&quot;,[$(this).data(&#x27;data&#x27;), true]);
+                            return false;
+                        })
+
+                    ownerObjectsContainer.append(cdom);
+                    num++;
+                }
+
+                self.updateImageSize(self.CURSIZE,true);
+
+                if (ownerObjects.length) {
+                    dataMan.createCollection({
+                        &#x27;title&#x27;: self.translate(&#x27;my-objects-title&#x27;), &#x27;objects&#x27;: ownerObjects, &#x27;uid&#x27;: -1,
+                        &#x27;updated&#x27;:new Date()
+                    });
+
+                    myObjsDom.find(&#x27;h4&#x27;).fadeIn(&#x27;400&#x27;);
+
+                    myObjsDom.find(&quot;.open-collection&quot;).off(&quot;.ph-plus&quot;);
+                    myObjsDom.find(&quot;.open-collection&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                        dataMan.selectCollection(-1)
+                        $(window).trigger(&quot;dataManaged&quot;);
+                        e.preventDefault();
+                    });
+                } else {
+                    myObjsDom.find(&#x27;h4&#x27;).hide();
+                }
+            };
+
+            this.showAllOwnObjects = function(bool)
+            {
+                var myObjsDom = dom.find(&#x27;#my-objects&#x27;);
+                var ownerObjectsContainer = myObjsDom.find(&#x27;.objects&#x27;);
+
+                var objects = ownerObjects;
+                if(bool) {
+                    for (var i = numOwnObjectsVisible; i &lt; objects.length; i++) {
+                        var o = objects[i];
+                        var cdom = o.createDom(&quot;collection&quot;, _standalone);
+                        cdom = cdom.clone();
+                        cdom
+                        .data(&quot;data&quot;, o.data)
+                        // .on(&#x27;click.ph-plus&#x27;, function (e) {
+                        //     dataMan.selectCollection(-1);
+                        //     $(window).trigger(&quot;openSingleView&quot;,[$(this).data(&#x27;data&#x27;), true]);
+                        //     return false;
+                        // });
+
+                        ownerObjectsContainer.append(cdom);
+                    };
+
+                    self.resizeImages(2);
+                } else {
+                    ownerObjectsContainer.find(&quot;li&quot;).each(function(i,e){
+                        if(i&gt;=numOwnObjectsVisible) {
+                            e.remove();
+                        }
+                    });
+                }
+            }
+
+
+
+            this.createCollectionDisplay = function(uid, title, objects, append, updated, isnew)
+            {
+                append = (typeof append != &#x27;undefined&#x27;) ? append : true;
+
+                var COLDOM = dom.find(&quot;li.collection[data-uid=&#x27;&quot;+uid+&quot;&#x27;]&quot;);
+                
+                if (!COLDOM.length || isnew) {
+                    //if (!$(&quot;#mainsection li.collection&quot;).length) {
+                        COLDOM = $(&quot;&lt;li&gt;&quot;);
+                        COLDOM.addClass(&quot;collection&quot;);
+                        COLDOM.append($(&quot;#collection-template&quot;).html())
+                    // } else {
+                    //     COLDOM = dom.find(&quot;.collection&quot;).eq(0).clone();
+                    //     COLDOM.find(&quot;.show-date&quot;).text(&quot;-&quot;);
+                    //     COLDOM.find(&quot;.show-more&quot;).text(&quot;&quot;);
+                    // }
+
+                    COLDOM.find(&quot;.collection-items&quot;).empty();
+                    COLDOM.attr(&quot;data-uid&quot;,uid);
+                    COLDOM.data(&quot;uid&quot;,uid);
+                    COLDOM.find(&quot;.name&quot;).text(title);
+                    $(&quot;#mainsection .collections&quot;).prepend(COLDOM);
+                }
+
+                COLDOM.data(&quot;uid&quot;, uid);
+
+                var name = COLDOM.find(&quot;.name&quot;);
+                
+                var CURCOL = COLDOM.find(&quot;.collection-items&quot;);
+                
+                CURCOL.data(&quot;uid&quot;, uid);
+
+                if (objects.length) {
+                    COLDOM.find(&#x27;.show-all, .download-ppt, .open-collection&#x27;).removeClass(&#x27;disabled&#x27;);
+                    $(objects).each(function (k, e) {
+                        if (k&gt;(numVisible-1)) { 
+                            return;
+                        }
+                        
+                        var cdom = e.createDom(&quot;collection&quot;, _standalone);
+                        cdom = cdom.clone();
+                        self.attachEvents(cdom, e);
+                        CURCOL.append(cdom);
+                    });
+                } else {
+                    COLDOM.find(&#x27;.download-ppt, .open-collection&#x27;).addClass(&#x27;disabled&#x27;);
+                }
+                COLDOM.on(&#x27;click.ph-plus touchend.ph-plus&#x27;,&#x27;.delete-item&#x27;, function() {
+                        var myself = $(this).closest(&#x27;li&#x27;);
+                        var cdom = myself
+                        var ownId = myself.data(&#x27;pid&#x27;);
+                        var collectionId = myself.closest(&#x27;ul&#x27;).data(&#x27;uid&#x27;);
+                        log(&quot;click delete&quot;)
+                        $(window).trigger(&#x27;deleteItemFromCollection&#x27;, [ownId, collectionId, {
+                            &#x27;func&#x27;: function() {
+                                var obj = cdom;
+                                // decreasing counter
+                                var dp = cdom.closest(&#x27;.inner&#x27;).find(&#x27;a.show-more&#x27;);
+                                var c = parseInt(dp.text());
+                                var n = dp.text().split(&#x27; &#x27;)[1];
+                                dp.text((c-1)+&#x27; &#x27;+n);
+
+                                if (cdom.closest(&#x27;.collection-items&#x27;).find(&#x27;.collection-object-view&#x27;).length == 1) {
+                                    obj = cdom.closest(&#x27;.collection&#x27;);
+                                }
+
+                                obj.fadeOut(&#x27;400&#x27;, function() {
+                                    obj.remove();
+                                });
+                            }
+                        }]);
+                        return false;
+                    });
+                return COLDOM;
+            };
+
+            this.attachEvents = function(cdom,e)
+            {
+                cdom
+                    .data(&quot;pid&quot;, e.data.pid)
+                
+            };
+
+            this.showAll = function(uid,bool)
+            {
+                var objects = dataMan.getCollection(uid).objects;
+                var col = self.getCollection(uid);
+                if(bool) {
+                    for (var i = numVisible; i &lt; objects.length; i++) {
+                        var o = objects[i];
+                        var cdom = o.createDom(&quot;collection&quot;);
+                        cdom = cdom.clone();
+                        cdom.data(&quot;pid&quot;,o.data.pid);
+                        self.attachEvents(cdom,o);
+                        col.append(cdom);
+                    };
+
+                    self.resizeImages(2);
+                } else {
+                    col.find(&quot;li&quot;).each(function(i,e){
+                        if(i&gt;=numVisible) {
+                            e.remove();
+                        }
+                    });
+                }
+            }
+
+            
+            this.getCollection = function(uid)
+            {
+                var cols = $(&quot;#container .collection-items&quot;);
+                for (var i = cols.length - 1; i &gt;= 0; i--) {
+                    var col = $(cols[i]);
+                    if(col.data(&quot;uid&quot;) == uid) {
+                        return col;
+                    }
+                };
+            }
+
+            this.updateHandlers = function (collection, enable)
+            {
+                try {
+                    if (collection) {
+                        var container = collection;
+                    } else {
+                        var container = $(&quot;#container&quot;);
+                    }
+
+                    container.find(&quot;ul.collection-items&quot;).on(&quot;click&quot;,function () {
+                        $(this).closest(&quot;.collection&quot;).find(&quot;.open-collection&quot;).trigger(&quot;click.ph-plus&quot;);
+                    });
+
+                    if (container.find(&quot;ul.collection-items&quot;).data(&#x27;ui-sortable&#x27;)) {
+                        container.find(&quot;ul.collection-items&quot;)
+                            .sortable(&quot;destroy&quot;)
+                            .off(&quot;sortupdate&quot;);    
+                        container.find(&quot;ul.collections&quot;)
+                            .sortable(&quot;destroy&quot;)
+                            .off(&quot;sortupdate&quot;);
+                    }
+                } catch (e) {
+                    log(&#x27;collection error&#x27;);
+                    log(e);
+                }
+
+                if (enable) {
+                    if (collection) {
+                        var container = collection;
+                    } else {
+                        var container = $(&quot;#container&quot;);
+                    }
+
+                    container.find(&quot;ul.collection-items&quot;).off(&quot;click&quot;);
+                    container.find(&quot;ul.collection-items&quot;).sortable({ scroll: false,helper: &quot;clone&quot;,opacity: 0.5 });
+                    container.find(&quot;ul.collections&quot;).sortable({handle:&quot;.move&quot;,scroll:false});
+                    container.find(&quot;ul.collections&quot;).on(&quot;sortupdate&quot;, function () {
+                        var lis = $(this).find(&quot;li.collection&quot;);
+                        var sort = [];
+                        for (var i = 0; i &lt; lis.length; i++) {
+                            var li = $(lis[i]);
+                            sort.push(li.data(&quot;uid&quot;));
+                        };
+                        dataMan.sortCollections(sort);
+                    });
+
+                    container.find(&quot;ul.collection-items&quot;).on(&quot;sortupdate&quot;, function () {
+
+                        var uid = $(this).data(&quot;uid&quot;);
+                        var lis = $(this).find(&quot;li&quot;);
+                        var sort = [];
+                        for (var i = 0; i &lt; lis.length; i++) {
+                            var li = $(lis[i]);
+                            sort.push(li.data(&quot;pid&quot;));
+                        };
+                        $(window).trigger(&#x27;updateCollectionOrder&#x27;, [uid, sort]);
+                    });
+                }
+
+                dom.find(&quot;.collection .button,.collection h4 a&quot;).off(&quot;.ph-plus&quot;);
+                dom.find(&quot;.open-collection, a.name&quot;).on(&quot;click.ph-plus&quot;,function (e) {
+                    var col = $(this).closest(&quot;.collection&quot;);
+                    var uid = col.data(&quot;uid&quot;);
+                    dataMan.selectCollection(uid)
+                    $(window).trigger(&quot;dataManaged&quot;);
+                    e.preventDefault();
+                });
+
+                dom.find(&quot;.delete-collection&quot;).on(&quot;click.ph-plus&quot;, function (e) {
+                    var col = $(this).closest(&quot;.collection&quot;);
+                    var uid = col.data(&quot;uid&quot;);
+                    var colContainer = $(this).closest(&quot;li&quot;);
+                    var c = confirm($(this).attr(&quot;data-warning&quot;));
+                    if (c) {
+                        $(window).trigger(&#x27;deleteCollection&#x27;, [
+                            uid,
+                            {
+                                &#x27;func&#x27;: function() {
+                                    colContainer.fadeOut(300, function(){
+                                        $(this).remove();
+                                    });
+                                }
+                            }
+                        ]);
+                    }
+                    e.preventDefault();
+                });
+
+                dom.find(&quot;.show-more&quot;).off(&quot;click.ph-plus&quot;)
+                dom.find(&quot;.show-more&quot;).on(&quot;click.ph-plus&quot;,function (e) {
+                    $(this).closest(&quot;.collection&quot;).find(&quot;.show-all&quot;).trigger(&quot;click&quot;)
+                    if ($(this).closest(&quot;.collection&quot;).find(&quot;.show-all&quot;).hasClass(&quot;dark&quot;)) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                    e.preventDefault();
+                });
+
+                dom.find(&#x27;.download-ppt&#x27;).on(&quot;click.ph-plus&quot;, function (e) {
+                    var uid = $(this).closest(&quot;.collection&quot;).data(&#x27;uid&#x27;);
+                    new _pptCreatorClass(dataMan.getCollection(uid).objects);
+                    return false;                    
+                });
+                
+                dom.find(&quot;.show-all&quot;).on(&quot;click.ph-plus&quot;,function (e) {
+                    var col = $(this).closest(&quot;.collection&quot;);
+                    var uid = col.data(&quot;uid&quot;);
+                    
+                    if ($(this).data(&quot;active&quot;)) {
+                        $(this).removeClass(&quot;active&quot;);
+                        $(&quot;.show-more&quot;).show();
+                        col.removeClass(&quot;editable&quot;);
+                        self.showAll(uid,false);
+                        self.updateHandlers(col);
+                        var colname = col.find(&quot;input.title-input&quot;).val();
+                        if(!colname) {
+                            colname = self.translate(&quot;untitled-collection&quot;);
+                        }
+                        var updateTitle = col.find(&quot;.name&quot;).text()!=colname;
+                        col.find(&quot;.name&quot;).text(colname);
+                        $(this).attr(&quot;title&quot;,$(this).attr(&quot;data-title&quot;));
+                        if(updateTitle) {
+                            $(window).trigger(&#x27;changeCollectionProperty&#x27;, [$(this).closest(&quot;.collection&quot;).data(&quot;uid&quot;), &#x27;title&#x27;, colname]);
+                        }
+                    } else {
+                        self.showAll(uid,true);
+                        self.updateHandlers(col,true);
+                        col.addClass(&quot;editable&quot;);
+                        $(this).attr(&quot;title&quot;,$(this).attr(&quot;data-active-title&quot;));
+                        $(this).addClass(&quot;active&quot;);
+                        $(&quot;.show-more&quot;).hide();                        
+                    }
+
+                    $(this).data(&quot;active&quot;,!$(this).data(&quot;active&quot;));                    
+                    e.preventDefault();
+                });
+                
+                dom.find(&quot;#add-collection,#add-object&quot;).off(&quot;.ph-plus&quot;);
+
+                dom.find(&quot;#add-collection&quot;).on(&quot;touchend.ph-plus click.ph-plus&quot;,function (e) {
+                    if(dom.find(&quot;#add-collection&quot;).hasClass(&quot;disabled&quot;)) return false;
+                    dom.find(&quot;#add-collection&quot;).addClass(&quot;disabled&quot;);
+                    self.createCollection();
+                    return false;
+                });
+                dom.find(&quot;#add-object&quot;).on(&quot;touchend.ph-plus click.ph-plus&quot;,function (e) {
+                    $(window).trigger(&quot;ingestObject&quot;);
+                    return false;
+                });
+            }
+
+            this.resizeImages = function(newVal)
+            {
+                var v = 8 - newVal;
+                
+                if (self.CURSIZE != v) {
+                    self.updateImageSize(v);
+                }
+            }
+
+            this.createCollection = function(d)
+            {
+                $(&quot;#add-collection&quot;).off(&quot;*.ph-plus&quot;)
+                $(window).trigger(&#x27;createCollection&#x27;, [{
+                    &#x27;func&#x27; : self.createCollectionFinished,
+                    &#x27;scope&#x27;: self,
+                }]);
+            };
+
+            this.createCollectionFinished = function(colData)
+            {
+                var o = self.createCollectionDisplay(colData.id, colData.title, colData.objects, false,null,true);
+
+                self.updateImageSize(self.CURSIZE,true);
+                self.updateHandlers(o);
+                o.hide().fadeIn(400);
+                dom.find(&quot;#add-collection&quot;).removeClass(&quot;disabled&quot;);
+            };
+
+            this.updateImageSize = function(v,force)
+            {
+                if (self.CURSIZE != v || force) {                    
+                    var cols = $(&quot;#container&quot;).find(&quot;ul.collection-items.grid&quot;);
+
+                    cols.attr(&quot;class&quot;,&quot;collection-items&quot;);
+                    
+                    cols.addClass(&quot;medium-block-grid-8&quot;);
+                    cols.addClass(&quot;large-block-grid-6&quot;);
+                    
+                    var wh = $(window).width()&gt;=1024?8:6
+                    var w = ($(&quot;#container .collection .collection-object-view .image&quot;).width()-10)//-10*wh)/wh;
+                    
+                    $(&quot;#container&quot;).find(&quot;.collection-object-view .image&quot;).css(&quot;height&quot;,Math.floor(w))//Math.floor(w*0.8))
+                }
+            }
+            /**
+             * @method show
+             */
+            this.show = function() {
+                $(&quot;#container&quot;).fadeIn(400);
+            };
+            /**
+             * @method close
+             */
+            this.close = function (newState)
+            {
+                $(&quot;html&quot;).removeClass(&quot;lightRoomCollectionView&quot;);
+
+                resourceMan.getResource(&#x27;sidebar&#x27;).setImageResizeListener(null);                
+                $(&#x27;#mainsection&#x27;).empty();
+
+                $(resourceMan.getResource(&#x27;collectionMan&#x27;)).off(&#x27;.ph-plus&#x27;);
+
+                resourceMan.setConfig(&#x27;*&#x27;, &#x27;lightRoomCollections&#x27;, {
+                    &#x27;deps&#x27;: [&#x27;components/lightroom-collections&#x27;],
+                    &#x27;open&#x27;: { &#x27;scope&#x27;: &#x27;components_lightroomCollections&#x27;, &#x27;func&#x27;: &#x27;create&#x27; },
+                    &#x27;close&#x27;: { &#x27;scope&#x27;: &#x27;components_lightroomCollections&#x27;, &#x27;func&#x27;: &#x27;close&#x27; },
+                });
+            };
+
+            this.translate = function(term)
+          {
+            if (typeof _texts[term] != &#x27;undefined&#x27;) {
+              return _texts[term];
+            } else {
+              return term;
+            }      
+          };
+
+            _H.registerHelper(&#x27;translate&#x27;, self.translate);
+        }
+    });
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

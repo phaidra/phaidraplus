@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0</em>
+            <em>API Docs for: 1.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -62,6 +62,15 @@
                                 <li><a href="../modules/basics.html">basics</a></li>
                                 <li><a href="../modules/helpers.html">helpers</a></li>
                                 <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
                                 <li><a href="../modules/resources.html">resources</a></li>
                                 <li><a href="../modules/search.html">search</a></li>
                                 <li><a href="../modules/viewControllers.html">viewControllers</a></li>
@@ -117,9 +126,9 @@
  * @module resources
  * @class searchRequestManager
  */
-define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27;, &#x27;config/gsa-request&#x27;, &#x27;config/searchfields&#x27;, &#x27;text!templates/share-modal.hbs&#x27;, &#x27;i18n!nls/texts&#x27;,
+define([&#x27;jquery&#x27;, &#x27;xdomainrequest&#x27;,&#x27;Handlebars&#x27;, &#x27;components/basics&#x27;, &#x27;config/gsa-request&#x27;, &#x27;config/searchfields&#x27;, &#x27;text!templates/share-modal.hbs&#x27;, &#x27;i18n!nls/texts&#x27;,
                 &#x27;foundation&#x27;],
-             function($, _H, _B, requestDefaults, searchFieldDefs, _rawTemplate, _texts) {
+             function($,_X, _H, _B, requestDefaults, searchFieldDefs, _rawTemplate, _texts) {
     /**
      * @constructor
      */
@@ -176,7 +185,15 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
          * @property gsaEndPoint
          * @type {String}
          */
-        var gsaEndPoint = &quot;https://phaidra-entw.univie.ac.at/google_search&quot;;
+        var gsaEndPoint = requestDefaults.endPoint;
+        /**
+         * Results can be accessed at result[resultsField]
+         * 
+         * @private
+         * @property resultsField
+         * @type {String}
+         */
+        var resultsField = requestDefaults.resultsField; 
         /**
          * Backreference
          * 
@@ -236,7 +253,8 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
                 }
                 fullquery.push(partialquery.join(&#x27; &#x27;));
             }
-            return (fullquery.length &gt; 0) ? boolToQueryTerm+&#x27; &#x27;+fullquery.join(&#x27; &#x27;) : &#x27;&#x27;;
+
+            return (fullquery.length &gt; 0) ? [boolToQueryTerm, fullquery.join(&#x27; &#x27;)] : &#x27;&#x27;;
         };
         /**
          * Method setting all META Tag search parameters to default values.
@@ -296,12 +314,15 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
 
             setup.partialfields = self.createMetaQueryString();
 
+            var finalSetup = {};
             for(var p in setup) {
                 if (setup[p] === &#x27;&#x27;) {
-                    delete setup[p];
+                    continue;
                 }
+
+                finalSetup[p] = setup[p];
             }
-            return setup;
+            return finalSetup;
         };
         /**
          * Method to query the GSA. It creates the AJAX get query and sets a timeout function.
@@ -326,14 +347,19 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
 
             start = (start &lt; 0) ? 0 : start;
             setup.query = q;
-            if (typeof setup.partialfields != &#x27;undefined&#x27;) {
-                setup.query += &#x27; &#x27;+setup.partialfields;
+
+            if (typeof setup.partialfields != &#x27;undefined&#x27; &amp;&amp; setup.partialfields[1].length &gt; 0) {
+                if (typeof setup.query == &#x27;undefined&#x27; || setup.query.length == 0) {
+                    setup.query = setup.partialfields[1];
+                } else {
+                    setup.query = setup.query+&#x27; &#x27;+setup.partialfields[0]+&#x27; &#x27;+setup.partialfields[1];
+                }
                 delete setup.partialfields;
             }
             setup.num = num;
             setup.start = start*num;
 
-            setup.requiredfields = &quot;(type%3AImage|type%3APicture|type%3APDF|type%3APaper|type%3AText)&quot;;
+            setup.requiredfields = requestDefaults.requiredfields;//&quot;(type%3AImage|type%3APicture|type%3APDF|type%3APaper|type%3AText)&quot;;
 
             self.rawLoad(setup);
             return self;
@@ -355,15 +381,15 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
             cb = cb || null;
             reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;
             window.clearTimeout(timer);
-
+            
             if (!cb &amp;&amp; reset) {
-                resourceMan.setResource(&#x27;gsaData&#x27;, data.RES);
+                resourceMan.setResource(&#x27;gsaData&#x27;, data[resultsField]);
             }
 
             if (cb == null) {
-                $(window).trigger(&#x27;searchFinished&#x27;, [data.RES, data.TOTAL, data.start, data.num]);
+                $(window).trigger(&#x27;searchFinished&#x27;, [data[resultsField], data.TOTAL, data.start, data.num,(data.PARAM ? data.PARAM : null)]);
             } else {
-                _B.executeCallback(cb, [data.RES]);
+                _B.executeCallback(cb, [data[resultsField]]);
             }
             return self;
         };
@@ -382,7 +408,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
             loading = false;
             window.clearTimeout(timer);
             resourceMan.setResource(&#x27;gsaData&#x27;, { &#x27;error&#x27;:true });
-            $(window).trigger(&#x27;searchFinished&#x27;, [&#x27;error&#x27;]);
+            $(window).trigger(&#x27;searchFinished&#x27;, []);
             return self;
         };
         /**
@@ -398,7 +424,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
             log(&#x27;loadTimeout&#x27;);
             loading = false;
             resourceMan.setResource(&#x27;gsaData&#x27;, { &#x27;timeout&#x27;:true });
-            $(window).trigger(&#x27;searchFinished&#x27;, [&#x27;timeout&#x27;]);
+            $(window).trigger(&#x27;searchFinished&#x27;, []);
             return self;
         };
 
@@ -446,7 +472,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
          */
         _p.matchValueToBoolean = function(value)
         {
-            return !!value;
+            return !!value;            
         };
         /**
          * A method to match a value against a template if the template is an enum|select.
@@ -460,7 +486,17 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
          */
         _p.matchValueToEnum = function(value, template)
         {
-            return (template.indexOf(value) != -1) ? value : null;
+            for (var i in template) {
+                var ri = parseInt(i);
+
+                if (ri != i &amp;&amp; !template.hasOwnProperty(i)) continue;
+
+                if (template[i] == value) return value;
+
+                if (typeof template[i] == &#x27;object&#x27;) return _p.matchValueToEnum(value, template[i]);
+            }
+
+            return null;
         };
         /**
          * Method to check whether a value is a valid Integer or Float.
@@ -562,12 +598,19 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
                         var template = typeof searchFieldDefs[name];
                         if (typeof searchFieldDefs[name].type != &quot;undefined&quot;) {
                             t = searchFieldDefs[name].type;
+                            t = t.substring(0,1).toUpperCase() + t.substring(1);
                         }
                         if (typeof searchFieldDefs[name].template != &quot;undefined&quot;) {
                             template = searchFieldDefs[name].template;
                         }
                         var f = &quot;matchValueTo&quot;+t;
+
+                        if (f == &#x27;matchValueToRadio&#x27; &amp;&amp; template) {
+                            f = &#x27;matchValueToText&#x27;;
+                        }
+
                         value = _p[f](value, template);
+
                         if (value === false &amp;&amp; t == &#x27;Object&#x27;) { value = null; }
                         return value;
                     break;
@@ -594,12 +637,17 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
             if (!cb &amp;&amp; reset) {
                 resourceMan.setResource(&#x27;gsaData&#x27;, {});
             }
-
+            if(setup.endPoint) {
+                delete setup.endPoint;
+            }
             _B.makeLoading($(&#x27;body&#x27;));
-
+            $.support.cors = true;
+            
+            
             $.getJSON(gsaEndPoint, setup, function(data, textStatus, jqXHR) {
                 data.num = setup.num;
                 data.start = setup.start/setup.num;
+
                  self.loadSuccess(data, cb, reset);
             })
              .fail(function(jqXHR) {
@@ -635,13 +683,17 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
          * @param {Integer} [start=0] the first result object to retrieve
          * @param {Integer} [number=100] the number of results to fetch; maximum is 100.
          * @param {Object} [callback] a callback to execute after the result has been loaded
+         * @param {Boolean} [true] flag passed on to rawLoad
+         * @param {Object} [additions] an arbitrary object to extend the load setup to support additional query parameters
          * @return {Mixed} Either the searchRequestManager or false if currently loading another query.
          */
-        this.rawSearch = function(query, required, start, num, cb, reset)
+        this.rawSearch = function(query, required, start, num, cb, reset, additions)
         {
             cb = cb || null;
             start = start || 0;
-            reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;            
+            reset = (typeof reset != &#x27;undefined&#x27;) ? reset : true;
+            additions = (typeof additions == &#x27;object&#x27;) ? additions : {};
+
             if (loading) { return false; }
 
             self.clearMetas();
@@ -652,6 +704,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
             setup.requiredfields = required || &quot;(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)&quot;;
             setup.start = ((start &lt; 0) ? 0 : start) * setup.num;
 
+            setup = $.extend(true, setup, additions);            
             self.rawLoad(setup, cb, reset);
             return self;
         };
@@ -666,30 +719,48 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
         {
             var link = &#x27;?standalone=true&amp;view=&#x27;;
 
-            switch (resourceMan.currentState) {
-                case &#x27;dataManaged&#x27;:
-                    link += resourceMan.states[&#x27;dataManaged&#x27;][0].open.scope.name;
-                    break;
-                case &#x27;openGeoView&#x27;:
-                    link += &#x27;geo&#x27;;
-                    break;
-                case &#x27;openLightRoom&#x27;:
-                    link += &#x27;lightroom&#x27;;
-                    break;
-                case &#x27;openSemanticView&#x27;:
-                    link += &#x27;semantic&#x27;;
-                    break;
-                case &#x27;openTimelineView&#x27;:
-                    link += &#x27;timeline&#x27;;
-                    break;
-                default:
-                    return false;
+            var dataMan = resourceMan.getResource(&#x27;gsaData&#x27;);
+            var setup = null;
+
+            if (dataMan.getDisplayMode() == &#x27;collection&#x27; &amp;&amp; dataMan.getSelectedCollection() != null) {
+                // exit for own documents
+                
+                if (dataMan.getSelectedCollection() == -1) {
+                    return self;
+                } else {
+                    
+                    setup = {
+                        &#x27;query&#x27;: dataMan.getSelectedCollection(),
+                        &#x27;start&#x27;: 0
+                    };
+                }
+            } else {
+                setup = self.getQuerySetup();
             }
+            switch (resourceMan.currentState) {
+                    case &#x27;dataManaged&#x27;:
+                        link += resourceMan.states[&#x27;dataManaged&#x27;][0].open.scope.name;
+                        break;
+                    case &#x27;openGeoView&#x27;:
+                        link += &#x27;geo&#x27;;
+                        break;
+                    case &#x27;openLightRoom&#x27;:
+                        link += &#x27;lightroom&#x27;;
+                        break;
+                    case &#x27;openSemanticView&#x27;:
+                        link += &#x27;semantic&#x27;;
+                        break;
+                    case &#x27;openTimelineView&#x27;:
+                        link += &#x27;timeline&#x27;;
+                        break;
+                    default:
+                        return false;
+                }
+                
 
           _H.registerHelper(&#x27;translate&#x27;, self.translate);
             
             var template = _H.compile($.trim(_rawTemplate));
-            var setup = self.getQuerySetup();
 
             link += &#x27;&amp;query=&#x27;+setup.query;
             link += &#x27;&amp;requiredfields=(type%3AImage|type%3AText|type%3APicture|type%3APDF|type%3APaper)&#x27;;
@@ -740,6 +811,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
 
                 outerloop:
                 for (var key in fields[i]) {
+
                     switch (key) {
                         case &#x27;boolean&#x27;:
                             fieldBool = fields[i][key];
@@ -750,6 +822,7 @@ define([&#x27;jquery&#x27;, &#x27;Handlebars&#x27;, &#x27;components/basics&#x27
                             break;
                     }
                 }
+
                 self.setQueryParam(fieldKey, fieldValue, fieldBool);
             }
 

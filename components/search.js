@@ -239,6 +239,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 		 */
 		_p.startSearch = function(reset)
 		{
+				
 			if (typeof reset == 'undefined') {
 				reset = true;
 				currentSearchPage = 0;
@@ -248,7 +249,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 				$(window).trigger('error.ph-plus', ['No search parameters entered!']);
 				return false;
 			}
-
+			
 			var d = [];
 			var toRemove = [];
 			for(var i=0; i<filters.length;i++) {
@@ -288,11 +289,11 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		_p.searchNext = function()
 		{
+
 			var n = currentSearchPage+1;
 			if (n > totalResultPages) {
 				n = totalResultPages;
 			}
-
 			if (n != currentSearchPage) {
 				currentSearchPage = n;
 				_p.startSearch(false);
@@ -338,7 +339,7 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 			var n = m.find('.search-nextpage a');
 			var p = m.find('.search-previouspage a');
-			
+
 
 			if (currentSearchPage == 0) {
 				p.addClass('disabled');
@@ -356,16 +357,23 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		};
 
-		_p.updateSearch = function(newData, results, currentPage, pageSize) {
+		_p.updateSearch = function(newData, results, currentPage, pageSize,params) {
 			currentSearchPage = currentPage;
 			searchPageSize = pageSize;
 			results = (parseInt(results) > 1000) ? 1000 : parseInt(results);
 			totalResultPages = Math.ceil(results/pageSize);
 
 			var str = [];
-
+			
+			if(!searchSetup && _basics.queryStringToJSON() && _basics.queryStringToJSON()[""]=="" && params && params.q) {
+				searchSetup = [{"query":params.q,"boolean":undefined}];
+				_p.searchable(1);
+			}
+			
+			
 			if (searchSetup) {
 				for (var i = 0; i < searchSetup.length; i++) {
+
 					if ('query' in searchSetup[i]) {
 						str.push(_p.translate('results-for')+' "'+searchSetup[i].query+'"');
 						continue;
@@ -400,7 +408,8 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 				str.push('Geteilte Suche');
 			}
-
+			
+			
 			var spc = $('#search-params');
 			var pic = $('#pagination-info');
 
@@ -408,24 +417,24 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 				spc = $('<li id="search-params">');
 				$('nav.top-bar .search-previouspage').before(spc);
 	
-				if (!_standalone) {
+				//if (!_standalone) {
 					spc.on('click.ph-plus', function(e) {
 						$('nav.top-bar .icon-search').trigger('click');
 						return false;
 					});
-				}
+				//}
 			}
 
 			if (pic.length == 0) {
 				pic = $('<li id="pagination-info">');
 				spc.after(pic);
 				
-				if (!_standalone) {
+				//if (!_standalone) {
 					pic.on('click.ph-plus', function(e) {
 						$('nav.top-bar .icon-search').trigger('click');
 						return false;
 					});
-				}
+				//}
 			}
 
 			spc
@@ -482,7 +491,6 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 
 		this.clearSearchUI = function()
 		{
-			//$('#search-info').find('.search-previouspage, .search-nextpage').hide();
 			$('#search-info').hide();
 			currentSearchPage = 0;
 			$('#search-params').removeClass('open');
@@ -525,7 +533,6 @@ define(['require', 'jquery', 'components/basics', 'components/search-filter', 'c
 				_p.addFilter($(this).val());
 				$(this).val('');
 			});
-
 			// adding start button + enter event
 			var btn = $('<button>');
 			btn.prop({ 'id': 'start-search-button', 'type': 'button' })

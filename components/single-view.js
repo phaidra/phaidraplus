@@ -33,8 +33,8 @@ define(['jquery', 'Handlebars','spin', 'text!templates/single-view.hbs', 'i18n!n
       'collections': [],
       
       'objectdata': ['type','mimetype','filesize_human','desc_language', 'dimensions', 'language', 'latlon','coverage', 'length', 'identifiers', 'pid', 'upload_date'],
-      'history': ['roles', 'status', 'provenance'],
-      'copyrights': ['costs', 'copyright', 'license'],
+      'history': ['roles', 'provenance'],//'status', 
+      'copyrights': [ 'copyright', 'license'],//'costs',
       'attributions': [],
       'categories': ['keywords','subject']
     };

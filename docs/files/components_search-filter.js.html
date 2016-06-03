@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="Phaidra+" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 1.0</em>
+            <em>API Docs for: 1.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -62,6 +62,15 @@
                                 <li><a href="../modules/basics.html">basics</a></li>
                                 <li><a href="../modules/helpers.html">helpers</a></li>
                                 <li><a href="../modules/main.html">main</a></li>
+                                <li><a href="../modules/main
+                
+                ## TODO
+                
+                - Update View when data is changed.html">main
+                
+                ## TODO
+                
+                - Update View when data is changed</a></li>
                                 <li><a href="../modules/resources.html">resources</a></li>
                                 <li><a href="../modules/search.html">search</a></li>
                                 <li><a href="../modules/viewControllers.html">viewControllers</a></li>
@@ -117,7 +126,7 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
      - enum
      - objects
      - radio
-     - select
+     - select with option groups
      - text
 
      ## Todos
@@ -245,6 +254,13 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
          @type {Object}
          */
                 self = this,
+        /**
+         Template Container
+         
+         @private
+         @property template
+         @type {Object}
+         */
                 template = null;
 
         this.addBooleanOps = function()
@@ -262,6 +278,7 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
         this.addFilterToDom = function() {
             dom.addClass(metaName);
 
+            //log(metaName)
             var similar = domParent.find(&#x27;.&#x27;+metaName+&#x27;:last&#x27;);
             if (domParent.find(&#x27;.sf&#x27;).length &gt; 0) {
                 self.addBooleanOps();
@@ -270,6 +287,10 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
                 similar.after(dom);
             } else {
                 domParent.append(dom);
+            }
+
+            if(metaName==&quot;query&quot;) {
+                $(&quot;.top-bar .suche&quot;).prepend(dom)
             }
 
             return self;
@@ -329,7 +350,20 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
 
                 d = [];
                 for(var i=0;i&lt;l.length;i++) {
-                    d.push({ &#x27;value&#x27;:l[i], label:l[i] });
+                    if (typeof l[i] == &#x27;object&#x27;) {
+                        for(var j in l[i]) {
+                            if (!l[i].hasOwnProperty(j)) continue;
+
+                            d.push({ &#x27;optgroupstart&#x27;:true, &#x27;label&#x27;:j });
+                            for(var k=0;k&lt;l[i][j].length;k++) {
+                                d.push({ &#x27;value&#x27;:l[i][j][k], label:l[i][j][k], &#x27;option&#x27;:true });
+                            }
+
+                            d.push({ &#x27;optgroupend&#x27;:true });                            
+                        }
+                    } else {
+                        d.push({ &#x27;value&#x27;:l[i], label:l[i], &#x27;option&#x27;:true });
+                    }
                 }
                 d = { &#x27;label&#x27;:this.translate(metaName), &#x27;options&#x27;:d, &#x27;selectType&#x27;:true };
             }
@@ -337,13 +371,25 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
             // number, text
             if (type == &#x27;text&#x27; || type == &#x27;number&#x27;) {
                 d = { &#x27;label&#x27;:this.translate(metaName), &#x27;value&#x27;:&#x27;&#x27;, &#x27;type&#x27;:type, &#x27;textType&#x27;:true };
-                if (type == &#x27;number&#x27; &amp;&amp; !searchFieldDefs[metaName][&#x27;exact&#x27;]) {
-                    d.comparisons = [
-                        { &#x27;display&#x27;: &#x27;equalTo&#x27;, &#x27;value&#x27;: &#x27;eq&#x27; },
-                        { &#x27;display&#x27;: &#x27;lessThan&#x27;, &#x27;value&#x27;: &#x27;lt&#x27; },
-                        { &#x27;display&#x27;: &#x27;greaterThan&#x27;, &#x27;value&#x27;: &#x27;gt&#x27; },
-                    ];
+                
+                if (type == &#x27;number&#x27;) {
+                    if (!searchFieldDefs[metaName][&#x27;exact&#x27;]) {
+                        d.comparisons = [
+                            { &#x27;display&#x27;: &#x27;equalTo&#x27;, &#x27;value&#x27;: &#x27;eq&#x27; },
+                            { &#x27;display&#x27;: &#x27;lessThan&#x27;, &#x27;value&#x27;: &#x27;lt&#x27; },
+                            { &#x27;display&#x27;: &#x27;greaterThan&#x27;, &#x27;value&#x27;: &#x27;gt&#x27; },
+                        ];
+                    }
+
+                    if (searchFieldDefs[metaName] &amp;&amp; typeof searchFieldDefs[metaName][&#x27;min&#x27;] != &#x27;undefined&#x27;) {
+                        d.min = searchFieldDefs[metaName][&#x27;min&#x27;];
+                    }
+                
+                    if (searchFieldDefs[metaName] &amp;&amp; typeof searchFieldDefs[metaName][&#x27;max&#x27;] != &#x27;undefined&#x27;) {
+                        d.max = searchFieldDefs[metaName][&#x27;max&#x27;];
+                    }
                 }
+                
                 if (searchFieldDefs[metaName] &amp;&amp; searchFieldDefs[metaName][&#x27;pattern&#x27;]) {
                     d.pattern = searchFieldDefs[metaName][&#x27;pattern&#x27;];
                 }
@@ -523,13 +569,43 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
 
             // enum or selects or text
             if (htmlType == &#x27;enum&#x27; || htmlType == &#x27;select&#x27; || htmlType == &#x27;text&#x27; || htmlType == &#x27;number&#x27;) {
-                var v = dom.find(&#x27;#&#x27;+domId).val();
+                var d = dom.find(&#x27;#&#x27;+domId);
+                var v = d.val();
+                
+                if (htmlType == &#x27;number&#x27;) {
+                    if (v == &#x27;-&#x27; || v.length == 0) {
+                        return v;
+                    }
+
+                    if (parseInt(v)+&#x27;&#x27; != v) {
+                        d.val(&#x27;&#x27;);
+                        return null;
+                    }
+                    v = parseInt(v);
+
+                    if (typeof searchFieldDefs[metaName][&#x27;min&#x27;] != null) {
+                        if (v &lt; searchFieldDefs[metaName][&#x27;min&#x27;]) {
+                            d.val(&#x27;&#x27;);
+                            return null;
+                        }
+                    }
+
+                    if (typeof searchFieldDefs[metaName][&#x27;max&#x27;] != null) {
+                        if (v &gt; searchFieldDefs[metaName][&#x27;max&#x27;]) {
+                            d.val(&#x27;&#x27;);
+                            return null;
+                        }
+                    }
+                }
+
                 if (htmlType == &#x27;number&#x27; &amp;&amp; dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;)) {
+                    v = v+&#x27;&#x27;;
                     v = v.replace(/\,/g, &#x27;.&#x27;);
                     var compType = dom.find(&#x27;#&#x27;+domId+&#x27;-comparison&#x27;).val();
                     if (compType == &#x27;lt&#x27;) { v = &#x27;..&#x27;+v; }
                     if (compType == &#x27;gt&#x27;) { v = v+&#x27;..&#x27;; }
                 }
+
                 return v;
             }
 
@@ -650,7 +726,8 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
 
                 if (typeof typeDef[&#x27;type&#x27;] != &#x27;undefined&#x27;) {
                     mt = typeDef[&#x27;type&#x27;].toLowerCase();
-                    ht = mt;
+                    if (mt == &#x27;boolean&#x27;) { ht = &#x27;radio&#x27;; }
+                    else { ht = mt; }                    
                 }
 
                 if (typeof typeDef[&#x27;multiple&#x27;] != &#x27;undefined&#x27;) {
@@ -773,7 +850,7 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
                 var v = $.trim(self.getValue());
                 var oldFlag = filled;
 
-                filled = (v.length &gt; 0);
+                filled = (v != null &amp;&amp; v.length &gt; 0);
                 if (htmlType == &#x27;object&#x27;) {
                     filled = [];
                     for(var key in v) {
@@ -795,6 +872,11 @@ define([&#x27;jquery&#x27;, &#x27;jqueryui&#x27;, &#x27;components/basics&#x27;,
                         dontReactOnEnter = false;
                         return false;
                     }
+
+                    if (self.getValue() == null) {
+                        return false;
+                    }
+
                     // filtering selection enter on autocomplete fields
                     $(self).trigger(&#x27;enter&#x27;);
                 }
