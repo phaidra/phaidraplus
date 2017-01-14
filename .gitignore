@@ -5,3 +5,4 @@ start-chrome.command
 curl-protocol.txt
 cache/*
 node_modules/*
+phaidra-plus.univie.ac.at.key
