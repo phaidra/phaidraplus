@@ -6,3 +6,4 @@ curl-protocol.txt
 cache/*
 node_modules/*
 phaidra-plus.univie.ac.at.key
+cert-6196-phaidra-plus.univie.ac.at.pem
